@@ -1,7 +1,7 @@
 const QuestionsAndAnswers = () => {
   return (
     <div>
-      Question and Answer Confirmation
+      full QuestionsAndAnswers parent component + functions to pass down
     </div>
   )
 }
