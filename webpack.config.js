@@ -11,9 +11,9 @@ const stylesHandler = isProduction ? MiniCssExtractPlugin.loader : 'style-loader
 
 
 const config = {
-    entry: './src/index.jsx',
+    entry: './client/src/index.jsx',
     output: {
-        path: path.resolve(__dirname, './src/dist'),
+        path: path.resolve(__dirname, './client/dist'),
         filename: "bundle.js"
     },
     plugins: [
@@ -25,6 +25,7 @@ const config = {
             {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/i,

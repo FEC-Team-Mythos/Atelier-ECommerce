@@ -4,7 +4,7 @@ const path = require('path');
 const app = express()
 const port = 3000
 
-const statics = path.join(__dirname + '/../src/dist');
+const statics = path.join(__dirname + '/../client/dist');
 
 app.use(express.static(statics));
 app.use(express.json());
