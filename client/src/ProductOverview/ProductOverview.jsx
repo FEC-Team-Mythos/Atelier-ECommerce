@@ -1,9 +1,15 @@
 import React from 'react';
+import MainImageScreen from './components/MainImageScreen.jsx';
+import StylesSelection from './components/StylesSelection.jsx';
+import ProductInformation from './components/ProductInformation.jsx';
 
-const ProductOverview = () => {
+const ProductOverview = (props) => {
   return (
     <div>
-      Product Overview Confirmation
+      <h1>Title</h1>
+      <MainImageScreen />
+      <StylesSelection />
+      <ProductInformation />
     </div>
   )
 }
