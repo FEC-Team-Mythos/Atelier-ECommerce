@@ -1,18 +1,20 @@
 import React from 'react';
 import Axios from 'axios';
 import MainImageScreen from './components/MainImageScreen.jsx';
-import StylesSelection from './components/StylesSelection.jsx';
 import ProductInformation from './components/ProductInformation.jsx';
+import ProductDescription from './components/ProductDescription.jsx';
 
 const ProductOverview = (props) => {
 
 
   return (
     <div>
-      <h1>Title</h1>
+      <h1>Logo</h1>
+      <input type='text'></input>
+      <h2>Search Icon</h2>
       <MainImageScreen />
-      <StylesSelection />
       <ProductInformation />
+      <ProductDescription />
     </div>
   )
 }
