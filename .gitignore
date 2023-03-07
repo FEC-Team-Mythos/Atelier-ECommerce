@@ -1,3 +1,4 @@
 node_modules
 src/dist/bundle.js
 .DS_Store
+*.env
