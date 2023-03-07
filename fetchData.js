@@ -11,9 +11,7 @@ const fetchData = (widget, method, params={}) => {
     params: params
   })
   .then((response) => {
-    response.data.forEach((key) => {
-      console.log(key);
-    })
+    console.log(response.data);
   })
   .catch((err) => {
     console.log(err);
