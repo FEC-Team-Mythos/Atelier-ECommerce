@@ -1,18 +1,17 @@
 const express = require('express')
 const path = require('path');
 const axios = require('axios');
-require('dotenv').config();
 
 const app = express()
 const port = 3000
 
-axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products', {
+axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/71701', {
   headers: {
     Authorization: process.env.API_KEY
   },
   params: {
-    count: 100
-    // product_id: 71701
+    // count: 100
+    product_id: 71701
   }
 })
 .then(data => {

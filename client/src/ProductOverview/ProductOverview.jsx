@@ -11,7 +11,7 @@ const ProductOverview = (props) => {
     <div>
       <h1>Logo</h1>
       <input type='text'></input>
-      <h2>Search Icon</h2>
+      <button>Search Icon</button>
       <MainImageScreen />
       <ProductInformation />
       <ProductDescription />
