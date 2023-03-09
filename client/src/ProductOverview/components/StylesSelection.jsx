@@ -8,12 +8,12 @@ const StylesSelection = (props) => {
         <li>Style 2</li>
       </ul>
       <select name="productSize">
-        <option value="defaultSize" selected>SELECT SIZE</option>
+        <option defaultValue="defaultSize">SELECT SIZE</option>
         <option value="small">Small</option>
         <option value="medium">Medium</option>
       </select>
       <select name="productQuant">
-        <option value="defaultStyle" selected>SELECT QUANTITY</option>
+        <option defaultValue="defaultStyle">SELECT QUANTITY</option>
         <option value="s1">1</option>
         <option value="s2">2</option>
       </select>

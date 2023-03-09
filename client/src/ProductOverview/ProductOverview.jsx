@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import MainImageScreen from './components/MainImageScreen.jsx';
 import ProductInformation from './components/ProductInformation.jsx';
 import ProductDescription from './components/ProductDescription.jsx';
@@ -12,9 +12,11 @@ const ProductOverview = (props) => {
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
-      <MainImageScreen />
-      <ProductInformation />
-      <ProductDescription />
+      <div className = "overview_overviewContainer">
+        <MainImageScreen />
+        <ProductInformation />
+        <ProductDescription />
+      </div>
     </div>
   )
 }
