@@ -1,4 +1,4 @@
 node_modules
-src/dist/bundle.js
+client/dist/bundle.js
 .DS_Store
 config.js
