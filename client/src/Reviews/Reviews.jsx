@@ -23,11 +23,14 @@ const Reviews = () => {
   }, [setAllReviews]);
 
   return (
-    <>
+    <div id='reviews'>
+    <StarBox
+      allReviews={allReviews}
+    />
     <ReviewList
       allReviews={allReviews}
     />
-    </>
+    </div>
   )
 }
 
