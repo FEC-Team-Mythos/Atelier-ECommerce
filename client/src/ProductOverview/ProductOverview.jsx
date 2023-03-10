@@ -36,7 +36,7 @@ const ProductOverview = ({ request }) => {
       <div className = "overview_overviewContainer">
         {Object.keys(productStock).length ? <MainImageScreen productStock={productStock}/> : null}
         <ProductInformation />
-        <ProductDescription />
+        {Object.keys(product).length ? <ProductDescription product={product}/> : null}
       </div>
     </div>
   )
