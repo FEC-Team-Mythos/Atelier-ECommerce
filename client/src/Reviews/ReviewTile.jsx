@@ -3,13 +3,12 @@ import React from 'react';
 const ReviewTile = (props) => {
   return (
     <div id='reviewTile'>
-      {props.review.rating}
-      {props.review.reviewer_name}
-      {props.review.date}
-      {props.review.summary}
-      {props.review.body}
-      {props.review.response}
-      {props.review.helpfulness}
+      <div>{props.review.rating} / {props.review.reviewer_name} / {props.review.date}</div>
+      <div>{props.review.summary}</div>
+      <div>{props.review.body}</div>
+      <div>{props.review.response}</div>
+      <div>Helpful? {props.review.helpfulness}</div>
+      -----
     </div>
   )
 }
