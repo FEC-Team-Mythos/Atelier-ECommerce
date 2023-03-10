@@ -11,7 +11,18 @@ const Reviews = () => {
   const getReviewData = async () => {
     //Product ID should be dynamic here, will grab from other widget
     try {
-      var response = await axios.get('/reviews/', {params: {product_id: 71697}})
+      var response = await axios.get('/reviews/', {params: {sort: 'relevance', product_id: 71697}})
+      setAllReviews(response.data.results);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const sortReviews = async (sortParam) => {
+    console.log(sortParam)
+    try {
+      var response = await axios.get('/reviews/', {params: {sort: sortParam, product_id: 71697}})
+      console.log(response.data.results);
       setAllReviews(response.data.results);
     } catch(err) {
       console.log(err);
@@ -29,6 +40,7 @@ const Reviews = () => {
     />
     <ReviewList
       allReviews={allReviews}
+      sortReviews={sortReviews}
     />
     </div>
   )
