@@ -12,7 +12,6 @@ const ProductOverview = ({ request }) => {
   useEffect(()=> {
     request('/products/71697', {product_id: 71697}, 'get')
       .then(data => {
-        console.log(data.data);
         setProduct(data.data);
       })
       .catch(err => {
@@ -22,7 +21,6 @@ const ProductOverview = ({ request }) => {
         request('/products/71697/styles', {product_id: 71697}, 'get')
       ))
       .then(data => {
-        console.log(data.data);
         setProductStock(data.data);
       })
       .catch(err => {
@@ -36,7 +34,7 @@ const ProductOverview = ({ request }) => {
       <input type='text'></input>
       <button>Search Icon</button>
       <div className = "overview_overviewContainer">
-        <MainImageScreen />
+        {Object.keys(productStock).length ? <MainImageScreen productStock={productStock}/> : null}
         <ProductInformation />
         <ProductDescription />
       </div>
