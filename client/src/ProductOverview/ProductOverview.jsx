@@ -36,7 +36,7 @@ const ProductOverview = ({ request }) => {
       {(Object.keys(product).length && Object.keys(productStock).length) ?
         <div className = "overview_overviewContainer">
           <MainImageScreen productStock={productStock}/>
-          <ProductInformation productStock={productStock} product={product}/>
+          <ProductInformation productStock={productStock} product={product} setProduct={setProduct}/>
           <ProductDescription product={product}/>
         </div>
         : null

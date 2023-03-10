@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StylesSelection = (props) => {
+const StylesSelection = ({productStock, setProduct}) => {
   return (
     <div>
       <ul>
