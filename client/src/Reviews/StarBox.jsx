@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Label, ResponsiveContainer } from 'recharts';
 
 const StarBox = (props) => {
   const [chartRatings, setChartRatings] = useState({})
@@ -45,10 +45,9 @@ const StarBox = (props) => {
             data={chartRatings}
             barGap={-45}>
           <XAxis hide/>
-          <YAxis type="category" dataKey="rating" />
-          <YAxis type="category" dataKey="rating" />
+          <YAxis type="category" dataKey="rating" axisLine={false} tickLine={false}/>
           <Bar dataKey="count" yAxisID={0} fill="#3A5311"/>
-          <Bar dataKey="total" yAxisID={1} fill="#5A5A5A" fillOpacity={0.4}/>
+          <Bar dataKey="total" yAxisID={1} fill="#5A5A5A" fillOpacity={0.4} label={{dataKey: "count", position: 'right'}}/>
         </BarChart>
     </ResponsiveContainer>
     </div>
@@ -57,7 +56,7 @@ const StarBox = (props) => {
 
   return (
     <div>
-      <div>{avgRating()} <span className="star">&#9733;</span>  </div>
+      <div>{avgRating()}⭐⭐⭐⭐⭐</div>
       <div>
         {starGraph()}
       </div>
