@@ -36,7 +36,7 @@ const ProductOverview = ({ request }) => {
       <input type='text'></input>
       <button>Search Icon</button>
       <div className = "overview_overviewContainer">
-        <MainImageScreen />
+        {Object.keys(productStock).length ? <MainImageScreen productStock={productStock}/> : null}
         <ProductInformation />
         <ProductDescription />
       </div>

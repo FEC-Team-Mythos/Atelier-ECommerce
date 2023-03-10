@@ -1,14 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-const MainImageScreen = () => {
+const MainImageScreen = ({productStock}) => {
+
+  const [mainImage, setMainImage] = useState(productStock.results[0].photos[0].url);
+
+
   return (
     <div>
       <ul>
-        <li>Image 1</li>
-        <li>Image 2</li>
-        <li>Image 3</li>
+        {productStock.results[0].photos.map(photo => (
+          <img src={photo.thumbnail_url} key={photo.url}></img>
+        ))}
       </ul>
-      <h1> IMAGE </h1>
+      <img src={mainImage}/>
     </div>
   )
 }
