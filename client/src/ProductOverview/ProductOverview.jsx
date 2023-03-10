@@ -12,7 +12,6 @@ const ProductOverview = ({ request }) => {
   useEffect(()=> {
     request('/products/71697', {product_id: 71697}, 'get')
       .then(data => {
-        console.log(data.data);
         setProduct(data.data);
       })
       .catch(err => {
@@ -22,7 +21,6 @@ const ProductOverview = ({ request }) => {
         request('/products/71697/styles', {product_id: 71697}, 'get')
       ))
       .then(data => {
-        console.log(data.data);
         setProductStock(data.data);
       })
       .catch(err => {
