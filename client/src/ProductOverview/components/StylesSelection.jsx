@@ -1,11 +1,10 @@
 import React from 'react';
 
-const StylesSelection = ({productStock, setProduct}) => {
+const StylesSelection = ({productStock, setCurrentStyle}) => {
   return (
     <div>
       <ul>
-        <li>Style 1</li>
-        <li>Style 2</li>
+        {productStock}
       </ul>
       <select name="productSize">
         <option defaultValue="defaultSize">SELECT SIZE</option>
