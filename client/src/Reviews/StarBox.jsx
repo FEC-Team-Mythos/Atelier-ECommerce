@@ -5,6 +5,23 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 const StarBox = (props) => {
   const [chartRatings, setChartRatings] = useState({})
 
+  useEffect(() => {
+    const chartData = [
+      { rating: 1, count: 0 },
+      { rating: 2, count: 0 },
+      { rating: 3, count: 0 },
+      { rating: 4, count: 0 },
+      { rating: 5, count: 0 },
+    ];
+
+    props.allReviews.forEach((review) => {
+      const rating = review.rating;
+      chartData[rating - 1].count += 1;
+    });
+
+    setChartRatings(chartData);
+  }, [props.allReviews]);
+
   const avgRating = (avg=0) => {
     props.allReviews.forEach((review) => {
       avg += review.rating;
@@ -19,32 +36,17 @@ const StarBox = (props) => {
     return avg / props.allReviews.length * 100 + '% of reviews recommend this product';
   }
 
-  const calcChartRatings = () => {
-    var newChart = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0
-    }
-    props.allReviews.forEach((review) => {
-      console.log(review);
-      newChart[review.rating]++
-    })
-    setChartRatings(newChart);
-  }
-
   const starGraph = () => {
     return (
-      <BarChart
-        width={200}
-        height={200}
-        layout="vertical"
-        data={props.allReviews}>
-      <XAxis type="number"/>
-      <YAxis type="category" dataKey="rating" />
-      <Bar dataKey="rating" fill="#8884d8" />
-      </BarChart>
+      <div id='star-chart'>
+      <ResponsiveContainer width={200} height={200}>
+        <BarChart layout="vertical" data={chartRatings} margin={{ left: 0 }}>
+          <XAxis type="number"/>
+          <YAxis type="category" dataKey="rating" />
+          <Bar dataKey="count" fill="#005C29"/>
+        </BarChart>
+    </ResponsiveContainer>
+    </div>
     )
   }
 
@@ -52,7 +54,6 @@ const StarBox = (props) => {
     <div>
       <div>{avgRating()} <span className="star">&#9733;</span>  </div>
       <div>
-        <button onClick={()=>calcChartRatings()}>Hi</button>
         {starGraph()}
       </div>
       <div>{avgRecommend()}</div>
