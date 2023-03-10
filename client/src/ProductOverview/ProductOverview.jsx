@@ -33,11 +33,14 @@ const ProductOverview = ({ request }) => {
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
-      <div className = "overview_overviewContainer">
-        {Object.keys(productStock).length ? <MainImageScreen productStock={productStock}/> : null}
-        {(Object.keys(product).length && Object.keys(productStock).length) ? <ProductInformation productStock={productStock} product={product}/> : null }
-        {Object.keys(product).length ? <ProductDescription product={product}/> : null}
-      </div>
+      {(Object.keys(product).length && Object.keys(productStock).length) ?
+        <div className = "overview_overviewContainer">
+          <MainImageScreen productStock={productStock}/>
+          <ProductInformation productStock={productStock} product={product}/>
+          <ProductDescription product={product}/>
+        </div>
+        : null
+      }
     </div>
   )
 }
