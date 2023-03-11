@@ -31,9 +31,9 @@ const App = () => {
 
   return (
     <>
-      <ProductOverview request={request}/>
+      {/* <ProductOverview request={request}/>
       <RelatedProducts  request={request}/>
-      <QuestionsAndAnswers  request={request}/>
+      <QuestionsAndAnswers  request={request}/> */}
       <Reviews  request={request}/>
     </>
   )
