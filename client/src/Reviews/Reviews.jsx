@@ -8,22 +8,28 @@ import StarBox from './StarBox.jsx';
 const Reviews = () => {
   const [allReviews, setAllReviews] = useState([]);
 
+  const [filteredReviews, setFilteredReviews] = useState([]);
+  const [filterParams, setFilterParams] = useState([]);
+  const [sortParam, setSortParam] = useState('relevance');
+
+  const [reviewList, setReviewList] = useState([]);
+
   const getReviewData = async () => {
     //Product ID should be dynamic here, will grab from other widget
     try {
       var response = await axios.get('/reviews/', {params: {sort: 'relevance', product_id: 71697}})
       setAllReviews(response.data.results);
+      setReviewList(response.data.results);
     } catch(err) {
       console.log(err);
     }
   }
 
   const sortReviews = async (sortParam) => {
-    console.log(sortParam)
     try {
+      setSortParam(sortParam);
       var response = await axios.get('/reviews/', {params: {sort: sortParam, product_id: 71697}})
-      console.log(response.data.results);
-      setAllReviews(response.data.results);
+      setReviewList(response.data.results);
     } catch(err) {
       console.log(err);
     }
@@ -31,16 +37,27 @@ const Reviews = () => {
 
   useEffect(() => {
     getReviewData()
-  }, [setAllReviews]);
+  }, []);
+
+  useEffect(() => {
+    console.log('filterParams', filterParams);
+    var filteredReviewList = reviewList.filter((review) => {
+        if (filterParams.includes(review.rating)) return review;
+      })
+    setReviewList(filteredReviewList);
+  }, [filterParams]);
 
   return (
     <div id='reviews'>
     <StarBox
       allReviews={allReviews}
+      filterReviews={filterReviews}
+      filterParams={filterParams}
+      setFilterParams={setFilterParams}
     />
     <ReviewList
-      allReviews={allReviews}
       sortReviews={sortReviews}
+      reviewList={reviewList}
     />
     </div>
   )

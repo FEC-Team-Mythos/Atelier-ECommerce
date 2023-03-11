@@ -7,11 +7,11 @@ const StarBox = (props) => {
 
   useEffect(() => {
     const chartData = [
-      { rating: 1 + '⭐', count: 0, total: props.allReviews.length},
-      { rating: 2 + '⭐', count: 0, total: props.allReviews.length},
-      { rating: 3 + '⭐', count: 0, total: props.allReviews.length},
-      { rating: 4 + '⭐', count: 0, total: props.allReviews.length},
-      { rating: 5 + '⭐', count: 0, total: props.allReviews.length},
+      { rating: 1, count: 0, total: props.allReviews.length},
+      { rating: 2, count: 0, total: props.allReviews.length},
+      { rating: 3, count: 0, total: props.allReviews.length},
+      { rating: 4, count: 0, total: props.allReviews.length},
+      { rating: 5, count: 0, total: props.allReviews.length},
     ];
 
     props.allReviews.forEach((review) => {
@@ -47,11 +47,21 @@ const StarBox = (props) => {
           <XAxis hide/>
           <YAxis type="category" dataKey="rating" axisLine={false} tickLine={false}/>
           <Bar dataKey="count" yAxisID={0} fill="#3A5311"/>
-          <Bar dataKey="total" yAxisID={1} fill="#5A5A5A" fillOpacity={0.4} label={{dataKey: "count", position: 'right'}}/>
+          <Bar dataKey="total" yAxisID={1} fill="#5A5A5A"
+               fillOpacity={0.4} onClick={(e)=>filterClick(e)}label={{dataKey: "count", position: 'right'}}/>
         </BarChart>
     </ResponsiveContainer>
     </div>
     )
+  }
+
+  //toggle rating filter
+  const filterClick = (e) => {
+    if (props.filterParams.includes(e.rating)) {
+      props.setFilterParams(props.filterParams.filter(rating => rating !== e.rating))
+    } else {
+      props.setFilterParams([...props.filterParams, e.rating]);
+    }
   }
 
   return (

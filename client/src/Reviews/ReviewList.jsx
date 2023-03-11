@@ -6,11 +6,11 @@ const ReviewList = (props) => {
   return (
     <div id='reviewList'>
     <Filter
-    allReviews={props.allReviews}
+    allReviews={props.reviewList}
     sortReviews={props.sortReviews}
     />
     --
-    {props.allReviews.map((review) => {
+    {props.reviewList.map((review) => {
       return(
         <ReviewTile
         key={review.review_id}
