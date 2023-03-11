@@ -4,7 +4,9 @@ const StylesSelection = ({productStock, setCurrentStyle}) => {
   return (
     <div>
       <ul>
-        {productStock}
+        {productStock.results.map(product => (
+          <img src={product.photos[0].thumbnail_url}/>
+        ))}
       </ul>
       <select name="productSize">
         <option defaultValue="defaultSize">SELECT SIZE</option>
