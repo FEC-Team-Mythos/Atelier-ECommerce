@@ -40,18 +40,21 @@ const Reviews = () => {
   }, []);
 
   useEffect(() => {
-    console.log('filterParams', filterParams);
-    var filteredReviewList = reviewList.filter((review) => {
-        if (filterParams.includes(review.rating)) return review;
+    if (!filterParams || filterParams.length === 0) {
+      setReviewList(allReviews);
+    } else {
+      var newReviews = allReviews.filter((review) => {
+        return filterParams.includes(review.rating);
       })
-    setReviewList(filteredReviewList);
+      setReviewList(newReviews)
+    }
   }, [filterParams]);
 
   return (
     <div id='reviews'>
     <StarBox
       allReviews={allReviews}
-      filterReviews={filterReviews}
+      filteredReviews={filteredReviews}
       filterParams={filterParams}
       setFilterParams={setFilterParams}
     />

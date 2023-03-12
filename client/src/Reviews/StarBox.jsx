@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Label, ResponsiveContainer } from 'recharts';
 
 const StarBox = (props) => {
@@ -56,13 +56,15 @@ const StarBox = (props) => {
   }
 
   //toggle rating filter
-  const filterClick = (e) => {
+  const filterClick = useCallback((e) => {
     if (props.filterParams.includes(e.rating)) {
       props.setFilterParams(props.filterParams.filter(rating => rating !== e.rating))
     } else {
       props.setFilterParams([...props.filterParams, e.rating]);
-    }
-  }
+      }
+    },
+    [props.filterParams, props.setFilterParams]
+  )
 
   return (
     <div>
