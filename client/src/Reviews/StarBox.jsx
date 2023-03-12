@@ -26,6 +26,8 @@ const StarBox = ({ allReviews, filterParams, setFilterParams }) => {
       avg += review.rating;
     })
     return avg / allReviews.length;
+
+    //TO DO: Render Stars with FontAwesome
   }
 
   const avgRecommend = (avg=0) => {
@@ -104,7 +106,7 @@ const StarBox = ({ allReviews, filterParams, setFilterParams }) => {
 
   return (
     <div>
-      <div>{avgRating()}⭐⭐⭐⭐⭐</div>
+      <div>{avgRating()}</div>
       <div>
         {starGraph()}
       </div>
