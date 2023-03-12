@@ -25,11 +25,10 @@ const Reviews = () => {
     }
   }
 
-  const sortReviews = async (sortParam) => {
+  const sortReviews = async () => {
     try {
-      setSortParam(sortParam);
       var response = await axios.get('/reviews/', {params: {sort: sortParam, product_id: 71697}})
-      if (filterParams) {
+      if (filterParams.length) {
         var newReviews = response.data.results.filter((review) => {
           return filterParams.includes(review.rating);
         })
@@ -62,6 +61,10 @@ const Reviews = () => {
   }, []);
 
   useEffect(() => {
+    sortReviews()
+  }, [sortParam]);
+
+  useEffect(() => {
     filterReviews()
   }, [filterParams]);
 
@@ -74,7 +77,8 @@ const Reviews = () => {
       setFilterParams={setFilterParams}
     />
     <ReviewList
-      sortReviews={sortReviews}
+      sortParam={sortParam}
+      setSortParam={setSortParam}
       reviewList={reviewList}
     />
     </div>

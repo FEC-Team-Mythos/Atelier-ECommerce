@@ -7,7 +7,8 @@ const ReviewList = (props) => {
     <div id='reviewList'>
     <Filter
     allReviews={props.reviewList}
-    sortReviews={props.sortReviews}
+    sortParam={props.sortParam}
+    setSortParam={props.setSortParam}
     />
     --
     {props.reviewList.map((review) => {
