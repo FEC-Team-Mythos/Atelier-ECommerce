@@ -1,10 +1,10 @@
 import React from 'react';
 
-const StylesSelection = ({productStock, setProductStock}) => {
+const StylesSelection = ({productStock, setProductStock, productStyles}) => {
   return (
     <div>
       <ul>
-        {productStock.results.map(product => (
+        {productStyles.map(product => (
           <img src={product.photos[0].thumbnail_url} key={product.photos[0].thumbnail_url} onClick={()=>{setProductStock(product)}}/>
         ))}
       </ul>
