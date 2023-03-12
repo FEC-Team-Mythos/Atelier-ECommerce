@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Label, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts';
 
 const StarBox = (props) => {
   const [chartRatings, setChartRatings] = useState({})
@@ -36,31 +36,58 @@ const StarBox = (props) => {
     return avg / props.allReviews.length * 100 + '% of reviews recommend this product';
   }
 
+  const CustomLabel = ({ x, y, width, height, value, onClick, grabRating }) => {
+    const handleClick = () => {
+      onClick(grabRating(value));
+    };
+
+    return (
+      <text
+        x={x + width + 10}
+        y={y + height / 2}
+        fill="#333"
+        fontSize={14}
+        textAnchor="start"
+        onClick={handleClick}
+      >
+        {value}
+      </text>
+    );
+  };
+
+  const grabRatingFromChart = (count) => {
+    const entry = chartRatings.find((entry) => entry.count === count);
+    return entry.rating;
+  }
+
   const starGraph = () => {
     return (
       <div id='star-chart'>
-      <ResponsiveContainer width={500} height={300}>
         <BarChart
             layout="vertical"
+            height={300}
+            width={700}
             data={chartRatings}
             barGap={-45}>
           <XAxis hide/>
-          <YAxis type="category" dataKey="rating" axisLine={false} tickLine={false}/>
+          <YAxis type="category" dataKey="rating" axisLine={false} tickLine={false} onClick={(e)=>filterClick(e.value)}/>
           <Bar dataKey="count" yAxisID={0} fill="#3A5311"/>
           <Bar dataKey="total" yAxisID={1} fill="#5A5A5A"
-               fillOpacity={0.4} onClick={(e)=>filterClick(e)}label={{dataKey: "count", position: 'right'}}/>
+               fillOpacity={0.4} onClick={(e)=>filterClick(e.rating)}>
+            <LabelList dataKey="count" position="right" content={<CustomLabel onClick={filterClick} grabRating={grabRatingFromChart}/>} />
+          </Bar>
         </BarChart>
-    </ResponsiveContainer>
     </div>
     )
   }
 
   //toggle rating filter
-  const filterClick = useCallback((e) => {
-    if (props.filterParams.includes(e.rating)) {
-      props.setFilterParams(props.filterParams.filter(rating => rating !== e.rating))
+  const filterClick = useCallback((clickedRating) => {
+    console.log(clickedRating);
+    if (props.filterParams.includes(clickedRating)) {
+      props.setFilterParams(props.filterParams.filter(rating => rating !== clickedRating))
     } else {
-      props.setFilterParams([...props.filterParams, e.rating]);
+      props.setFilterParams([...props.filterParams, clickedRating]);
       }
     },
     [props.filterParams, props.setFilterParams]
