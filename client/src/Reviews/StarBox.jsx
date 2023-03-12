@@ -41,13 +41,13 @@ const StarBox = ({ allReviews, filterParams, setFilterParams }) => {
     };
 
     return (
-      <text
+      <text style={{position: 'absolute'}}
         x={x + width + 10}
         y={y + height / 2}
-        fill="#333"
         fontSize={14}
-        textAnchor="start"
         onClick={handleClick}
+        fill='#000000'
+        dominantBaseline="middle"
       >
         {value}
       </text>
@@ -60,15 +60,18 @@ const StarBox = ({ allReviews, filterParams, setFilterParams }) => {
   }
 
   const starGraph = () => {
+
     return (
       <div id='star-chart'>
         <BarChart
             layout="vertical"
             height={300}
-            width={700}
+            width={500}
             data={chartRatings}
             barGap={-45}>
-          <XAxis hide/>
+          <XAxis  type="number"
+            domain={[0, 7]}
+            hide/>
           <YAxis type="category" dataKey="rating" axisLine={false} tickLine={false} onClick={(e)=>filterClick(e.value)}/>
           <Bar dataKey="count" yAxisID={0} fill="#3A5311"/>
           <Bar dataKey="total" yAxisID={1} fill="#5A5A5A"
