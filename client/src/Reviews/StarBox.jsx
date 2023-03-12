@@ -6,11 +6,11 @@ const StarBox = ({ allReviews, filterParams, setFilterParams }) => {
 
   useEffect(() => {
     const chartData = [
-      { rating: 1, count: 0, total: allReviews.length},
-      { rating: 2, count: 0, total: allReviews.length},
-      { rating: 3, count: 0, total: allReviews.length},
-      { rating: 4, count: 0, total: allReviews.length},
-      { rating: 5, count: 0, total: allReviews.length},
+      { rating: 1 + '★', count: 0, total: allReviews.length},
+      { rating: 2 + '★', count: 0, total: allReviews.length},
+      { rating: 3 + '★', count: 0, total: allReviews.length},
+      { rating: 4 + '★', count: 0, total: allReviews.length},
+      { rating: 5 + '★', count: 0, total: allReviews.length},
     ];
 
     allReviews.forEach((review) => {
@@ -25,7 +25,7 @@ const StarBox = ({ allReviews, filterParams, setFilterParams }) => {
     allReviews.forEach((review) => {
       avg += review.rating;
     })
-    return avg / allReviews.length;
+    return avg / allReviews.length + '★ - 5 total reviews';
 
     //TO DO: Render Stars with FontAwesome
   }
