@@ -93,12 +93,23 @@ const StarBox = (props) => {
     [props.filterParams, props.setFilterParams]
   )
 
+  const displayFilters = () => {
+    var sortedFilterParams = props.filterParams.sort().join(', ');
+
+    if (props.filterParams.length > 0) {
+      return <div>
+        Reviews filtered by {sortedFilterParams} stars
+      </div>
+    }
+  }
+
   return (
     <div>
       <div>{avgRating()}⭐⭐⭐⭐⭐</div>
       <div>
         {starGraph()}
       </div>
+      {displayFilters()}
       <div>{avgRecommend()}</div>
       ----
     </div>
