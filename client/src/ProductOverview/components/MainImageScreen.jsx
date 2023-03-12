@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const MainImageScreen = ({productStock}) => {
-
-  const [mainImage, setMainImage] = useState(productStock.photos[0].url);
-
+const MainImageScreen = ({productStock, mainImage, setMainImage}) => {
 
   return (
     <div>

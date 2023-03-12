@@ -1,11 +1,14 @@
 import React from 'react';
 
-const StylesSelection = ({productStock, setProductStock, productStyles}) => {
+const StylesSelection = ({productStock, setProductStock, productStyles, setMainImage}) => {
   return (
     <div>
       <ul>
         {productStyles.map(product => (
-          <img src={product.photos[0].thumbnail_url} key={product.photos[0].thumbnail_url} onClick={()=>{setProductStock(product)}}/>
+          <img src={product.photos[0].thumbnail_url} key={product.photos[0].thumbnail_url} onClick={()=>{
+            setProductStock(product);
+            setMainImage(product.photos[0].url)
+          }}/>
         ))}
       </ul>
       <select name="productSize">

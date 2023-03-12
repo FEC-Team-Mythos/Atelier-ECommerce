@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import StylesSelection from './StylesSelection.jsx';
 
-const ProductInformation = ({productStock, product, setProductStock, productStyles}) => {
+const ProductInformation = ({productStock, product, setProductStock, productStyles, setMainImage}) => {
 
   return (
     <div>
@@ -9,7 +9,7 @@ const ProductInformation = ({productStock, product, setProductStock, productStyl
       <h3>{product.category}</h3>
       <h1>{product.name}</h1>
       <h2>${productStock.original_price || product.default_price}</h2>
-      <StylesSelection productStock={productStock} setProductStock={setProductStock} productStyles={productStyles}/>
+      <StylesSelection productStock={productStock} setProductStock={setProductStock} productStyles={productStyles} setMainImage={setMainImage}/>
       <button>Add to Bag</button>
       <button>Favorite</button>
     </div>

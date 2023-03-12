@@ -9,6 +9,7 @@ const ProductOverview = ({ request }) => {
   const [product, setProduct] = useState({});
   const [productStock, setProductStock] = useState({});
   const [productStyles, setProductStyles] = useState([]);
+  const [mainImage, setMainImage] = useState('');
 
   useEffect(()=> {
     request('/products/71697', {product_id: 71697}, 'get')
@@ -24,6 +25,7 @@ const ProductOverview = ({ request }) => {
       .then(data => {
         setProductStock(data.data.results[0]);
         setProductStyles(data.data.results);
+        setMainImage(data.data.results[0].photos[0].url);
       })
       .catch(err => {
         console.log('Could not get: ', err);
@@ -37,8 +39,8 @@ const ProductOverview = ({ request }) => {
       <button>Search Icon</button>
       {(Object.keys(product).length && Object.keys(productStock).length) ?
         <div className = "overview_overviewContainer">
-          <MainImageScreen productStock={productStock}/>
-          <ProductInformation productStock={productStock} product={product} setProductStock={setProductStock} productStyles={productStyles}/>
+          <MainImageScreen productStock={productStock} mainImage={mainImage} setMainImage={setMainImage}/>
+          <ProductInformation productStock={productStock} product={product} setProductStock={setProductStock} productStyles={productStyles} setMainImage={setMainImage}/>
           <ProductDescription product={product}/>
         </div>
         : null
