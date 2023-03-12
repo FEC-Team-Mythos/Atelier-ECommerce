@@ -29,7 +29,29 @@ const Reviews = () => {
     try {
       setSortParam(sortParam);
       var response = await axios.get('/reviews/', {params: {sort: sortParam, product_id: 71697}})
-      setReviewList(response.data.results);
+      if (filterParams) {
+        var newReviews = response.data.results.filter((review) => {
+          return filterParams.includes(review.rating);
+        })
+        setReviewList(newReviews)
+      } else {
+        setReviewList(response.data.results);
+      }
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const filterReviews = async () => {
+    try {
+      if (!filterParams || filterParams.length === 0) {
+        setReviewList(allReviews);
+      } else {
+        var newReviews = allReviews.filter((review) => {
+          return filterParams.includes(review.rating);
+        })
+        setReviewList(newReviews)
+      }
     } catch(err) {
       console.log(err);
     }
@@ -40,14 +62,7 @@ const Reviews = () => {
   }, []);
 
   useEffect(() => {
-    if (!filterParams || filterParams.length === 0) {
-      setReviewList(allReviews);
-    } else {
-      var newReviews = allReviews.filter((review) => {
-        return filterParams.includes(review.rating);
-      })
-      setReviewList(newReviews)
-    }
+    filterReviews()
   }, [filterParams]);
 
   return (
