@@ -1,6 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const StylesSelection = ({productStock, setProductStock, productStyles, setMainImage}) => {
+
+  const [selectedSize, setSelectedSize] = useState({});
+
+  const getSelectedValue = () => {
+    var e = document.getElementById('overview_productSize');
+    setSelectedSize(productStock.skus[e.value]);
+  }
+
+
   return (
     <div>
       <ul>
@@ -11,16 +20,22 @@ const StylesSelection = ({productStock, setProductStock, productStyles, setMainI
           }}/>
         ))}
       </ul>
-      <select name="productSize">
+
+      <select id="overview_productSize" onChange={getSelectedValue}>
         <option defaultValue="defaultSize">SELECT SIZE</option>
         {Object.keys(productStock.skus).map((style, index) => (
-          <option key={index} value={productStock.skus[style].size}>{productStock.skus[style].size}</option>
+          <option key={index} value={style}>{productStock.skus[style].size}</option>
         ))}
       </select>
-      <select name="productQuant">
+
+      <select id="overview_productQuant">
         <option defaultValue="defaultStyle">SELECT QUANTITY</option>
-        {Object.keys(productStock.skus).map((style, index) => (
-          <option key={index} value={index + 1}>{index + 1}</option>
+        {(Object.keys(selectedSize).length && selectedSize.quantity < 5) ?
+        Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
+          <option value={quantity} key={quantity}>{quantity}</option>
+        ))
+        : [1,2,3,4,5].map(quantity => (
+          <option value={quantity} key={quantity}>{quantity}</option>
         ))}
       </select>
     </div>
