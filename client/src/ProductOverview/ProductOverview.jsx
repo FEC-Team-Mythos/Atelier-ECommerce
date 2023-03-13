@@ -16,9 +16,6 @@ const ProductOverview = ({ request }) => {
       .then(data => {
         setProduct(data.data);
       })
-      .catch(err => {
-        console.log('Could not get: ', err);
-      })
       .then(()=> (
         request('/products/71697/styles', {product_id: 71697}, 'get')
       ))
