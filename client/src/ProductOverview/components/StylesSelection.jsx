@@ -13,13 +13,15 @@ const StylesSelection = ({productStock, setProductStock, productStyles, setMainI
       </ul>
       <select name="productSize">
         <option defaultValue="defaultSize">SELECT SIZE</option>
-        <option value="small">Small</option>
-        <option value="medium">Medium</option>
+        {Object.keys(productStock.skus).map((style, index) => (
+          <option key={index} value={productStock.skus[style].size}>{productStock.skus[style].size}</option>
+        ))}
       </select>
       <select name="productQuant">
         <option defaultValue="defaultStyle">SELECT QUANTITY</option>
-        <option value="s1">1</option>
-        <option value="s2">2</option>
+        {Object.keys(productStock.skus).map((style, index) => (
+          <option key={index} value={index + 1}>{index + 1}</option>
+        ))}
       </select>
     </div>
   )
