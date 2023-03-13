@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 
-const StylesSelection = ({productStock, setProductStock, productStyles, setMainImage}) => {
+const StylesSelection = ({productInformation, setProductInformation, productStyles, setMainImage}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
 
   const getSelectedValue = () => {
     var e = document.getElementById('overview_productSize');
-    setSelectedSize(productStock.skus[e.value]);
+    setSelectedSize(productInformation.skus[e.value]);
   }
 
 
@@ -15,7 +15,7 @@ const StylesSelection = ({productStock, setProductStock, productStyles, setMainI
       <ul>
         {productStyles.map(product => (
           <img src={product.photos[0].thumbnail_url} key={product.photos[0].thumbnail_url} onClick={()=>{
-            setProductStock(product);
+            setProductInformation(product);
             setMainImage(product.photos[0].url)
           }}/>
         ))}
@@ -23,8 +23,8 @@ const StylesSelection = ({productStock, setProductStock, productStyles, setMainI
 
       <select id="overview_productSize" onChange={getSelectedValue}>
         <option defaultValue="defaultSize">SELECT SIZE</option>
-        {Object.keys(productStock.skus).map((style, index) => (
-          <option key={index} value={style}>{productStock.skus[style].size}</option>
+        {Object.keys(productInformation.skus).map((style, index) => (
+          <option key={index} value={style}>{productInformation.skus[style].size}</option>
         ))}
       </select>
 
