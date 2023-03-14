@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, ZAxis, CartesianGrid, LabelList } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, ZAxis, CartesianGrid, LabelList, Dot } from 'recharts';
 
 const Characteristics = ({ characteristics }) => {
   const [characteristicRatings, setCharacteristicsRatings] = useState({})
@@ -18,7 +18,9 @@ const Characteristics = ({ characteristics }) => {
             domain={[0, 5]}
             hide/>
           <YAxis type="category" dataKey="name" />
-          <Bar dataKey="value" yAxisID={0} fill="#8884d8" />
+          <Bar dataKey="value" yAxisID={0} fill="#8884d8">
+            <LabelList data="•" position="right"/>
+          </Bar>
           <Bar dataKey="total" yAxisID={1} fill="#82ca9d" />
         </BarChart>
       )
