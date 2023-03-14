@@ -3,11 +3,21 @@ import React, {useState} from 'react';
 const StylesSelection = ({productInformation, setProductInformation, productStyles, setMainImage}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
+  const [selectedQuantity, setSelectedQuantity] = useState(0);
 
-  const getSelectedValue = () => {
+  const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
     setSelectedSize(productInformation.skus[e.value]);
   }
+
+  const getSelectedQuantity = () => {
+    var e = document.getElementById('overview_productQuantity');
+    setSelectedQuantity(e.value);
+    console.log(e.value);
+  }
+
+  //ProductInformation is the style information
+  // Will need product id, productinformation style id, sku id, selected quantity, selected size
 
 
   return (
@@ -21,15 +31,15 @@ const StylesSelection = ({productInformation, setProductInformation, productStyl
         ))}
       </ul>
 
-      <select id="overview_productSize" onChange={getSelectedValue}>
-        <option defaultValue="defaultSize">SELECT SIZE</option>
+      <select id="overview_productSize" onChange={getSelectedSize}>
+        <option value='0'>SELECT SIZE</option>
         {Object.keys(productInformation.skus).map((style, index) => (
           <option key={index} value={style}>{productInformation.skus[style].size}</option>
         ))}
       </select>
 
-      <select id="overview_productQuant">
-        <option defaultValue="defaultStyle">SELECT QUANTITY</option>
+      <select id="overview_productQuantity" onChange={getSelectedQuantity}>
+        <option value="0">SELECT QUANTITY</option>
         {(Object.keys(selectedSize).length && selectedSize.quantity < 5) ?
         Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
           <option value={quantity} key={quantity}>{quantity}</option>
@@ -42,6 +52,4 @@ const StylesSelection = ({productInformation, setProductInformation, productStyl
   )
 }
 
-//Select size, make ALL styles that have that available or in stock not grey
-//Options only UP to quantity amount
 export default StylesSelection;
