@@ -5,6 +5,7 @@ import Characteristics from './Characteristics.jsx';
 
 const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
   const [avgRating, setAvgRating] = useState(0);
+  const [recommended, setRecommended] = useState(0);
   const [chartRatings, setChartRatings] = useState({})
   const [totalRatings, setTotalRatings] = useState(0);
 
@@ -17,6 +18,22 @@ const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
     setAvgRating((avg/total).toFixed(2));
 
     //TO DO: Render Stars with FontAwesome
+  }
+
+  const calcRecommend = () => {
+    if (metaData.recommended) {
+      const didRecommend = Number(metaData.recommended[true])
+      const total = Number(metaData.recommended[true]) + Number(metaData.recommended[false]);
+      setRecommended(Math.round((didRecommend / total) * 100));
+    }
+  }
+
+  const displayRecommended = () => {
+    return (
+      <div>
+        {recommended}% recommended
+      </div>
+    )
   }
 
   const grabRatingFromChart = (count) => {
@@ -106,6 +123,7 @@ const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
 
   useEffect(() => {
     calcAvgRating()
+    calcRecommend()
   }, [metaData])
 
   return (
@@ -117,6 +135,7 @@ const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
       <Characteristics
         characteristics={metaData.characteristics}
       />
+      {displayRecommended()}
       {displayFilters()}
     </div>
   )
