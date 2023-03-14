@@ -1,24 +1,28 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, ZAxis, CartesianGrid, LabelList } from 'recharts';
 
 const Characteristics = ({ characteristics }) => {
   const [characteristicRatings, setCharacteristicsRatings] = useState({})
+
   const characteristicsGraph = () => {
-    return (
-    <BarChart
-      layout="vertical"
-      width={500}
-      height={300}
-      data={characteristicRatings}
-      barGap={-45}>
-      <XAxis type="number"
-            domain={[0, 5]}/>
-      <YAxis type="category" dataKey="name"/>
-      <Bar dataKey="value" yAxisID={0} fill="#8884d8" />
-      <Bar dataKey={5} yAxisID={1} fill="#5A5A5A" />
-    </BarChart>
-    )
+    if (characteristicRatings.length) {
+      return (
+        <BarChart
+          layout="vertical"
+          width={500}
+          height={400}
+          data={characteristicRatings}
+        >
+          <XAxis type="number"
+            domain={[0, 5]}
+            hide/>
+          <YAxis type="category" dataKey="name" />
+          <Bar dataKey="value" yAxisID={0} fill="#8884d8" />
+          <Bar dataKey="total" yAxisID={1} fill="#82ca9d" />
+        </BarChart>
+      )
+    }
   }
 
   useEffect(() => {
@@ -26,7 +30,8 @@ const Characteristics = ({ characteristics }) => {
     for (var specific in characteristics) {
       chartData.push({
         name: specific,
-        value: characteristics[specific].value
+        value: characteristics[specific].value,
+        total: 5
       })
     }
     setCharacteristicsRatings(chartData);
