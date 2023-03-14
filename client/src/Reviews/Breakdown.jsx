@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts';
+import Characteristics from './Characteristics.jsx';
 
 const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
   const [avgRating, setAvgRating] = useState(0);
@@ -97,7 +98,6 @@ const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
     ];
 
     for (var rating in metaData.ratings) {
-      console.log(chartData[rating - 1])
       chartData[rating - 1].count = Number(metaData.ratings[rating]);
       }
 
@@ -114,6 +114,9 @@ const Breakdown = ({ metaData, filterParams, setFilterParams }) => {
       {avgRating}
       </div>
       {ratingsGraph()}
+      <Characteristics
+        characteristics={metaData.characteristics}
+      />
       {displayFilters()}
     </div>
   )
