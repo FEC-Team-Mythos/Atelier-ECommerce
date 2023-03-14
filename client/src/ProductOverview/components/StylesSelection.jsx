@@ -1,24 +1,32 @@
 import React, {useState} from 'react';
 
-const StylesSelection = ({productInformation, setProductInformation, productStyles, setMainImage}) => {
+const StylesSelection = ({product, productInformation, setProductInformation, productStyles, setMainImage}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState(0);
+  const [selectedSku, setSelectedSku] = useState('');
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
     setSelectedSize(productInformation.skus[e.value]);
+    setSelectedSku(e.value);
   }
 
   const getSelectedQuantity = () => {
     var e = document.getElementById('overview_productQuantity');
     setSelectedQuantity(e.value);
-    console.log(e.value);
   }
 
-  //ProductInformation is the style information
-  // Will need product id, productinformation style id, sku id, selected quantity, selected size
-
+  const addToCart = () => {
+    if (sessionStorage.getItem('cart')) {
+      let cartItems = JSON.parse(sessionStorage.getItem('cart'));
+      cartItems.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
+      sessionStorage.setItem('cart', JSON.stringify(cartItems));
+    } else {
+      let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
+      sessionStorage.setItem('cart', JSON.stringify(item));
+    }
+  }
 
   return (
     <div>
@@ -48,7 +56,7 @@ const StylesSelection = ({productInformation, setProductInformation, productStyl
           <option value={quantity} key={quantity}>{quantity}</option>
         ))}
       </select>
-      <button>Add to Bag</button>
+      <button onClick={addToCart}>Add to Bag</button>
       <button>Favorite</button>
     </div>
   )
