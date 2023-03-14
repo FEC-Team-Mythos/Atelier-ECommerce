@@ -3,7 +3,6 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import ReviewList from './ReviewList.jsx';
-import StarBox from './StarBox.jsx';
 import Breakdown from './Breakdown.jsx'
 
 const Reviews = () => {
@@ -83,13 +82,6 @@ const Reviews = () => {
 
   return (
     <div id='reviews'>
-    {/* <StarBox
-      allReviews={allReviews}
-      filteredReviews={filteredReviews}
-      filterParams={filterParams}
-      setFilterParams={setFilterParams}
-      metaData={metaData}
-    /> */}
     <Breakdown
       metaData={metaData}
       filterParams={filterParams}

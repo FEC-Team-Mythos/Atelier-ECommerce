@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import Filter from './Filter.jsx'
 
-const ReviewList = (props) => {
+const ReviewList = ({ reviewList, sortParam, setSortParam }) => {
   const [reviewListLength, setReviewListLength] = useState(2);
 
   const moreReviewsButton = () => {
-    if (reviewListLength < props.reviewList.length) {
+    if (reviewListLength < reviewList.length) {
       return (
         <button onClick={()=>setReviewListLength(reviewListLength + 2)}>More Reviews</button>
       )
@@ -17,12 +17,12 @@ const ReviewList = (props) => {
   return (
     <div id='reviewList'>
     <Filter
-    allReviews={props.reviewList}
-    sortParam={props.sortParam}
-    setSortParam={props.setSortParam}
+    allReviews={reviewList}
+    sortParam={sortParam}
+    setSortParam={setSortParam}
     />
     --
-    {props.reviewList.slice(0,reviewListLength).map((review) => {
+    {reviewList.slice(0,reviewListLength).map((review) => {
       return(
         <ReviewTile
         key={review.review_id}

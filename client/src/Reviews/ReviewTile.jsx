@@ -1,13 +1,13 @@
 import React from 'react';
 
-const ReviewTile = (props) => {
+const ReviewTile = ({ review }) => {
   return (
     <div id='reviewTile'>
-      <div>{props.review.rating} / {props.review.reviewer_name} / {props.review.date}</div>
-      <div>{props.review.summary}</div>
-      <div>{props.review.body}</div>
-      <div>{props.review.response}</div>
-      <div>Helpful? {props.review.helpfulness}</div>
+      <div>{review.rating} / {review.reviewer_name} / {review.date}</div>
+      <div>{review.summary}</div>
+      <div>{review.body}</div>
+      <div>{review.response}</div>
+      <div>Helpful? {review.helpfulness}</div>
       -----
     </div>
   )
