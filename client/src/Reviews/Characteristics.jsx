@@ -10,8 +10,8 @@ const Characteristics = ({ characteristics }) => {
       return (
         <BarChart
           layout="vertical"
-          width={500}
-          height={400}
+          width={400}
+          height={150}
           data={characteristicRatings}
         >
           <XAxis type="number"
