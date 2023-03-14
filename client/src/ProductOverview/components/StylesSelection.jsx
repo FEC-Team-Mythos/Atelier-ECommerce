@@ -48,6 +48,8 @@ const StylesSelection = ({productInformation, setProductInformation, productStyl
           <option value={quantity} key={quantity}>{quantity}</option>
         ))}
       </select>
+      <button>Add to Bag</button>
+      <button>Favorite</button>
     </div>
   )
 }

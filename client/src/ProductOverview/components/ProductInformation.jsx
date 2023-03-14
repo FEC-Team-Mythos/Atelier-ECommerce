@@ -18,8 +18,6 @@ const ProductInformation = ({productInformation, product, setProductInformation,
         <h3>${productInformation.original_price || product.default_price}</h3>
       }
       <StylesSelection productInformation={productInformation} setProductInformation={setProductInformation} productStyles={productStyles} setMainImage={setMainImage}/>
-      <button>Add to Bag</button>
-      <button>Favorite</button>
     </div>
   )
 }
