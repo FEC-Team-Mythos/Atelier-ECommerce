@@ -14,6 +14,7 @@ const Reviews = () => {
   const [sortParam, setSortParam] = useState('relevance');
 
   const [reviewList, setReviewList] = useState([]);
+  const [reviewToAdd, setReviewToAdd] = useState({});
 
   const getReviewData = async () => {
     //Product ID should be dynamic here, will grab from other widget
@@ -80,6 +81,10 @@ const Reviews = () => {
     filterReviews()
   }, [filterParams]);
 
+  useEffect(() => {
+    console.log(reviewToAdd)
+  }, [reviewToAdd]);
+
   return (
     <div id='reviews'>
     <Breakdown
@@ -91,6 +96,7 @@ const Reviews = () => {
       sortParam={sortParam}
       setSortParam={setSortParam}
       reviewList={reviewList}
+      setReviewToAdd={setReviewToAdd}
     />
     </div>
   )

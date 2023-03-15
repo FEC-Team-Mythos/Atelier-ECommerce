@@ -4,7 +4,7 @@ import ReviewTile from './ReviewTile.jsx';
 import Filter from './Filter.jsx'
 import AddReviewModal from './AddReviewModal.jsx';
 
-const ReviewList = ({ reviewList, sortParam, setSortParam }) => {
+const ReviewList = ({ reviewList, sortParam, setSortParam, reviewToAdd, setReviewToAdd }) => {
   const [reviewListLength, setReviewListLength] = useState(2);
   const [addReviewState, toggleAddReviewState] = useState(false);
 
@@ -41,6 +41,7 @@ const ReviewList = ({ reviewList, sortParam, setSortParam }) => {
     <AddReviewModal
       addReviewState={addReviewState}
       toggleAddReviewState={toggleAddReviewState}
+      setReviewToAdd={setReviewToAdd}
     />
     {moreReviewsButton()}{addReview()}
     </div>
