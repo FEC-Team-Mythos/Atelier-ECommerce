@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-const Filter = (props) => {
+const Filter = ({ allReviews, sortParam, setSortParam }) => {
   const filterDropDown = () => {
 
     const handleChange = (e) => {
       var val = e.target.value
-      props.setSortParam(val);
+      setSortParam(val);
     }
 
     return (
-        <select value={props.sortParam} onChange={handleChange}>
+        <select value={sortParam} onChange={handleChange}>
           <option value="relevance">Relevance</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>
@@ -19,7 +19,7 @@ const Filter = (props) => {
 
   return (
     <div>
-      {props.allReviews.length} Total Reviews, sorted by <span>{filterDropDown()}</span>
+      {allReviews.length} Total Reviews, sorted by <span>{filterDropDown()}</span>
     </div>
   )
 }

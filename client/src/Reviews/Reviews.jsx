@@ -3,10 +3,11 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import ReviewList from './ReviewList.jsx';
-import StarBox from './StarBox.jsx';
+import Breakdown from './Breakdown.jsx'
 
 const Reviews = () => {
   const [allReviews, setAllReviews] = useState([]);
+  const [metaData, setMetaData] = useState([]);
 
   const [filteredReviews, setFilteredReviews] = useState([]);
   const [filterParams, setFilterParams] = useState([]);
@@ -17,9 +18,19 @@ const Reviews = () => {
   const getReviewData = async () => {
     //Product ID should be dynamic here, will grab from other widget
     try {
-      var response = await axios.get('/reviews/', {params: {sort: 'relevance', product_id: 71697}})
+      var response = await axios.get('/reviews', {params: {sort: 'relevance', product_id: 71697}})
       setAllReviews(response.data.results);
       setReviewList(response.data.results);
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  const getReviewMetaData = async () => {
+    //Product ID should be dynamic here, will grab from other widget
+    try {
+      var response = await axios.get('/reviews/meta', {params: {product_id: 71697}})
+      setMetaData(response.data);
     } catch(err) {
       console.log(err);
     }
@@ -58,6 +69,7 @@ const Reviews = () => {
 
   useEffect(() => {
     getReviewData()
+    getReviewMetaData()
   }, []);
 
   useEffect(() => {
@@ -70,9 +82,8 @@ const Reviews = () => {
 
   return (
     <div id='reviews'>
-    <StarBox
-      allReviews={allReviews}
-      filteredReviews={filteredReviews}
+    <Breakdown
+      metaData={metaData}
       filterParams={filterParams}
       setFilterParams={setFilterParams}
     />
