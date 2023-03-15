@@ -20,3 +20,11 @@ body {background-color: aqua;}
   max-width: 300px;
   background-color: #FFF;
 }
+
+#review-photos {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  padding: 10px 10px 10px 0;
+  display:flex;
+}

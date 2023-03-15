@@ -40,7 +40,11 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
             <label>
               <div>
                 Do you recommend this product?
-              <input type="checkbox" />
+              <input
+              type="checkbox"
+              value={formRecommend}
+              onChange={(e) => setFormRecommend(e.target.value)}
+              />
               </div>
             </label>
             <label>
@@ -51,13 +55,20 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
             <label>
               <div>
                 Review Summary:
-                <input type="text" maxLength={60}/>
+                <input
+                type="text" maxLength={60}
+                value={formSummary}
+                onChange={(e) => setFormSummary(e.target.value)}/>
               </div>
             </label>
             <label>
               <div>
                 Review Body:
-                <input type="text" minLength={50} maxLength={1000}/>
+                <input
+                type="text" minLength={50} maxLength={1000}
+                value={formBody}
+                onChange={(e) => setFormBody(e.target.value)}
+                />
               </div>
             </label>
             <label>
@@ -68,13 +79,19 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
             <label>
               <div>
                 Nickname:
-                <input type="text" maxLength={60}/>
+                <input
+                type="text" maxLength={60}
+                value={formName}
+                onChange={(e) => setFormName(e.target.value)}/>
               </div>
             </label>
             <label>
               <div>
                 Email:
-                <input type="text" maxLength={60}/>
+                <input
+                type="text" maxLength={60}
+                value={formEmail}
+                onChange={(e) => setFormEmail(e.target.value)}/>
               </div>
             </label>
             <input type="submit" value="Submit" />
