@@ -1,7 +1,16 @@
 import {render, screen} from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import ProductOverview from './client/src/ProductOverview/ProductOverview'
+import axios from 'axios';
 
+const request = (endpoint, params={}, method='get') => {
+  return axios({
+    method: method,
+    url: endpoint,
+    params: params
+  })
+}
 
 describe('Random test examples', () => {
 
@@ -15,4 +24,13 @@ describe('Random test examples', () => {
   })
 
   //test and it works interchangeably
+})
+
+describe('Checks the logo component', () => {
+
+  it('checks the value of the Logo component', () => {
+    const { getByText } = render(<ProductOverview request={request} />);
+    const logoValue = getByText('Logo');
+    expect(logoValue).toBeInTheDocument('Logo');
+  })
 })
