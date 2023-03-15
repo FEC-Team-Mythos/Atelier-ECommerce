@@ -82,11 +82,12 @@ const Reviews = () => {
   }, [filterParams]);
 
   useEffect(() => {
-    console.log(reviewToAdd)
+    // console.log(reviewToAdd)
   }, [reviewToAdd]);
 
   return (
     <div id='reviews'>
+      Review Widget
     <Breakdown
       metaData={metaData}
       filterParams={filterParams}
