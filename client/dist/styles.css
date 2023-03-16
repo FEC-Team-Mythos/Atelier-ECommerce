@@ -1,5 +1,18 @@
 body {background-color: aqua;}
 
+#total-rating-bar {
+  background-color: grey;
+  margin: 10px;
+}
+
+#total-characteristics-bar {
+  background-color: grey;
+  margin: 10px;
+  height: 10px;
+  width: 400px;
+  display:flex;
+}
+
 #popup {
   position: fixed;
   top: 0;

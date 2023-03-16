@@ -5,24 +5,28 @@ import { BarChart, Bar, Cell, XAxis, YAxis, ZAxis, CartesianGrid, LabelList, Dot
 const Characteristics = ({ characteristics }) => {
   const [characteristicRatings, setCharacteristicsRatings] = useState({})
 
-  const characteristicsGraph = () => {
+  const marginCalc = (rating) => {
+    //hardcoded value
+    return (rating / 5) * 400;
+  }
+
+  const characteristicsSlider = () => {
     if (characteristicRatings.length) {
       return (
-        <BarChart
-          layout="vertical"
-          width={400}
-          height={150}
-          data={characteristicRatings}
-        >
-          <XAxis type="number"
-            domain={[0, 5]}
-            hide/>
-          <YAxis type="category" dataKey="name" />
-          <Bar dataKey="value" yAxisID={0} fill="#8884d8">
-            <LabelList data="•" position="right"/>
-          </Bar>
-          <Bar dataKey="total" yAxisID={1} fill="#82ca9d" />
-        </BarChart>
+        characteristicRatings.map((specificCharacteristic) => {
+          var dotStyle = {
+            backgroundColor: 'black',
+            width: 10,
+            height: 10,
+            marginLeft: marginCalc(specificCharacteristic.value)
+          }
+
+          return (
+            <div id='total-characteristics-bar'>
+              <div id={`${specificCharacteristic.name}-bar`} style={dotStyle}/>
+            </div>
+          )
+        })
       )
     }
   }
@@ -40,7 +44,7 @@ const Characteristics = ({ characteristics }) => {
   }, [characteristics])
 
   return (
-    <div>{characteristicsGraph()}</div>
+    <div>{characteristicsSlider()}</div>
   )
 }
 

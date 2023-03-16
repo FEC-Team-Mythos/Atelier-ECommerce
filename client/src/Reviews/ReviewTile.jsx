@@ -20,7 +20,6 @@ const ReviewTile = ({ review }) => {
 
   return (
     <div id='reviewTile'>
-      {console.log(review)}
       <div>{review.rating} / {review.reviewer_name} / {formatDate()}</div>
       <div>{review.summary}</div>
       <div>{review.body}</div>

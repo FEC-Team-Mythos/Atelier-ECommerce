@@ -3,7 +3,9 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import ReviewList from './ReviewList.jsx';
-import Breakdown from './Breakdown.jsx'
+import Breakdown from './Breakdown.jsx';
+import NewBreakdown from './NewBreakdown.jsx';
+
 
 const Reviews = () => {
   const [allReviews, setAllReviews] = useState([]);
@@ -88,11 +90,16 @@ const Reviews = () => {
   return (
     <div id='reviews'>
       Review Widget
-    <Breakdown
+    {/* <Breakdown
       metaData={metaData}
       filterParams={filterParams}
       setFilterParams={setFilterParams}
-    />
+    /> */}
+    <NewBreakdown
+      metaData={metaData}
+      filterParams={filterParams}
+      setFilterParams={setFilterParams}
+      />
     <ReviewList
       sortParam={sortParam}
       setSortParam={setSortParam}
