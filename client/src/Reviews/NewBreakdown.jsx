@@ -72,7 +72,7 @@ const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
           }
 
           return (
-            <div className='bar' onClick={() => {console.log(rating.rating)}}>
+            <div className='bar' onClick={() => {filterClick(rating.rating)}}>
             <span className='leftBarText'>{rating.rating + " "}<FontAwesomeIcon icon="fa-solid fa-star" /></span>
               <div id='total-rating-bar' style={{width: totalRatings}}>
                 <div id={`${rating.rating}-rating-bar`} style={barStyle}>
@@ -86,6 +86,15 @@ const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
     }
   }
 
+  const filterClick = useCallback((clickedRating) => {
+    if (filterParams.includes(clickedRating)) {
+      setFilterParams(filterParams.filter(rating => rating !== clickedRating))
+    } else {
+      setFilterParams([...filterParams, clickedRating]);
+      }
+    },
+    [filterParams, setFilterParams]
+  )
 
   const displayFilters = () => {
     var sortedFilterParams = filterParams.sort().join(', ');
