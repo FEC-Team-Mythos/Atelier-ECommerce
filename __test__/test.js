@@ -74,7 +74,7 @@ describe('Unit Tests', () => {
     expect(logoPlaceholder).toBeInTheDocument();
   });
 
-  it('Renders product information pulled from API/Server', async () => {
+  it('Renders product information pulled from API/Server', () => {
     render(<ProductDescription product={mockProductData}/>);
     const descriptionText = screen.getByText(/The So Fatigue/i);
     expect(descriptionText).toBeInTheDocument();
