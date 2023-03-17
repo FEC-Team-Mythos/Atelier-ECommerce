@@ -7,7 +7,7 @@ body {background-color: aqua;}
 }
 
 #breakdown {
-  margin-right: 30px;
+  margin-right: 50px;
 }
 
 .threeQ {
@@ -24,12 +24,21 @@ body {background-color: aqua;}
 
 .bar{
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-start
 }
 
 #total-rating-bar {
   background-color: grey;
   margin: 10px;
+}
+
+#characterSliders {
+  font-size: 12px;
+}
+
+.singular-character-title {
+  display: block;
+  margin-left: 15%;
 }
 
 #total-characteristics-bar {
@@ -38,6 +47,12 @@ body {background-color: aqua;}
   height: 10px;
   width: 350px;
   display:flex;
+}
+
+.singular-character-slider {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
 }
 
 #popup {
