@@ -27,10 +27,16 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
           return;
         }
       }
-        updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
+        // updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
+        updatedCart.push({productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), sku_id: selectedSku,
+          size: selectedSize.size, quantity: selectedQuantity});
         setCartItems(updatedCart);
     } else {
-      let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
+      // let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
+      let item = [{productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+        productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), sku_id: selectedSku,
+        size: selectedSize.size, quantity: selectedQuantity}];
       setCartItems(item);
     }
   }

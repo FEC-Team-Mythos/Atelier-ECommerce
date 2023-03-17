@@ -10,7 +10,9 @@ const ShoppingCart = ({cartItems}) => {
   return (
     <div>
       {cartItems.map(item => (
-        <h1 key={item.sku_id}>{JSON.stringify(item)}</h1>
+        <div key={item.sku_id}>
+        <h1>{JSON.stringify(item)}</h1>
+        </div>
       ))}
     </div>
   )
