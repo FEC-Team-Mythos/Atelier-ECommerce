@@ -14,14 +14,22 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
 
   const getSelectedQuantity = () => {
     var e = document.getElementById('overview_productQuantity');
-    setSelectedQuantity(e.value);
+    setSelectedQuantity(Number(e.value));
   }
 
   const addToCart = () => {
     if (sessionStorage.getItem('cart')) {
       let cartItems = JSON.parse(sessionStorage.getItem('cart'));
-      cartItems.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-      sessionStorage.setItem('cart', JSON.stringify(cartItems));
+      console.log(cartItems);
+      for (var item of cartItems) {
+        if (item.sku_id === selectedSku && item.size === selectedSize.size) {
+          item.quantity += selectedQuantity;
+          sessionStorage.setItem('cart', JSON.stringify(cartItems));
+          return;
+        }
+      }
+        cartItems.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
+        sessionStorage.setItem('cart', JSON.stringify(cartItems));
     } else {
       let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
       sessionStorage.setItem('cart', JSON.stringify(item));
@@ -47,7 +55,7 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
       </select>
 
       <select id="overview_productQuantity" onChange={getSelectedQuantity}>
-        <option value="0">SELECT QUANTITY</option>
+        <option value='0'>SELECT QUANTITY</option>
         {(Object.keys(selectedSize).length && selectedSize.quantity < 5) ?
         Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
           <option value={quantity} key={quantity}>{quantity}</option>

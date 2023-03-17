@@ -4,6 +4,7 @@ import MainImageScreen from './components/MainImageScreen.jsx';
 import ProductInformation from './components/ProductInformation.jsx';
 import ProductDescription from './components/ProductDescription.jsx';
 import PurchaseOptions from './components/PurchaseOptions.jsx';
+import ShoppingCart from './components/ShoppingCart.jsx';
 
 const ProductOverview = ({ request }) => {
 
@@ -35,7 +36,7 @@ const ProductOverview = ({ request }) => {
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
-      {sessionStorage.getItem('cart') ? <h1>hi</h1> : <h2>bye</h2>}
+      {sessionStorage.length ? <ShoppingCart /> : <h2>bye</h2>}
       {(Object.keys(product).length && Object.keys(productInformation).length) ?
         <div className = "overview_overviewContainer">
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
