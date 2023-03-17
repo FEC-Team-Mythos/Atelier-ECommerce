@@ -1,14 +1,18 @@
 import React, {useState, useEffect} from 'react';
 
-const ShoppingCart = () => {
+const ShoppingCart = ({cartItems}) => {
 
-  // useEffect(()=>{
-  //   let storedCartItems = JSON.parse(localStorage.getItem('cart'));
-  //   setCartItems(storedCartItems);
-  // }, [cartItems])
+  useEffect(()=>{
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    console.log('here');
+  }, [cartItems])
 
   return (
-    <h2>Hi</h2>
+    <div>
+      {cartItems.map(item => (
+        <h1 key={item.sku_id}>{JSON.stringify(item)}</h1>
+      ))}
+    </div>
   )
 }
 

@@ -19,15 +19,16 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
 
   const addToCart = () => {
     if (cartItems.length) {
-      for (var item of cartItems) {
+      let updatedCart = [...cartItems];
+      for (var item of updatedCart) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
-          setCartItems(cartItems);
+          setCartItems(updatedCart);
           return;
         }
       }
-        cartItems.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-        setCartItems(cartItems);
+        updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
+        setCartItems(updatedCart);
     } else {
       let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
       setCartItems(item);
