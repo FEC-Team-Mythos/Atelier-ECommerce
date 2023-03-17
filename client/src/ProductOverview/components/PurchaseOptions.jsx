@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage}) => {
+const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState(0);
@@ -18,20 +18,19 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
   }
 
   const addToCart = () => {
-    if (localStorage.getItem('cart')) {
-      let cartItems = JSON.parse(localStorage.getItem('cart'));
+    if (cartItems.length) {
       for (var item of cartItems) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
-          localStorage.setItem('cart', JSON.stringify(cartItems));
+          setCartItems(cartItems);
           return;
         }
       }
         cartItems.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+        setCartItems(cartItems);
     } else {
       let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
-      localStorage.setItem('cart', JSON.stringify(item));
+      setCartItems(item);
     }
   }
 

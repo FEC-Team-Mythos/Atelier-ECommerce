@@ -42,7 +42,8 @@ const ProductOverview = ({ request }) => {
         <div className = "overview_overviewContainer">
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
           <ProductInformation productInformation={productInformation} product={product}/>
-          <PurchaseOptions product={product} productInformation={productInformation} setProductInformation={setProductInformation} productStyles={productStyles} setMainImage={setMainImage}/>
+          <PurchaseOptions product={product} productInformation={productInformation} setProductInformation={setProductInformation}
+            productStyles={productStyles} setMainImage={setMainImage} cartItems={cartItems} setCartItems={setCartItems}/>
           <ProductDescription product={product}/>
         </div>
         : null
