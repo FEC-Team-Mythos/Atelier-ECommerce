@@ -10,7 +10,7 @@ const Filter = ({ allReviews, sortParam, setSortParam }) => {
 
     return (
         <select value={sortParam} onChange={handleChange}>
-          <option value="relevance">Relevance</option>
+          <option value="relevant">Relevance</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>
         </select>
