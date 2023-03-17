@@ -10,8 +10,8 @@ const ProductInformation = ({productInformation, product}) => {
       <h2>{productInformation.name}</h2>
       {productInformation.sale_price ?
         <div>
-          <h3>${productInformation.original_price || product.default_price}</h3>
-          <h2>${productInformation.sale_price}</h2>
+          <h3 style={{textDecoration: 'line-through'}}>${productInformation.original_price || product.default_price}</h3>
+          <h2 style={{color: 'red'}}>${productInformation.sale_price}</h2>
         </div>
         :
         <h3>${productInformation.original_price || product.default_price}</h3>

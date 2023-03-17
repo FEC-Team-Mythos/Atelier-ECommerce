@@ -37,7 +37,7 @@ const ProductOverview = ({ request }) => {
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
-      {Object.keys(cartItems).length ? <ShoppingCart cartItems={cartItems}/> : null}
+      {localStorage.getItem('cart') ? <ShoppingCart cartItems={cartItems}/> : null}
       {(Object.keys(product).length && Object.keys(productInformation).length) ?
         <div className = "overview_overviewContainer">
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
