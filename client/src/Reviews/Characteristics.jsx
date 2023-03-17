@@ -20,9 +20,9 @@ function Characteristics({ characteristics }) {
 
           return (
             <div id="total-characteristics-bar">
-              Left
+              {/* Left */}
               <span id={`${specificCharacteristic.name}-bar`} style={dotStyle} />
-              Right
+              {/* Right */}
             </div>
           );
         })

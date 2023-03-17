@@ -87,7 +87,7 @@ const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
   }, [metaData])
 
   return (
-    <div>
+    <div id="breakdown">
       <div>
       {avgRating}
       </div>

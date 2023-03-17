@@ -1,5 +1,15 @@
 body {background-color: aqua;}
 
+#reviews {
+  display:flex;
+  flex-shrink: 0;
+  padding: 20px;
+}
+
+#breakdown {
+  margin-right: 30px;
+}
+
 #total-rating-bar {
   background-color: grey;
   margin: 10px;
@@ -9,7 +19,7 @@ body {background-color: aqua;}
   background-color: grey;
   margin: 10px;
   height: 10px;
-  width: 400px;
+  width: 350px;
   display:flex;
 }
 
