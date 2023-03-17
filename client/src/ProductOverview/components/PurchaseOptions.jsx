@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const StylesSelection = ({product, productInformation, setProductInformation, productStyles, setMainImage}) => {
+const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState(0);
@@ -62,4 +62,4 @@ const StylesSelection = ({product, productInformation, setProductInformation, pr
   )
 }
 
-export default StylesSelection;
+export default PurchaseOptions;

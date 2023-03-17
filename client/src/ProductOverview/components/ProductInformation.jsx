@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import StylesSelection from './StylesSelection.jsx';
 
-const ProductInformation = ({productInformation, product, setProductInformation, productStyles, setMainImage}) => {
+const ProductInformation = ({productInformation, product}) => {
 
   return (
     <div>
@@ -17,7 +16,6 @@ const ProductInformation = ({productInformation, product, setProductInformation,
         :
         <h3>${productInformation.original_price || product.default_price}</h3>
       }
-      <StylesSelection product={product} productInformation={productInformation} setProductInformation={setProductInformation} productStyles={productStyles} setMainImage={setMainImage}/>
     </div>
   )
 }
