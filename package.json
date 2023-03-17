@@ -8,6 +8,9 @@
     "server-dev": "nodemon ./server/index.js",
     "test": "jest"
   },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FEC-Team-Mythos/rpp2210-fec-atelier.git"
