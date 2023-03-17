@@ -12,6 +12,7 @@ const ProductOverview = ({ request }) => {
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [mainImage, setMainImage] = useState('');
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(()=> {
     request('/products/71697', {product_id: 71697}, 'get')
@@ -36,7 +37,7 @@ const ProductOverview = ({ request }) => {
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
-      {sessionStorage.length ? <ShoppingCart /> : <h2>bye</h2>}
+      {Object.keys(cartItems).length ? <ShoppingCart cartItems={cartItems}/> : null}
       {(Object.keys(product).length && Object.keys(productInformation).length) ?
         <div className = "overview_overviewContainer">
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>

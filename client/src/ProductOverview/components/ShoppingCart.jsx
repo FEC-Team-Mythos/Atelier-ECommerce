@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 
 const ShoppingCart = () => {
-  const [cartItems, setCartItems] = useState([])
+
   useEffect(()=>{
-    let storedCartItems = JSON.parse(sessionStorage.getItem('cart'));
+    let storedCartItems = JSON.parse(localStorage.getItem('cart'));
     setCartItems(storedCartItems);
-    console.log(storedCartItems);
-  }, [sessionStorage.getItem('cart')])
+  }, [cartItems])
+
   return (
     <h2>Hi</h2>
   )

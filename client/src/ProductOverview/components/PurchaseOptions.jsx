@@ -18,21 +18,20 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
   }
 
   const addToCart = () => {
-    if (sessionStorage.getItem('cart')) {
-      let cartItems = JSON.parse(sessionStorage.getItem('cart'));
-      console.log(cartItems);
+    if (localStorage.getItem('cart')) {
+      let cartItems = JSON.parse(localStorage.getItem('cart'));
       for (var item of cartItems) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
-          sessionStorage.setItem('cart', JSON.stringify(cartItems));
+          localStorage.setItem('cart', JSON.stringify(cartItems));
           return;
         }
       }
         cartItems.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-        sessionStorage.setItem('cart', JSON.stringify(cartItems));
+        localStorage.setItem('cart', JSON.stringify(cartItems));
     } else {
       let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
-      sessionStorage.setItem('cart', JSON.stringify(item));
+      localStorage.setItem('cart', JSON.stringify(item));
     }
   }
 
