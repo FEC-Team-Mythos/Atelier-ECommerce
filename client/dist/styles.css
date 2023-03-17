@@ -10,6 +10,19 @@ body {background-color: aqua;}
   margin-right: 30px;
 }
 
+.threeQ {
+  clip-path: polygon(75% 0%, 75% 100%, 0% 100%, 0% 0%);
+}
+
+.oneHalf {
+  clip-path: polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%);
+}
+
+.oneQuarter {
+  clip-path: polygon(25% 0%, 25% 100%, 0% 100%, 0% 0%);
+}
+
+
 #total-rating-bar {
   background-color: grey;
   margin: 10px;

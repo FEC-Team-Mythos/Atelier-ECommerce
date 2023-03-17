@@ -1,6 +1,11 @@
 import React from 'react';
 import { useState, useEffect, useCallback } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import Characteristics from './Characteristics.jsx';
+
+library.add(faStar);
 
 const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
   const [avgRating, setAvgRating] = useState(0);
@@ -14,9 +19,30 @@ const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
       total += Number(metaData.ratings[rating])
       }
     setTotalRatings(total);
-    setAvgRating((avg/total).toFixed(2));
+    setAvgRating(Number((avg/total).toFixed(2)));
+  }
 
-    //TO DO: Render Stars with FontAwesome
+  const starCount = () => {
+    var roundToNearestQuarter = Math.round(avgRating * 4) / 4;
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (roundToNearestQuarter > 1) {
+        stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
+        roundToNearestQuarter--;
+      } else if (roundToNearestQuarter < 1 && roundToNearestQuarter >= 0.75) {
+        stars.push(<span className='threeQ' ><FontAwesomeIcon icon="fa-solid fa-star" /></span>);
+        roundToNearestQuarter--;
+      } else if (roundToNearestQuarter < 0.75 && roundToNearestQuarter >= 0.5) {
+        stars.push(<span className="oneHalf"><FontAwesomeIcon icon="fa-solid fa-star" /></span>);
+        roundToNearestQuarter--;
+      } else if (roundToNearestQuarter < 0.5 && roundToNearestQuarter >= 0.25) {
+        stars.push(<span className="oneQuarter"><FontAwesomeIcon icon="fa-solid fa-star" /></span>);
+        roundToNearestQuarter--;
+      }
+    }
+    return (<span id="stars">
+      {stars}
+    </span>)
   }
 
   const calcRecommend = () => {
@@ -88,9 +114,7 @@ const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
 
   return (
     <div id="breakdown">
-      <div>
-      {avgRating}
-      </div>
+      <span>{avgRating}{starCount()}</span>
       {ratingsGraph()}
       <Characteristics
         characteristics={metaData.characteristics}
