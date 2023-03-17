@@ -9,7 +9,7 @@ const ReviewList = ({ reviewList, sortParam, setSortParam, reviewToAdd, setRevie
   const [addReviewState, toggleAddReviewState] = useState(false);
 
   const moreReviewsButton = () => {
-    if (reviewListLength < reviewList.length) {
+    if (reviewList && reviewListLength < reviewList.length) {
       return (
         <button onClick={()=>setReviewListLength(reviewListLength + 2)}>More Reviews</button>
       )
@@ -30,7 +30,7 @@ const ReviewList = ({ reviewList, sortParam, setSortParam, reviewToAdd, setRevie
     setSortParam={setSortParam}
     />
     --
-    {reviewList.slice(0,reviewListLength).map((review) => {
+    {reviewList && reviewList.slice(0,reviewListLength).map((review) => {
       return(
         <ReviewTile
         key={review.review_id}

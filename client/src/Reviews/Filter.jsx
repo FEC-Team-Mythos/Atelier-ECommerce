@@ -17,9 +17,15 @@ const Filter = ({ allReviews, sortParam, setSortParam }) => {
     )
   }
 
+  const tallyReviews = () => {
+    if (allReviews) {
+      return (<>{allReviews.length}</>)
+    }
+  }
+
   return (
     <div>
-      {allReviews.length} Total Reviews, sorted by <span>{filterDropDown()}</span>
+      {tallyReviews()} Total Reviews, sorted by <span>{filterDropDown()}</span>
     </div>
   )
 }
