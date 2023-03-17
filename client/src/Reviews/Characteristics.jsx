@@ -1,51 +1,50 @@
-import React from 'react';
-import { useState, useEffect, useCallback } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, ZAxis, CartesianGrid, LabelList, Dot } from 'recharts';
+import React, { useState, useEffect } from 'react';
 
-const Characteristics = ({ characteristics }) => {
-  const [characteristicRatings, setCharacteristicsRatings] = useState({})
+function Characteristics({ characteristics }) {
+  const [characteristicRatings, setCharacteristicsRatings] = useState({});
 
-  const marginCalc = (rating) => {
-    //hardcoded value
-    return (rating / 5) * 400;
-  }
+  const marginCalc = (rating) =>
+    // hardcoded value
+    (rating / 5) * 400;
 
   const characteristicsSlider = () => {
     if (characteristicRatings.length) {
       return (
         characteristicRatings.map((specificCharacteristic) => {
-          var dotStyle = {
+          const dotStyle = {
             backgroundColor: 'black',
             width: 10,
             height: 10,
-            marginLeft: marginCalc(specificCharacteristic.value)
-          }
+            marginLeft: marginCalc(specificCharacteristic.value),
+          };
 
           return (
-            <div id='total-characteristics-bar'>
-              <div id={`${specificCharacteristic.name}-bar`} style={dotStyle}/>
+            <div id="total-characteristics-bar">
+              Left
+              <span id={`${specificCharacteristic.name}-bar`} style={dotStyle} />
+              Right
             </div>
-          )
+          );
         })
-      )
+      );
     }
-  }
+  };
 
   useEffect(() => {
-    const chartData = []
-    for (var specific in characteristics) {
+    const chartData = [];
+    for (const specific in characteristics) {
       chartData.push({
         name: specific,
         value: characteristics[specific].value,
-        total: 5
-      })
+        total: 5,
+      });
     }
     setCharacteristicsRatings(chartData);
-  }, [characteristics])
+  }, [characteristics]);
 
   return (
     <div>{characteristicsSlider()}</div>
-  )
+  );
 }
 
 export default Characteristics;

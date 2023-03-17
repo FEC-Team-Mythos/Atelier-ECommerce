@@ -42,7 +42,6 @@
     "express": "^4.18.2",
     "nodemon": "^2.0.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "recharts": "^2.4.3"
+    "react-dom": "^18.2.0"
   }
 }
