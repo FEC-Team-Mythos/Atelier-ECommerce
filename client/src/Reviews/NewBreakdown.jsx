@@ -72,9 +72,14 @@ const NewBreakdown = ({ metaData, filterParams, setFilterParams }) => {
           }
 
           return (
-            <div id='total-rating-bar' style={{width: totalRatings}}>
-              <div id={`${rating.rating}-rating-bar`} style={barStyle}/>
+            <div className='bar' onClick={() => {console.log(rating.rating)}}>
+            <span className='leftBarText'>{rating.rating + " "}<FontAwesomeIcon icon="fa-solid fa-star" /></span>
+              <div id='total-rating-bar' style={{width: totalRatings}}>
+                <div id={`${rating.rating}-rating-bar`} style={barStyle}>
+              </div>
             </div>
+              <span className="rightBarText">{rating.count}</span>
+              </div>
           )
         })
       )
