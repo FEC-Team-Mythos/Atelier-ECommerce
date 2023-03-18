@@ -6,7 +6,7 @@ import ProductDescription from './components/ProductDescription.jsx';
 import PurchaseOptions from './components/PurchaseOptions.jsx';
 import ShoppingCart from './components/ShoppingCart.jsx';
 
-const ProductOverview = ({ request }) => {
+const ProductOverview = ({ request, outfits, setOutfits }) => {
 
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});

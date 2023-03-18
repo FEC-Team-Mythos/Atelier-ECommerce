@@ -5,6 +5,7 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
+  const [favorited, setFavorited] = useState(false);
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
@@ -39,6 +40,10 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
         size: selectedSize.size, quantity: selectedQuantity}];
       setCartItems(item);
     }
+  }
+
+  const addToFavorite = () => {
+
   }
 
   return (
