@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import '@testing-library/jest-dom';
 import {
-  render, fireEvent, waitFor, screen
+  render, fireEvent, waitFor, screen,
 } from '@testing-library/react';
 
 import Reviews from './Reviews.jsx';
@@ -100,7 +100,7 @@ const mockDataWithMoreReviews = [
   },
 ];
 
-xdescribe('Reviews', () => {
+describe('Reviews', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -124,7 +124,7 @@ xdescribe('Reviews', () => {
   });
 });
 
-xdescribe('Review List', () => {
+describe('Review List', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -175,23 +175,23 @@ xdescribe('Review List', () => {
   });
 });
 
-describe('Review Tile', () => {
+xdescribe('Review Tile', () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
   test('Review Tile should render all necessary components as per Business Docs', () => {
-    //star
-    //date
-    //summary
-    //body
-    //recommend
-    //name
-    //response
-    //helpful
+    // star
+    // date
+    // summary
+    // body
+    // recommend
+    // name
+    // response
+    // helpful
   });
 
-  //if body > 250, button should display with hidden part of review
+  // if body > 250, button should display with hidden part of review
   test('Summary and Body should be standard lengths', () => {
 
   });
@@ -207,22 +207,22 @@ describe('Review Tile', () => {
   test('Providing review feedback should store in API', () => {
 
   });
-}
+});
 
-  describe('Sorting', () => {
-    beforeEach(() => {
-      jest.resetModules();
-    });
+xdescribe('Sorting', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
 
-    test('Should display dropdown with 3 sorting options', () => {
+  test('Should display dropdown with 3 sorting options', () => {
 
-    });
+  });
 
-    test('Changing Sort Option should sort review list', () => {
+  test('Changing Sort Option should sort review list', () => {
 
-    });
+  });
 
-    test('Sorting should persist when filters are added/removed', () => {
+  test('Sorting should persist when filters are added/removed', () => {
 
-    });
+  });
 });
