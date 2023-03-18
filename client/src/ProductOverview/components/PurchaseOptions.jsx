@@ -1,11 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems}) => {
+const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems, setOutfits, outfits}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
   const [favorited, setFavorited] = useState(false);
+
+  useEffect(()=> {
+    if (localStorage.getItem('outfits')) {
+      let outfitList = JSON.parse(localStorage.getItem('outfits'));
+      for (var outfitItem of outfitList) {
+        if (outfitItem.productName === product.name && outfitItem.styleName === productInformation.name) {
+          setFavorited(true);
+        }
+      }
+    }
+  }, [outfits])
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
@@ -42,9 +53,36 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
     }
   }
 
-  const addToFavorite = () => {
+  //Look into the localStorage to see if outfit exists
+    //If it does, set favorited to true, if not, keep favorited false
 
+  //When button is clicked
+    //If the item is favorited > add to favorite list
+    //If it isnt > Remove from favorite list
+  //Set not favorited
+
+  const outfitButtonHandler = () => {
+    //Picture, category, product description with product information style, cost
+    if (favorited) {
+
+    } else {
+      if (outfits.length) {
+        let updatedOutfits = [...outfits];
+        for (var outfitItem of updatedOutfits) {
+          if (outfitItem.productName === product.name && outfitItem.styleName === productInformation.name) {
+
+            break;
+          }
+      } else {
+        let outfitInfo = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category}];
+        setOutfits = outfitInfo;
+      }
+
+    }
+    setFavorited(!favorited);
   }
+
 
   return (
     <div>
@@ -75,7 +113,7 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
         ))}
       </select>
       <button onClick={addToCart}>Add to Bag</button>
-      <button>Favorite</button>
+      <button onClick={outfitButtonHandler}>Favorite</button>
     </div>
   )
 }

@@ -47,7 +47,7 @@ const ProductOverview = ({ request, outfits, setOutfits }) => {
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
           <ProductInformation productInformation={productInformation} product={product}/>
           <PurchaseOptions product={product} productInformation={productInformation} setProductInformation={setProductInformation}
-            productStyles={productStyles} setMainImage={setMainImage} cartItems={cartItems} setCartItems={setCartItems}/>
+            productStyles={productStyles} setMainImage={setMainImage} cartItems={cartItems} setCartItems={setCartItems} setOutfits={setOutfits} outfits={outfits}/>
           <ProductDescription product={product}/>
         </div>
         : null
