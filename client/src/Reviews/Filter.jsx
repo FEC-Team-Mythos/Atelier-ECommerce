@@ -24,7 +24,7 @@ const Filter = ({ allReviews, sortParam, setSortParam }) => {
   }
 
   return (
-    <div>
+    <div id='reviews-filter' data-testid='reviews-filter'>
       {tallyReviews()} Total Reviews, sorted by <span>{filterDropDown()}</span>
     </div>
   )
