@@ -7,6 +7,7 @@ import {
 
 import Reviews from './Reviews.jsx';
 import ReviewList from './ReviewList.jsx';
+import ReviewTile from './ReviewTile.jsx';
 
 jest.mock('axios');
 
@@ -123,7 +124,7 @@ xdescribe('Reviews', () => {
   });
 });
 
-describe('Review List', () => {
+xdescribe('Review List', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -172,4 +173,56 @@ describe('Review List', () => {
     fireEvent.click(moreReviewsButton);
     expect(moreReviewsButton).not.toBeInTheDocument();
   });
+});
+
+describe('Review Tile', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Review Tile should render all necessary components as per Business Docs', () => {
+    //star
+    //date
+    //summary
+    //body
+    //recommend
+    //name
+    //response
+    //helpful
+  });
+
+  //if body > 250, button should display with hidden part of review
+  test('Summary and Body should be standard lengths', () => {
+
+  });
+
+  test('Clicking Image should expand to full resolution', () => {
+
+  });
+
+  test('Marking a review helpful should increment Helpfulness in API', () => {
+
+  });
+
+  test('Providing review feedback should store in API', () => {
+
+  });
+}
+
+  describe('Sorting', () => {
+    beforeEach(() => {
+      jest.resetModules();
+    });
+
+    test('Should display dropdown with 3 sorting options', () => {
+
+    });
+
+    test('Changing Sort Option should sort review list', () => {
+
+    });
+
+    test('Sorting should persist when filters are added/removed', () => {
+
+    });
 });
