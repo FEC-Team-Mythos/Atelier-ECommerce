@@ -1,47 +1,50 @@
-import React from 'react';
-import { useState, useEffect, useCallback } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, ZAxis, CartesianGrid, LabelList, Dot } from 'recharts';
+import React, { useState, useEffect } from 'react';
 
-const Characteristics = ({ characteristics }) => {
-  const [characteristicRatings, setCharacteristicsRatings] = useState({})
+function Characteristics({ characteristics }) {
+  const [characteristicRatings, setCharacteristicsRatings] = useState({});
 
-  const characteristicsGraph = () => {
+  const marginCalc = (rating) =>
+    // hardcoded value
+    (rating / 5) * 400;
+
+  const characteristicsSlider = () => {
     if (characteristicRatings.length) {
       return (
-        <BarChart
-          layout="vertical"
-          width={400}
-          height={150}
-          data={characteristicRatings}
-        >
-          <XAxis type="number"
-            domain={[0, 5]}
-            hide/>
-          <YAxis type="category" dataKey="name" />
-          <Bar dataKey="value" yAxisID={0} fill="#8884d8">
-            <LabelList data="•" position="right"/>
-          </Bar>
-          <Bar dataKey="total" yAxisID={1} fill="#82ca9d" />
-        </BarChart>
-      )
+        characteristicRatings.map((specificCharacteristic) => {
+          const dotStyle = {
+            backgroundColor: 'black',
+            width: 10,
+            height: 10,
+            marginLeft: marginCalc(specificCharacteristic.value),
+          };
+
+          return (
+            <div id="total-characteristics-bar">
+              {/* Left */}
+              <span id={`${specificCharacteristic.name}-bar`} style={dotStyle} />
+              {/* Right */}
+            </div>
+          );
+        })
+      );
     }
-  }
+  };
 
   useEffect(() => {
-    const chartData = []
-    for (var specific in characteristics) {
+    const chartData = [];
+    for (const specific in characteristics) {
       chartData.push({
         name: specific,
         value: characteristics[specific].value,
-        total: 5
-      })
+        total: 5,
+      });
     }
     setCharacteristicsRatings(chartData);
-  }, [characteristics])
+  }, [characteristics]);
 
   return (
-    <div>{characteristicsGraph()}</div>
-  )
+    <div>{characteristicsSlider()}</div>
+  );
 }
 
 export default Characteristics;

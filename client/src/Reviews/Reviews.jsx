@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import ReviewList from './ReviewList.jsx';
-import Breakdown from './Breakdown.jsx'
+import NewBreakdown from './NewBreakdown.jsx';
+
 
 const Reviews = () => {
   const [allReviews, setAllReviews] = useState([]);
@@ -14,6 +15,7 @@ const Reviews = () => {
   const [sortParam, setSortParam] = useState('relevance');
 
   const [reviewList, setReviewList] = useState([]);
+  const [reviewToAdd, setReviewToAdd] = useState({});
 
   const getReviewData = async () => {
     //Product ID should be dynamic here, will grab from other widget
@@ -80,17 +82,22 @@ const Reviews = () => {
     filterReviews()
   }, [filterParams]);
 
+  useEffect(() => {
+    // console.log(reviewToAdd)
+  }, [reviewToAdd]);
+
   return (
     <div id='reviews'>
-    <Breakdown
+    <NewBreakdown
       metaData={metaData}
       filterParams={filterParams}
       setFilterParams={setFilterParams}
-    />
+      />
     <ReviewList
       sortParam={sortParam}
       setSortParam={setSortParam}
       reviewList={reviewList}
+      setReviewToAdd={setReviewToAdd}
     />
     </div>
   )

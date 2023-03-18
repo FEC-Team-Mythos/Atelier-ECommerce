@@ -1,1 +1,53 @@
 body {background-color: aqua;}
+
+#reviews {
+  display:flex;
+  flex-shrink: 0;
+  padding: 20px;
+}
+
+#breakdown {
+  margin-right: 30px;
+}
+
+#total-rating-bar {
+  background-color: grey;
+  margin: 10px;
+}
+
+#total-characteristics-bar {
+  background-color: grey;
+  margin: 10px;
+  height: 10px;
+  width: 350px;
+  display:flex;
+}
+
+#popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(red, green, blue, alpha);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #FFF;
+}
+
+#review-photos {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  padding: 10px 10px 10px 0;
+  display:flex;
+}

@@ -2,9 +2,11 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 import Filter from './Filter.jsx'
+import AddReviewModal from './AddReviewModal.jsx';
 
-const ReviewList = ({ reviewList, sortParam, setSortParam }) => {
+const ReviewList = ({ reviewList, sortParam, setSortParam, reviewToAdd, setReviewToAdd }) => {
   const [reviewListLength, setReviewListLength] = useState(2);
+  const [addReviewState, toggleAddReviewState] = useState(false);
 
   const moreReviewsButton = () => {
     if (reviewListLength < reviewList.length) {
@@ -12,6 +14,12 @@ const ReviewList = ({ reviewList, sortParam, setSortParam }) => {
         <button onClick={()=>setReviewListLength(reviewListLength + 2)}>More Reviews</button>
       )
     }
+  }
+
+  const addReview = () => {
+    return (
+      <button onClick={()=>toggleAddReviewState(!addReviewState)}>Add Review</button>
+    )
   }
 
   return (
@@ -30,7 +38,12 @@ const ReviewList = ({ reviewList, sortParam, setSortParam }) => {
         />
       )
     })}
-    {moreReviewsButton()}
+    <AddReviewModal
+      addReviewState={addReviewState}
+      toggleAddReviewState={toggleAddReviewState}
+      setReviewToAdd={setReviewToAdd}
+    />
+    {moreReviewsButton()}{addReview()}
     </div>
   )
 }
