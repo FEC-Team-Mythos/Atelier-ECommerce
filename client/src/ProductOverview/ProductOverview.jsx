@@ -3,6 +3,8 @@ import axios from 'axios';
 import MainImageScreen from './components/MainImageScreen.jsx';
 import ProductInformation from './components/ProductInformation.jsx';
 import ProductDescription from './components/ProductDescription.jsx';
+import PurchaseOptions from './components/PurchaseOptions.jsx';
+import ShoppingCart from './components/ShoppingCart.jsx';
 
 const ProductOverview = ({ request }) => {
 
@@ -10,6 +12,7 @@ const ProductOverview = ({ request }) => {
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [mainImage, setMainImage] = useState('');
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(()=> {
     request('/products/71697', {product_id: 71697}, 'get')
@@ -23,6 +26,10 @@ const ProductOverview = ({ request }) => {
         setProductInformation(data.data.results[0]);
         setProductStyles(data.data.results);
         setMainImage(data.data.results[0].photos[0].url);
+        if (localStorage.getItem('cart')) {
+          let cart = JSON.parse(localStorage.getItem('cart'))
+          setCartItems(cart);
+        }
       })
       .catch(err => {
         console.log('Could not get: ', err);
@@ -34,10 +41,13 @@ const ProductOverview = ({ request }) => {
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
+      {cartItems.length ? <ShoppingCart cartItems={cartItems} setCartItems={setCartItems}/> : null}
       {(Object.keys(product).length && Object.keys(productInformation).length) ?
         <div className = "overview_overviewContainer">
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
-          <ProductInformation productInformation={productInformation} product={product} setProductInformation={setProductInformation} productStyles={productStyles} setMainImage={setMainImage}/>
+          <ProductInformation productInformation={productInformation} product={product}/>
+          <PurchaseOptions product={product} productInformation={productInformation} setProductInformation={setProductInformation}
+            productStyles={productStyles} setMainImage={setMainImage} cartItems={cartItems} setCartItems={setCartItems}/>
           <ProductDescription product={product}/>
         </div>
         : null
