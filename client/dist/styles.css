@@ -7,12 +7,38 @@ body {background-color: aqua;}
 }
 
 #breakdown {
-  margin-right: 30px;
+  margin-right: 50px;
+}
+
+.threeQ {
+  clip-path: polygon(75% 0%, 75% 100%, 0% 100%, 0% 0%);
+}
+
+.oneHalf {
+  clip-path: polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%);
+}
+
+.oneQuarter {
+  clip-path: polygon(25% 0%, 25% 100%, 0% 100%, 0% 0%);
+}
+
+.bar{
+  display: flex;
+  justify-content:flex-start
 }
 
 #total-rating-bar {
   background-color: grey;
   margin: 10px;
+}
+
+#characterSliders {
+  font-size: 12px;
+}
+
+.singular-character-title {
+  display: block;
+  margin-left: 15%;
 }
 
 #total-characteristics-bar {
@@ -21,6 +47,12 @@ body {background-color: aqua;}
   height: 10px;
   width: 350px;
   display:flex;
+}
+
+.singular-character-slider {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
 }
 
 #popup {
