@@ -32,27 +32,29 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
   }
 
   const addToCart = () => {
+
+    let updatedCart = [];
+
     if (cartItems.length) {
-      let updatedCart = [...cartItems];
+      updatedCart = [...cartItems];
       for (var item of updatedCart) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
-          setCartItems(updatedCart);
-          return;
+          break;
         }
       }
         // updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
         updatedCart.push({productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
           productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), sku_id: selectedSku,
           size: selectedSize.size, quantity: selectedQuantity});
-        setCartItems(updatedCart);
     } else {
       // let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
-      let item = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+        updatedCart = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
         productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), sku_id: selectedSku,
         size: selectedSize.size, quantity: selectedQuantity}];
-      setCartItems(item);
-    }
+      }
+    setCartItems(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   }
 
 

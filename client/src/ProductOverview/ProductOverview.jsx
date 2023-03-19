@@ -36,20 +36,13 @@ const ProductOverview = ({ request, outfits, setOutfits }) => {
       })
   }, [])
 
-  useEffect(()=>{
-    if (!cartItems.length) {
-      localStorage.removeItem('cart');
-    } else {
-      localStorage.setItem('cart', JSON.stringify(cartItems));
-    }
-  }, [cartItems])
 
   return (
     <div>
       <h1>Logo</h1>
       <input type='text'></input>
       <button>Search Icon</button>
-      {cartItems.length ? <ShoppingCart cartItems={cartItems} setCartItems={setCartItems}/> : null}
+      <ShoppingCart cartItems={cartItems} setCartItems={setCartItems}/>
       {(Object.keys(product).length && Object.keys(productInformation).length) ?
         <div className = "overview_overviewContainer">
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
