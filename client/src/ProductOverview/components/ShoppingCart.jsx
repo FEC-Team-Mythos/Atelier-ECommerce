@@ -2,20 +2,14 @@ import React, {useState, useEffect} from 'react';
 
 const ShoppingCart = ({cartItems, setCartItems}) => {
 
-  useEffect(()=>{
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }, [cartItems])
-
   const removeItem = (sku_id, size) => {
-    let updatedCart=[];
+    let updatedCart=[...cartItems];
 
     for (let i = 0; i < cartItems.length; i++) {
       if (cartItems[i].sku_id === sku_id && cartItems[i].size === size) {
-        continue;
+        updatedCart.splice(i, 1);
       }
-      updatedCart.push(cartItems[i]);
     }
-
     setCartItems(updatedCart);
   }
 

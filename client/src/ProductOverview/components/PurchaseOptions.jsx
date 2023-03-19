@@ -1,10 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems}) => {
+const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems, setOutfits, outfits}) => {
 
   const [selectedSize, setSelectedSize] = useState({});
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
+  const [favorited, setFavorited] = useState(false);
+
+  useEffect(()=> {
+    if (localStorage.getItem('outfits')) {
+      let outfitList = JSON.parse(localStorage.getItem('outfits'));
+      for (var outfitItem of outfitList) {
+        if (outfitItem.productName === product.name && outfitItem.styleName === productInformation.name) {
+          setFavorited(true);
+          return;
+        }
+      }
+    }
+    setFavorited(false);
+  }, [outfits, productInformation])
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
@@ -41,6 +55,36 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
     }
   }
 
+
+  const outfitButtonHandler = () => {
+
+    let updatedOutfits = [...outfits];
+
+    if (favorited) {
+      for (let i = 0; i < outfits.length; i++) {
+        if (updatedOutfits[i].productName === product.name && updatedOutfits[i].styleName === productInformation.name) {
+          updatedOutfits.splice(i, 1);
+          break;
+        }
+      }
+    } else {
+      if (updatedOutfits.length) {
+        updatedOutfits.push({productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category})
+      } else {
+        updatedOutfits = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category}];
+      }
+    }
+    if (!updatedOutfits.length) {
+      localStorage.removeItem('outfits');
+    } else {
+      localStorage.setItem('outfits', JSON.stringify(updatedOutfits));
+    }
+    setOutfits(updatedOutfits);
+  }
+
+
   return (
     <div>
       <ul>
@@ -70,7 +114,7 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
         ))}
       </select>
       <button onClick={addToCart}>Add to Bag</button>
-      <button>Favorite</button>
+      <button onClick={outfitButtonHandler}>Favorite</button>
     </div>
   )
 }

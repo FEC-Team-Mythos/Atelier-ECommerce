@@ -6,7 +6,7 @@ import ProductDescription from './components/ProductDescription.jsx';
 import PurchaseOptions from './components/PurchaseOptions.jsx';
 import ShoppingCart from './components/ShoppingCart.jsx';
 
-const ProductOverview = ({ request }) => {
+const ProductOverview = ({ request, outfits, setOutfits }) => {
 
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});
@@ -36,6 +36,14 @@ const ProductOverview = ({ request }) => {
       })
   }, [])
 
+  useEffect(()=>{
+    if (!cartItems.length) {
+      localStorage.removeItem('cart');
+    } else {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems])
+
   return (
     <div>
       <h1>Logo</h1>
@@ -47,7 +55,7 @@ const ProductOverview = ({ request }) => {
           <MainImageScreen productInformation={productInformation} mainImage={mainImage} setMainImage={setMainImage}/>
           <ProductInformation productInformation={productInformation} product={product}/>
           <PurchaseOptions product={product} productInformation={productInformation} setProductInformation={setProductInformation}
-            productStyles={productStyles} setMainImage={setMainImage} cartItems={cartItems} setCartItems={setCartItems}/>
+            productStyles={productStyles} setMainImage={setMainImage} cartItems={cartItems} setCartItems={setCartItems} setOutfits={setOutfits} outfits={outfits}/>
           <ProductDescription product={product}/>
         </div>
         : null

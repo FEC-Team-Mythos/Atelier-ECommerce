@@ -29,9 +29,11 @@ const App = () => {
     })
     */
 
+    const [outfits, setOutfits] = useState([]);
+
   return (
     <>
-      <ProductOverview request={request}/>
+      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits}/>
       <RelatedProducts  request={request}/>
       <QuestionsAndAnswers  request={request}/>
       <Reviews  request={request}/>
