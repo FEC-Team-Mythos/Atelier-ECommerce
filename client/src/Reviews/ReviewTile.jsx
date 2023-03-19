@@ -1,4 +1,9 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
 
 function ReviewTile({ review }) {
   const formatDate = () => {
@@ -18,10 +23,24 @@ function ReviewTile({ review }) {
     }
   };
 
+  const starCount = (rating) => {
+    const stars = [];
+    while (rating > 0) {
+      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
+      rating--;
+    }
+    return (
+      <span id="stars">
+        {stars}
+      </span>
+    );
+  };
+
   return (
     <div id="reviewTile" data-testid="reviews-individualReview">
       <div>
         {review.rating}
+        {starCount(review.rating)}
         {' '}
         /
         {' '}
@@ -42,7 +61,6 @@ function ReviewTile({ review }) {
         Helpful?
         {review.helpfulness}
       </div>
-      -----
     </div>
   );
 }
