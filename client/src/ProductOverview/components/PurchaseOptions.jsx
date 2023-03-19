@@ -15,6 +15,8 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
           setFavorited(true);
         }
       }
+    } else {
+      setFavorited(false);
     }
   }, [outfits])
 
@@ -53,34 +55,30 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
     }
   }
 
-  //Look into the localStorage to see if outfit exists
-    //If it does, set favorited to true, if not, keep favorited false
-
-  //When button is clicked
-    //If the item is favorited > add to favorite list
-    //If it isnt > Remove from favorite list
-  //Set not favorited
 
   const outfitButtonHandler = () => {
-    //Picture, category, product description with product information style, cost
-    if (favorited) {
+    console.log('hello');
 
+    let updatedOutfits = [...outfits];
+
+    if (favorited) {
+      for (let i = 0; i < outfits.length; i++) {
+        if (outfits[i].productName === product.name && outfits[i].styleName === productInformation.name) {
+          updatedOutfits.splice(i, 1);
+          break;
+        }
+      }
     } else {
       if (outfits.length) {
-        let updatedOutfits = [...outfits];
-        for (var outfitItem of updatedOutfits) {
-          if (outfitItem.productName === product.name && outfitItem.styleName === productInformation.name) {
-
-            break;
-          }
+        updatedOutfits.push({productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category})
       } else {
-        let outfitInfo = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+        let updatedOutfits = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
           productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category}];
-        setOutfits = outfitInfo;
       }
-
     }
-    setFavorited(!favorited);
+    localStorage.setItem('outfits', JSON.stringify(updatedOutfits));
+    setOutfits(updatedOutfits);
   }
 
 
