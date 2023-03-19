@@ -37,7 +37,6 @@ const ProductOverview = ({ request, outfits, setOutfits }) => {
   }, [])
 
   useEffect(()=>{
-    console.log('here');
     if (!cartItems.length) {
       localStorage.removeItem('cart');
     } else {

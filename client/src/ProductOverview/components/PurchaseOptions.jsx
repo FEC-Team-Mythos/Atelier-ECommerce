@@ -13,12 +13,12 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
       for (var outfitItem of outfitList) {
         if (outfitItem.productName === product.name && outfitItem.styleName === productInformation.name) {
           setFavorited(true);
+          return;
         }
       }
-    } else {
-      setFavorited(false);
     }
-  }, [outfits])
+    setFavorited(false);
+  }, [outfits, productInformation])
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
@@ -57,27 +57,30 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
 
 
   const outfitButtonHandler = () => {
-    console.log('hello');
 
     let updatedOutfits = [...outfits];
 
     if (favorited) {
       for (let i = 0; i < outfits.length; i++) {
-        if (outfits[i].productName === product.name && outfits[i].styleName === productInformation.name) {
+        if (updatedOutfits[i].productName === product.name && updatedOutfits[i].styleName === productInformation.name) {
           updatedOutfits.splice(i, 1);
           break;
         }
       }
     } else {
-      if (outfits.length) {
+      if (updatedOutfits.length) {
         updatedOutfits.push({productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
           productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category})
       } else {
-        let updatedOutfits = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
+        updatedOutfits = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
           productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category}];
       }
     }
-    localStorage.setItem('outfits', JSON.stringify(updatedOutfits));
+    if (!updatedOutfits.length) {
+      localStorage.removeItem('outfits');
+    } else {
+      localStorage.setItem('outfits', JSON.stringify(updatedOutfits));
+    }
     setOutfits(updatedOutfits);
   }
 
