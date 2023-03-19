@@ -5,20 +5,20 @@ import axios from 'axios';
 // this component is for the carousel which serves both related products and your outfit sections
 const Carousel = ({ product, listType, setShowModal }) => {
 
-    var [box, setBox] = useState(document.querySelector('.related-product-container'));
+    var [carouselBox, setCarouselBox] = useState(document.querySelector('.related-product-container'));
 
     useEffect(() => {
-        setBox(document.querySelector('.related-product-container'));
+        setCarouselBox(document.querySelector('.related-product-container'));
     });
 
     const prev = () => {
-        let width = box.clientWidth;
-        box.scrollLeft = box.scrollLeft - width;
+        let width = carouselBox.clientWidth;
+        carouselBox.scrollLeft = carouselBox.scrollLeft - width;
     }
 
     const next = () => {
-        let width = box.clientWidth;
-        box.scrollLeft = box.scrollLeft + width;
+        let width = carouselBox.clientWidth;
+        carouselBox.scrollLeft = carouselBox.scrollLeft + width;
     }
 
     return (
