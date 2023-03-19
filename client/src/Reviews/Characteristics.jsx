@@ -11,18 +11,18 @@ function Characteristics({ characteristics }) {
     Fit: ['Runs Tight', 'Runs Long']
   }
 
-  const marginCalc = (rating) =>
-    // hardcoded value
-    (rating / 5) * 400;
+  const marginCalc = (rating) => {
+    return (rating / 5) * 200;
+  }
 
   const characteristicsSlider = () => {
     if (characteristicRatings.length) {
       return (
         characteristicRatings.map((specificCharacteristic) => {
           const dotStyle = {
-            backgroundColor: 'black',
-            width: 10,
-            height: 10,
+            borderRadius: '30%',
+            width: 5,
+            height: 15,
             marginLeft: marginCalc(specificCharacteristic.value),
           };
 
@@ -30,11 +30,11 @@ function Characteristics({ characteristics }) {
             <div>
               <span className='singular-character-title'>{specificCharacteristic.name}</span>
             <div className='singular-character-slider'>
-              <span className={`${specificCharacteristic.name}-leftLabel`}>{factorLabels[specificCharacteristic.name][0]}</span>
+              <span className='slider-leftLabel'>{factorLabels[specificCharacteristic.name][0]}</span>
               <div id="total-characteristics-bar">
-                <span id={`${specificCharacteristic.name}-bar`} style={dotStyle} />
+                <span className='slider-bar' style={dotStyle} />
               </div>
-              <span className={`${specificCharacteristic.name}-rightLabel`}>{factorLabels[specificCharacteristic.name][1]}</span>
+              <span className='slider-rightLabel'>{factorLabels[specificCharacteristic.name][1]}</span>
             </div>
             </div>
           );
