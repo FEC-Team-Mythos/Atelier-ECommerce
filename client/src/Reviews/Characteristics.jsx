@@ -26,8 +26,6 @@ function Characteristics({ characteristics }) {
             marginLeft: marginCalc(specificCharacteristic.value),
           };
 
-          console.log(factorLabels[specificCharacteristic.name][0])
-
           return (
             <div>
               <span className='singular-character-title'>{specificCharacteristic.name}</span>
