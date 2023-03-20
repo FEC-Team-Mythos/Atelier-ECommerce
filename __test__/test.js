@@ -1,10 +1,13 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import axios from 'axios';
 import ProductOverview from '../client/src/ProductOverview/ProductOverview';
 import ProductDescription from '../client/src/ProductOverview/components/ProductDescription';
 import MainImageScreen from '../client/src/ProductOverview/components/MainImageScreen';
-import axios from 'axios';
+import ProductInformation from '../client/src/ProductOverview/components/ProductInformation';
+import PurchaseOptions from '../client/src/ProductOverview/components/PurchaseOptions';
+import ShoppingCart from '../client/src/ProductOverview/components/ShoppingCart';
 
 const request = async (endpoint, params={}, method='get') => {
   return axios({
@@ -74,12 +77,30 @@ describe('Unit Tests', () => {
     expect(logoPlaceholder).toBeInTheDocument();
   });
 
-  it('Renders product information pulled from API/Server', () => {
+  it('Renders product description pulled from API/Server', () => {
     render(<ProductDescription product={mockProductData}/>);
     const descriptionText = screen.getByText(/The So Fatigue/i);
     expect(descriptionText).toBeInTheDocument();
   });
+
+  it('Renders product information pulled from API/Server', () => {
+    render(<ProductInformation product={mockProductData} productInformation={mockProductInformationData}/>);
+    const productCategory = mockProductData.category //Jackets
+    const categoryText = screen.getByText(productCategory);
+    expect(categoryText).toBeInTheDocument();
+  });
+
+  // it('Renders product information pulled from API/Server', () => {
+  //   render(<ProductDescription product={mockProductData}/>);
+  //   const descriptionText = screen.getByText(/The So Fatigue/i);
+  //   expect(descriptionText).toBeInTheDocument();
+  // });
+
+
+
 })
+
+
 
 /* ____________ INTEGRATION TESTS ____________ */
 
