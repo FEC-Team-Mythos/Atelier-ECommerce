@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from './Carousel.jsx';
 import axios from 'axios';
 
-// this component is the carousel for "Related Products"
+// this component gets the data for "Related Products" and sends it to the Carousel component
 function RelatedList({ setShowModal }) {
 
   const [related, setRelated] = useState([]);

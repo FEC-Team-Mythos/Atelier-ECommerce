@@ -10,7 +10,7 @@ const ProductCard = ({ product, index, listType, setShowModal }) => {
   if (listType.type === 'outfit' && index === undefined) {
     return (
       <Card className="related-card">
-          <button>+ Add product to outfit +</button>
+          <button role="add-outfit">+ Add product to outfit +</button>
     </Card>
     )
     } else {
