@@ -25,7 +25,7 @@ const ShoppingCart = ({cartItems, setCartItems}) => {
         {cartItems.map((item, index) => (
           <div key={item.sku_id}>
             <img src={item.productPhoto}/>
-            <p>Product: {item.name} - {item.styleName}</p>
+            <p>Product: {item.productName} - {item.styleName}</p>
             <p>Cost: {item.productCost}</p>
             <p>Size: {item.size}</p>
             <p>Quantity: {item.quantity}</p>
