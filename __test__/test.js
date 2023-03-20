@@ -171,8 +171,14 @@ describe('Unit Tests', () => {
   it('Renders product information pulled from API/Server', () => {
     render(<ProductInformation product={mockProductData} productInformation={mockProductInformationData}/>);
     const productCategory = mockProductData.category //Jackets
+    const productName = mockProductData.name;
+    const productCost = mockProductInformationData.original_price;
     const categoryText = screen.getByText(productCategory);
+    const nameText = screen.getByText(productName);
+    const costText = screen.getByText(/140/i);
     expect(categoryText).toBeInTheDocument();
+    expect(nameText).toBeInTheDocument();
+    expect(costText).toBeInTheDocument();
   });
 
 
@@ -209,6 +215,29 @@ describe('Integration Tests', () => {
     const imageSidebar = screen.getByTestId('image-0');
     fireEvent.click(imageSidebar);
     expect(mockSetMainImage).toHaveBeenCalled();
+  });
+
+  it('Calls to remove an item from shopping cart state when remove button is clicked', async () => {
+    await render(<ShoppingCart cartItems={mockCartItems} setCartItems={mockSetCartItems}/>);
+    const removeButton = screen.getByRole('button', {name: "Remove Item"});
+    fireEvent.click(removeButton);
+    expect(mockSetCartItems).toHaveBeenCalled();
+  });
+
+  it('Calls to add an item to shopping cart state when add button is clicked', async () => {
+    await render(<PurchaseOptions product={mockProductData} productInformation={mockProductInformationData} setProductInformation={mockSetProductInformation}
+    productStyles={mockProductStyles} setMainImage={mockSetMainImage} cartItems={mockCartItems} setCartItems={mockSetCartItems} setOutfits={mockSetOutfits} outfits={[]}/>);
+    const addButton = screen.getByRole('button', {name: "Add to Bag"});
+    fireEvent.click(addButton);
+    expect(mockSetCartItems).toHaveBeenCalled();
+  });
+
+  it('Update outfits state if favorite button is clicked', async () => {
+    await render(<PurchaseOptions product={mockProductData} productInformation={mockProductInformationData} setProductInformation={mockSetProductInformation}
+    productStyles={mockProductStyles} setMainImage={mockSetMainImage} cartItems={mockCartItems} setCartItems={mockSetCartItems} setOutfits={mockSetOutfits} outfits={[]}/>);
+    const favoriteButton = screen.getByRole('button', {name: "Favorite"});
+    fireEvent.click(favoriteButton);
+    expect(mockSetOutfits).toHaveBeenCalled();
   });
 
 })
