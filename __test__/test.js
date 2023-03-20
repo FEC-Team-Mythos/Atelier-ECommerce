@@ -65,7 +65,92 @@ const mockProductInformationData = {
   }
 }
 
+const mockProductStyles =
+  [
+    {
+        "style_id": 444218,
+        "name": "Forest Green & Black",
+        "original_price": "140.00",
+        "sale_price": null,
+        "default?": true,
+        "photos": [
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1549831243-a69a0b3d39e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2775&q=80"
+            }
+        ],
+        "skus": {
+            "2580526": {
+                "quantity": 8,
+                "size": "XS"
+            },
+            "2580527": {
+                "quantity": 16,
+                "size": "S"
+            },
+            "2580528": {
+                "quantity": 17,
+                "size": "M"
+            }
+        }
+    },
+    {
+        "style_id": 444219,
+        "name": "Desert Brown & Tan",
+        "original_price": "140.00",
+        "sale_price": null,
+        "default?": false,
+        "photos": [
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+            },
+            {
+                "thumbnail_url": "https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+                "url": "https://images.unsplash.com/photo-1458253329476-1ebb8593a652?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+            }
+        ],
+        "skus": {
+            "2580532": {
+                "quantity": 8,
+                "size": "XS"
+            },
+            "2580533": {
+                "quantity": 16,
+                "size": "S"
+            },
+            "2580534": {
+                "quantity": 17,
+                "size": "M"
+            }
+        }
+    }
+  ];
+
+  const mockCartItems = [{
+    productName: "Jean Jacket",
+    productPhoto: "https://images.unsplash.com/photo-1533779183510-8f55a55f15c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+    styleName: "Hip 80s",
+    productCost: "About tree fiddy",
+    size: "Big Foot",
+    quantity: 9
+  }];
+
 let mockMainImage = mockProductInformationData.photos[0].url;
+
+const [mockSetMainImage, mockSetProductInformation, mockSetCartItems, mockSetOutfits] = [jest.fn(), jest.fn(), jest.fn(), jest.fn()];
 
 /* ____________ UNIT TESTS ____________ */
 
@@ -90,12 +175,19 @@ describe('Unit Tests', () => {
     expect(categoryText).toBeInTheDocument();
   });
 
-  // it('Renders product information pulled from API/Server', () => {
-  //   render(<ProductDescription product={mockProductData}/>);
-  //   const descriptionText = screen.getByText(/The So Fatigue/i);
-  //   expect(descriptionText).toBeInTheDocument();
-  // });
 
+  it('Properly renders all style images as options', async () => {
+    render(<PurchaseOptions product={mockProductData} productInformation={mockProductInformationData} setProductInformation={mockSetProductInformation}
+    productStyles={mockProductStyles} setMainImage={mockSetMainImage} cartItems={mockCartItems} setCartItems={mockSetCartItems} setOutfits={mockSetOutfits} outfits={[]}/>);
+    const styleImages = await screen.findAllByRole('img');
+    expect(styleImages.length).toBe(2);
+  });
+
+  it('Properly renders all style images as options', async () => {
+    render(<ShoppingCart cartItems={mockCartItems} setCartItems={mockSetCartItems}/>);
+    const itemName = screen.getByText(mockCartItems.productName);
+    expect(itemName).toBeInTheDocument();
+  });
 
 
 })
@@ -107,7 +199,6 @@ describe('Unit Tests', () => {
 describe('Integration Tests', () => {
 
   it('Call state change function in parent component when image is clicked', async () => {
-    const mockSetMainImage = jest.fn();
     await render(<MainImageScreen productInformation = {mockProductInformationData} mainImage = {mockMainImage} setMainImage = {mockSetMainImage} />);
     const imageSidebar = screen.getByTestId('image-0');
     fireEvent.click(imageSidebar);
