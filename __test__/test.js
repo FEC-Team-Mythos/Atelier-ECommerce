@@ -185,8 +185,14 @@ describe('Unit Tests', () => {
 
   it('Properly renders all style images as options', async () => {
     render(<ShoppingCart cartItems={mockCartItems} setCartItems={mockSetCartItems}/>);
-    const itemName = screen.getByText(mockCartItems.productName);
+    const itemName = screen.getByText(/Jean Jacket/i);
     expect(itemName).toBeInTheDocument();
+  });
+
+  it('Renders all of the images for a product and a main image', async () => {
+    render(<MainImageScreen productInformation={mockProductInformationData} mainImage={mockMainImage} setMainImage={mockSetMainImage} />)
+    const renderedImages = await screen.findAllByRole('img');
+    expect(renderedImages.length).toBe(mockProductInformationData.photos.length + 1); // + 1 for the main image
   });
 
 
