@@ -9,6 +9,8 @@ import Reviews from './Reviews.jsx';
 import ReviewList from './ReviewList.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
+import {expect, jest, test} from '@jest/globals';
+
 jest.mock('axios');
 
 const request = (endpoint, params = {}, method = 'get') => axios({

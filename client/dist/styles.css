@@ -96,12 +96,33 @@
 
 /* Review Tile Components */
 #reviewTile {
-  padding: 10px;
-  margin-bottom: 10px;
+  padding:10px;
+  margin: 10px 0 10px 0;
+  width:500px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+#reviewTile-top {
+  display:flex;
+  justify-content: space-between;
+  padding: 5 5 5 0;
+}
+
+#reviewTile-username {
+  font-style: italic;
+}
+
+#reviewTile-text {
+  padding: 10px 0 10px 0;
+}
+
+#reviewTile-summary {
+  font-weight: bold;
 }
 
 #reviews-filter {
-  padding: 10px;
+  padding: 5px;
 }
 
 #review-photos {
