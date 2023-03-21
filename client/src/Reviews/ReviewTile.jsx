@@ -1,5 +1,5 @@
-import React from 'react';
-import {useState} from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ library.add(faCheck);
 
 function ReviewTile({ review }) {
   const [reviewBodyButton, setReviewBodyButton] = useState(false);
+  const [helpfulClick, setHelpfulClick] = useState(false);
 
   const formatDate = () => {
     const year = review.date.slice(0, 4);
@@ -30,7 +31,7 @@ function ReviewTile({ review }) {
   const starCount = (rating) => {
     const stars = [];
     while (rating > 0) {
-      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
+      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" data-testid='star'/>);
       rating--;
     }
     return (
@@ -42,51 +43,85 @@ function ReviewTile({ review }) {
 
   const reviewBody = () => {
     if (!reviewBodyButton) {
-      var reviewBody250 = review.body.slice(0, 250);
-      return (
-      <>
-        {reviewBody250}
-        <button onClick={()=>setReviewBodyButton(!reviewBodyButton)}>Expand</button>
-      </>
-      )
-    } else {
+      const reviewBody250 = review.body.slice(0, 250);
       return (
         <>
-        {review.body}
-        <button onClick={()=>setReviewBodyButton(!reviewBodyButton)}>Collapse</button>
+          {reviewBody250}
+          <button data-testid="reviews-individualReview-bodyBtn" onClick={() => setReviewBodyButton(!reviewBodyButton)}>Expand</button>
         </>
-      )
+      );
     }
+    return (
+      <>
+        {review.body}
+        <button onClick={() => setReviewBodyButton(!reviewBodyButton)}>Collapse</button>
+      </>
+    );
   };
 
   const reviewRecommend = () => {
     if (review.recommend) {
-      return <>
-      <span>
-        I recommend this product
-      </span>
-      <FontAwesomeIcon icon={faCheck} size="sm" />
-      </>
+      return (
+        <>
+          <span>
+            I recommend this product
+          </span>
+          <FontAwesomeIcon icon={faCheck} size="sm" />
+        </>
+      );
     }
-  }
+  };
+
+  const reviewHelpful = () => {
+    const postHelpful = async () => {
+      try {
+        await axios.put(`/reviews/${review.review_id}/helpful`)
+        setHelpfulClick(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (!helpfulClick) {
+      return (
+        <div>
+          <span>Helpful?</span>
+          {' '}
+          <button datatest-id="reviewHelpBtn" onClick={()=>postHelpful()}>{` Yes ${review.helpfulness}`}</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <span>Helpful?</span>
+          {' '}
+          <span datatest-id="reviewHelpBtn">{` Yes ${review.helpfulness}`}</span>
+        </div>
+      );
+    }
+  };
 
   return (
     <div id="reviewTile" data-testid="reviews-individualReview">
       <div id="reviewTile-top">
-        <div id="reviewTile-stars">
-        {review.rating}{starCount(review.rating)}
+        <div id="reviewTile-stars" data-testid="reviews-individualReview-stars">
+          {review.rating}
+          {starCount(review.rating)}
         </div>
         <div id="reviewTile-date">
-        {formatDate()}
+          {formatDate()}
         </div>
       </div>
       <div id="reviewTile-username">
         {review.reviewer_name}
-        </div>
+      </div>
       <div id="reviewTile-text">
         <div id="reviewTile-summary">{review.summary}</div>
-        <div id="reviewTile-body">{review.body.length < 250 ? review.body : reviewBody()}</div>
-        <div id="reviewTile-photos">      {showPhotos()}</div>
+        <div id="reviewTile-body" data-testid="reviews-individualReview-body">{review.body.length < 250 ? review.body : reviewBody()}</div>
+        <div id="reviewTile-photos">
+          {' '}
+          {showPhotos()}
+        </div>
       </div>
       <div>
         {review.response ? `Response from seller: ${review.response}` : null}
@@ -94,10 +129,7 @@ function ReviewTile({ review }) {
       <div>
         {reviewRecommend()}
       </div>
-      <div>
-        Helpful?
-        {review.helpfulness}
-      </div>
+      {reviewHelpful()}
     </div>
   );
 }

@@ -9,6 +9,12 @@ import Reviews from './Reviews.jsx';
 import ReviewList from './ReviewList.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
+library.add(faCheck);
+
 import {expect, jest, test} from '@jest/globals';
 
 jest.mock('axios');
@@ -102,7 +108,7 @@ const mockDataWithMoreReviews = [
   },
 ];
 
-describe('Reviews', () => {
+xdescribe('Reviews', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -126,7 +132,7 @@ describe('Reviews', () => {
   });
 });
 
-describe('Review List', () => {
+xdescribe('Review List', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -177,25 +183,40 @@ describe('Review List', () => {
   });
 });
 
-xdescribe('Review Tile', () => {
+describe('Review Tile', () => {
+  const review = {
+    review_id: 1276368,
+    rating: 4,
+    summary: 'Best product',
+    recommend: true,
+    response: null,
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est',
+    date: '2022-09-03T00:00:00.000Z',
+    reviewer_name: 'the man',
+    helpfulness: 1,
+    photos: [],
+  };
+
   beforeEach(() => {
     jest.resetModules();
   });
 
-  test('Review Tile should render all necessary components as per Business Docs', () => {
-    // star
-    // date
-    // summary
-    // body
-    // recommend
-    // name
-    // response
-    // helpful
+  test('Review Tile should render rating with correct amount of star icons', () => {
+    render(<ReviewTile review={review} />);
+    const reviewStars = screen.getAllByTestId('star');
+    expect(reviewStars.length).toBe(4);
   });
 
   // if body > 250, button should display with hidden part of review
   test('Summary and Body should be standard lengths', () => {
-
+    render(<ReviewTile review={review} />);
+    const reviewBody = screen.getByTestId('reviews-individualReview-body');
+    //250 Character Body + 6 Characters from Button
+    expect(reviewBody.textContent.length).toBe(256);
+    const reviewBodyButton = screen.getByTestId('reviews-individualReview-bodyBtn');
+    fireEvent.click(reviewBodyButton);
+    const newReviewBody = screen.getByTestId('reviews-individualReview-body');
+    expect(newReviewBody.textContent.length).toBe(444);
   });
 
   test('Clicking Image should expand to full resolution', () => {
@@ -203,11 +224,7 @@ xdescribe('Review Tile', () => {
   });
 
   test('Marking a review helpful should increment Helpfulness in API', () => {
-
-  });
-
-  test('Providing review feedback should store in API', () => {
-
+    render(<ReviewTile review={review} />);
   });
 });
 

@@ -25,7 +25,6 @@ function NewBreakdown({ metaData, filterParams, setFilterParams }) {
     let roundToNearestQuarter = Math.round(avgRating * 4) / 4;
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      console.log(roundToNearestQuarter);
       if (roundToNearestQuarter > 1) {
 
         stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
