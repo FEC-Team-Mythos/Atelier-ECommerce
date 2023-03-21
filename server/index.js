@@ -32,6 +32,21 @@ app.post('*', (req, res) => {
     })
 })
 
+app.put('*', (req, res) => {
+  console.log(req.url);
+  console.log(req.body);
+  console.log(req.method);
+
+  fetch(req.url, req.body.params, req.method)
+    .then(data => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('Could not post data: ', err);
+      res.sendStatus(501);
+    })
+})
+
 app.listen(port, () => {
   console.log(`FEC Atelier App listening on port ${port}`)
 })
