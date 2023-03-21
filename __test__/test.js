@@ -170,12 +170,9 @@ describe('Unit Tests', () => {
 
   it('Renders product information pulled from API/Server', () => {
     render(<ProductInformation product={mockProductData} productInformation={mockProductInformationData}/>);
-    const productCategory = mockProductData.category //Jackets
-    const productName = mockProductData.name;
-    const productCost = mockProductInformationData.original_price;
-    const categoryText = screen.getByText(productCategory);
-    const nameText = screen.getByText(productName);
-    const costText = screen.getByText(/140/i);
+    const categoryText = screen.getByText(mockProductData.category);
+    const nameText = screen.getByText(mockProductData.name);
+    const costText = screen.getByText('$' + mockProductInformationData.original_price);
     expect(categoryText).toBeInTheDocument();
     expect(nameText).toBeInTheDocument();
     expect(costText).toBeInTheDocument();
