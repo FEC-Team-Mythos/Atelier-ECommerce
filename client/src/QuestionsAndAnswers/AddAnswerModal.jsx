@@ -96,6 +96,7 @@ const AddAnswerModal = ({ question, questionId, showModal, handleClose }) => {
                 required
               />
               <small>For privacy reasons, do not use your full name or email address</small>
+              <br />
               <label className="qa-modal-a-label">
                 Your Email*
               </label>
@@ -110,6 +111,7 @@ const AddAnswerModal = ({ question, questionId, showModal, handleClose }) => {
                 required
               />
               <small>For authentication reasons, you will not be emailed</small>
+              <br />
               <button className="qa-modal-a-submit" onClick={handleSubmit}>Submit Answer</button>
               <button className="qa-modal-a-cancel" onClick={handleClose}>Cancel</button>
             </div>
