@@ -18,8 +18,8 @@ app.get('*', (req, res) => {
     .catch(err => {
       console.log('Could not get data: ', err);
       res.sendStatus(404);
-    })
-})
+    });
+});
 
 app.post('*', (req, res) => {
   fetch(req.url, req.body.params, req.method)
@@ -29,14 +29,10 @@ app.post('*', (req, res) => {
     .catch(err => {
       console.log('Could not post data: ', err);
       res.sendStatus(501);
-    })
-})
+    });
+});
 
 app.put('*', (req, res) => {
-  console.log(req.url);
-  console.log(req.body);
-  console.log(req.method);
-
   fetch(req.url, req.body.params, req.method)
     .then(data => {
       res.sendStatus(201);
