@@ -6,7 +6,10 @@ import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
 
-const Reviews = () => {
+const Reviews = ( {changeRequestHook} ) => {
+  //add state to top component of Widget to track all clicks in widget. Set widget in initial state declaration
+  const [clickedElement, clickedTime] = changeRequestHook('reviews');
+
   const [allReviews, setAllReviews] = useState([]);
   const [metaData, setMetaData] = useState([]);
 
