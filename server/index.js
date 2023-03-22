@@ -1,21 +1,21 @@
-const express = require('express')
+const express = require('express');
 const path = require('path');
-const fetch = require('../fetchData')
+const fetch = require('../fetchData');
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-const statics = path.join(__dirname + '/../client/dist');
+const statics = path.join(`${__dirname}/../client/dist`);
 
 app.use(express.static(statics));
 app.use(express.json());
 
 app.get('*', (req, res) => {
   fetch(req.url, req.body.params, req.method)
-    .then(data => {
+    .then((data) => {
       res.send(data.data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Could not get data: ', err);
       res.sendStatus(404);
     });
@@ -23,10 +23,10 @@ app.get('*', (req, res) => {
 
 app.post('*', (req, res) => {
   fetch(req.url, req.body.params, req.method)
-    .then(data => {
+    .then(() => {
       res.sendStatus(201);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Could not post data: ', err);
       res.sendStatus(501);
     });
@@ -34,15 +34,15 @@ app.post('*', (req, res) => {
 
 app.put('*', (req, res) => {
   fetch(req.url, req.body.params, req.method)
-    .then(data => {
+    .then(() => {
       res.sendStatus(201);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log('Could not post data: ', err);
       res.sendStatus(501);
-    })
-})
+    });
+});
 
 app.listen(port, () => {
-  console.log(`FEC Atelier App listening on port ${port}`)
-})
+  console.log(`FEC Atelier App listening on port ${port}`);
+});
