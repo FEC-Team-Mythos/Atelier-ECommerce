@@ -6,8 +6,13 @@ export function changeRequestHook(widget) {
 
   useEffect(() => {
     function handleClick(event) {
+      if (event.target.getAttribute('id')) {
+        var element = event.target.getAttribute('id');
+      } else {
+        var element = event.target.getAttribute('class')
+      }
       //set clicked div and time of click
-      setClickedElement(event.target.getAttribute('id'));
+      setClickedElement(element);
       setClickedTime(new Date());
     }
 
@@ -23,7 +28,7 @@ export function changeRequestHook(widget) {
   useEffect(() => {
     //if state updates and click sets element and time, show values and send to API
     if (clickedElement && clickedTime) {
-      console.log(`Clicked ${clickedElement.tagName} in ${widget} at ${clickedTime}`);
+      console.log(`Clicked ${clickedElement} in ${widget} at ${clickedTime}`);
     }
   }, [clickedElement, clickedTime]);
 
