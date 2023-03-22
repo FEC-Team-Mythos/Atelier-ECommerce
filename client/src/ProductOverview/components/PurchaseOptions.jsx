@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems, setOutfits, outfits}) => {
 
-  const [selectedSize, setSelectedSize] = useState({});
+  const [selectedSize, setSelectedSize] = useState(0);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
   const [favorited, setFavorited] = useState(false);
@@ -22,8 +22,12 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
-    setSelectedSize(productInformation.skus[e.value]);
-    setSelectedSku(e.value);
+    if (e.value) {
+      setSelectedSize(productInformation.skus[e.value]);
+      setSelectedSku(e.value);
+    } else {
+      setSelectedSize(0);
+    }
   }
 
   const getSelectedQuantity = () => {
@@ -86,6 +90,17 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
     setOutfits(updatedOutfits);
   }
 
+  let quantityWithData = () => {
+    return (
+      (Object.keys(selectedSize).length && selectedSize.quantity < 15) ?
+        Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
+          <option value={quantity} key={quantity}>{quantity}</option>
+        ))
+        : Array.from({length: 15}, (_, index) => index + 1).map(quantity => (
+          <option value={quantity} key={quantity}>{quantity}</option>
+        ))
+    )
+  }
 
   return (
     <div>
@@ -97,7 +112,6 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
           }}/>
         ))}
       </ul>
-
       <select id="overview_productSize" onChange={getSelectedSize}>
         <option value='0'>SELECT SIZE</option>
         {Object.keys(productInformation.skus).map((style, index) => (
@@ -107,13 +121,7 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
 
       <select id="overview_productQuantity" onChange={getSelectedQuantity}>
         <option value='0'>SELECT QUANTITY</option>
-        {(Object.keys(selectedSize).length && selectedSize.quantity < 15) ?
-        Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
-          <option value={quantity} key={quantity}>{quantity}</option>
-        ))
-        : Array.from({length: 15}, (_, index) => index + 1).map(quantity => (
-          <option value={quantity} key={quantity}>{quantity}</option>
-        ))}
+        {selectedSize ? quantityWithData() : null}
       </select>
       <button onClick={addToCart}>Add to Bag</button>
       <button onClick={outfitButtonHandler}>Favorite</button>
