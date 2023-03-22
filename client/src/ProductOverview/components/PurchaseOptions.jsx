@@ -1,24 +1,29 @@
-import React, {useState, useEffect} from 'react';
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
 
-const PurchaseOptions = ({product, productInformation, setProductInformation, productStyles, setMainImage, cartItems, setCartItems, setOutfits, outfits}) => {
-
+function PurchaseOptions({
+  product, productInformation, setProductInformation, productStyles, setMainImage,
+  cartItems, setCartItems, setOutfits, outfits,
+}) {
   const [selectedSize, setSelectedSize] = useState(0);
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
   const [favorited, setFavorited] = useState(false);
 
-  useEffect(()=> {
+  useEffect(() => {
     if (localStorage.getItem('outfits')) {
-      let outfitList = JSON.parse(localStorage.getItem('outfits'));
-      for (var outfitItem of outfitList) {
-        if (outfitItem.productName === product.name && outfitItem.styleName === productInformation.name) {
+      const outfitList = JSON.parse(localStorage.getItem('outfits'));
+      for (const outfitItem of outfitList) {
+        if (outfitItem.productName === product.name
+        && outfitItem.styleName === productInformation.name) {
           setFavorited(true);
           return;
         }
       }
     }
     setFavorited(false);
-  }, [outfits, productInformation])
+  }, [outfits, productInformation]);
 
   const getSelectedSize = () => {
     var e = document.getElementById('overview_productSize');
