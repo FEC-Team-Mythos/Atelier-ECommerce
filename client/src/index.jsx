@@ -15,8 +15,8 @@ const App = () => {
       method: method,
       url: endpoint,
       params: params
-    })
-  }
+    });
+  };
   /* EXAMPLE REQUEST WITHIN WIDGET. MAKE SURE TO EITHER CALL props.request OR { request }
   ___________________________________________________________________________________________
 
