@@ -9,6 +9,14 @@ import Reviews from './Reviews.jsx';
 import ReviewList from './ReviewList.jsx';
 import ReviewTile from './ReviewTile.jsx';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
+library.add(faCheck);
+
+import {expect, jest, test} from '@jest/globals';
+
 jest.mock('axios');
 
 const request = (endpoint, params = {}, method = 'get') => axios({
@@ -175,37 +183,64 @@ describe('Review List', () => {
   });
 });
 
-xdescribe('Review Tile', () => {
+describe('Review Tile', () => {
+  const review = {
+    review_id: 1276368,
+    rating: 4,
+    summary: 'Best product',
+    recommend: true,
+    response: null,
+    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est',
+    date: '2022-09-03T00:00:00.000Z',
+    reviewer_name: 'the man',
+    helpfulness: 15,
+    photos: [
+      {
+        id: 2455956,
+        url: 'http://res.cloudinary.com/dzblbll9t/image/upload/v1662236386/xvdfovsxue47dieltrg7.jpg',
+      },
+    ],
+  };
+
   beforeEach(() => {
     jest.resetModules();
   });
 
-  test('Review Tile should render all necessary components as per Business Docs', () => {
-    // star
-    // date
-    // summary
-    // body
-    // recommend
-    // name
-    // response
-    // helpful
+  test('Review Tile should render rating with correct amount of star icons', () => {
+    render(<ReviewTile review={review} />);
+    const reviewStars = screen.getAllByTestId('star');
+    expect(reviewStars.length).toBe(4);
   });
 
   // if body > 250, button should display with hidden part of review
   test('Summary and Body should be standard lengths', () => {
-
+    render(<ReviewTile review={review} />);
+    const reviewBody = screen.getByTestId('reviews-individualReview-body');
+    //250 Character Body + 6 Characters from Button
+    expect(reviewBody.textContent.length).toBe(256);
+    const reviewBodyButton = screen.getByTestId('reviews-individualReview-bodyBtn');
+    fireEvent.click(reviewBodyButton);
+    const newReviewBody = screen.getByTestId('reviews-individualReview-body');
+    expect(newReviewBody.textContent.length).toBe(444);
   });
 
-  test('Clicking Image should expand to full resolution', () => {
-
+  test('Clicking Image should expand resolution', () => {
+    render(<ReviewTile review={review} />);
+    const photo = screen.getByTestId('review-photo');
+    const stylePreClick = getComputedStyle(photo);
+    expect(stylePreClick._values['max-width']).toBe('100px');
+    fireEvent.click(photo);
+    const stylePostClick = getComputedStyle(photo);
+    expect(stylePostClick._values['max-width']).toBe('300px');
   });
 
-  test('Marking a review helpful should increment Helpfulness in API', () => {
-
-  });
-
-  test('Providing review feedback should store in API', () => {
-
+  test('Marking a review helpful should increment Helpfulness in API', async () => {
+    axios.put.mockResolvedValueOnce({ data: { success: true } });
+    render(<ReviewTile review={review} />);
+    const helpfulButton = screen.getByTestId('reviewHelpBtn');
+    fireEvent.click(helpfulButton);
+    await waitFor(() => expect(axios.put).toHaveBeenCalledTimes(1));
+    expect(axios.put).toHaveBeenCalledWith('/reviews/1276368/helpful');
   });
 });
 

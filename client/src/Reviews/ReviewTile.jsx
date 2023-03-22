@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
+library.add(faCheck);
 
 function ReviewTile({ review }) {
+  const [reviewBodyButton, setReviewBodyButton] = useState(false);
+  const [helpfulClick, setHelpfulClick] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
   const formatDate = () => {
     const year = review.date.slice(0, 4);
     const month = review.date.slice(5, 7);
@@ -9,10 +20,95 @@ function ReviewTile({ review }) {
   };
 
   const showPhotos = () => {
+    const imgStyle = {
+      cursor: 'pointer',
+      maxWidth: expanded ? '300px' : '100px',
+      maxHeight: expanded ? '300px' : '100px',
+    };
+
+
     if (review.photos.length) {
       return (
-        <div id="review-photos">
-          {review.photos.map((photo, ind) => <img src={photo.url} key={ind} />)}
+        <>
+          {review.photos.map((photo, ind) =>
+          <img src={photo.url}
+          key={ind}
+          data-testid='review-photo'
+          onClick={()=>{setExpanded(!expanded)}}
+          style={imgStyle} />)}
+        </>
+      );
+    }
+  };
+
+  const starCount = (rating) => {
+    const stars = [];
+    while (rating > 0) {
+      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" data-testid='star'/>);
+      rating--;
+    }
+    return (
+      <span id="stars">
+        {stars}
+      </span>
+    );
+  };
+
+  const reviewBody = () => {
+    if (!reviewBodyButton) {
+      const reviewBody250 = review.body.slice(0, 250);
+      return (
+        <>
+          {reviewBody250}
+          <button data-testid="reviews-individualReview-bodyBtn" onClick={() => setReviewBodyButton(!reviewBodyButton)}>Expand</button>
+        </>
+      );
+    }
+    return (
+      <>
+        {review.body}
+        <button onClick={() => setReviewBodyButton(!reviewBodyButton)}>Collapse</button>
+      </>
+    );
+  };
+
+  const reviewRecommend = () => {
+    if (review.recommend) {
+      return (
+        <>
+          <span>
+            I recommend this product
+          </span>
+          <FontAwesomeIcon icon={faCheck} size="sm" />
+        </>
+      );
+    }
+  };
+
+  const reviewHelpful = () => {
+    const postHelpful = async () => {
+      try {
+        await axios.put(`/reviews/${review.review_id}/helpful`)
+        setHelpfulClick(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (!helpfulClick) {
+      return (
+        <div>
+          <span>Helpful?</span>
+          {' '}
+          <button data-testid="reviewHelpBtn" onClick={()=>postHelpful()}>{` Yes ${review.helpfulness}`}</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <span>Helpful?</span>
+          {' '}
+          <span datatest-id="reviewHelpBtnAfter">{` Yes ${review.helpfulness}`}</span>
         </div>
       );
     }
@@ -20,29 +116,33 @@ function ReviewTile({ review }) {
 
   return (
     <div id="reviewTile" data-testid="reviews-individualReview">
-      <div>
-        {review.rating}
-        {' '}
-        /
-        {' '}
+      <div id="reviewTile-top">
+        <div id="reviewTile-stars" data-testid="reviews-individualReview-stars">
+          {review.rating}
+          {starCount(review.rating)}
+        </div>
+        <div id="reviewTile-date">
+          {formatDate()}
+        </div>
+      </div>
+      <div id="reviewTile-username">
         {review.reviewer_name}
-        {' '}
-        /
-        {' '}
-        {formatDate()}
       </div>
-      <div>{review.summary}</div>
-      <div>{review.body}</div>
-      {showPhotos()}
-      <div>
-        Response from seller:
-        {review.response}
+      <div id="reviewTile-text">
+        <div id="reviewTile-summary">{review.summary}</div>
+        <div id="reviewTile-body" data-testid="reviews-individualReview-body">{review.body.length < 250 ? review.body : reviewBody()}</div>
+        <div id="reviewTile-photos">
+          {' '}
+          {showPhotos()}
+        </div>
       </div>
       <div>
-        Helpful?
-        {review.helpfulness}
+        {review.response ? `Response from seller: ${review.response}` : null}
       </div>
-      -----
+      <div>
+        {reviewRecommend()}
+      </div>
+      {reviewHelpful()}
     </div>
   );
 }
