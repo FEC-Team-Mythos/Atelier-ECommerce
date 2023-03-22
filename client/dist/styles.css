@@ -123,15 +123,16 @@
 
 #reviews-filter {
   padding: 5px;
+  overflow: visible;
 }
 
-#review-photos {
+#reviewTile-photos {
+  overflow: visible;
   position: relative;
-  width: 100px;
-  height: 100px;
-  padding: 5px;
-  display:flex;
-} */
+  display: block;
+}
+
+*/
 
 /* Stars */
 #stars {
@@ -148,14 +149,7 @@
 .oneQuarter {
   clip-path: polygon(25% 0%, 25% 100%, 0% 100%, 0% 0%);
 }
-
-#review-photos {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  padding: 10px 10px 10px 0;
-  display:flex;
-} */
+*/
 
 /* #popup {
   position: fixed;
