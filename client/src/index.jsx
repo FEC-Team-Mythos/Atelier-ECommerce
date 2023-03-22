@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <>
-      <ProductOverview request={request}/>
+      <ProductOverview request={request} changeRequestHook={changeRequestHook}/>
       <RelatedProducts  request={request}/>
       <QuestionsAndAnswers  request={request}/>
       <Reviews  request={request}/>
