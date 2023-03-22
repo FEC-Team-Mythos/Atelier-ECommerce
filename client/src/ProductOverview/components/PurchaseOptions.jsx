@@ -107,11 +107,11 @@ const PurchaseOptions = ({product, productInformation, setProductInformation, pr
 
       <select id="overview_productQuantity" onChange={getSelectedQuantity}>
         <option value='0'>SELECT QUANTITY</option>
-        {(Object.keys(selectedSize).length && selectedSize.quantity < 5) ?
+        {(Object.keys(selectedSize).length && selectedSize.quantity < 15) ?
         Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
           <option value={quantity} key={quantity}>{quantity}</option>
         ))
-        : [1,2,3,4,5].map(quantity => (
+        : Array.from({length: 15}, (_, index) => index + 1).map(quantity => (
           <option value={quantity} key={quantity}>{quantity}</option>
         ))}
       </select>
