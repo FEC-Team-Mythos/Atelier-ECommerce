@@ -6,6 +6,7 @@ import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 
+import { changeRequestHook } from '../../changeRequestHook.js';
 
 
 const App = () => {
