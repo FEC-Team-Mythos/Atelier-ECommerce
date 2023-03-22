@@ -10,6 +10,7 @@ library.add(faCheck);
 function ReviewTile({ review }) {
   const [reviewBodyButton, setReviewBodyButton] = useState(false);
   const [helpfulClick, setHelpfulClick] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const formatDate = () => {
     const year = review.date.slice(0, 4);
@@ -19,11 +20,23 @@ function ReviewTile({ review }) {
   };
 
   const showPhotos = () => {
+    const imgStyle = {
+      cursor: 'pointer',
+      maxWidth: expanded ? '300px' : '100px',
+      maxHeight: expanded ? '300px' : '100px',
+    };
+
+
     if (review.photos.length) {
       return (
-        <div id="review-photos">
-          {review.photos.map((photo, ind) => <img src={photo.url} key={ind} />)}
-        </div>
+        <>
+          {review.photos.map((photo, ind) =>
+          <img src={photo.url}
+          key={ind}
+          data-testid='review-photo'
+          onClick={()=>{setExpanded(!expanded)}}
+          style={imgStyle} />)}
+        </>
       );
     }
   };
@@ -87,7 +100,7 @@ function ReviewTile({ review }) {
         <div>
           <span>Helpful?</span>
           {' '}
-          <button datatest-id="reviewHelpBtn" onClick={()=>postHelpful()}>{` Yes ${review.helpfulness}`}</button>
+          <button data-testid="reviewHelpBtn" onClick={()=>postHelpful()}>{` Yes ${review.helpfulness}`}</button>
         </div>
       );
     } else {
@@ -95,7 +108,7 @@ function ReviewTile({ review }) {
         <div>
           <span>Helpful?</span>
           {' '}
-          <span datatest-id="reviewHelpBtn">{` Yes ${review.helpfulness}`}</span>
+          <span datatest-id="reviewHelpBtnAfter">{` Yes ${review.helpfulness}`}</span>
         </div>
       );
     }

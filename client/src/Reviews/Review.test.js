@@ -108,7 +108,7 @@ const mockDataWithMoreReviews = [
   },
 ];
 
-xdescribe('Reviews', () => {
+describe('Reviews', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -132,7 +132,7 @@ xdescribe('Reviews', () => {
   });
 });
 
-xdescribe('Review List', () => {
+describe('Review List', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -193,8 +193,13 @@ describe('Review Tile', () => {
     body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est',
     date: '2022-09-03T00:00:00.000Z',
     reviewer_name: 'the man',
-    helpfulness: 1,
-    photos: [],
+    helpfulness: 15,
+    photos: [
+      {
+        id: 2455956,
+        url: 'http://res.cloudinary.com/dzblbll9t/image/upload/v1662236386/xvdfovsxue47dieltrg7.jpg',
+      },
+    ],
   };
 
   beforeEach(() => {
@@ -219,12 +224,23 @@ describe('Review Tile', () => {
     expect(newReviewBody.textContent.length).toBe(444);
   });
 
-  test('Clicking Image should expand to full resolution', () => {
-
+  test('Clicking Image should expand resolution', () => {
+    render(<ReviewTile review={review} />);
+    const photo = screen.getByTestId('review-photo');
+    const stylePreClick = getComputedStyle(photo);
+    expect(stylePreClick._values['max-width']).toBe('100px');
+    fireEvent.click(photo);
+    const stylePostClick = getComputedStyle(photo);
+    expect(stylePostClick._values['max-width']).toBe('300px');
   });
 
-  test('Marking a review helpful should increment Helpfulness in API', () => {
+  test('Marking a review helpful should increment Helpfulness in API', async () => {
+    axios.put.mockResolvedValueOnce({ data: { success: true } });
     render(<ReviewTile review={review} />);
+    const helpfulButton = screen.getByTestId('reviewHelpBtn');
+    fireEvent.click(helpfulButton);
+    await waitFor(() => expect(axios.put).toHaveBeenCalledTimes(1));
+    expect(axios.put).toHaveBeenCalledWith('/reviews/1276368/helpful');
   });
 });
 
