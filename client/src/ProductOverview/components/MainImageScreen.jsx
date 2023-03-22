@@ -1,17 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
-const MainImageScreen = ({productInformation, mainImage, setMainImage}) => {
-
+function MainImageScreen({ productInformation, mainImage, setMainImage }) {
   return (
     <div>
       <ul>
-        {productInformation.photos.map((photo,index) => (
-          <img src={photo.thumbnail_url} key={photo.url} data-testid={`image-${index}`} onClick={()=>{setMainImage(photo.url)}}></img>
+        {productInformation.photos.map((photo, index) => (
+          <img src={photo.thumbnail_url} key={photo.url} alt="Product View Options" data-testid={`image-${index}`} onClick={() => {setMainImage(photo.url) }} />
         ))}
       </ul>
-      <img src={mainImage}/>
+      <img src={mainImage} alt="Main Product" />
     </div>
-  )
+  );
 }
 
 export default MainImageScreen;
