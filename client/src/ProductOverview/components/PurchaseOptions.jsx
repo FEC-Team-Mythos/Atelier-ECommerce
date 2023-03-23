@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
+
 import React, { useState, useEffect } from 'react';
 
 function PurchaseOptions({
@@ -26,66 +29,90 @@ function PurchaseOptions({
   }, [outfits, productInformation]);
 
   const getSelectedSize = () => {
-    var e = document.getElementById('overview_productSize');
+    const e = document.getElementById('overview_productSize');
     if (e.value) {
       setSelectedSize(productInformation.skus[e.value]);
       setSelectedSku(e.value);
     } else {
       setSelectedSize(0);
     }
-  }
+  };
 
   const getSelectedQuantity = () => {
-    var e = document.getElementById('overview_productQuantity');
+    const e = document.getElementById('overview_productQuantity');
     setSelectedQuantity(Number(e.value));
-  }
+  };
 
   const addToCart = () => {
-
     let updatedCart = [];
 
     if (cartItems.length) {
       updatedCart = [...cartItems];
-      for (var item of updatedCart) {
+      for (const item of updatedCart) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
           break;
         }
       }
-        // updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-        updatedCart.push({productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
-          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), sku_id: selectedSku,
-          size: selectedSize.size, quantity: selectedQuantity});
+      // updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id:
+      // selectedSku, size: selectedSize.size, quantity: selectedQuantity});
+      updatedCart.push({
+        productName: product.name,
+        productPhoto: productInformation.photos[0].thumbnail_url,
+        styleName: productInformation.name,
+        productCost: (productInformation.sale_price || productInformation.original_price
+                      || product.default_price),
+        sku_id: selectedSku,
+        size: selectedSize.size,
+        quantity: selectedQuantity,
+      });
     } else {
-      // let item = [{product_id: product.id, style_id: productInformation.style_id, sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
-        updatedCart = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
-        productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), sku_id: selectedSku,
-        size: selectedSize.size, quantity: selectedQuantity}];
-      }
+      // let item = [{product_id: product.id, style_id: productInformation.style_id,
+      // sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
+      updatedCart = [{
+        productName: product.name,
+        productPhoto: productInformation.photos[0].thumbnail_url,
+        styleName: productInformation.name,
+        productCost: (productInformation.sale_price || productInformation.original_price
+                      || product.default_price),
+        sku_id: selectedSku,
+        size: selectedSize.size,
+        quantity: selectedQuantity,
+      }];
+    }
     setCartItems(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-  }
-
+  };
 
   const outfitButtonHandler = () => {
-
     let updatedOutfits = [...outfits];
 
     if (favorited) {
-      for (let i = 0; i < outfits.length; i++) {
-        if (updatedOutfits[i].productName === product.name && updatedOutfits[i].styleName === productInformation.name) {
+      for (let i = 0; i < outfits.length; i += 1) {
+        if (updatedOutfits[i].productName === product.name
+          && updatedOutfits[i].styleName === productInformation.name) {
           updatedOutfits.splice(i, 1);
           break;
         }
       }
+    } else if (updatedOutfits.length) {
+      updatedOutfits.push({
+        productName: product.name,
+        productPhoto: productInformation.photos[0].thumbnail_url,
+        styleName: productInformation.name,
+        productCost: (productInformation.sale_price || productInformation.original_price
+                      || product.default_price),
+        productCategory: product.category,
+      });
     } else {
-      if (updatedOutfits.length) {
-        updatedOutfits.push({productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
-          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category})
-      } else {
-        updatedOutfits = [{productName: product.name, productPhoto: productInformation.photos[0].thumbnail_url, styleName: productInformation.name,
-          productCost: (productInformation.sale_price || productInformation.original_price || product.default_price), productCategory: product.category}];
-      }
+      updatedOutfits = [{
+        productName: product.name,
+        productPhoto: productInformation.photos[0].thumbnail_url,
+        styleName: productInformation.name,
+        productCost: (productInformation.sale_price || productInformation.original_price
+                      || product.default_price),
+        productCategory: product.category,
+      }];
     }
     if (!updatedOutfits.length) {
       localStorage.removeItem('outfits');
@@ -93,45 +120,48 @@ function PurchaseOptions({
       localStorage.setItem('outfits', JSON.stringify(updatedOutfits));
     }
     setOutfits(updatedOutfits);
-  }
+  };
 
-  let quantityWithData = () => {
-    return (
-      (Object.keys(selectedSize).length && selectedSize.quantity < 15) ?
-        Array.from({length: selectedSize.quantity}, (_, index) => index + 1).map(quantity => (
-          <option value={quantity} key={quantity}>{quantity}</option>
-        ))
-        : Array.from({length: 15}, (_, index) => index + 1).map(quantity => (
-          <option value={quantity} key={quantity}>{quantity}</option>
-        ))
-    )
-  }
+  const quantityWithData = () => (
+    (Object.keys(selectedSize).length && selectedSize.quantity < 15)
+      ? Array.from({ length: selectedSize.quantity }, (_, index) => index + 1).map((quantity) => (
+        <option value={quantity} key={quantity}>{quantity}</option>
+      ))
+      : Array.from({ length: 15 }, (_, index) => index + 1).map((quantity) => (
+        <option value={quantity} key={quantity}>{quantity}</option>
+      ))
+  );
 
   return (
     <div>
       <ul>
-        {productStyles.map(product => (
-          <img src={product.photos[0].thumbnail_url} key={product.photos[0].thumbnail_url} onClick={()=>{
-            setProductInformation(product);
-            setMainImage(product.photos[0].url)
-          }}/>
+        {productStyles.map((style, index) => (
+          <img
+            src={style.photos[0].thumbnail_url}
+            key={style.photos[0].thumbnail_url}
+            alt={`Product Style - ${index}`}
+            onClick={() => {
+              setProductInformation(style);
+              setMainImage(style.photos[0].url);
+            }}
+          />
         ))}
       </ul>
       <select id="overview_productSize" onChange={getSelectedSize}>
-        <option value='0'>SELECT SIZE</option>
-        {Object.keys(productInformation.skus).map((style, index) => (
-          <option key={index} value={style}>{productInformation.skus[style].size}</option>
+        <option value="0">SELECT SIZE</option>
+        {Object.keys(productInformation.skus).map((style) => (
+          <option key={style} value={style}>{productInformation.skus[style].size}</option>
         ))}
       </select>
 
       <select id="overview_productQuantity" onChange={getSelectedQuantity}>
-        <option value='0'>SELECT QUANTITY</option>
+        <option value="0">SELECT QUANTITY</option>
         {selectedSize ? quantityWithData() : null}
       </select>
-      <button onClick={addToCart}>Add to Bag</button>
-      <button onClick={outfitButtonHandler}>Favorite</button>
+      <button type="submit" onClick={addToCart}>Add to Bag</button>
+      <button type="submit" onClick={outfitButtonHandler}>Favorite</button>
     </div>
-  )
+  );
 }
 
 export default PurchaseOptions;

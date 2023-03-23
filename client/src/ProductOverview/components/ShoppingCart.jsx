@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
@@ -6,7 +5,7 @@ function ShoppingCart({ cartItems, setCartItems }) {
   const removeItem = (skuId, size) => {
     const updatedCart = [...cartItems];
 
-    for (let i = 0; i < cartItems.length; i++) {
+    for (let i = 0; i < cartItems.length; i += 1) {
       if (cartItems[i].sku_id === skuId && cartItems[i].size === size) {
         updatedCart.splice(i, 1);
       }
