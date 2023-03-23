@@ -1,1 +1,20 @@
 body {background-color: aqua;}
+
+.overview-leftButton{
+  padding: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.overview-sideImages{
+  display: flex;
+  flex-direction: column;
+}
+
+#overview-sideImage{
+  width: 80px;
+  height: 100px;
+}

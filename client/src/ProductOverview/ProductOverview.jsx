@@ -40,9 +40,11 @@ function ProductOverview({ request, outfits, setOutfits }) {
 
   return (
     <div>
-      <h1>Logo</h1>
-      <input type="text" />
-      <button type="submit">Search Icon</button>
+      <div className="overview-navBar">
+        <h1>Logo</h1>
+        <input type="text" />
+        <button type="submit">Search Icon</button>
+      </div>
       <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
       {(Object.keys(product).length && Object.keys(productInformation).length)
         ? (

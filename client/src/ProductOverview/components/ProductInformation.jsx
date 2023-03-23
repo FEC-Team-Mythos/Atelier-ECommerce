@@ -7,7 +7,7 @@ function ProductInformation({ productInformation, product }) {
       <div>Reviews</div>
       <h3>{product.category}</h3>
       <h1>{product.name}</h1>
-      <h2>{productInformation.name}</h2>
+      <h2>{`STYLE > ${productInformation.name}`}</h2>
       {productInformation.sale_price
         ? (
           <div>

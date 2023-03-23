@@ -6,12 +6,14 @@ import React from 'react';
 function MainImageScreen({ productInformation, mainImage, setMainImage }) {
   return (
     <div>
-      <ul>
+      <ul className="overview-sideImages">
         {productInformation.photos.map((photo, index) => (
-          <img src={photo.thumbnail_url} key={photo.url} alt="Product View Options" data-testid={`image-${index}`} onClick={() => { setMainImage(photo.url); }} />
+          <img id="overview-sideImage" src={photo.thumbnail_url} key={photo.url} alt="Product View Options" data-testid={`image-${index}`} onClick={() => { setMainImage(photo.url); }} />
         ))}
       </ul>
-      <img src={mainImage} alt="Main Product" />
+      <button type="submit" id="overview-leftButton">Left</button>
+      <img src={mainImage} alt="Main Product" id="overview-mainImage" />
+      <button type="submit" id="overview-rightButton">Right</button>
     </div>
   );
 }
