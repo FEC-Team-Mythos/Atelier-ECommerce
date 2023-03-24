@@ -34,7 +34,7 @@ const App = () => {
   return (
     <>
       <div className="overview-navBar">
-        <h1 id="overview-logo">Logo</h1>
+        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" />
         <div className="overview-searchBar">
           <input type="text" />
           <button type="submit">Search Icon</button>

@@ -11,16 +11,17 @@ body {
   position: fixed;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: white;
+  height: 8%;
+  background-color: tan;
 }
 
 .overview-searchBar {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .content {
@@ -32,8 +33,13 @@ body {
   border: solid black;
   border-width: 0 3px 3px 0;
   display: inline-block;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
+}
+
+.overview-rightButton {
+  padding: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
 }
 
 .overview-sideImages {

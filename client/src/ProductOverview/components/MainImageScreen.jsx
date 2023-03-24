@@ -11,9 +11,17 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
           <img id="overview-sideImage" src={photo.thumbnail_url} key={photo.url} alt="Product View Options" data-testid={`image-${index}`} onClick={() => { setMainImage(photo.url); }} />
         ))}
       </ul>
-      <button type="submit" id="overview-leftButton">Left</button>
+      <button type="submit" id="overview-leftButton">
+        <div>
+          {'<'}
+        </div>
+      </button>
       <img src={mainImage} alt="Main Product" id="overview-mainImage" />
-      <button type="submit" id="overview-rightButton">Right</button>
+      <button type="submit" id="overview-rightButton">
+        <div>
+          {'>'}
+        </div>
+      </button>
     </div>
   );
 }
