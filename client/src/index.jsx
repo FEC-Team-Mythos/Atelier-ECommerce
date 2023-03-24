@@ -6,6 +6,7 @@ import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 
+import { changeRequestHook } from '../../changeRequestHook.js';
 
 
 const App = () => {
@@ -33,7 +34,7 @@ const App = () => {
 
   return (
     <>
-      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits}/>
+      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook/>
       <RelatedProducts  request={request}/>
       <QuestionsAndAnswers  request={request}/>
       <Reviews  request={request}/>
