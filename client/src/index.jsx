@@ -33,10 +33,19 @@ const App = () => {
 
   return (
     <>
+      <div className="overview-navBar">
+        <h1 id="overview-logo">Logo</h1>
+        <div className="overview-searchBar">
+          <input type="text" />
+          <button type="submit">Search Icon</button>
+        </div>
+      </div>
+    <div className="content">
       <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits}/>
       <RelatedProducts  request={request}/>
       <QuestionsAndAnswers  request={request}/>
       <Reviews  request={request}/>
+    </div>
     </>
   )
 }

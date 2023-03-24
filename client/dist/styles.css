@@ -1,6 +1,33 @@
-body {background-color: aqua;}
+* {
+  box-sizing: border-box;
+  outline: 1px solid limegreen !important;
+}
 
-.overview-leftButton{
+body {
+  background-color: aqua;
+}
+
+.overview-navBar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+}
+
+.overview-searchBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.content {
+  margin-top: 5%;
+}
+
+.overview-leftButton {
   padding: 10px;
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -9,12 +36,13 @@ body {background-color: aqua;}
   -webkit-transform: rotate(-45deg);
 }
 
-.overview-sideImages{
+.overview-sideImages {
   display: flex;
   flex-direction: column;
 }
 
-#overview-sideImage{
+#overview-sideImage {
   width: 80px;
   height: 100px;
 }
+
