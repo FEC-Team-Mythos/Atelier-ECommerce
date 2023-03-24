@@ -30,12 +30,23 @@ const App = () => {
     })
     */
 
+    const [outfits, setOutfits] = useState([]);
+
   return (
     <>
-      <ProductOverview request={request} changeRequestHook={changeRequestHook}/>
-      <RelatedProducts  request={request}/>
-      <QuestionsAndAnswers  request={request}/> */}
-      <Reviews  request={request} changeRequestHook={changeRequestHook}/>
+      <div className="overview-navBar">
+        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" />
+        <div className="overview-searchBar">
+          <input type="text" />
+          <button type="submit">Search Icon</button>
+        </div>
+      </div>
+      <div className="content">
+        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+        <RelatedProducts  request={request}/>
+        <QuestionsAndAnswers  request={request}/>
+        <Reviews  request={request} changeRequestHook={changeRequestHook}/>
+      </div>
     </>
   )
 }
