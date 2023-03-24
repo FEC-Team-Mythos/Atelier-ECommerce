@@ -11,8 +11,8 @@ app.use(express.static(statics));
 app.use(express.json());
 
 // path for related products
-app.get('/related', (req, res) => {
-  getRelated(req, res, (relatedProducts) => {
+app.get('/related/products', (req, res) => {
+  getRelated(req.query.product_id, (relatedProducts) => {
     res.send(relatedProducts);
   });
 });
@@ -29,8 +29,8 @@ app.get('*', (req, res) => {
 })
 
 //async function to get related products
-var getRelated = async function(req, res, callback) {
-  var related_ids = await fetch('/products/71697/related', {product_id: 71697}, 'get');
+var getRelated = async function(product_id, callback) {
+  var related_ids = await fetch('/products/' + product_id + '/related', {product_id: product_id}, 'get');
   var relatedProducts = [];
   for (var i = 0; i < related_ids.data.length; i++) {
     const product = await fetch('/products/' + related_ids.data[i], {product_id: related_ids.data[i]}, 'get');
