@@ -10,7 +10,7 @@ function RelatedList({ setShowModal, setComparedProduct }) {
 
   // get related products object data
   useEffect(() => {
-    axios.get('/related')
+    axios.get('/related/products', {params: {product_id: 71697}})
     .then((response) => {
       setRelated(response.data);
     })
