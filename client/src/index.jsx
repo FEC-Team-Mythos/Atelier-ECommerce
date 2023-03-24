@@ -6,8 +6,8 @@ import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 
-import { changeRequestHook } from '../../changeRequestHook.js';
 
+import { changeRequestHook } from '../../changeRequestHook.js';
 
 const App = () => {
 
@@ -30,18 +30,12 @@ const App = () => {
     })
     */
 
-    const [outfits, setOutfits] = useState([]);
-
   return (
     <>
-<<<<<<< HEAD
-      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
-=======
-      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook/>
->>>>>>> c7063c8173b24f5a9689bbdf2880486a4a277d91
+      <ProductOverview request={request} changeRequestHook={changeRequestHook}/>
       <RelatedProducts  request={request}/>
-      <QuestionsAndAnswers  request={request}/>
-      <Reviews  request={request}/>
+      <QuestionsAndAnswers  request={request}/> */}
+      <Reviews  request={request} changeRequestHook={changeRequestHook}/>
     </>
   )
 }
