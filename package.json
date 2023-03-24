@@ -6,10 +6,8 @@
   "scripts": {
     "client-dev": "webpack --mode development --watch",
     "server-dev": "nodemon ./server/index.js",
-    "test": "jest ./client/src/Reviews/Review.test.js"
-  },
-  "jest": {
-    "testEnvironment": "jsdom"
+    "test-related": "jest ./client/src/RelatedProducts/Related.test.js",
+    "test-review": "jest ./client/src/Reviews/Review.test.js"
   },
   "repository": {
     "type": "git",
@@ -27,30 +25,38 @@
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/dom": "^9.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "babel-loader": "^9.1.2",
+    "jest": "^29.5.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "mini-css-extract-plugin": "^2.7.2",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "@testing-library/react": "^14.0.0",
+    "axios": "^1.3.4",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.3.4",
     "express": "^4.18.2",
+    "jest-environment-jsdom": "^29.5.0",
     "nodemon": "^2.0.21",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   }
 }

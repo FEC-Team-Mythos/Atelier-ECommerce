@@ -1,3 +1,86 @@
+body {background-color: rgb(255, 255, 255);}
+
+.related-product-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.related-product-container {
+  padding: 0px 5px;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.related-pre-btn,
+.related-next-btn {
+  border: none;
+  width: 60px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.related-next-btn {
+  right: 0;
+}
+
+.related-next-btn p,
+.related-pre-btn p {
+  font-size: 50px;
+  background-color: rgba(255, 255, 255, 0.436);
+  box-shadow: 0px 0px 10px 1px black;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.related-product-modal {
+  position: absolute;
+  display: flex;
+  direction: row;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.related-card {
+  height: 228px;
+  margin: 15px;
+  padding: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+
+
+#related-table {
+  border: 2px solid rgb(0, 0, 0);
+  width: 500px;
+  height: 200px;
+  border-radius: 5px;
+}
+
+#related-th {
+  border-bottom: 1px solid black;
+}
+
+#related-td {
+  text-align: center;
+}
 /* Main Widget + 2 columns */
 #reviews {
   display:flex;
