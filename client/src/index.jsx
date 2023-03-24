@@ -34,7 +34,11 @@ const App = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+=======
+      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook/>
+>>>>>>> c7063c8173b24f5a9689bbdf2880486a4a277d91
       <RelatedProducts  request={request}/>
       <QuestionsAndAnswers  request={request}/>
       <Reviews  request={request}/>
