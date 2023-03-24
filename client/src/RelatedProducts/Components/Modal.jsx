@@ -35,15 +35,15 @@ function Modal({ related, showModal, setShowModal, comparedProduct, currentProdu
           <div style={{ backgroundColor: "white" }} ref={modalRef}>
             <h1>Compare Products</h1>
             <div className="table">
-              <table>
+              <table id="related-table">
                 <tbody>
                   <tr>
-                  <th>{currentProduct.name}</th>
-                  <th></th>
-                  <th>{comparedProduct.name}</th>
+                  <th id="related-th">{currentProduct.name}</th>
+                  <th id="related-th"></th>
+                  <th id="related-th">{comparedProduct.name}</th>
                   </tr>
                   {featuresArray.map((item, index) => (
-                    <tr key={index}><td>{item[1]}</td><td>{item[0]}</td><td>{item[2]}</td></tr>
+                    <tr key={index}><td id="related-td">{item[1]}</td><td id="related-td">{item[0]}</td><td id="related-td">{item[2]}</td></tr>
                   ))}
                 </tbody>
               </table>

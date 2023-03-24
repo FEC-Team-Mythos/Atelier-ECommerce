@@ -65,27 +65,19 @@ body {background-color: rgb(255, 255, 255);}
   border-radius: 5px;
 }
 
-/*
-.table {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-*/
 
-table {
+
+#related-table {
   border: 2px solid rgb(0, 0, 0);
   width: 500px;
   height: 200px;
   border-radius: 5px;
 }
 
-th {
+#related-th {
   border-bottom: 1px solid black;
 }
 
-td {
+#related-td {
   text-align: center;
 }
