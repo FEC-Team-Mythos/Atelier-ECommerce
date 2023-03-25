@@ -6,18 +6,14 @@ import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 
-
 import { changeRequestHook } from '../../changeRequestHook.js';
 
-const App = () => {
-
-  const request = (endpoint, params={}, method='get') => {
-    return axios({
-      method: method,
-      url: endpoint,
-      params: params
-    });
-  };
+function App() {
+  const request = (endpoint, params = {}, method = 'get') => axios({
+    method,
+    url: endpoint,
+    params,
+  });
   /* EXAMPLE REQUEST WITHIN WIDGET. MAKE SURE TO EITHER CALL props.request OR { request }
   ___________________________________________________________________________________________
 
@@ -30,7 +26,8 @@ const App = () => {
     })
     */
 
-    const [outfits, setOutfits] = useState([]);
+  const [outfits, setOutfits] = useState([]);
+  localStorage.clear();
 
   return (
     <>
@@ -42,13 +39,13 @@ const App = () => {
         </div>
       </div>
       <div className="content">
-        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
-        <RelatedProducts  request={request}/>
-        <QuestionsAndAnswers  request={request}/>
-        <Reviews  request={request} changeRequestHook={changeRequestHook}/>
+        {/*<ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} />*/}
+        <RelatedProducts request={request} />
+        {/*<QuestionsAndAnswers request={request} />*/}
+        {/*<Reviews request={request} changeRequestHook={changeRequestHook} />*/}
       </div>
     </>
-  )
+  );
 }
 
 const container = document.getElementById('app');
