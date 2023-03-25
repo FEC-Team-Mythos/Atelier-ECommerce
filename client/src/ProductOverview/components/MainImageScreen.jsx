@@ -23,9 +23,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
     <div>
       <div className="overview-imagesContainer">
         <button type="submit" id="overview-upButton">
-          <div>
-            Up
-          </div>
+          <span id="overview-upArrow" />
         </button>
         <ul className="overview-sideImages">
           {productInformation.photos.map((photo, index) => (
@@ -33,17 +31,13 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
           ))}
         </ul>
         <button type="submit" id="overview-downButton">
-          <div>
-            Down
-          </div>
+          <span id="overview-downArrow" />
         </button>
       </div>
       {productInformation.photos[mainImage.index - 1]
         ? (
           <button type="submit" id="overview-leftButton" onClick={() => { changeImage('left'); }}>
-            <div>
-              {'<'}
-            </div>
+            <span id="overview-leftArrow" />
           </button>
         )
         : null }
@@ -51,9 +45,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
       {productInformation.photos[mainImage.index + 1]
         ? (
           <button type="submit" id="overview-rightButton" onClick={() => { changeImage('right'); }}>
-            <div>
-              {'>'}
-            </div>
+            <span id="overview-rightArrow" />
           </button>
         )
         : null }

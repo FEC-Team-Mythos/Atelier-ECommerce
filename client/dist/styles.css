@@ -1,10 +1,8 @@
-<<<<<<< HEAD
 * {
   box-sizing: border-box;
   outline: 1px solid limegreen !important;
 }
 
-=======
 body {background-color: rgb(255, 255, 255);}
 
 .related-product-carousel {
@@ -88,7 +86,7 @@ body {background-color: rgb(255, 255, 255);}
 #related-td {
   text-align: center;
 }
->>>>>>> main
+
 /* Main Widget + 2 columns */
 #reviews {
   display:flex;
@@ -320,6 +318,78 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-mainImage {
-  width: 30%;
-  height: 25%;
+  height: 30%;
+}
+
+#overview-downButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#overview-downArrow {
+    position: relative;
+    display: inline-block;
+    top: -5px;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(135deg);
+}
+
+#overview-upButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#overview-upArrow {
+    position: relative;
+    display: inline-block;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(315deg);
+}
+
+#overview-leftButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#overview-leftArrow {
+    position: relative;
+    display: inline-block;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(-135deg);
+}
+
+#overview-rightButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#overview-rightArrow {
+    position: relative;
+    display: inline-block;
+    top: 5px;
+    width: 15px;
+    height: 15px;
+    border-right: 0.2em solid black;
+    border-top: 0.2em solid black;
+    transform: rotate(-45deg);
+}
+
+#overview-upArrow:hover {
+  border-bottom-width: 4px;
+  border-right-width: 4px;
 }
