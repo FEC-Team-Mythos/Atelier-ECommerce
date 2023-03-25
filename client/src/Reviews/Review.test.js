@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '@testing-library/jest-dom';
 import {
@@ -142,32 +143,6 @@ const mockMetaData = {
     },
   },
 };
-
-xdescribe('Reviews', () => {
-  beforeEach(() => {
-    jest.resetModules();
-  });
-
-  test('Reviews should render to page', async () => {
-    const changeRequestHook = jest.fn();
-    axios.get.mockResolvedValue({ data: mockData });
-    const widget = render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
-    const reviewDiv = widget.container.querySelector('#reviews');
-    await waitFor(() => {
-      expect(reviewDiv.id).toEqual('reviews');
-    });
-  });
-
-  test('Reviews should render to 2 child components', async () => {
-    const changeRequestHook = jest.fn();
-    axios.get.mockResolvedValue({ data: mockData });
-    const widget = render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
-    const reviewDiv = widget.container.querySelector('#reviews');
-    await waitFor(() => {
-      expect(reviewDiv.children.length).toBe(2);
-    });
-  });
-});
 
 describe('Review List', () => {
   beforeEach(() => {
@@ -372,3 +347,18 @@ describe('Rating Graph', () => {
     expect(setFilterParams).toHaveBeenCalledWith([5, 3]);
   });
 });
+
+describe('Characteristics Sliders', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Should display slider for all available characteristics', () => {
+    render(<Characteristics characteristics={mockMetaData.characteristics} />);
+    const sliders = screen.getByTestId('reviews-sliders');
+    expect(sliders).toHaveTextContent('Fit');
+    expect(sliders).toHaveTextContent('Length');
+    expect(sliders).toHaveTextContent('Comfort');
+    expect(sliders).toHaveTextContent('Quality');
+  });
+})
