@@ -13,7 +13,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
-  const [mainImage, setMainImage] = useState('');
+  const [mainImage, setMainImage] = useState({});
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
       .then((data) => {
         setProductInformation(data.data.results[0]);
         setProductStyles(data.data.results);
-        setMainImage(data.data.results[0].photos[0].url);
+        setMainImage({ url: data.data.results[0].photos[0].url, index: 0 });
         if (localStorage.getItem('cart')) {
           const cart = JSON.parse(localStorage.getItem('cart'));
           setCartItems(cart);

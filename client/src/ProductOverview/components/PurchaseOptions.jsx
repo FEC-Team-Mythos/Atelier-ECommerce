@@ -140,9 +140,10 @@ function PurchaseOptions({
             src={style.photos[0].thumbnail_url}
             key={style.photos[0].thumbnail_url}
             alt={`Product Style - ${index}`}
+            id="overview-productStyle"
             onClick={() => {
               setProductInformation(style);
-              setMainImage(style.photos[0].url);
+              setMainImage({ url: style.photos[0].url, index: 0 });
             }}
           />
         ))}

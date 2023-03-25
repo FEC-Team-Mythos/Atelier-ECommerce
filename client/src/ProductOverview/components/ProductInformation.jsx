@@ -5,21 +5,21 @@ function ProductInformation({ productInformation, product }) {
   return (
     <div>
       <div>Reviews</div>
-      <h3>{product.category}</h3>
-      <h1>{product.name}</h1>
-      <h2>{`STYLE > ${productInformation.name}`}</h2>
+      <p>{product.category}</p>
+      <p>{product.name}</p>
+      <p>{`STYLE > ${productInformation.name}`}</p>
       {productInformation.sale_price
         ? (
           <div>
-            <h3 style={{ textDecoration: 'line-through' }}>
+            <p style={{ textDecoration: 'line-through' }}>
               {`$${productInformation.original_price || product.default_price}`}
-            </h3>
-            <h2 style={{ color: 'red' }}>
+            </p>
+            <p style={{ color: 'red' }}>
               {`${productInformation.sale_price}`}
-            </h2>
+            </p>
           </div>
         )
-        : <h3>{`${productInformation.original_price || product.default_price}`}</h3>}
+        : <p>{`${productInformation.original_price || product.default_price}`}</p>}
     </div>
   );
 }
