@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '@testing-library/jest-dom';
 import {
@@ -16,6 +15,8 @@ import ReviewTile from './ReviewTile.jsx';
 import Filter from './Filter.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 import Characteristics from './Characteristics.jsx';
+
+import { changeRequestHook } from '../../../changeRequestHook.js';
 
 library.add(faStar);
 library.add(faCheck);
@@ -143,6 +144,41 @@ const mockMetaData = {
     },
   },
 };
+
+describe('Reviews', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  test('Reviews should render to page', () => {
+    render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
+    const widget = screen.getByTestId('reviews');
+    expect(widget).toBeInTheDocument();
+  });
+
+  test('Reviews should fetch reviews and review meta data upon page load', async () => {
+    render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
+
+    axios.get.mockImplementation((url) => {
+      if (url === '/reviews') {
+        return Promise.resolve({ data: mockData });
+      }
+      if (url === '/reviews/meta') {
+        return Promise.resolve({ data: mockMetaData });
+      }
+    });
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalledWith('/reviews', { params: { count: 250, product_id: 71697, sort: 'relevant' } });
+      expect(axios.get).toHaveBeenCalledWith('/reviews/meta', { params: { product_id: 71697 } });
+    });
+  });
+  //TODO TEST SORTING, TEST FILTERING
+});
 
 describe('Review List', () => {
   beforeEach(() => {
@@ -361,4 +397,4 @@ describe('Characteristics Sliders', () => {
     expect(sliders).toHaveTextContent('Comfort');
     expect(sliders).toHaveTextContent('Quality');
   });
-})
+});
