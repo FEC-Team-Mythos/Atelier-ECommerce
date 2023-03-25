@@ -6,7 +6,7 @@ import Characteristics from './Characteristics.jsx';
 
 library.add(faStar);
 
-function NewBreakdown({ metaData, filterParams, setFilterParams }) {
+function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
   const [avgRating, setAvgRating] = useState(0);
   const [recommended, setRecommended] = useState(0);
   const [chartRatings, setChartRatings] = useState({});
@@ -26,7 +26,6 @@ function NewBreakdown({ metaData, filterParams, setFilterParams }) {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (roundToNearestQuarter > 1) {
-
         stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
         roundToNearestQuarter--;
       } else if (roundToNearestQuarter < 1 && roundToNearestQuarter >= 0.75) {
@@ -65,7 +64,7 @@ function NewBreakdown({ metaData, filterParams, setFilterParams }) {
   const ratingsGraph = () => {
     if (totalRatings > 1) {
       return (
-        chartRatings.map((rating) => {
+        chartRatings.map((rating, index) => {
           const barStyle = {
             backgroundColor: '#2E8B57',
             height: '10px',
@@ -73,7 +72,7 @@ function NewBreakdown({ metaData, filterParams, setFilterParams }) {
           };
 
           return (
-            <div className="bar" onClick={() => { filterClick(rating.rating); }}>
+            <div key={index} className="bar" onClick={() => { filterClick(rating.rating); }}>
               <span className="leftBarText">
                 {`${rating.rating} `}
                 <FontAwesomeIcon icon="fa-solid fa-star" />
@@ -137,7 +136,7 @@ function NewBreakdown({ metaData, filterParams, setFilterParams }) {
   }, [metaData]);
 
   return (
-    <div id="breakdown">
+    <div id="breakdown" data-testid="reviews-breakdown">
       <span id="reviews-graph-avg">
         {avgRating}
         {" "}

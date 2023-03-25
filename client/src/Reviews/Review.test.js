@@ -8,10 +8,13 @@ import {
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { expect, jest, test } from '@jest/globals';
+
 import Reviews from './Reviews.jsx';
 import ReviewList from './ReviewList.jsx';
 import ReviewTile from './ReviewTile.jsx';
 import Filter from './Filter.jsx';
+import NewBreakdown from './NewBreakdown.jsx';
+import Characteristics from './Characteristics.jsx';
 
 library.add(faStar);
 library.add(faCheck);
@@ -107,14 +110,48 @@ const mockDataWithMoreReviews = [
   },
 ];
 
+const mockMetaData = {
+  product_id: '71697',
+  ratings: {
+    1: '56',
+    2: '22',
+    3: '41',
+    4: '66',
+    5: '165',
+  },
+  recommended: {
+    false: '74',
+    true: '276',
+  },
+  characteristics: {
+    Fit: {
+      id: 240582,
+      value: '3.5714285714285714',
+    },
+    Length: {
+      id: 240583,
+      value: '3.1346153846153846',
+    },
+    Comfort: {
+      id: 240584,
+      value: '3.3346007604562738',
+    },
+    Quality: {
+      id: 240585,
+      value: '3.5077519379844961',
+    },
+  },
+};
+
 xdescribe('Reviews', () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
   test('Reviews should render to page', async () => {
+    const changeRequestHook = jest.fn();
     axios.get.mockResolvedValue({ data: mockData });
-    const widget = render(<Reviews request={request} />);
+    const widget = render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
     const reviewDiv = widget.container.querySelector('#reviews');
     await waitFor(() => {
       expect(reviewDiv.id).toEqual('reviews');
@@ -122,8 +159,9 @@ xdescribe('Reviews', () => {
   });
 
   test('Reviews should render to 2 child components', async () => {
+    const changeRequestHook = jest.fn();
     axios.get.mockResolvedValue({ data: mockData });
-    const widget = render(<Reviews request={request} />);
+    const widget = render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
     const reviewDiv = widget.container.querySelector('#reviews');
     await waitFor(() => {
       expect(reviewDiv.children.length).toBe(2);
@@ -131,7 +169,7 @@ xdescribe('Reviews', () => {
   });
 });
 
-xdescribe('Review List', () => {
+describe('Review List', () => {
   beforeEach(() => {
     jest.resetModules();
   });
@@ -182,7 +220,7 @@ xdescribe('Review List', () => {
   });
 });
 
-xdescribe('Review Tile', () => {
+describe('Review Tile', () => {
   const review = {
     review_id: 1276368,
     rating: 4,
@@ -259,7 +297,7 @@ describe('Sorting', () => {
 
   test('Displays selected sorting option correctly', () => {
     const sortParam = 'helpful';
-    render (<Filter sortParam={sortParam}/>)
+    render(<Filter sortParam={sortParam} />);
     const filter = screen.getByTestId('reviews-sorting');
     expect(filter).toHaveValue('helpful');
   });
@@ -268,13 +306,69 @@ describe('Sorting', () => {
     const setSortParam = jest.fn();
     render(<Filter setSortParam={setSortParam} />);
     const filter = screen.getByTestId('reviews-sorting');
-    fireEvent.change(filter, {target: {value: 'helpful'}});
+    fireEvent.change(filter, { target: { value: 'helpful' } });
     expect(setSortParam).toHaveBeenCalledWith('helpful');
   });
 
   test('Displays total number of reviews', () => {
-    render(<Filter allReviews={mockDataWithMoreReviews} />)
+    render(<Filter allReviews={mockDataWithMoreReviews} />);
     const filter = screen.getByTestId('reviews-filter');
     expect(filter).toHaveTextContent('4 Total Reviews');
+  });
+});
+
+describe('Rating Graph', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Should display correct average rating based on metadata', async () => {
+    const ratings = {
+      1: '56',
+      2: '22',
+      3: '41',
+      4: '66',
+      5: '165',
+    };
+    const setFilterParams = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
+    const totalRatings = Object.keys(ratings).reduce((acc, rating) => acc + (rating * ratings[rating]), 0);
+    const avgRating = (totalRatings / 350).toFixed(2);
+    const graph = screen.getByTestId('reviews-breakdown');
+    expect(graph).toHaveTextContent(avgRating);
+  });
+
+  test('Should display correct recommended percentage', () => {
+    const recommended = {
+      false: 74,
+      true: 276,
+    };
+    const setFilterParams = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
+    const totalRecommend = Math.round(recommended.true / (recommended.true + recommended.false));
+    const graph = screen.getByTestId('reviews-breakdown');
+    expect(graph).toHaveTextContent(totalRecommend);
+  });
+
+  test('Should render ratings graph', () => {
+    const setFilterParams = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('3')).toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
+    expect(screen.getByText('5')).toBeInTheDocument();
+  });
+
+  test('Should filter review list by clicking on graph', () => {
+    const setFilterParams = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[5]} setFilterParams={setFilterParams} />);
+    const ratingFilter4 = screen.getByText('4');
+    const ratingFilter3 = screen.getByText('3');
+    fireEvent.click(ratingFilter4);
+    expect(setFilterParams).toHaveBeenCalledWith([5, 4]);
+    fireEvent.click(ratingFilter4);
+    fireEvent.click(ratingFilter3);
+    expect(setFilterParams).toHaveBeenCalledWith([5, 3]);
   });
 });
