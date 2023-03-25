@@ -43,30 +43,32 @@ function ProductOverview({ request, outfits, setOutfits }) {
       <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
       {(Object.keys(product).length && Object.keys(productInformation).length)
         ? (
-          <div className="overview_overviewContainer">
-            <MainImageScreen
-              productInformation={productInformation}
-              mainImage={mainImage}
-              setMainImage={setMainImage}
-            />
-            <ProductInformation
-              productInformation={productInformation}
-              product={product}
-            />
-            <PurchaseOptions
-              product={product}
-              productInformation={productInformation}
-              setProductInformation={setProductInformation}
-              productStyles={productStyles}
-              setMainImage={setMainImage}
-              cartItems={cartItems}
-              setCartItems={setCartItems}
-              setOutfits={setOutfits}
-              outfits={outfits}
-            />
-            <ProductDescription
-              product={product}
-            />
+          <div className="overview-overviewContainer">
+            <div className="overview-parentContainer">
+              <MainImageScreen
+                productInformation={productInformation}
+                mainImage={mainImage}
+                setMainImage={setMainImage}
+              />
+              <ProductInformation
+                productInformation={productInformation}
+                product={product}
+              />
+              <PurchaseOptions
+                product={product}
+                productInformation={productInformation}
+                setProductInformation={setProductInformation}
+                productStyles={productStyles}
+                setMainImage={setMainImage}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                setOutfits={setOutfits}
+                outfits={outfits}
+              />
+              <ProductDescription
+                product={product}
+              />
+            </div>
           </div>
         )
         : null}

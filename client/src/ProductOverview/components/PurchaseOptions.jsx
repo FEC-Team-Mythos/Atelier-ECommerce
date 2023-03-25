@@ -134,7 +134,14 @@ function PurchaseOptions({
 
   return (
     <div>
-      <ul>
+      <p>
+        <b>
+          STYLE
+          {' > '}
+        </b>
+        {productInformation.name}
+      </p>
+      <ul className="overview-productStyleContainer">
         {productStyles.map((style, index) => (
           <img
             src={style.photos[0].thumbnail_url}

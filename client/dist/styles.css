@@ -261,6 +261,27 @@ body {background-color: rgb(255, 255, 255);}
   background-color: #FFF;
 } */
 
+
+/* _________________________________ OVERVIEW ______________________________*/
+
+.overview-overviewContainer {
+  width: auto;
+  height: 30vh;
+}
+.overview-parentContainer {
+  position: relative;
+  width: auto;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 10% 10% 10% 10% 40% 10% 10%;
+}
+
+.overview-imagesContainer {
+  grid-column: 1/2;
+  grid-row: 1/7;
+  display:flex;
+}
+
 .overview-navBar {
   position: fixed;
   display: flex;
@@ -286,39 +307,42 @@ body {background-color: rgb(255, 255, 255);}
   margin-top: 5%;
 }
 
-.overview-leftButton {
-  padding: 10px;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-}
-
-.overview-rightButton {
-  padding: 10px;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-}
-
 .overview-sideImages {
   display: flex;
   flex-direction: column;
+  width: 15%;
 }
 
 #overview-sideImage {
-  width: 80px;
-  height: 100px;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.overview-productStyleContainer {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 #overview-productStyle {
-  height: 80px;
-  width: 80px;
+  width: 20%;
+  aspect-ratio: 1/1;
+  box-sizing: border-box;
+  position: relative;
   border-radius: 50%;
+  margin: 1%;
   border: 2px solid black;
 }
 
-#overview-mainImage {
-  height: 30%;
+#overview-mainImageContainer {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #overview-downButton {
@@ -356,6 +380,10 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-leftButton {
+  padding: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,6 +404,10 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
 }
 
 #overview-rightArrow {
@@ -386,7 +418,7 @@ body {background-color: rgb(255, 255, 255);}
     height: 15px;
     border-right: 0.2em solid black;
     border-top: 0.2em solid black;
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
 }
 
 #overview-upArrow:hover {
