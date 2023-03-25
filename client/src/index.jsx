@@ -6,7 +6,6 @@ import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 
-
 import { changeRequestHook } from '../../changeRequestHook.js';
 
 const App = () => {
@@ -34,17 +33,17 @@ const App = () => {
 
   return (
     <>
-      <div className="overview-navBar">
+      {/* <div className="overview-navBar">
         <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" />
         <div className="overview-searchBar">
           <input type="text" />
           <button type="submit">Search Icon</button>
         </div>
-      </div>
+      </div> */}
       <div className="content">
-        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+        {/* <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
         <RelatedProducts  request={request}/>
-        <QuestionsAndAnswers  request={request}/>
+        <QuestionsAndAnswers  request={request}/> */}
         <Reviews  request={request} changeRequestHook={changeRequestHook}/>
       </div>
     </>

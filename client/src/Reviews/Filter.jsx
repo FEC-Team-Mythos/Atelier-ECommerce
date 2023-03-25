@@ -6,7 +6,7 @@ const Filter = ({ allReviews, sortParam, setSortParam }) => {
     const handleChange = (e) => {
       var val = e.target.value
       setSortParam(val);
-    }
+    };
 
     return (
         <select id='reviews-sorting' data-testid='reviews-sorting' value={sortParam} onChange={handleChange}>

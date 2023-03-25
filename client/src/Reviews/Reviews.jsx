@@ -1,13 +1,11 @@
-import React from 'react';
-import {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
-
-const Reviews = ( {changeRequestHook} ) => {
-  //add state to top component of Widget to track all clicks in widget. Set widget in initial state declaration
+function Reviews({ request, changeRequestHook }) {
+  // add state to top component of Widget to track all clicks in widget. Set widget in initial state declaration
   const [clickedElement, clickedTime] = changeRequestHook('reviews');
 
   const [allReviews, setAllReviews] = useState([]);
@@ -21,68 +19,64 @@ const Reviews = ( {changeRequestHook} ) => {
   const [reviewToAdd, setReviewToAdd] = useState({});
 
   const getReviewData = async () => {
-    //Product ID should be dynamic here, will grab from other widget
+    // Product ID should be dynamic here, will grab from other widget
     try {
-      var response = await axios.get('/reviews', {params: {count: 250, sort: 'relevant', product_id: 71697}})
+      const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: 71697 } });
       setAllReviews(response.data.results);
       setReviewList(response.data.results);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const getReviewMetaData = async () => {
-    //Product ID should be dynamic here, will grab from other widget
+    // Product ID should be dynamic here, will grab from other widget
     try {
-      var response = await axios.get('/reviews/meta', {params: {product_id: 71697}})
+      const response = await axios.get('/reviews/meta', { params: { product_id: 71697 } });
       setMetaData(response.data);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const sortReviews = async () => {
     try {
-      var response = await axios.get('/reviews/', {params: {count: 250, sort: sortParam, product_id: 71697}})
+      const response = await axios.get('/reviews/', { params: { count: 250, sort: sortParam, product_id: 71697 } });
       if (filterParams.length) {
-        var newReviews = response.data.results.filter((review) => {
-          return filterParams.includes(review.rating);
-        })
-        setReviewList(newReviews)
+        const newReviews = response.data.results.filter((review) => filterParams.includes(review.rating));
+        setReviewList(newReviews);
       } else {
         setReviewList(response.data.results);
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const filterReviews = async () => {
     try {
       if (!filterParams || filterParams.length === 0) {
         setReviewList(allReviews);
       } else {
-        var newReviews = allReviews.filter((review) => {
-          return filterParams.includes(review.rating);
-        })
-        setReviewList(newReviews)
+        const newReviews = allReviews.filter((review) => filterParams.includes(review.rating));
+        setReviewList(newReviews);
       }
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
-    getReviewData()
-    getReviewMetaData()
+    getReviewData();
+    getReviewMetaData();
   }, []);
 
   useEffect(() => {
-    sortReviews()
+    sortReviews();
   }, [sortParam]);
 
   useEffect(() => {
-    filterReviews()
+    filterReviews();
   }, [filterParams]);
 
   useEffect(() => {
@@ -90,20 +84,20 @@ const Reviews = ( {changeRequestHook} ) => {
   }, [reviewToAdd]);
 
   return (
-    <div id='reviews'>
-    <NewBreakdown
-      metaData={metaData}
-      filterParams={filterParams}
-      setFilterParams={setFilterParams}
+    <div id="reviews" data-testid="reviews">
+      <NewBreakdown
+        metaData={metaData}
+        filterParams={filterParams}
+        setFilterParams={setFilterParams}
       />
-    <ReviewList
-      sortParam={sortParam}
-      setSortParam={setSortParam}
-      reviewList={reviewList}
-      setReviewToAdd={setReviewToAdd}
-    />
+      <ReviewList
+        sortParam={sortParam}
+        setSortParam={setSortParam}
+        reviewList={reviewList}
+        setReviewToAdd={setReviewToAdd}
+      />
     </div>
-  )
+  );
 }
 
 export default Reviews;
