@@ -9,9 +9,9 @@ const Filter = ({ allReviews, sortParam, setSortParam }) => {
     }
 
     return (
-        <select value={sortParam} onChange={handleChange}>
+        <select id='reviews-sorting' data-testid='reviews-sorting' value={sortParam} onChange={handleChange}>
           <option value="relevant">Relevance</option>
-          <option value="helpful">Helpful</option>
+          <option data-testid='reviews-dropNew' value="helpful">Helpful</option>
           <option value="newest">Newest</option>
         </select>
     )
