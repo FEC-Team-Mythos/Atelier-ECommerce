@@ -1,18 +1,18 @@
-import react from 'react';
-import {useState} from 'react'
+import react, { useState } from 'react';
+import axios from 'axios';
 
-const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }) => {
+function AddReviewModal({ addReviewState, toggleAddReviewState }) {
   const [formSummary, setFormSummary] = useState('');
   const [formBody, setFormBody] = useState('');
   const [formRecommend, setFormRecommend] = useState(false);
   const [formName, setFormName] = useState('');
   const [formEmail, setFormEmail] = useState('');
-  const [formPhotos, setFormPhotos] = useState('');
+  const [formPhotos, setFormPhotos] = useState([]);
   const [formCharacteristics, setFormCharacteristics] = useState({});
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setReviewToAdd({
+    const data = {
       product_id: 71697,
       rating: 5,
       summary: formSummary,
@@ -20,11 +20,13 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
       recommend: formRecommend,
       name: formName,
       email: formEmail,
-      formPhotos: formPhotos,
-      characteristics: formCharacteristics
-    })
-    toggleAddReviewState(!addReviewState)
-  }
+      photos: formPhotos,
+      characteristics: formCharacteristics,
+    };
+
+    await axios.post('/reviews', data);
+    toggleAddReviewState(!addReviewState);
+  };
 
   if (addReviewState) {
     return (
@@ -40,11 +42,11 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
             <label>
               <div>
                 Do you recommend this product?
-              <input
-              type="checkbox"
-              value={formRecommend}
-              onChange={(e) => setFormRecommend(e.target.value)}
-              />
+                <input
+                  type="checkbox"
+                  value={formRecommend}
+                  onChange={(e) => setFormRecommend(e.target.value)}
+                />
               </div>
             </label>
             <label>
@@ -56,18 +58,22 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
               <div>
                 Review Summary:
                 <input
-                type="text" maxLength={60}
-                value={formSummary}
-                onChange={(e) => setFormSummary(e.target.value)}/>
+                  type="text"
+                  maxLength={60}
+                  value={formSummary}
+                  onChange={(e) => setFormSummary(e.target.value)}
+                />
               </div>
             </label>
             <label>
               <div>
                 Review Body:
                 <input
-                type="text" minLength={50} maxLength={1000}
-                value={formBody}
-                onChange={(e) => setFormBody(e.target.value)}
+                  type="text"
+                  minLength={50}
+                  maxLength={1000}
+                  value={formBody}
+                  onChange={(e) => setFormBody(e.target.value)}
                 />
               </div>
             </label>
@@ -80,26 +86,31 @@ const AddReviewModal = ({ addReviewState, toggleAddReviewState, setReviewToAdd }
               <div>
                 Nickname:
                 <input
-                type="text" maxLength={60}
-                value={formName}
-                onChange={(e) => setFormName(e.target.value)}/>
+                  type="text"
+                  maxLength={60}
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                />
               </div>
             </label>
             <label>
               <div>
                 Email:
                 <input
-                type="text" maxLength={60}
-                value={formEmail}
-                onChange={(e) => setFormEmail(e.target.value)}/>
+                  type="text"
+                  maxLength={60}
+                  value={formEmail}
+                  onChange={(e) => setFormEmail(e.target.value)}
+                />
               </div>
             </label>
             <input type="submit" value="Submit" />
-        </form>
-          <button onClick={()=>toggleAddReviewState(!addReviewState)}>Close Form</button>
+          </form>
+          <button onClick={() => toggleAddReviewState(!addReviewState)}>Close Form</button>
         </div>
+        {formBody}
       </div>
-    )
+    );
   }
 }
 
