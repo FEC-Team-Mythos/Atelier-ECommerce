@@ -3,7 +3,7 @@ import React from 'react';
 
 function ProductDescription({ product }) {
   return (
-    <div>
+    <div className="overview-descriptionContainer">
       <div>{product.slogan}</div>
       <div>{product.description}</div>
       {product.features.map((feature) => (

@@ -4,21 +4,21 @@ import React from 'react';
 function ProductInformation({ productInformation, product }) {
   return (
     <div>
-      <div>Reviews</div>
-      <p>{product.category}</p>
-      <p>{product.name}</p>
+      <div className="overview-reviewContainer">Reviews</div>
+      <p id="overview-categoryName">{product.category}</p>
+      <p id="overview-productName">{product.name}</p>
       {productInformation.sale_price
         ? (
-          <div>
+          <div id="overview-productPrice">
             <p style={{ textDecoration: 'line-through' }}>
               {`$${productInformation.original_price || product.default_price}`}
             </p>
             <p style={{ color: 'red' }}>
-              {`${productInformation.sale_price}`}
+              {`$${productInformation.sale_price}`}
             </p>
           </div>
         )
-        : <p>{`${productInformation.original_price || product.default_price}`}</p>}
+        : <p id="overview-productPrice">{`$${productInformation.original_price || product.default_price}`}</p>}
     </div>
   );
 }

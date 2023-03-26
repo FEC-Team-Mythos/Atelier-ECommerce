@@ -134,7 +134,7 @@ function PurchaseOptions({
 
   return (
     <div>
-      <p>
+      <p id="overview-selectedStyle">
         <b>
           STYLE
           {' > '}
@@ -168,8 +168,10 @@ function PurchaseOptions({
           {selectedSize ? quantityWithData() : null}
         </select>
       </div>
-      <button type="submit" onClick={addToCart}>Add to Bag</button>
-      <button type="submit" onClick={outfitButtonHandler}>Favorite</button>
+      <div className="overview-purchaseButtons">
+        <button type="submit" onClick={addToCart}>Add to Bag</button>
+        <button type="submit" onClick={outfitButtonHandler}>Favorite</button>
+      </div>
     </div>
   );
 }
