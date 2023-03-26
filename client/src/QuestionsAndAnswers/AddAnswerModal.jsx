@@ -31,9 +31,16 @@ const AddAnswerModal = ({ question, questionId, showModal, handleClose }) => {
       email,
     };
 
-    // TODO: post request to server/API
-    console.log(`[POST/todo] Submitting answer "${formData.body}" for question ${questionId}...`);
-    console.log(`...with nickname "${formData.name}" and email "${formData.email}"`);
+    // POST answer to API
+    console.log(`Submitting answer "${formData.body}" for question ${questionId}...`);
+    var answerEndpoint = `/qa/questions/${questionId}/answers`;
+    request(answerEndpoint, formData, 'POST')
+      .then((response) => {
+        console.log('Success, answer submitted: ', response);
+      })
+      .catch((error) => {
+        console.log('Error submitting answer: ', error);
+      });
 
     // finally, clear form fields & close modal
     setAnswer('');

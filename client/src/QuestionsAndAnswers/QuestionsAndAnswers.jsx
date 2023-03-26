@@ -12,17 +12,15 @@ import SearchBar from './SearchBar.jsx';
 //  |- AddAnswerModal.jsx
 //  |- AddQuestionModal.jsx
 
-const QuestionsAndAnswers = ({ productId }) => {
+const QuestionsAndAnswers = ({ productId, changeRequestHook }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [allQuestions, setAllQuestions] = useState([]);
 
   const getQuestionsData = async () => {
     try {
       var response = await axios.get('/qa/questions', { params: { product_id: productId } })
       // this is redundant now, but depending on how filtering is implemented we may want two
-      setAllQuestions(response.data.results);
       setQuestions(response.data.results);
     } catch (err) {
       console.log(err);
