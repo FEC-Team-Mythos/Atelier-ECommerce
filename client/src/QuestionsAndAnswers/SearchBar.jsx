@@ -10,6 +10,9 @@ const SearchBar = ({ handleSearch }) => {
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
+    if (searchTerm.length >= 3 || searchTerm. length === 0) {
+      handleSearch(searchTerm);
+    }
   };
 
   return (
@@ -20,7 +23,7 @@ const SearchBar = ({ handleSearch }) => {
         value={searchTerm}
         onChange={handleInputChange}
       />
-      <button type="button" onClick={handleClick}>
+      <button type="button" onClick={handleClick} disabled={searchTerm.length < 3}>
         Search
       </button>
     </>

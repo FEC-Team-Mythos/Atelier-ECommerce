@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import QuestionsList from './QuestionsList.jsx';
 import AddQuestionModal from './AddQuestionModal.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -12,27 +11,24 @@ import SearchBar from './SearchBar.jsx';
 //  |- AddAnswerModal.jsx
 //  |- AddQuestionModal.jsx
 
-const QuestionsAndAnswers = ({ productId }) => {
+const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [allQuestions, setAllQuestions] = useState([]);
 
   const getQuestionsData = async () => {
     try {
-      var response = await axios.get('/qa/questions', { params: { product_id: productId } })
-      // this is redundant now, but depending on how filtering is implemented we may want two
-      setAllQuestions(response.data.results);
+      const response = await request('/qa/questions', { product_id: productId }, 'get');
       setQuestions(response.data.results);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
 
   useEffect(() => {
     getQuestionsData();
   }, [productId]);
-
 
   const handleSearch = (term) => {
     console.log('Searching for:', term);
@@ -54,15 +50,19 @@ const QuestionsAndAnswers = ({ productId }) => {
         questions={questions}
         productId={productId}
         searchTerm={searchTerm}
+        request={request}
       />
       <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
         Add a Question
       </button>
+      {showAddQuestionModal && (
       <AddQuestionModal
         productId={productId}
         showModal={showAddQuestionModal}
         handleClose={handleModalClose}
+        request={request}
       />
+    )}
     </div>
   );
 };
