@@ -1,7 +1,7 @@
-* {
+/* * {
   box-sizing: border-box;
   outline: 1px solid limegreen !important;
-}
+} */
 
 body {background-color: rgb(255, 255, 255);}
 
@@ -266,20 +266,25 @@ body {background-color: rgb(255, 255, 255);}
 
 .overview-overviewContainer {
   width: auto;
-  height: 30vh;
+  height: 60vh;
 }
+
 .overview-parentContainer {
   position: relative;
   width: auto;
+  height: 80vh;
   display: grid;
   grid-template-columns: 60% 40%;
   grid-template-rows: 10% 10% 10% 10% 40% 10% 10%;
 }
 
 .overview-imagesContainer {
-  grid-column: 1/2;
+  grid-column: 1;
   grid-row: 1/7;
   display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .overview-navBar {
@@ -294,8 +299,8 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-logo {
-  width: 40px;
-  height: 30px;
+  width: 200px;
+  height: 150px;
 }
 
 .overview-searchBar {
@@ -311,10 +316,12 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   flex-direction: column;
   width: 15%;
+  height: 100%;
 }
 
 #overview-sideImage {
   width: 100%;
+  margin: 5%;
   aspect-ratio: 1/1;
 }
 
@@ -339,16 +346,23 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-mainImageContainer {
-  width: 85%;
+  height:100%;
+  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+
+#overview-mainImage {
+  position: relative;
+  height: 100%;
+  width: auto;
 }
 
 #overview-downButton {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
 }
 
 #overview-downArrow {
@@ -366,6 +380,7 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
 }
 
 #overview-upArrow {
@@ -384,9 +399,6 @@ body {background-color: rgb(255, 255, 255);}
   border: solid black;
   border-width: 0 3px 3px 0;
   display: inline-block;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 #overview-leftArrow {
@@ -401,9 +413,6 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-rightButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 10px;
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -424,4 +433,11 @@ body {background-color: rgb(255, 255, 255);}
 #overview-upArrow:hover {
   border-bottom-width: 4px;
   border-right-width: 4px;
+}
+
+.overview-purchaseSelections {
+  grid-row: 6/7;
+  grid-column: 2;
+  display: flex;
+  justify-content: space-evenly;
 }

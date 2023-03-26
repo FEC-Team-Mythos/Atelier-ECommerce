@@ -155,17 +155,19 @@ function PurchaseOptions({
           />
         ))}
       </ul>
-      <select id="overview_productSize" onChange={getSelectedSize}>
-        <option value="0">SELECT SIZE</option>
-        {Object.keys(productInformation.skus).map((style) => (
-          <option key={style} value={style}>{productInformation.skus[style].size}</option>
-        ))}
-      </select>
+      <div className="overview-purchaseSelections">
+        <select id="overview_productSize" onChange={getSelectedSize}>
+          <option value="0">SELECT SIZE</option>
+          {Object.keys(productInformation.skus).map((style) => (
+            <option key={style} value={style}>{productInformation.skus[style].size}</option>
+          ))}
+        </select>
 
-      <select id="overview_productQuantity" onChange={getSelectedQuantity}>
-        <option value="0">SELECT QUANTITY</option>
-        {selectedSize ? quantityWithData() : null}
-      </select>
+        <select id="overview_productQuantity" onChange={getSelectedQuantity}>
+          <option value="0">SELECT QUANTITY</option>
+          {selectedSize ? quantityWithData() : null}
+        </select>
+      </div>
       <button type="submit" onClick={addToCart}>Add to Bag</button>
       <button type="submit" onClick={outfitButtonHandler}>Favorite</button>
     </div>
