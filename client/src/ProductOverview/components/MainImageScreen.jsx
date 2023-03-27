@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 
 function MainImageScreen({ productInformation, mainImage, setMainImage }) {
+  const [imageSelection, setImageSelection] = useState(0);
+
   const changeImage = (direction) => {
     const currentPhotoIndex = mainImage.index;
     if (direction === 'left') {

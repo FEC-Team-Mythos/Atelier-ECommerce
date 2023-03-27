@@ -1,9 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faStar);
 
 function PurchaseOptions({
   product, productInformation, setProductInformation, productStyles, setMainImage,
@@ -162,15 +168,35 @@ function PurchaseOptions({
             <option key={style} value={style}>{productInformation.skus[style].size}</option>
           ))}
         </select>
-
-        <select id="overview_productQuantity" onChange={getSelectedQuantity}>
-          <option value="0">SELECT QUANTITY</option>
-          {selectedSize ? quantityWithData() : null}
-        </select>
+        {selectedSize
+          ? (
+            <select id="overview_productQuantity" onChange={getSelectedQuantity}>
+              {quantityWithData()}
+            </select>
+          )
+          : (
+            <select id="overview_productQuantity" onChange={getSelectedQuantity}>
+              <option value="0">SELECT QUANTITY</option>
+            </select>
+          )}
       </div>
       <div className="overview-purchaseButtons">
         <button type="submit" onClick={addToCart}>ADD TO BAG</button>
-        <button type="submit" onClick={outfitButtonHandler}>FAVORITE</button>
+        {favorited
+          ? (
+            <button type="submit" onClick={outfitButtonHandler}>
+              <div>
+                <FontAwesomeIcon icon="fa-solid fa-star" style={{ color: '#000000' }} />
+              </div>
+            </button>
+          )
+          : (
+            <button type="submit" onClick={outfitButtonHandler}>
+              <div>
+                <FontAwesomeIcon icon="fa-regular fa-star" style={{ color: '#000000' }} />
+              </div>
+            </button>
+          )}
       </div>
     </div>
   );
