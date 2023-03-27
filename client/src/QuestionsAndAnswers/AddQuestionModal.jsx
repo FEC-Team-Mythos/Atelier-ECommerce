@@ -35,7 +35,7 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
     const formData = {
       body: question,
       name: nickname,
-      email,
+      email: email,
       product_id: productId,
     };
 

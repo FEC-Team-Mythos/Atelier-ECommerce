@@ -31,7 +31,7 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   }, [productId]);
 
   const handleSearch = (term) => {
-    console.log('Searching for:', term);
+    console.log('Searching for: ', term);
     setSearchTerm(term);
   };
 
@@ -43,6 +43,43 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
     setShowAddQuestionModal(false);
   };
 
+  const markQuestionHelpful = async (questionId) => {
+    try {
+      await request(`/qa/questions/${questionId}/helpful`, {}, 'put');
+      console.log('Marked question as helpful: ', questionId);
+    } catch (err) {
+      console.log('Error marking question as helpful: ', err);
+    }
+  };
+
+  const reportQuestion = async (questionId) => {
+    try {
+      await request(`/qa/questions/${questionId}/report`, {}, 'put');
+      console.log('Reported question: ', questionId);
+    } catch (err) {
+      console.log('Error reporting question: ', err);
+    }
+  };
+
+  const markAnswerHelpful = async (answerId) => {
+    try {
+      await request(`/qa/answers/${answerId}/helpful`, {}, 'put');
+      console.log('Marked answer as helpful: ', answerId);
+    } catch (err) {
+      console.log('Error marking answer as helpful: ', err);
+    }
+  };
+
+  const reportAnswer = async (answerId) => {
+    try {
+      await request(`/qa/answers/${answerId}/report`, {}, 'put');
+      console.log('Reported answer: ', answerId);
+    } catch (err) {
+      console.log('Error reporting answer: ', err);
+    }
+  };
+
+
   return (
     <div>
       <SearchBar handleSearch={handleSearch} />
@@ -51,6 +88,10 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
         productId={productId}
         searchTerm={searchTerm}
         request={request}
+        markQuestionHelpful={markQuestionHelpful}
+        reportQuestion={reportQuestion}
+        markAnswerHelpful={markAnswerHelpful}
+        reportAnswer={reportAnswer}
       />
       <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
         Add a Question
