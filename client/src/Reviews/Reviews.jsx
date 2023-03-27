@@ -95,6 +95,7 @@ function Reviews({ request, changeRequestHook }) {
         setSortParam={setSortParam}
         reviewList={reviewList}
         setReviewToAdd={setReviewToAdd}
+        metaData={metaData}
       />
     </div>
   );

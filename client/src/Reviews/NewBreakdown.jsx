@@ -18,7 +18,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
       total += Number(metaData.ratings[rating]);
     }
     setTotalRatings(total);
-    setAvgRating(Number((avg / total).toFixed(2)));
+    setAvgRating(Number((avg / total).toFixed(1)));
   };
 
   const starCount = () => {

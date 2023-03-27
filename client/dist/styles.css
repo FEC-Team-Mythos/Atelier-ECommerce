@@ -234,7 +234,7 @@ body {background-color: rgb(255, 255, 255);}
 }
 */
 
-/* #popup {
+#popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -253,7 +253,7 @@ body {background-color: rgb(255, 255, 255);}
   width: 100%;
   max-width: 300px;
   background-color: #FFF;
-} */
+}
 
 .overview-navBar {
   position: fixed;

@@ -1,7 +1,7 @@
-import react, { useState } from 'react';
+import react, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function AddReviewModal({ addReviewState, toggleAddReviewState }) {
+function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics }) {
   const [formSummary, setFormSummary] = useState('');
   const [formBody, setFormBody] = useState('');
   const [formRecommend, setFormRecommend] = useState(false);
@@ -28,6 +28,48 @@ function AddReviewModal({ addReviewState, toggleAddReviewState }) {
     toggleAddReviewState(!addReviewState);
   };
 
+  const handleRecommendChange = (e) => {
+    if (e.target.value === 'true') {
+      setFormRecommend(true);
+    } else {
+      setFormRecommend(false);
+    }
+  };
+
+  const DisplayRadioButtons = (input) =>{
+    const radioButtons = [];
+    for (let i = 1; i <= 5; i++) {
+      const radioButton = (
+        <label key={i}>
+          <input type="radio" name={input} value={i} />
+          {i}
+        </label>
+      );
+      radioButtons.push(radioButton);
+    }
+    return (
+      <div>
+        {radioButtons}
+      </div>
+    );
+  }
+
+  const displayCharacterRadio = () => {
+    if (characteristics) {
+      const charKeys = Object.keys(characteristics);
+      return (
+        <>
+          {charKeys.map((key) => (
+            <div key={key}>
+              {key}
+              <DisplayRadioButtons input={key} />
+            </div>
+          ))}
+        </>
+      );
+    }
+  };
+
   if (addReviewState) {
     return (
       <div id="popup">
@@ -40,18 +82,30 @@ function AddReviewModal({ addReviewState, toggleAddReviewState }) {
               </div>
             </label>
             <label>
-              <div>
-                Do you recommend this product?
-                <input
-                  type="checkbox"
-                  value={formRecommend}
-                  onChange={(e) => setFormRecommend(e.target.value)}
-                />
-              </div>
+              Do you recommend this product?
+              <input
+                type="radio"
+                name="yes"
+                value="true"
+                checked={formRecommend === true}
+                onChange={handleRecommendChange}
+              />
+              Yes
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                name="no"
+                value="false"
+                checked={formRecommend === false}
+                onChange={handleRecommendChange}
+              />
+              No
             </label>
             <label>
               <div>
-                Characteristics:
+                {displayCharacterRadio()}
               </div>
             </label>
             <label>
@@ -108,7 +162,6 @@ function AddReviewModal({ addReviewState, toggleAddReviewState }) {
           </form>
           <button onClick={() => toggleAddReviewState(!addReviewState)}>Close Form</button>
         </div>
-        {formBody}
       </div>
     );
   }

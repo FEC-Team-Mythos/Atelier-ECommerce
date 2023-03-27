@@ -4,7 +4,7 @@ import Filter from './Filter.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 
 function ReviewList({
-  reviewList, sortParam, setSortParam, reviewToAdd, setReviewToAdd,
+  reviewList, sortParam, setSortParam, reviewToAdd, setReviewToAdd, metaData
 }) {
   const [reviewListLength, setReviewListLength] = useState(2);
   const [addReviewState, toggleAddReviewState] = useState(false);
@@ -25,7 +25,7 @@ function ReviewList({
   const addReview = () => (
     <button
       id="reviews-addReview-button"
-      data-tesid="reviews-addReview-button"
+      data-testid="reviews-addReview-button"
       onClick={() => toggleAddReviewState(!addReviewState)}
     >
       Add Review
@@ -49,6 +49,7 @@ function ReviewList({
         addReviewState={addReviewState}
         toggleAddReviewState={toggleAddReviewState}
         setReviewToAdd={setReviewToAdd}
+        characteristics={metaData.characteristics}
       />
       {moreReviewsButton()}
       {addReview()}
