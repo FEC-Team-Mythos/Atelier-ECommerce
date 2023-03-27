@@ -169,8 +169,8 @@ function PurchaseOptions({
         </select>
       </div>
       <div className="overview-purchaseButtons">
-        <button type="submit" onClick={addToCart}>Add to Bag</button>
-        <button type="submit" onClick={outfitButtonHandler}>Favorite</button>
+        <button type="submit" onClick={addToCart}>ADD TO BAG</button>
+        <button type="submit" onClick={outfitButtonHandler}>FAVORITE</button>
       </div>
     </div>
   );
