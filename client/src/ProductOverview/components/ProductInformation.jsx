@@ -10,11 +10,11 @@ function ProductInformation({ productInformation, product }) {
       {productInformation.sale_price
         ? (
           <div id="overview-productPrice">
-            <p style={{ textDecoration: 'line-through' }}>
-              {`$${productInformation.original_price || product.default_price}`}
-            </p>
             <p style={{ color: 'red' }}>
               {`$${productInformation.sale_price}`}
+            </p>
+            <p style={{ textDecoration: 'line-through' }}>
+              {`$${productInformation.original_price || product.default_price}`}
             </p>
           </div>
         )
