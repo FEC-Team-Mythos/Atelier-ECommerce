@@ -245,6 +245,7 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   justify-content: center;
   align-items: center;
+  border: black solid 2px;
 }
 
 #popup-inner {
@@ -253,6 +254,7 @@ body {background-color: rgb(255, 255, 255);}
   width: 100%;
   max-width: 300px;
   background-color: #FFF;
+  border: black solid 2px;
 }
 
 .overview-navBar {
