@@ -56,7 +56,7 @@ function Characteristics({ characteristics }) {
   }, [characteristics]);
 
   return (
-    <div id="characterSliders">{characteristicsSlider()}</div>
+    <div id="characterSliders" data-testid='reviews-sliders'>{characteristicsSlider()}</div>
   );
 }
 
