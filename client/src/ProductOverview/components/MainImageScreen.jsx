@@ -4,7 +4,10 @@
 import React, { useState } from 'react';
 
 function MainImageScreen({ productInformation, mainImage, setMainImage }) {
-  const [imageSelection, setImageSelection] = useState(0);
+  const [imageSelection, setImageSelection] = useState({
+    indexSet: 0,
+    productInfoList: productInformation.photos.slice(0, 7),
+  });
 
   const changeImage = (direction) => {
     const currentPhotoIndex = mainImage.index;
@@ -27,8 +30,17 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
         <button type="submit" id="overview-upButton">
           <span id="overview-upArrow" />
         </button>
-        {productInformation.photos.map((photo, index) => (
-          <img id="overview-sideImage" src={photo.thumbnail_url} key={photo.url} alt="Product View Options" data-testid={`image-${index}`} onClick={() => { setMainImage({ url: photo.url, index }); }} />
+        {imageSelection.productInfoList.map((photo, index) => (
+          <img
+            id="overview-sideImage"
+            src={photo.thumbnail_url}
+            key={photo.url}
+            alt="Product View Options"
+            data-testid={`image-${index}`}
+            onClick={() => {
+              setMainImage({ url: photo.url, index: imageSelection.indexSet + index });
+            }}
+          />
         ))}
         <button type="submit" id="overview-downButton">
           <span id="overview-downArrow" />

@@ -157,6 +157,7 @@ function PurchaseOptions({
             onClick={() => {
               setProductInformation(style);
               setMainImage({ url: style.photos[0].url, index: 0 });
+              setSelectedSize(0);
             }}
           />
         ))}
