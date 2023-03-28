@@ -15,14 +15,15 @@ function ProductOverview({ request, outfits, setOutfits }) {
   const [productStyles, setProductStyles] = useState([]);
   const [mainImage, setMainImage] = useState({});
   const [cartItems, setCartItems] = useState([]);
+  const [expand, setExpand] = useState(false);
 //71697
   useEffect(() => {
-    request('/products/71701', { product_id: 71701 }, 'get')
+    request('/products/71697', { product_id: 71697 }, 'get')
       .then((data) => {
         setProduct(data.data);
       })
       .then(() => (
-        request('/products/71701/styles', { product_id: 71701 }, 'get')
+        request('/products/71697/styles', { product_id: 71697 }, 'get')
       ))
       .then((data) => {
         setProductInformation(data.data.results[0]);

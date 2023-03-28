@@ -101,6 +101,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
             </button>
           )
           : null }
+        <button type="submit" id="overview-expand">Expand</button>
       </div>
     </div>
   );
