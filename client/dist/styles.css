@@ -304,3 +304,8 @@ body {background-color: rgb(255, 255, 255);}
   width: 80px;
   height: 100px;
 }
+
+.qa-question-list {
+  max-height: 150px;
+  overflow-y: auto;
+}

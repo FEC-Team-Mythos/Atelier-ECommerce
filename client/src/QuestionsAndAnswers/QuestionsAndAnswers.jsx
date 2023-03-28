@@ -15,11 +15,15 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
+  const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(4);
+  const [totalQuestionsCount, setTotalQuestionsCount] = useState(0);
+  const [moreQuestionsAvailable, setMoreQuestionsAvailable] = useState(false);
 
   const getQuestionsData = async () => {
     try {
       const response = await request('/qa/questions', { product_id: productId }, 'get');
       setQuestions(response.data.results);
+      setTotalQuestionsCount(response.data.results.length);
     } catch (err) {
       console.log(err);
     }
@@ -42,6 +46,16 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   const handleModalClose = () => {
     setShowAddQuestionModal(false);
   };
+
+  // const handleLoadMore = () => {
+  //   setVisibleQuestionsCount((prevCount) => prevCount + 2);
+  // };
+
+  const handleMoreAnsweredQuestions = () => {
+    setVisibleQuestionsCount(visibleQuestionsCount + 2);
+  };
+
+  const hasMoreQuestions = visibleQuestionsCount < questions.length;
 
   const markQuestionHelpful = async (questionId) => {
     try {
@@ -83,27 +97,34 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   return (
     <div>
       <SearchBar handleSearch={handleSearch} />
+      <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
+        Add a Question
+      </button>
+      {showAddQuestionModal && (
+        <AddQuestionModal
+          productId={productId}
+          showModal={showAddQuestionModal}
+          handleClose={handleModalClose}
+          request={request}
+        />
+      )}
       <QuestionsList
-        questions={questions}
+        questions={questions.slice(0, visibleQuestionsCount)}
         productId={productId}
         searchTerm={searchTerm}
         request={request}
+        setMoreQuestionsAvailable={setMoreQuestionsAvailable}
+        visibleQuestionsCount={visibleQuestionsCount}
         markQuestionHelpful={markQuestionHelpful}
         reportQuestion={reportQuestion}
         markAnswerHelpful={markAnswerHelpful}
         reportAnswer={reportAnswer}
       />
-      <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
-        Add a Question
-      </button>
-      {showAddQuestionModal && (
-      <AddQuestionModal
-        productId={productId}
-        showModal={showAddQuestionModal}
-        handleClose={handleModalClose}
-        request={request}
-      />
-    )}
+      {hasMoreQuestions && (
+        <button className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
+          More Answered Questions
+        </button>
+      )}
     </div>
   );
 };
