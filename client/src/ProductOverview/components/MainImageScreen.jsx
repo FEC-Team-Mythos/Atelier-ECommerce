@@ -1,13 +1,44 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function MainImageScreen({ productInformation, mainImage, setMainImage }) {
   const [imageSelection, setImageSelection] = useState({
     indexSet: 0,
     productInfoList: productInformation.photos.slice(0, 7),
   });
+
+  useEffect(() => {
+    setImageSelection({
+      indexSet: 0,
+      productInfoList: productInformation.photos.slice(0, 7),
+    });
+  }, [productInformation]);
+
+  const setList = (direction) => {
+    const currentSetIndex = imageSelection.indexSet;
+    if (direction === 'up') {
+      if (productInformation.photos[currentSetIndex - 7]) {
+        setImageSelection({
+          indexSet: currentSetIndex - 7,
+          productInfoList: productInformation.photos.slice(currentSetIndex - 7, 7),
+        });
+      } else {
+        setImageSelection({
+          indexSet: 0,
+          productInfoList: productInformation.photos.slice(0, 7),
+        });
+      }
+    } else if (direction === 'down') {
+      if (productInformation.photos[currentSetIndex + 7]) {
+        setImageSelection({
+          indexSet: currentSetIndex + 7,
+          productInfoList: productInformation.photos.slice(currentSetIndex + 7, currentSetIndex + 14),
+        });
+      }
+    }
+  };
 
   const changeImage = (direction) => {
     const currentPhotoIndex = mainImage.index;
@@ -27,9 +58,13 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
   return (
     <div className="overview-imagesContainer">
       <ul className="overview-sideImages">
-        <button type="submit" id="overview-upButton">
-          <span id="overview-upArrow" />
-        </button>
+        {productInformation.photos[imageSelection.indexSet - 1]
+          ? (
+            <button type="submit" id="overview-upButton" onClick={() => { setList('up'); }}>
+              <span id="overview-upArrow" />
+            </button>
+          )
+          : null }
         {imageSelection.productInfoList.map((photo, index) => (
           <img
             id="overview-sideImage"
@@ -42,9 +77,13 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
             }}
           />
         ))}
-        <button type="submit" id="overview-downButton">
-          <span id="overview-downArrow" />
-        </button>
+        {productInformation.photos[imageSelection.indexSet + 7]
+          ? (
+            <button type="submit" id="overview-downButton" onClick={() => { setList('down'); }}>
+              <span id="overview-downArrow" />
+            </button>
+          )
+          : null }
       </ul>
       <div className="overview-mainImageContainer">
         {productInformation.photos[mainImage.index - 1]
