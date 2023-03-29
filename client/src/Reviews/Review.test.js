@@ -15,6 +15,7 @@ import ReviewTile from './ReviewTile.jsx';
 import Filter from './Filter.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 import Characteristics from './Characteristics.jsx';
+import AddReviewModal from './AddReviewModal.jsx';
 
 import { changeRequestHook } from '../../../changeRequestHook.js';
 
@@ -177,7 +178,7 @@ describe('Reviews', () => {
       expect(axios.get).toHaveBeenCalledWith('/reviews/meta', { params: { product_id: 71697 } });
     });
   });
-  //TODO TEST SORTING, TEST FILTERING
+  // TODO TEST SORTING, TEST FILTERING
 });
 
 describe('Review List', () => {
@@ -187,13 +188,13 @@ describe('Review List', () => {
 
   test('Review List should render to page', () => {
     const data = axios.get.mockResolvedValue({ data: mockData });
-    render(<ReviewList />);
+    render(<ReviewList metaData={mockMetaData} />);
     const reviewList = screen.getByTestId('reviewList');
     expect(reviewList).toBeInTheDocument();
   });
 
   test('If Total Reviews <= 2, review list should show 2 reviews and no button', () => {
-    render(<ReviewList reviewList={mockData} />);
+    render(<ReviewList reviewList={mockData} metaData={mockMetaData} />);
     const reviews = screen.getAllByTestId('reviews-individualReview');
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
 
@@ -205,7 +206,7 @@ describe('Review List', () => {
   });
 
   test('If Total Reviews > 2, review list should initially show 2 reviews and more reviews button', () => {
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const firstListOfReviews = screen.getAllByTestId('reviews-individualReview');
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
     expect(firstListOfReviews.length).toBe(2);
@@ -213,7 +214,7 @@ describe('Review List', () => {
   });
 
   test('Clicking More Reviews Button should increment list by 2', () => {
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const firstListOfReviews = screen.getAllByTestId('reviews-individualReview');
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
     expect(firstListOfReviews.length).toBe(2);
@@ -223,7 +224,7 @@ describe('Review List', () => {
   });
 
   test('Button should dissappear if no more reviews are available to be shown', () => {
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
     expect(moreReviewsButton).toBeInTheDocument();
     fireEvent.click(moreReviewsButton);
@@ -298,7 +299,7 @@ describe('Sorting', () => {
 
   test('Should display dropdown with 3 sorting options', () => {
     const sortingOptions = ['Relevance', 'Helpful', 'Newest'];
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const filterDropdown = screen.queryByTestId('reviews-sorting');
     fireEvent.click(filterDropdown);
     sortingOptions.forEach((option) => {
@@ -344,7 +345,7 @@ describe('Rating Graph', () => {
     const setFilterParams = jest.fn();
     render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
     const totalRatings = Object.keys(ratings).reduce((acc, rating) => acc + (rating * ratings[rating]), 0);
-    const avgRating = (totalRatings / 350).toFixed(2);
+    const avgRating = (totalRatings / 350).toFixed(1);
     const graph = screen.getByTestId('reviews-breakdown');
     expect(graph).toHaveTextContent(avgRating);
   });
@@ -396,5 +397,29 @@ describe('Characteristics Sliders', () => {
     expect(sliders).toHaveTextContent('Length');
     expect(sliders).toHaveTextContent('Comfort');
     expect(sliders).toHaveTextContent('Quality');
+  });
+});
+
+describe('Adding New Review', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Form should submit if all fields are filled out properly', async () => {
+    const toggleAddReviewState = jest.fn();
+    render(<AddReviewModal characteristics={mockMetaData.characteristics} addReviewState toggleAddReviewState={toggleAddReviewState} />);
+    fireEvent.input(screen.getByTestId('reviews-addReviewSummaryText'), { target: { value: 'Lorem Ipsum Summary' } });
+    fireEvent.input(screen.getByTestId('reviews-addReviewBodyText'), { target: { value: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,' } });
+    fireEvent.input(screen.getByTestId('reviews-addReviewName'), { target: { value: 'tester4567' } });
+    fireEvent.input(screen.getByTestId('reviews-addReviewEmail'), { target: { value: 'tester4567@yahoo.com' } });
+
+    fireEvent.mouseEnter(screen.getByTestId('reviews-addReviewStars3', { key: '3' }));
+    fireEvent.click(screen.getByTestId('reviews-addReviewStars3', { key: '3' }));
+
+    fireEvent.click(screen.getByTestId('reviews-addReviewRecYes'));
+
+    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+
+    await waitFor(() => expect(axios.post).toHaveBeenCalled());
   });
 });
