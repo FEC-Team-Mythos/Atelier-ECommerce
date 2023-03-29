@@ -3,16 +3,15 @@ import Carousel from './Carousel.jsx';
 
 // this component is the carousel for "Your Outfit"
 function OutfitList({ currentProduct }) {
-
   const [outfit, setOutfit] = useState([]);
   const listType = { type: 'outfit' };
 
+  // add current product to outfit list both in local storage and in state
   const handleAdd = () => {
-
-    var outfitList = JSON.parse(localStorage.getItem('outfit'));
+    const outfitList = JSON.parse(localStorage.getItem('outfit'));
 
     if (outfitList !== null) {
-      for (var i = 0; i < outfitList.length; i++) {
+      for (let i = 0; i < outfitList.length; i++) {
         if (outfitList[i].name === currentProduct.name) {
           var alreadyAdded = true;
         }
@@ -20,17 +19,25 @@ function OutfitList({ currentProduct }) {
     }
 
     if (!alreadyAdded) {
-      setOutfit(prevState => [...prevState, currentProduct]);
-      var updatedOutfitList = [];
+      setOutfit((prevState) => [...prevState, currentProduct]);
+      const updatedOutfitList = [];
       updatedOutfitList.push(currentProduct);
       localStorage.setItem('outfit', JSON.stringify(updatedOutfitList));
     }
-
   };
 
-  const handleRemove = () => {
-
-  }
+  // remove selected product from outfit list both in local storage and in state
+  const handleRemove = (product) => {
+    const outfitList = JSON.parse(localStorage.getItem('outfit'));
+    const updatedOutfitList = [];
+    for (let i = 0; i < outfitList.length; i++) {
+      if (!outfitList[i].name === product) {
+        updatedOutfitList.push(outfitList[i]);
+      }
+    }
+    setOutfit(updatedOutfitList);
+    localStorage.setItem('outfit', JSON.stringify(updatedOutfitList));
+  };
 
   return (
     <div id="My Outfit">
