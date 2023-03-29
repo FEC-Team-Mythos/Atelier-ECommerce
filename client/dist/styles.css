@@ -247,8 +247,88 @@ body {background-color: rgb(255, 255, 255);}
   color: #ccc;
 }
 
+#reviews-addReviewModal {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#reviews-addReviewPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#reviews-addReviewPopupInner {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#reviews-addReviewStars {
+  padding: 5px;
+}
+
+#reviews-addReviewRecommend {
+  padding: 5px;
+}
+
+#reviews-addReviewCharacteristics {
+  padding: 10px;
+}
+
+#reviews-addReviewCharacteristicIndividual {
+  padding:5px;
+  display:flex;
+}
+
+.reviews-addReviewCharacteristicIndividualDisc {
+  margin-left: 5px;
+}
+
 #reviews-addReviewSummary {
-  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#reviews-addReviewSummaryText {
+  width: 100%;
+  max-width: 250px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+#reviews-addReviewBodyText {
+  width: 300px;
+  height:50px;
+}
+
+#reviews-addReviewPhotos {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#reviews-addReviewSubtext {
+  font-size: 12px;
+  font-style: italic;
+}
+
+#reviews-addReviewNameEmail {
+  margin-bottom: 5px;
+}
+
+#reviews-addFormCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 50%);
 }
 
 .overview-navBar {

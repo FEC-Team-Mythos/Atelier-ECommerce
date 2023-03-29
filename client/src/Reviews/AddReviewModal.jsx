@@ -82,7 +82,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
         <label key={i}>
           <input
             type="radio"
-            name={input}
+            name={i}
             value={i}
             checked={formCharacteristics[input] === i}
             onChange={() => {
@@ -129,10 +129,10 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
       return (
         <>
           {charKeys.map((key) => (
-            <div key={key}>
+            <div key={key} id="reviews-addReviewCharacteristicIndividual">
               {key}
-              <DisplayRadioButtons input={key} />
-              {charLabels[key][formCharacteristics[key] - 1]}
+              <DisplayRadioButtons input={key}/>
+              <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[key][formCharacteristics[key] - 1]}</span>
             </div>
           ))}
         </>
@@ -142,25 +142,26 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
 
   const formBodyCounter = () => {
     if (formBody.length < 50) {
-      return 50 - formBody.length;
+      return "Minimum required characters left: " + (50 - formBody.length);
     } else {
-      return 0;
+      return "Minimum reached";
     }
   }
 
 
   if (addReviewState) {
     return (
-      <div id="popup">
-        <div id="popup-inner">
+      <div id="reviews-addReviewPopup" onClick={() => toggleAddReviewState(false)}>
+        <div id="reviews-addReviewPopupInner" onClick={(e) => e.stopPropagation()}>
           <form onSubmit={handleSubmit}>
             <h3>Write Your Review</h3>
             <label>
-              <div>
+              <div id="reviews-addReviewStars">
                 {formStars()}
                 {starText[formRating - 1]}
               </div>
             </label>
+            <div id="reviews-addReviewRecommend">
             <label>
               Do you recommend this product?
               <input
@@ -182,15 +183,17 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
               />
               No
             </label>
+            </div>
             <label>
-              <div>
+              <div id="reviews-addReviewCharacteristics">
                 {displayCharacterRadio()}
               </div>
             </label>
             <label>
-              <div>
-                <span id="reviews-addReviewSummary">Review Summary:</span>
+              <div id="reviews-addReviewSummary">
+                <span>Review Summary:</span>
                 <input
+                  id="reviews-addReviewSummaryText"
                   type="text"
                   maxLength={60}
                   value={formSummary}
@@ -200,24 +203,25 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
               </div>
             </label>
             <label>
-              <div>
+              <div id="reviews-addReviewBody">
                 Review Body:
                 <input
                   type="text"
+                  id="reviews-addReviewBodyText"
                   minLength={50}
                   maxLength={1000}
                   value={formBody}
                   onChange={(e) => setFormBody(e.target.value)}
                   placeholder="Why did you like the product or not?"
                 />
-                {formBodyCounter()}
+                <div id="reviews-addReviewSubtext">{formBodyCounter()}</div>
               </div>
-              <div>
-                Photos:
+              <div  id="reviews-addReviewPhotos">
+                Photos: PLACEHOLDER
               </div>
             </label>
             <label>
-              <div>
+              <div id="reviews-addReviewNameEmail">
                 Nickname:
                 <input
                   type="text"
@@ -226,10 +230,13 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="jackson11"
                 />
+                <div id="reviews-addReviewSubtext">
+                For privacy reasons, do not use your full name or email address.
+                </div>
               </div>
             </label>
             <label>
-              <div>
+              <div id="reviews-addReviewNameEmail">
                 Email:
                 <input
                   type="text"
@@ -238,11 +245,19 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   onChange={(e) => setFormEmail(e.target.value)}
                   placeholder="jackson11@gmail.com"
                 />
+                <div id="reviews-addReviewSubtext">
+                For authentication reasons, you will not be emailed.
+                </div>
               </div>
             </label>
             <input type="submit" value="Submit" />
           </form>
-          <button onClick={() => toggleAddReviewState(!addReviewState)}>Close Form</button>
+          <button
+          onClick={() => toggleAddReviewState(!addReviewState)}
+          id="reviews-addFormCloseBtn"
+          >
+            X
+            </button>
         </div>
       </div>
     );
