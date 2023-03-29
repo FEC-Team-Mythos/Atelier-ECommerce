@@ -29,16 +29,29 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const charObj = {};
+    const formatCharacteristics = () => {
+
+      for (key in formCharacteristics) {
+        key === "Size" ? charObj["10"] = formCharacteristics[key] : null;
+        key === "Width" ? charObj["10"] = formCharacteristics[key] : null;
+        key === "Comfort" ? charObj["10"] = formCharacteristics[key] : null;
+        key === "Quality" ? charObj["10"] = formCharacteristics[key] : null;
+        key === "Length" ? charObj["10"] = formCharacteristics[key] : null;
+        key === "Fit" ? charObj["10"] = formCharacteristics[key] : null;
+      }
+    };
+
     const data = {
       product_id: 71697,
-      rating: 5,
+      rating: formRating,
       summary: formSummary,
       body: formBody,
       recommend: formRecommend,
       name: formName,
       email: formEmail,
       photos: formPhotos,
-      characteristics: formCharacteristics,
+      characteristics: charObj,
     };
 
     await axios.post('/reviews', data);
@@ -55,7 +68,12 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
 
   function DisplayRadioButtons(input) {
     const radioButtons = [];
-    const [checkedChar, setCheckedChar] = useState(1);
+
+    const trackRadioValues = (key, value) => {
+      const newRadioValues = { ...formCharacteristics }; // Create a copy of the existing radioValues object
+      newRadioValues[key.input] = value; // Update the value for the input key
+      setFormCharacteristics(newRadioValues);
+    };
 
     for (let i = 1; i <= 5; i++) {
       const radioButton = (
@@ -64,7 +82,10 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             type="radio"
             name={input}
             value={i}
-
+            checked={formCharacteristics[input] === i}
+            onChange={() => {
+              trackRadioValues(input, i);
+            }}
           />
           {i}
         </label>
@@ -78,27 +99,26 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     );
   }
 
-  const formStars = () => {
-    return (
-      <div id="review-addReview-starRating">
-        {[...Array(5)].map((star, index) => {
-          index += 1;
-          return (
-            <button id="reviews-formStarButton"
-              type="button"
-              key={index}
-              className={index <= (hover || formRating) ? "on" : "off"}
-              onClick={() => setFormRating(index)}
-              onMouseEnter={() => setHover(index)}
-              onMouseLeave={() => setHover(formRating)}
-            >
-              <span className="star"><FontAwesomeIcon icon="fa-solid fa-star" /></span>
-            </button>
-          );
-        })}
-      </div>
-    );
-  };
+  const formStars = () => (
+    <div id="review-addReview-starRating">
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        return (
+          <button
+            id="reviews-formStarButton"
+            type="button"
+            key={index}
+            className={index <= (hover || formRating) ? 'on' : 'off'}
+            onClick={() => setFormRating(index)}
+            onMouseEnter={() => setHover(index)}
+            onMouseLeave={() => setHover(formRating)}
+          >
+            <span className="star"><FontAwesomeIcon icon="fa-solid fa-star" /></span>
+          </button>
+        );
+      })}
+    </div>
+  );
 
   const displayCharacterRadio = () => {
     if (characteristics) {
