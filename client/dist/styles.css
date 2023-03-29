@@ -314,6 +314,7 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .overview-imagesContainer {
+  position: relative;
   grid-column: 1/2;
   grid-row: 1/9;
   display:grid;
@@ -321,13 +322,13 @@ body {background-color: rgb(255, 255, 255);}
   grid-template-rows: 100%;
 }
 
-/* .overview-imagesContainer-clicked {
+.overview-imagesContainer-clicked {
   grid-column: 1/-1;
   grid-row: 1/9;
   display:grid;
   grid-template-columns: 12% 88%;
   grid-template-rows: 100%;
-} */
+}
 
 .overview-purchaseButtons {
   grid-column: 2/3;
@@ -418,6 +419,7 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .overview-mainImageContainer {
+  position: relative;
   display: flex;
   grid-column: 2/-1;
   flex-direction: row;
@@ -437,6 +439,16 @@ body {background-color: rgb(255, 255, 255);}
   height: auto;
   max-width: 100%;
   max-height: 100%;
+}
+
+#overview-expand {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.overview-hidden {
+  display: none;
 }
 
 #overview-downButton {
@@ -476,6 +488,9 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-leftButton {
+  position: absolute;
+  top: 50%;
+  left: 0;
   padding: 10px;
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -494,6 +509,9 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #overview-rightButton {
+  position: absolute;
+  top: 50%;
+  right: 0;
   padding: 10px;
   border: solid black;
   border-width: 0 3px 3px 0;

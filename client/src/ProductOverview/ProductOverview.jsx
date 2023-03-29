@@ -50,25 +50,31 @@ function ProductOverview({ request, outfits, setOutfits }) {
                 productInformation={productInformation}
                 mainImage={mainImage}
                 setMainImage={setMainImage}
+                expand={expand}
+                setExpand={setExpand}
               />
-              <ProductInformation
-                productInformation={productInformation}
-                product={product}
-              />
-              <PurchaseOptions
-                product={product}
-                productInformation={productInformation}
-                setProductInformation={setProductInformation}
-                productStyles={productStyles}
-                setMainImage={setMainImage}
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-                setOutfits={setOutfits}
-                outfits={outfits}
-              />
-              <ProductDescription
-                product={product}
-              />
+              {!expand
+                ? (
+                  <>
+                    <ProductInformation
+                      productInformation={productInformation}
+                      product={product}
+                    />
+                    <PurchaseOptions
+                      product={product}
+                      productInformation={productInformation}
+                      setProductInformation={setProductInformation}
+                      productStyles={productStyles}
+                      setMainImage={setMainImage}
+                      cartItems={cartItems}
+                      setCartItems={setCartItems}
+                      setOutfits={setOutfits}
+                      outfits={outfits}
+                    />
+                  </>
+                )
+                : null}
+              <ProductDescription product={product} />
             </div>
           </div>
         )

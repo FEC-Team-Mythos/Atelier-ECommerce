@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
-function MainImageScreen({ productInformation, mainImage, setMainImage }) {
+function MainImageScreen({ productInformation, mainImage, setMainImage, expand, setExpand }) {
   const [imageSelection, setImageSelection] = useState({
     indexSet: 0,
     productInfoList: productInformation.photos.slice(0, 7),
@@ -56,7 +56,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
   };
 
   return (
-    <div className="overview-imagesContainer">
+    <div className={expand ? 'overview-imagesContainer-clicked' : 'overview-imagesContainer'}>
       <ul className="overview-sideImages">
         {productInformation.photos[imageSelection.indexSet - 1]
           ? (
@@ -93,7 +93,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
             </button>
           )
           : null }
-        <img src={mainImage.url} alt="Main Product" id="overview-mainImage" />
+        <img src={mainImage.url} alt="Main Product" id={expand ? 'overview-mainImage-clicked' : 'overview-mainImage'} />
         {productInformation.photos[mainImage.index + 1]
           ? (
             <button type="submit" id="overview-rightButton" onClick={() => { changeImage('right'); }}>
@@ -101,7 +101,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage }) {
             </button>
           )
           : null }
-        <button type="submit" id="overview-expand">Expand</button>
+        <button type="submit" id="overview-expand" onClick={() => { setExpand(!expand); }}>Expand</button>
       </div>
     </div>
   );
