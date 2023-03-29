@@ -18,6 +18,8 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const [formRating, setFormRating] = useState(0);
   const [hover, setHover] = useState(0);
 
+  const starText = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
+
   const charLabels = {
     Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'Too Big'],
     Width: ['Too Narrow', 'Slightly Narrow', 'Perfect', 'Slightly Wide', 'Too Wide'],
@@ -130,7 +132,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             <div key={key}>
               {key}
               <DisplayRadioButtons input={key} />
-              {charLabels[key][0]}
+              {charLabels[key][formCharacteristics[key] - 1]}
             </div>
           ))}
         </>
@@ -156,6 +158,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             <label>
               <div>
                 {formStars()}
+                {starText[formRating - 1]}
               </div>
             </label>
             <label>
@@ -169,7 +172,6 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
               />
               Yes
             </label>
-
             <label>
               <input
                 type="radio"
@@ -187,7 +189,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             </label>
             <label>
               <div>
-                Review Summary:
+                <span id="reviews-addReviewSummary">Review Summary:</span>
                 <input
                   type="text"
                   maxLength={60}
