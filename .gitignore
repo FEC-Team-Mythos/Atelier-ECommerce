@@ -1,5 +1,7 @@
 node_modules
 client/dist/bundle.js
+client/dist/.gz
+client/dist/bundle.js.LICENSE.txt
 .DS_Store
 config.js
 coverage
