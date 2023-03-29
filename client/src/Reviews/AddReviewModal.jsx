@@ -1,5 +1,10 @@
 import react, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
 
 function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics }) {
   const [formSummary, setFormSummary] = useState('');
@@ -9,6 +14,9 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const [formEmail, setFormEmail] = useState('');
   const [formPhotos, setFormPhotos] = useState([]);
   const [formCharacteristics, setFormCharacteristics] = useState({});
+
+  const [formRating, setFormRating] = useState(0);
+  const [hover, setHover] = useState(0);
 
   const charLabels = {
     Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'Too Big'],
@@ -70,6 +78,28 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     );
   }
 
+  const formStars = () => {
+    return (
+      <div id="review-addReview-starRating">
+        {[...Array(5)].map((star, index) => {
+          index += 1;
+          return (
+            <button id="reviews-formStarButton"
+              type="button"
+              key={index}
+              className={index <= (hover || formRating) ? "on" : "off"}
+              onClick={() => setFormRating(index)}
+              onMouseEnter={() => setHover(index)}
+              onMouseLeave={() => setHover(formRating)}
+            >
+              <span className="star"><FontAwesomeIcon icon="fa-solid fa-star" /></span>
+            </button>
+          );
+        })}
+      </div>
+    );
+  };
+
   const displayCharacterRadio = () => {
     if (characteristics) {
       const charKeys = Object.keys(characteristics);
@@ -79,7 +109,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
           {charKeys.map((key) => (
             <div key={key}>
               {key}
-              <DisplayRadioButtons input={key}/>
+              <DisplayRadioButtons input={key} />
               {charLabels[key][0]}
             </div>
           ))}
@@ -96,7 +126,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             <h3>Write Your Review</h3>
             <label>
               <div>
-                Rating: 5 STAR ICONS HERE - Poor/Fair/Avg/Good/Great
+                {formStars()}
               </div>
             </label>
             <label>
@@ -134,7 +164,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   maxLength={60}
                   value={formSummary}
                   onChange={(e) => setFormSummary(e.target.value)}
-                  placeholder='Best purchase ever!'
+                  placeholder="Best purchase ever!"
                 />
               </div>
             </label>
@@ -147,7 +177,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   maxLength={1000}
                   value={formBody}
                   onChange={(e) => setFormBody(e.target.value)}
-                  placeholder='Why did you like the product or not?'
+                  placeholder="Why did you like the product or not?"
                 />
               </div>
               <div>
@@ -162,7 +192,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   maxLength={60}
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  placeholder='jackson11'
+                  placeholder="jackson11"
                 />
               </div>
             </label>
@@ -174,7 +204,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   maxLength={60}
                   value={formEmail}
                   onChange={(e) => setFormEmail(e.target.value)}
-                  placeholder='jackson11@gmail.com'
+                  placeholder="jackson11@gmail.com"
                 />
               </div>
             </label>

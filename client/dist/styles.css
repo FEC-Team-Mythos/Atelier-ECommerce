@@ -257,6 +257,19 @@ body {background-color: rgb(255, 255, 255);}
   border: black solid 2px;
 }
 
+.reviews-formStarButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
+
 .overview-navBar {
   position: fixed;
   display: flex;
