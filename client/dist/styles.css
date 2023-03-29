@@ -116,6 +116,10 @@ body {background-color: rgb(255, 255, 255);}
   align-items: center;
 }
 
+.bar:hover{
+  background-color: grey;
+}
+
 .leftBarText{
   font-size: 12px;
   white-space: nowrap;

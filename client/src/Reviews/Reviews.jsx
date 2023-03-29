@@ -4,19 +4,14 @@ import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
-function Reviews({ request, changeRequestHook }) {
-  // add state to top component of Widget to track all clicks in widget. Set widget in initial state declaration
+function Reviews({ changeRequestHook }) {
   const [clickedElement, clickedTime] = changeRequestHook('reviews');
 
   const [allReviews, setAllReviews] = useState([]);
   const [metaData, setMetaData] = useState([]);
-
-  const [filteredReviews, setFilteredReviews] = useState([]);
   const [filterParams, setFilterParams] = useState([]);
   const [sortParam, setSortParam] = useState('relevance');
-
   const [reviewList, setReviewList] = useState([]);
-  const [reviewToAdd, setReviewToAdd] = useState({});
 
   const getReviewData = async () => {
     // Product ID should be dynamic here, will grab from other widget
@@ -79,10 +74,6 @@ function Reviews({ request, changeRequestHook }) {
     filterReviews();
   }, [filterParams]);
 
-  useEffect(() => {
-    // console.log(reviewToAdd)
-  }, [reviewToAdd]);
-
   return (
     <div id="reviews" data-testid="reviews">
       <NewBreakdown
@@ -94,7 +85,6 @@ function Reviews({ request, changeRequestHook }) {
         sortParam={sortParam}
         setSortParam={setSortParam}
         reviewList={reviewList}
-        setReviewToAdd={setReviewToAdd}
         metaData={metaData}
       />
     </div>

@@ -39,6 +39,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
         roundToNearestQuarter--;
       }
     }
+
     return (
       <span id="stars">
         {stars}
@@ -114,6 +115,16 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
     }
   };
 
+  const removeFilters = () => {
+    if (filterParams.length > 0) {
+      return (
+        <button onClick={()=> setFilterParams([])}>
+          Remove Filters
+        </button>
+      )
+    }
+  }
+
   useEffect(() => {
     const chartData = [
       { rating: 1, count: 0, total: totalRatings },
@@ -150,6 +161,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
       />
       {displayRecommended()}
       {displayFilters()}
+      {removeFilters()}
     </div>
   );
 }

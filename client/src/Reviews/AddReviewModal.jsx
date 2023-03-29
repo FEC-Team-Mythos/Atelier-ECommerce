@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -32,17 +32,14 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const charObj = {};
-    const formatCharacteristics = () => {
-
-      for (key in formCharacteristics) {
-        key === "Size" ? charObj["10"] = formCharacteristics[key] : null;
-        key === "Width" ? charObj["10"] = formCharacteristics[key] : null;
-        key === "Comfort" ? charObj["10"] = formCharacteristics[key] : null;
-        key === "Quality" ? charObj["10"] = formCharacteristics[key] : null;
-        key === "Length" ? charObj["10"] = formCharacteristics[key] : null;
-        key === "Fit" ? charObj["10"] = formCharacteristics[key] : null;
-      }
-    };
+    for (var key in formCharacteristics) {
+      key === 'Size' ? charObj['10'] = formCharacteristics[key] : null;
+      key === 'Width' ? charObj['11'] = formCharacteristics[key] : null;
+      key === 'Comfort' ? charObj['12'] = formCharacteristics[key] : null;
+      key === 'Quality' ? charObj['13'] = formCharacteristics[key] : null;
+      key === 'Length' ? charObj['14'] = formCharacteristics[key] : null;
+      key === 'Fit' ? charObj['15'] = formCharacteristics[key] : null;
+    }
 
     const data = {
       product_id: 71697,
@@ -72,8 +69,8 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     const radioButtons = [];
 
     const trackRadioValues = (key, value) => {
-      const newRadioValues = { ...formCharacteristics }; // Create a copy of the existing radioValues object
-      newRadioValues[key.input] = value; // Update the value for the input key
+      const newRadioValues = { ...formCharacteristics };
+      newRadioValues[key.input] = value;
       setFormCharacteristics(newRadioValues);
     };
 
@@ -108,6 +105,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
         return (
           <button
             id="reviews-formStarButton"
+            data-testId={`reviews-addReviewStars${index}`}
             type="button"
             key={index}
             className={index <= (hover || formRating) ? 'on' : 'off'}
@@ -131,7 +129,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
           {charKeys.map((key) => (
             <div key={key} id="reviews-addReviewCharacteristicIndividual">
               {key}
-              <DisplayRadioButtons input={key}/>
+              <DisplayRadioButtons input={key} />
               <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[key][formCharacteristics[key] - 1]}</span>
             </div>
           ))}
@@ -142,12 +140,10 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
 
   const formBodyCounter = () => {
     if (formBody.length < 50) {
-      return "Minimum required characters left: " + (50 - formBody.length);
-    } else {
-      return "Minimum reached";
+      return `Minimum required characters left: ${50 - formBody.length}`;
     }
-  }
-
+    return 'Minimum reached';
+  };
 
   if (addReviewState) {
     return (
@@ -162,27 +158,29 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
               </div>
             </label>
             <div id="reviews-addReviewRecommend">
-            <label>
-              Do you recommend this product?
-              <input
-                type="radio"
-                name="yes"
-                value="true"
-                checked={formRecommend === true}
-                onChange={handleRecommendChange}
-              />
-              Yes
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="no"
-                value="false"
-                checked={formRecommend === false}
-                onChange={handleRecommendChange}
-              />
-              No
-            </label>
+              <label>
+                Do you recommend this product?
+                <input
+                  type="radio"
+                  data-testid="reviews-addReviewRecYes"
+                  name="yes"
+                  value="true"
+                  checked={formRecommend === true}
+                  onChange={handleRecommendChange}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  data-testid="reviews-addReviewRecNo"
+                  name="no"
+                  value="false"
+                  checked={formRecommend === false}
+                  onChange={handleRecommendChange}
+                />
+                No
+              </label>
             </div>
             <label>
               <div id="reviews-addReviewCharacteristics">
@@ -194,6 +192,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <span>Review Summary:</span>
                 <input
                   id="reviews-addReviewSummaryText"
+                  data-testid="reviews-addReviewSummaryText"
                   type="text"
                   maxLength={60}
                   value={formSummary}
@@ -208,6 +207,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <input
                   type="text"
                   id="reviews-addReviewBodyText"
+                  data-testid="reviews-addReviewBodyText"
                   minLength={50}
                   maxLength={1000}
                   value={formBody}
@@ -216,7 +216,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 />
                 <div id="reviews-addReviewSubtext">{formBodyCounter()}</div>
               </div>
-              <div  id="reviews-addReviewPhotos">
+              <div id="reviews-addReviewPhotos">
                 Photos: PLACEHOLDER
               </div>
             </label>
@@ -225,13 +225,14 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 Nickname:
                 <input
                   type="text"
+                  data-testid="reviews-addReviewName"
                   maxLength={60}
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
                   placeholder="jackson11"
                 />
                 <div id="reviews-addReviewSubtext">
-                For privacy reasons, do not use your full name or email address.
+                  For privacy reasons, do not use your full name or email address.
                 </div>
               </div>
             </label>
@@ -240,24 +241,25 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 Email:
                 <input
                   type="text"
+                  data-testid="reviews-addReviewEmail"
                   maxLength={60}
                   value={formEmail}
                   onChange={(e) => setFormEmail(e.target.value)}
                   placeholder="jackson11@gmail.com"
                 />
                 <div id="reviews-addReviewSubtext">
-                For authentication reasons, you will not be emailed.
+                  For authentication reasons, you will not be emailed.
                 </div>
               </div>
             </label>
             <input type="submit" value="Submit" />
           </form>
           <button
-          onClick={() => toggleAddReviewState(!addReviewState)}
-          id="reviews-addFormCloseBtn"
+            onClick={() => toggleAddReviewState(!addReviewState)}
+            id="reviews-addFormCloseBtn"
           >
             X
-            </button>
+          </button>
         </div>
       </div>
     );

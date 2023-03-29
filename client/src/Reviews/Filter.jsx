@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Filter = ({ allReviews, sortParam, setSortParam }) => {
+function Filter({ allReviews, sortParam, setSortParam }) {
   const filterDropDown = () => {
-
     const handleChange = (e) => {
-      var val = e.target.value
+      const val = e.target.value;
       setSortParam(val);
     };
 
     return (
-        <select id='reviews-sorting' data-testid='reviews-sorting' value={sortParam} onChange={handleChange}>
-          <option value="relevant">Relevance</option>
-          <option data-testid='reviews-dropNew' value="helpful">Helpful</option>
-          <option value="newest">Newest</option>
-        </select>
-    )
-  }
+      <select id="reviews-sorting" data-testid="reviews-sorting" value={sortParam} onChange={handleChange}>
+        <option value="relevant">Relevance</option>
+        <option data-testid="reviews-dropNew" value="helpful">Helpful</option>
+        <option value="newest">Newest</option>
+      </select>
+    );
+  };
 
   const tallyReviews = () => {
     if (allReviews) {
-      return (<>{allReviews.length}</>)
+      return (<>{allReviews.length}</>);
     }
-  }
+  };
 
   return (
-    <div id='reviews-filter' data-testid='reviews-filter'>
-      {tallyReviews()} Total Reviews, sorted by <span>{filterDropDown()}</span>
+    <div id="reviews-filter" data-testid="reviews-filter">
+      {tallyReviews()}
+      {' '}
+      Total Reviews, sorted by
+      <span>{filterDropDown()}</span>
     </div>
-  )
+  );
 }
 
 export default Filter;
