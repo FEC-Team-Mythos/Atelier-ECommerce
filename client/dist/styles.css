@@ -247,6 +247,10 @@ body {background-color: rgb(255, 255, 255);}
   color: #ccc;
 }
 
+#reviews-addReviewSummary {
+  font-weight: bold;
+}
+
 .overview-navBar {
   position: fixed;
   display: flex;

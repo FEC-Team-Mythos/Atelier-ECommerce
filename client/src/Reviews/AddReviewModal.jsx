@@ -138,6 +138,15 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     }
   };
 
+  const formBodyCounter = () => {
+    if (formBody.length < 50) {
+      return 50 - formBody.length;
+    } else {
+      return 0;
+    }
+  }
+
+
   if (addReviewState) {
     return (
       <div id="popup">
@@ -199,6 +208,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   onChange={(e) => setFormBody(e.target.value)}
                   placeholder="Why did you like the product or not?"
                 />
+                {formBodyCounter()}
               </div>
               <div>
                 Photos:
