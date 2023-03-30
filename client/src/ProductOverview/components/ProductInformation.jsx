@@ -1,10 +1,17 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
 function ProductInformation({ productInformation, product }) {
+  const scrollToReview = () => {
+    const elem = document.getElementById('reviews');
+    elem.scrollIntoView();
+  };
+
   return (
     <div>
-      <div className="overview-reviewContainer">Reviews</div>
+      <div className="overview-reviewContainer" onClick={scrollToReview}>See All Reviews</div>
       <p id="overview-categoryName">{product.category}</p>
       <p id="overview-productName">{product.name}</p>
       {productInformation.sale_price

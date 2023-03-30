@@ -36,9 +36,9 @@ const App = () => {
     <>
       <div className="content">
         <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
-        {/* <RelatedProducts  request={request}/>
+        <RelatedProducts  request={request}/>
         <QuestionsAndAnswers  request={request}/>
-        <Reviews  request={request} changeRequestHook={changeRequestHook}/> */}
+        <Reviews  request={request} changeRequestHook={changeRequestHook}/>
       </div>
     </>
   )

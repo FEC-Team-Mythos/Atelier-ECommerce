@@ -3,6 +3,10 @@
   outline: 1px solid limegreen !important;
 } */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {background-color: rgb(255, 255, 255);}
 
 .related-product-carousel {
@@ -285,6 +289,12 @@ body {background-color: rgb(255, 255, 255);}
 .overview-reviewContainer {
   grid-column: 2/3;
   grid-row: 1/2;
+  text-decoration: underline;
+  color: grey;
+}
+
+.overview-reviewContainer:hover {
+  color: black;
 }
 
 #overview-categoryName {
