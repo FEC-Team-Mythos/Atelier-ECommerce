@@ -184,17 +184,17 @@ function PurchaseOptions({
           )}
       </div>
       <div className="overview-purchaseButtons">
-        <button type="submit" onClick={addToCart}>ADD TO BAG</button>
+        <button type="submit" onClick={addToCart} id="overview-addToBag" data-testId="addToBag">ADD TO BAG &nbsp;&nbsp;&nbsp; +</button>
         {favorited
           ? (
-            <button type="submit" onClick={outfitButtonHandler}>
+            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testId="favorite">
               <div>
                 <FontAwesomeIcon icon="fa-solid fa-star" style={{ color: '#000000' }} />
               </div>
             </button>
           )
           : (
-            <button type="submit" onClick={outfitButtonHandler}>
+            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testId="favorite">
               <div>
                 <FontAwesomeIcon icon="fa-regular fa-star" style={{ color: '#000000' }} />
               </div>

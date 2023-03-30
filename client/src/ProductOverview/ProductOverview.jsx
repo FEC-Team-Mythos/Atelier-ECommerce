@@ -16,14 +16,14 @@ function ProductOverview({ request, outfits, setOutfits }) {
   const [mainImage, setMainImage] = useState({});
   const [cartItems, setCartItems] = useState([]);
   const [expand, setExpand] = useState(false);
-//71697
+  // 71697
   useEffect(() => {
-    request('/products/71697', { product_id: 71697 }, 'get')
+    request('/products/71701', { product_id: 71701 }, 'get')
       .then((data) => {
         setProduct(data.data);
       })
       .then(() => (
-        request('/products/71697/styles', { product_id: 71697 }, 'get')
+        request('/products/71701/styles', { product_id: 71701 }, 'get')
       ))
       .then((data) => {
         setProductInformation(data.data.results[0]);
@@ -41,6 +41,13 @@ function ProductOverview({ request, outfits, setOutfits }) {
 
   return (
     <div>
+      <div className="overview-navBar">
+        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" data-testId="logo" />
+        <div className="overview-searchBar">
+          <input type="text" />
+          <button type="submit">Search Icon</button>
+        </div>
+      </div>
       <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
       {(Object.keys(product).length && Object.keys(productInformation).length)
         ? (
@@ -55,7 +62,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
               />
               {!expand
                 ? (
-                  <>
+                  <div className="overview-infoContainer">
                     <ProductInformation
                       productInformation={productInformation}
                       product={product}
@@ -71,7 +78,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
                       setOutfits={setOutfits}
                       outfits={outfits}
                     />
-                  </>
+                  </div>
                 )
                 : null}
               <ProductDescription product={product} />

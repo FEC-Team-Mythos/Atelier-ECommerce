@@ -101,7 +101,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage, expand, 
             </button>
           )
           : null }
-        <button type="submit" id="overview-expand" onClick={() => { setExpand(!expand); }}>Expand</button>
+        <button type="submit" id="overview-expand" onClick={() => { setExpand(!expand); }}>[ ]</button>
       </div>
     </div>
   );
