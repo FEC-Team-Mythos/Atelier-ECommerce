@@ -49,6 +49,10 @@ function PurchaseOptions({
     setSelectedQuantity(Number(e.value));
   };
 
+  useEffect(() => {
+    getSelectedQuantity();
+  }, [selectedSize]);
+
   const addToCart = () => {
     let updatedCart = [];
 
@@ -184,7 +188,9 @@ function PurchaseOptions({
           )}
       </div>
       <div className="overview-purchaseButtons">
-        <button type="submit" onClick={addToCart} id="overview-addToBag" data-testId="addToBag">ADD TO BAG &nbsp;&nbsp;&nbsp; +</button>
+        {selectedSize
+          ? <button type="submit" onClick={addToCart} id="overview-addToBag" data-testId="addToBag">ADD TO BAG &nbsp;&nbsp;&nbsp; +</button>
+          : <button type="submit" onClick={addToCart} id="overview-addToBag" data-testId="addToBag" disabled>ADD TO BAG &nbsp;&nbsp;&nbsp; +</button>}
         {favorited
           ? (
             <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testId="favorite">
