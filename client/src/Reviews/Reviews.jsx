@@ -4,7 +4,9 @@ import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
-function Reviews({ changeRequestHook }) {
+function Reviews({
+  changeRequestHook, avgRating, setAvgRating, starArr, setStars,
+}) {
   const [clickedElement, clickedTime] = changeRequestHook('reviews');
 
   const [allReviews, setAllReviews] = useState([]);
@@ -13,7 +15,7 @@ function Reviews({ changeRequestHook }) {
   const [sortParam, setSortParam] = useState('relevance');
   const [reviewList, setReviewList] = useState([]);
 
-  const getReviewData = async () => {
+  const getReviewData = async (count) => {
     // Product ID should be dynamic here, will grab from other widget
     try {
       const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: 71697 } });
@@ -80,6 +82,11 @@ function Reviews({ changeRequestHook }) {
         metaData={metaData}
         filterParams={filterParams}
         setFilterParams={setFilterParams}
+        starArr={starArr}
+        setStars={setStars}
+        avgRating={avgRating}
+        setAvgRating={setAvgRating}
+        allReviews={allReviews}
       />
       <ReviewList
         sortParam={sortParam}

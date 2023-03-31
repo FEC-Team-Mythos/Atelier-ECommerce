@@ -156,13 +156,17 @@ describe('Reviews', () => {
   });
 
   test('Reviews should render to page', () => {
-    render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<Reviews request={request} changeRequestHook={changeRequestHook} setAvgRating={setAvgRating} setStars={setStars} />);
     const widget = screen.getByTestId('reviews');
     expect(widget).toBeInTheDocument();
   });
 
   test('Reviews should fetch reviews and review meta data upon page load', async () => {
-    render(<Reviews request={request} changeRequestHook={changeRequestHook} />);
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<Reviews request={request} changeRequestHook={changeRequestHook} setAvgRating={setAvgRating} setStars={setStars} />);
 
     axios.get.mockImplementation((url) => {
       if (url === '/reviews') {
@@ -343,7 +347,10 @@ describe('Rating Graph', () => {
       5: '165',
     };
     const setFilterParams = jest.fn();
-    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars} avgRating={3.7} />);
     const totalRatings = Object.keys(ratings).reduce((acc, rating) => acc + (rating * ratings[rating]), 0);
     const avgRating = (totalRatings / 350).toFixed(1);
     const graph = screen.getByTestId('reviews-breakdown');
@@ -356,7 +363,9 @@ describe('Rating Graph', () => {
       true: 276,
     };
     const setFilterParams = jest.fn();
-    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars}  />);
     const totalRecommend = Math.round(recommended.true / (recommended.true + recommended.false));
     const graph = screen.getByTestId('reviews-breakdown');
     expect(graph).toHaveTextContent(totalRecommend);
@@ -364,7 +373,9 @@ describe('Rating Graph', () => {
 
   test('Should render ratings graph', () => {
     const setFilterParams = jest.fn();
-    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} />);
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars}  />);
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('3')).toBeInTheDocument();
@@ -374,7 +385,9 @@ describe('Rating Graph', () => {
 
   test('Should filter review list by clicking on graph', () => {
     const setFilterParams = jest.fn();
-    render(<NewBreakdown metaData={mockMetaData} filterParams={[5]} setFilterParams={setFilterParams} />);
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[5]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars} />);
     const ratingFilter4 = screen.getByText('4');
     const ratingFilter3 = screen.getByText('3');
     fireEvent.click(ratingFilter4);

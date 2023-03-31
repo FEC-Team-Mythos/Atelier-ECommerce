@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 import Characteristics from './Characteristics.jsx';
 
 library.add(faStar);
 
-function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
-  const [avgRating, setAvgRating] = useState(0);
+function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, setAvgRating, starArr, setStars, allReviews }) {
   const [recommended, setRecommended] = useState(0);
   const [chartRatings, setChartRatings] = useState({});
   const [totalRatings, setTotalRatings] = useState(0);
@@ -39,12 +38,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
         roundToNearestQuarter--;
       }
     }
-
-    return (
-      <span id="stars">
-        {stars}
-      </span>
-    );
+    setStars(stars);
   };
 
   const calcRecommend = () => {
@@ -61,6 +55,15 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
       % recommended
     </div>
   );
+
+  const calcReviewNum = (currentRating) => {
+    if (allReviews.length) {
+      const reviewsByRating = allReviews.filter((review) => {
+        return review.rating === currentRating;
+      });
+      return reviewsByRating.length;
+    }
+  };
 
   const ratingsGraph = () => {
     if (totalRatings > 1) {
@@ -81,7 +84,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
               <div id="total-rating-bar" style={{ width: totalRatings / 2 }}>
                 <div id={`${rating.rating}-rating-bar`} style={barStyle} />
               </div>
-              <span className="rightBarText">{rating.count}</span>
+              <span className="rightBarText">{calcReviewNum(rating.rating)}</span>
             </div>
           );
         })
@@ -146,12 +149,16 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams }) {
     calcRecommend();
   }, [metaData]);
 
+  useEffect(() => {
+    starCount();
+  }, [avgRating]);
+
   return (
     <div id="breakdown" data-testid="reviews-breakdown">
       <span id="reviews-graph-avg">
         {avgRating}
         {" "}
-        {starCount()}
+        {starArr}
       </span>
       <div id="reviews-ratingsGraph">
         {ratingsGraph()}

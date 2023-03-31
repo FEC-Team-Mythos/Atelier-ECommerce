@@ -79,9 +79,9 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
         <label key={i}>
           <input
             type="radio"
-            name={i}
+            name={input}
             value={i}
-            checked={formCharacteristics[input] === i}
+            checked={i}
             onChange={() => {
               trackRadioValues(input, i);
             }}
