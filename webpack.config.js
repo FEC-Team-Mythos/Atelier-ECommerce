@@ -16,12 +16,12 @@ const config = {
   },
   plugins: [
     new CompressionPlugin({
-        test: /\.(js|css|html)$/,
-        filename: '[path].gz[query]',
-        algorithm: 'gzip',
-        threshold: 10240,
-        minRatio: 0.8,
-      }),
+      test: /\.(js|css|html)$/,
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
   ],
   module: {
     rules: [
