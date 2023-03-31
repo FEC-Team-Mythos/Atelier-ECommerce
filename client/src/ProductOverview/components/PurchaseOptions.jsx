@@ -189,18 +189,18 @@ function PurchaseOptions({
       </div>
       <div className="overview-purchaseButtons">
         {selectedSize
-          ? <button type="submit" onClick={addToCart} id="overview-addToBag" data-testId="addToBag">ADD TO BAG &nbsp;&nbsp;&nbsp; +</button>
-          : <button type="submit" onClick={addToCart} id="overview-addToBag" data-testId="addToBag" disabled>ADD TO BAG &nbsp;&nbsp;&nbsp; +</button>}
+          ? <button type="submit" onClick={addToCart} id="overview-addToBag" data-testid="addToBag">ADD TO CART &nbsp;&nbsp;&nbsp; +</button>
+          : <button type="submit" onClick={addToCart} id="overview-addToBag" data-testid="addToBag" disabled>ADD TO CART &nbsp;&nbsp;&nbsp; +</button>}
         {favorited
           ? (
-            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testId="favorite">
+            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testid="favorite">
               <div>
                 <FontAwesomeIcon icon="fa-solid fa-star" style={{ color: '#000000' }} />
               </div>
             </button>
           )
           : (
-            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testId="favorite">
+            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testid="favorite">
               <div>
                 <FontAwesomeIcon icon="fa-regular fa-star" style={{ color: '#000000' }} />
               </div>

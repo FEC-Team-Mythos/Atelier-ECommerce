@@ -16,7 +16,8 @@ function ProductOverview({ request, outfits, setOutfits }) {
   const [mainImage, setMainImage] = useState({});
   const [cartItems, setCartItems] = useState([]);
   const [expand, setExpand] = useState(false);
-  // 71697
+  const [reviewList, setReviewList] = useState(0);
+
   useEffect(() => {
     request('/products/71701', { product_id: 71701 }, 'get')
       .then((data) => {
@@ -42,10 +43,10 @@ function ProductOverview({ request, outfits, setOutfits }) {
   return (
     <div>
       <div className="overview-navBar">
-        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" data-testId="logo" />
+        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
         <div className="overview-searchBar">
           <input type="text" />
-          <button type="submit">Search Icon</button>
+          <button type="submit">Search</button>
         </div>
       </div>
       <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
@@ -66,6 +67,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
                     <ProductInformation
                       productInformation={productInformation}
                       product={product}
+                      reviewList={reviewList}
                     />
                     <PurchaseOptions
                       product={product}

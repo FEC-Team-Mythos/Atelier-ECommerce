@@ -11,7 +11,7 @@ function ProductInformation({ productInformation, product }) {
 
   return (
     <div>
-      <div className="overview-reviewContainer" onClick={scrollToReview}>See All Reviews</div>
+      <div className="overview-reviewContainer" onClick={scrollToReview}>Read all reviews</div>
       <p id="overview-categoryName">{product.category}</p>
       <p id="overview-productName">{product.name}</p>
       {productInformation.sale_price

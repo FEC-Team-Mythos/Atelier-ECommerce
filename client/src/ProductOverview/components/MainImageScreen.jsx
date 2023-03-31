@@ -3,11 +3,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
-function MainImageScreen({ productInformation, mainImage, setMainImage, expand, setExpand }) {
+function MainImageScreen({
+  productInformation, mainImage, setMainImage, expand, setExpand,
+}) {
   const [imageSelection, setImageSelection] = useState({
     indexSet: 0,
     productInfoList: productInformation.photos.slice(0, 7),
   });
+  const [zoomImage, setZoomImage] = useState('');
+  const [zoomIn, setZoomIn] = useState(false);
 
   useEffect(() => {
     setImageSelection({
@@ -15,6 +19,31 @@ function MainImageScreen({ productInformation, mainImage, setMainImage, expand, 
       productInfoList: productInformation.photos.slice(0, 7),
     });
   }, [productInformation]);
+
+  useEffect(() => {
+    setZoomImage(document.getElementById('overview-mainImage-clicked'));
+  }, [expand]);
+
+  const mouseMove = (e) => {
+    if (zoomIn) {
+      const xPosition = e.clientX - (1.45) * e.target.offsetLeft;
+      const yPosition = 0.80 * e.clientY;
+
+      zoomImage.style.transformOrigin = `${xPosition}px ${yPosition}px`;
+      zoomImage.style.transform = 'scale(2.5)';
+    }
+  };
+
+  const zoom = () => {
+    if (zoomIn) {
+      zoomImage.style.transformOrigin = 'center';
+      zoomImage.style.transform = 'scale(1)';
+      zoomImage.style.cursor = 'zoom-in';
+    } else {
+      zoomImage.style.cursor = 'zoom-out';
+    }
+    setZoomIn(!zoomIn);
+  };
 
   const setList = (direction) => {
     const currentSetIndex = imageSelection.indexSet;
@@ -34,6 +63,7 @@ function MainImageScreen({ productInformation, mainImage, setMainImage, expand, 
       if (productInformation.photos[currentSetIndex + 7]) {
         setImageSelection({
           indexSet: currentSetIndex + 7,
+          // eslint-disable-next-line max-len
           productInfoList: productInformation.photos.slice(currentSetIndex + 7, currentSetIndex + 14),
         });
       }
@@ -93,7 +123,14 @@ function MainImageScreen({ productInformation, mainImage, setMainImage, expand, 
             </button>
           )
           : null }
-        <img src={mainImage.url} alt="Main Product" id={expand ? 'overview-mainImage-clicked' : 'overview-mainImage'} />
+        <div className="overview-zoomContainer" style={zoomIn ? { cursor: 'zoomIn' } : { cursor: 'zoomOut' }}>
+          {expand
+            ? (
+              <img src={mainImage.url} alt="Main Product" id="overview-mainImage-clicked" onClick={zoom} onMouseMove={mouseMove} />
+            ) : (
+              <img src={mainImage.url} alt="Main Product" id="overview-mainImage" />
+            )}
+        </div>
         {productInformation.photos[mainImage.index + 1]
           ? (
             <button type="submit" id="overview-rightButton" onClick={() => { changeImage('right'); }}>

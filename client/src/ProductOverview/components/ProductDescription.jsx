@@ -5,8 +5,8 @@ function ProductDescription({ product }) {
   return (
     <div className="overview-descriptionContainer">
       <div className="overview-description">
-        <p id="overview-slogan">{product.slogan}</p>
-        <p id="overview-productDescription">{product.description}</p>
+        <span id="overview-slogan">{product.slogan}</span>
+        <span id="overview-productDescription">{product.description}</span>
       </div>
       <div className="overview-featuresContainer">
         {product.features.map((feature) => (
