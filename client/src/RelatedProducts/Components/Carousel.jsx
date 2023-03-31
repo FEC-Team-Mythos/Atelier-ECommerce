@@ -10,6 +10,7 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
   const [showRight, setShowRight] = useState(true);
   const [partialScroll, setPartialScroll] = useState(0);
   const cardSize = 204;
+  const additionalScroll = 30;
   const windowWidth = useRef(window.innerWidth).current - 16;
 
   var numberOfCards = products.length;
@@ -37,15 +38,19 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
 
 
   const prev = () => {
+    //console.log('partial', partialScroll);
     var pos = carouselBox.scrollLeft;
+    //console.log('pos', pos);
 
     if (!(pos % cardSize === 0))  {
-      carouselBox.scrollLeft -= partialScroll;
-      pos -= partialScroll;
+      carouselBox.scrollLeft -= partialScroll + additionalScroll;
+      pos -= partialScroll + additionalScroll;
+
     } else {
       carouselBox.scrollLeft -= cardSize;
       pos -= cardSize;
     }
+    //console.log('pos after', pos)
     setShowRight(true);
     setCarouselPos(pos);
   };
@@ -53,16 +58,25 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
   const next = () => {
     const lastPos = carouselBox.scrollLeft;
     var pos = carouselBox.scrollLeft;
+    //console.log('pos', pos);
     if (((cardSize * numberOfCards) - pos - width) < cardSize) {
-      carouselBox.scrollLeft += ((cardSize * numberOfCards) - pos - width);
-      pos += ((cardSize * numberOfCards) - pos - width);
-      setPartialScroll(pos - lastPos);
+      //console.log('cbox', carouselBox.scrollLeft);
+      //console.log('calc', (cardSize * numberOfCards) - pos - width);
+      carouselBox.scrollLeft += ((cardSize * numberOfCards) - pos - width - additionalScroll);
+      pos += ((cardSize * numberOfCards) - pos - width - additionalScroll);
+      //console.log('partial', pos - lastPos)
+      setPartialScroll(pos - lastPos - additionalScroll);
       setShowRight(false);
     } else {
       carouselBox.scrollLeft += cardSize;
       pos += cardSize;
     }
+    //console.log('pos after', pos);
     setCarouselPos(pos);
+    /*setTimeout(() => {
+      console.log(carouselBox.scrollLeft);
+    }, 1000)
+    */
   };
 
   if (listType.type === 'related') {

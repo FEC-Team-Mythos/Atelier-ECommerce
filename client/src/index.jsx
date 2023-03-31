@@ -27,7 +27,6 @@ function App() {
     */
 
   const [outfits, setOutfits] = useState([]);
-  localStorage.clear();
 
   return (
     <>
@@ -40,7 +39,7 @@ function App() {
       </div>
       <div className="content">
         {/*<ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} />*/}
-        <RelatedProducts request={request} />
+        <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
         {/*<QuestionsAndAnswers request={request} />*/}
         {/*<Reviews request={request} changeRequestHook={changeRequestHook} />*/}
       </div>

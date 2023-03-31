@@ -5,10 +5,11 @@ import Carousel from './Components/Carousel.jsx';
 import Modal from './Components/Modal.jsx';
 
 // this is the parent component for the Related Products widget
-function RelatedProducts({ request }) {
+function RelatedProducts({ request, changeRequestHook }) {
   const [showModal, setShowModal] = useState(false);
   const [comparedProduct, setComparedProduct] = useState();
   const [currentProduct, setCurrentProduct] = useState();
+  const [clickedElement, clickedTime] = changeRequestHook('related');
 
   useEffect(() => {
     request('/products/71697', { product_id: 71697 }, 'get')

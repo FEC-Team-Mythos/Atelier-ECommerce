@@ -71,9 +71,9 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .related-card {
-  height: 228px;
+  height: 250px;
   width: 150px;
-  margin: 15px;
+  margin: 10px;
   padding: 10px;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
