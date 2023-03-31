@@ -151,11 +151,11 @@ function PurchaseOptions({
           STYLE
           {' > '}
         </b>
-        {productInformation.name}
+        <em>{productInformation.name}</em>
       </p>
       <ul className="overview-productStyleContainer">
         {productStyles.map((style, index) => (
-          <div className={selectedStyleIndex === index ? 'overview-productStyleList-selected' : 'overview-productStyleList'}>
+          <div key={style.photos[0].url} className={selectedStyleIndex === index ? 'overview-productStyleList-selected' : 'overview-productStyleList'}>
             <img
               src={style.photos[0].thumbnail_url}
               key={style.photos[0].thumbnail_url}
@@ -195,18 +195,18 @@ function PurchaseOptions({
       </div>
       <div className="overview-purchaseButtons">
         {selectedSize
-          ? <button type="submit" onClick={addToCart} id="overview-addToBag" data-testid="addToBag">ADD TO CART &nbsp;&nbsp;&nbsp; +</button>
-          : <button type="submit" onClick={addToCart} id="overview-addToBag" data-testid="addToBag" disabled>ADD TO CART &nbsp;&nbsp;&nbsp; +</button>}
+          ? <button type="submit" aria-label="Add to Bag" onClick={addToCart} id="overview-addToBag" data-testid="addToBag">ADD TO CART &nbsp;&nbsp;&nbsp; +</button>
+          : <button type="submit" aria-label="Add to Bag" onClick={addToCart} id="overview-addToBag" data-testid="addToBag" disabled>ADD TO CART &nbsp;&nbsp;&nbsp; +</button>}
         {favorited
           ? (
-            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testid="favorite">
+            <button type="submit" onClick={outfitButtonHandler} aria-label="Favorite Outfit" id="overview-favoriteButton" data-testid="favorite">
               <div>
                 <FontAwesomeIcon icon="fa-solid fa-star" style={{ color: '#000000' }} />
               </div>
             </button>
           )
           : (
-            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" data-testid="favorite">
+            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" aria-label="Favorite Outfit" data-testid="favorite">
               <div>
                 <FontAwesomeIcon icon="fa-regular fa-star" style={{ color: '#000000' }} />
               </div>

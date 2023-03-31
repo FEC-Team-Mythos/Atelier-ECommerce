@@ -29,7 +29,7 @@ function ShoppingCart({ cartItems, setCartItems }) {
             <p>{`Cost: ${item.productCost}`}</p>
             <p>{`Size: ${item.size}`}</p>
             <p>{`Quantity: ${item.quantity}`}</p>
-            <button type="submit" onClick={() => { removeItem(item.sku_id, item.size); }}>Remove Item</button>
+            <button type="submit" aria-label="Remove Current Item" onClick={() => { removeItem(item.sku_id, item.size); }}>Remove Item</button>
           </div>
         ))}
       </div>

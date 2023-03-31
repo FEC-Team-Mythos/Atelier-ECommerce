@@ -102,7 +102,7 @@ function MainImageScreen({
       <ul className="overview-sideImages">
         {productInformation.photos[imageSelection.indexSet - 1]
           ? (
-            <button type="submit" id="overview-upButton" onClick={() => { setList('up'); }}>
+            <button type="submit" id="overview-upButton" aria-label="Up list of images" onClick={() => { setList('up'); }}>
               <span id="overview-upArrow" />
             </button>
           )
@@ -122,7 +122,7 @@ function MainImageScreen({
         ))}
         {productInformation.photos[imageSelection.indexSet + 7]
           ? (
-            <button type="submit" id="overview-downButton" onClick={() => { setList('down'); }}>
+            <button type="submit" id="overview-downButton" aria-label="Down list of images" onClick={() => { setList('down'); }}>
               <span id="overview-downArrow" />
             </button>
           )
@@ -131,7 +131,7 @@ function MainImageScreen({
       <div className="overview-mainImageContainer">
         {productInformation.photos[mainImage.index - 1]
           ? (
-            <button type="submit" id="overview-leftButton" onClick={() => { changeImage('left'); }}>
+            <button type="submit" id="overview-leftButton" aria-label="Previous Image" onClick={() => { changeImage('left'); }}>
               <span id="overview-leftArrow" />
             </button>
           )
@@ -153,12 +153,12 @@ function MainImageScreen({
         </div>
         {productInformation.photos[mainImage.index + 1]
           ? (
-            <button type="submit" id="overview-rightButton" onClick={() => { changeImage('right'); }}>
+            <button type="submit" id="overview-rightButton" aria-label="Next Image" onClick={() => { changeImage('right'); }}>
               <span id="overview-rightArrow" />
             </button>
           )
           : null }
-        <button type="submit" id="overview-expand" onClick={() => { setExpand(!expand); zoom(); setZoomIn(false); }}>
+        <button type="submit" id="overview-expand" aria-label="Expand Image" onClick={() => { setExpand(!expand); zoom(); setZoomIn(false); }}>
           {expand ? <RxExitFullScreen id="overview-fullScreenButton" /> : <RxEnterFullScreen id="overview-fullScreenButton" />}
         </button>
       </div>

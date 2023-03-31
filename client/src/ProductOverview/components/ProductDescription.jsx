@@ -10,7 +10,7 @@ function ProductDescription({ product }) {
       </div>
       <div className="overview-featuresContainer">
         {product.features.map((feature) => (
-          <div className="overview-features">
+          <div className="overview-features" key={feature.feature}>
             <div className="overview-checkmark">L</div>
             <div key={feature.feature}>
               &nbsp;&nbsp;&nbsp;

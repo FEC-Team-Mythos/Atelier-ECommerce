@@ -336,6 +336,9 @@ body {background-color: rgb(255, 255, 255);}
   display:grid;
   grid-template-columns: 20% 80%;
   grid-template-rows: 100%;
+  background-color: rgb(229, 229, 229);
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .overview-imagesContainer-clicked {
@@ -344,6 +347,9 @@ body {background-color: rgb(255, 255, 255);}
   display:grid;
   grid-template-columns: 12% 88%;
   grid-template-rows: 100%;
+  background-color: rgb(229, 229, 229);
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .overview-purchaseButtons {
@@ -530,6 +536,7 @@ body {background-color: rgb(255, 255, 255);}
 #overview-mainImage {
   max-width: 85%;
   max-height: 85%;
+  box-shadow: 0 0 15px 3px;
 }
 
 #overview-mainImage-clicked {

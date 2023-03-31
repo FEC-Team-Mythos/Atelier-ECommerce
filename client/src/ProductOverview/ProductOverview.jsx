@@ -18,12 +18,12 @@ function ProductOverview({ request, outfits, setOutfits }) {
   const [expand, setExpand] = useState(false);
 
   useEffect(() => {
-    request('/products/71701', { product_id: 71701 }, 'get')
+    request('/products/71697', { product_id: 71697 }, 'get')
       .then((data) => {
         setProduct(data.data);
       })
       .then(() => (
-        request('/products/71701/styles', { product_id: 71701 }, 'get')
+        request('/products/71697/styles', { product_id: 71697 }, 'get')
       ))
       .then((data) => {
         setProductInformation(data.data.results[0]);
@@ -44,9 +44,9 @@ function ProductOverview({ request, outfits, setOutfits }) {
       <div className="overview-navBar">
         <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
         <div className="overview-searchBar">
-          <input type="text" />
-          <button type="submit">Search</button>
-          <button type="submit">Cart</button>
+          <input type="text" aria-label="Search form" />
+          <button type="submit" aria-label="Search">Search</button>
+          <button type="submit" aria-label="Open Cart">Cart</button>
         </div>
       </div>
       <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
