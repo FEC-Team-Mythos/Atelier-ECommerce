@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { RxCheckCircled } from 'react-icons/rx';
 
 library.add(faStar);
 
@@ -19,6 +20,7 @@ function PurchaseOptions({
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
   const [favorited, setFavorited] = useState(false);
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem('outfits')) {
@@ -153,19 +155,23 @@ function PurchaseOptions({
       </p>
       <ul className="overview-productStyleContainer">
         {productStyles.map((style, index) => (
-          <img
-            src={style.photos[0].thumbnail_url}
-            key={style.photos[0].thumbnail_url}
-            alt={`Product Style - ${index}`}
-            id="overview-productStyle"
-            onClick={() => {
-              if (productInformation !== style) {
-                setProductInformation(style);
-                setMainImage({ url: style.photos[0].url, index: 0 });
-                setSelectedSize(0);
-              }
-            }}
-          />
+          <div className={selectedStyleIndex === index ? 'overview-productStyleList-selected' : 'overview-productStyleList'}>
+            <img
+              src={style.photos[0].thumbnail_url}
+              key={style.photos[0].thumbnail_url}
+              alt={`Product Style - ${index}`}
+              id={selectedStyleIndex === index ? 'overview-productStyle-selected' : 'overview-productStyle'}
+              onClick={() => {
+                if (productInformation !== style) {
+                  setProductInformation(style);
+                  setMainImage({ url: style.photos[0].url, index: 0 });
+                  setSelectedSize(0);
+                  setSelectedStyleIndex(index);
+                }
+              }}
+            />
+            {selectedStyleIndex === index ? <RxCheckCircled id="overview-productCheck" /> : null}
+          </div>
         ))}
       </ul>
       <div className="overview-purchaseSelections">

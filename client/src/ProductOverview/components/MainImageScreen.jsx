@@ -1,7 +1,10 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { RxEnterFullScreen } from "react-icons/rx";
+import { RxExitFullScreen } from "react-icons/rx";
 
 function MainImageScreen({
   productInformation, mainImage, setMainImage, expand, setExpand,
@@ -12,12 +15,14 @@ function MainImageScreen({
   });
   const [zoomImage, setZoomImage] = useState('');
   const [zoomIn, setZoomIn] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     setImageSelection({
       indexSet: 0,
       productInfoList: productInformation.photos.slice(0, 7),
     });
+    setSelectedIndex(0);
   }, [productInformation]);
 
   useEffect(() => {
@@ -63,7 +68,6 @@ function MainImageScreen({
       if (productInformation.photos[currentSetIndex + 7]) {
         setImageSelection({
           indexSet: currentSetIndex + 7,
-          // eslint-disable-next-line max-len
           productInfoList: productInformation.photos.slice(currentSetIndex + 7, currentSetIndex + 14),
         });
       }
@@ -73,15 +77,23 @@ function MainImageScreen({
   const changeImage = (direction) => {
     const currentPhotoIndex = mainImage.index;
     if (direction === 'left') {
+      setSelectedIndex(currentPhotoIndex - 1);
       setMainImage({
         url: productInformation.photos[currentPhotoIndex - 1].url,
         index: currentPhotoIndex - 1,
       });
+      if (currentPhotoIndex - 1 < imageSelection.indexSet) {
+        setList('up');
+      }
     } else if (direction === 'right') {
+      setSelectedIndex(currentPhotoIndex + 1);
       setMainImage({
         url: productInformation.photos[currentPhotoIndex + 1].url,
         index: currentPhotoIndex + 1,
       });
+      if (currentPhotoIndex + 1 > imageSelection.indexSet + 6) {
+        setList('down');
+      }
     }
   };
 
@@ -97,13 +109,14 @@ function MainImageScreen({
           : null }
         {imageSelection.productInfoList.map((photo, index) => (
           <img
-            id="overview-sideImage"
+            id={imageSelection.indexSet + index === selectedIndex ? 'overview-sideImage-selected' : 'overview-sideImage'}
             src={photo.thumbnail_url}
             key={photo.url}
             alt="Product View Options"
             data-testid={`image-${index}`}
             onClick={() => {
               setMainImage({ url: photo.url, index: imageSelection.indexSet + index });
+              setSelectedIndex(imageSelection.indexSet + index);
             }}
           />
         ))}
@@ -123,10 +136,17 @@ function MainImageScreen({
             </button>
           )
           : null }
-        <div className="overview-zoomContainer" style={zoomIn ? { cursor: 'zoomIn' } : { cursor: 'zoomOut' }}>
+        <div className="overview-zoomContainer">
           {expand
             ? (
-              <img src={mainImage.url} alt="Main Product" id="overview-mainImage-clicked" onClick={zoom} onMouseMove={mouseMove} />
+              <img
+                src={mainImage.url}
+                alt="Main Product"
+                id="overview-mainImage-clicked"
+                style={zoomIn ? { cursor: 'zoomIn' } : { cursor: 'zoomOut' }}
+                onClick={zoom}
+                onMouseMove={mouseMove}
+              />
             ) : (
               <img src={mainImage.url} alt="Main Product" id="overview-mainImage" />
             )}
@@ -138,7 +158,9 @@ function MainImageScreen({
             </button>
           )
           : null }
-        <button type="submit" id="overview-expand" onClick={() => { setExpand(!expand); }}>[ ]</button>
+        <button type="submit" id="overview-expand" onClick={() => { setExpand(!expand); zoom(); setZoomIn(false); }}>
+          {expand ? <RxExitFullScreen id="overview-fullScreenButton" /> : <RxEnterFullScreen id="overview-fullScreenButton" />}
+        </button>
       </div>
     </div>
   );

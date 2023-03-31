@@ -16,7 +16,6 @@ function ProductOverview({ request, outfits, setOutfits }) {
   const [mainImage, setMainImage] = useState({});
   const [cartItems, setCartItems] = useState([]);
   const [expand, setExpand] = useState(false);
-  const [reviewList, setReviewList] = useState(0);
 
   useEffect(() => {
     request('/products/71701', { product_id: 71701 }, 'get')
@@ -47,6 +46,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
         <div className="overview-searchBar">
           <input type="text" />
           <button type="submit">Search</button>
+          <button type="submit">Cart</button>
         </div>
       </div>
       <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />
@@ -67,7 +67,6 @@ function ProductOverview({ request, outfits, setOutfits }) {
                     <ProductInformation
                       productInformation={productInformation}
                       product={product}
-                      reviewList={reviewList}
                     />
                     <PurchaseOptions
                       product={product}
