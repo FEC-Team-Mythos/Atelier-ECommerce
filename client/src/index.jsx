@@ -30,6 +30,8 @@ const App = () => {
     */
 
     const [outfits, setOutfits] = useState([]);
+    const [avgRating, setAvgRating] = useState(0);
+    const [starArr, setStars] = useState('');
 
   return (
     <>
@@ -44,7 +46,7 @@ const App = () => {
         {/* <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
         <RelatedProducts  request={request}/>
         <QuestionsAndAnswers  request={request}/> */}
-        <Reviews  request={request} changeRequestHook={changeRequestHook}/>
+        <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating}/>
       </div>
     </>
   )
