@@ -9,7 +9,7 @@ function OutfitList({ currentProduct }) {
   useEffect(() => {
     const outfitList = JSON.parse(localStorage.getItem('outfit'));
     setOutfit(outfitList);
-  });
+  },[]);
 
   // add current product to outfit list both in local storage and in state
   const handleAdd = () => {
