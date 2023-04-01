@@ -36,7 +36,7 @@ const App = () => {
   return (
     <>
       <div className="content">
-        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr}/>
         <RelatedProducts  request={request}/>
         <QuestionsAndAnswers  request={request}/>
         <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating}/>

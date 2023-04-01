@@ -10,8 +10,10 @@ import PurchaseOptions from './components/PurchaseOptions.jsx';
 import ShoppingCart from './components/ShoppingCart.jsx';
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 
-function ProductOverview({ request, outfits, setOutfits }) {
+function ProductOverview({ request, outfits, setOutfits, starArr }) {
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
@@ -72,6 +74,7 @@ function ProductOverview({ request, outfits, setOutfits }) {
                     <ProductInformation
                       productInformation={productInformation}
                       product={product}
+                      starArr={starArr}
                     />
                     <PurchaseOptions
                       product={product}

@@ -379,12 +379,19 @@ select:hover {
 .overview-reviewContainer {
   grid-column: 2/3;
   grid-row: 1/2;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#overview-allReviews {
   text-decoration: underline;
   color: grey;
 }
 
-.overview-reviewContainer:hover {
+#overview-allReviews:hover {
   color: black;
+  cursor: pointer;
 }
 
 #overview-categoryName {
