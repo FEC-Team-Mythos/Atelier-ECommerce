@@ -15,7 +15,7 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(4);
+  const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(1);
   const [totalQuestionsCount, setTotalQuestionsCount] = useState(0);
   const [moreQuestionsAvailable, setMoreQuestionsAvailable] = useState(false);
 
@@ -46,10 +46,6 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   const handleModalClose = () => {
     setShowAddQuestionModal(false);
   };
-
-  // const handleLoadMore = () => {
-  //   setVisibleQuestionsCount((prevCount) => prevCount + 2);
-  // };
 
   const handleMoreAnsweredQuestions = () => {
     setVisibleQuestionsCount(visibleQuestionsCount + 2);
@@ -95,11 +91,9 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
 
 
   return (
-    <div>
+    <div className="qa-container">
+      Questions & Answers
       <SearchBar handleSearch={handleSearch} />
-      <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
-        Add a Question
-      </button>
       {showAddQuestionModal && (
         <AddQuestionModal
           productId={productId}
@@ -125,6 +119,9 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
           More Answered Questions
         </button>
       )}
+      <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
+        Add a Question
+      </button>
     </div>
   );
 };

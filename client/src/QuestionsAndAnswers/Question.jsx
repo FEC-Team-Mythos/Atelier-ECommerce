@@ -102,7 +102,9 @@ const Question = ({ question, request }) => {
 
   return (
     <div className="qa-question-container">
-      <h4 className="qa-question-body">{question.question_body}</h4>
+    <div className="qa-question-heading">
+      <h4 className="qa-question-body">Q: {question.question_body}</h4>
+    </div>
       <div className="qa-question-info">
         <span className="qa-question-asker">by {question.asker_name},</span>
         <span className="qa-question-date">{formatDate(question.question_date)}</span>
@@ -123,7 +125,7 @@ const Question = ({ question, request }) => {
       </div>
       {bestAnswers.map((answer) => (
         <div key={answer.id} className="qa-answer">
-          <p className="qa-answer-body">{answer.body}</p>
+          <p className="qa-answer-body">A: {answer.body}</p>
           <div className="qa-answer-info">
             <span className="qa-answerer-name">by {answer.answerer_name},</span>
             <span className="qa-answer-date">{formatDate(answer.date)}</span>
