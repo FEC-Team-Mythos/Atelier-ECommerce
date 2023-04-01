@@ -189,7 +189,7 @@ function PurchaseOptions({
           )
           : (
             <select id="overview_productQuantity" onChange={getSelectedQuantity}>
-              <option value="0">SELECT QUANTITY</option>
+              <option value="0">-</option>
             </select>
           )}
       </div>

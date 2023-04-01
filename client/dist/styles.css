@@ -269,6 +269,14 @@ body {background-color: rgb(255, 255, 255);}
 
 /* _________________________________ OVERVIEW ______________________________*/
 
+button:hover {
+  cursor: pointer;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
 .overview-overviewContainer {
   width: auto;
   height: 100vh;
@@ -364,6 +372,48 @@ body {background-color: rgb(255, 255, 255);}
   margin-bottom: 3%;
 }
 
+#overview-cartQuantity {
+  position: absolute;
+  bottom: 0;
+  right: 0%;
+  font-size: 0.7em;
+}
+
+#overview-searchForm {
+  height: 24px;
+}
+
+#overview-searchButton {
+  width: 40px;
+  height: 30px;
+}
+
+#overview-searchIcon {
+  display:flex;
+  justify-self: center;
+  align-self: center;
+  width: 80%;
+  height: 80%;
+}
+
+#overview-cartButton {
+  position: relative;
+  width: 40px;
+  height: 30px;
+}
+
+* button:hover {
+  cursor:pointer;
+}
+
+#overview-cartIcon {
+  display:flex;
+  justify-self: center;
+  align-self: center;
+  width: 80%;
+  height: 80%;
+}
+
 .overview-descriptionContainer {
   grid-row: 9/10;
   grid-column: 1/-1;
@@ -426,6 +476,7 @@ body {background-color: rgb(255, 255, 255);}
 .overview-searchBar {
   display: flex;
   align-items: flex-end;
+  padding-right: 1%;
 }
 
 .content {
@@ -439,6 +490,8 @@ body {background-color: rgb(255, 255, 255);}
   grid-column: 1/2;
   flex-direction: column;
   height: auto;
+  position: relative;
+  left: -10%;
 }
 
 #overview-sideImage {
@@ -505,8 +558,8 @@ body {background-color: rgb(255, 255, 255);}
   position: absolute;
   width: 40%;
   height: 40%;
-  top:-16%;
-  right:-16%;
+  top:-18%;
+  right:-18%;
   color: black;
 }
 

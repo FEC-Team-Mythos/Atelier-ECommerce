@@ -21,15 +21,15 @@ function ShoppingCart({ cartItems, setCartItems }) {
 
   if (cartItems.length) {
     return (
-      <div>
+      <div className="overview-cartContainer">
         {cartItems.map((item, index) => (
-          <div key={item.sku_id}>
+          <div key={item.sku_id} className="overview-cartItems">
             <img src={item.productPhoto} alt={`Product in Cart - ${index}`} />
             <p>{`Product: ${item.productName} - ${item.styleName}`}</p>
             <p>{`Cost: ${item.productCost}`}</p>
             <p>{`Size: ${item.size}`}</p>
             <p>{`Quantity: ${item.quantity}`}</p>
-            <button type="submit" aria-label="Remove Current Item" onClick={() => { removeItem(item.sku_id, item.size); }}>Remove Item</button>
+            <button type="submit" aria-label="Remove Current Item" onClick={() => { removeItem(item.sku_id, item.size); }}>Remove</button>
           </div>
         ))}
       </div>
