@@ -179,7 +179,6 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
     <div id="reviews-breakdown" data-testid="reviews-breakdown">
       <span id="reviews-graph-avg">
         {avgRating}
-        {" "}
         {displayAllStars()}
       </span>
       <div id="reviews-ratingsGraph">

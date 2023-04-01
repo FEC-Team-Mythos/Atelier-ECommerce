@@ -66,6 +66,28 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     }
   };
 
+  const formStars = () => (
+    <div id="review-addReview-starRating">
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        return (
+          <button
+            id="reviews-formStarButton"
+            data-testId={`reviews-addReviewStars${index}`}
+            type="button"
+            key={index}
+            className={index <= (hover || formRating) ? 'on' : 'off'}
+            onClick={() => setFormRating(index)}
+            onMouseEnter={() => setHover(index)}
+            onMouseLeave={() => setHover(formRating)}
+          >
+            <span className="star"><FontAwesomeIcon icon="fa-solid fa-star" /></span>
+          </button>
+        );
+      })}
+    </div>
+  );
+
   function DisplayRadioButtons(input, checked) {
     const radioButtons = [];
 
@@ -98,28 +120,6 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
       </div>
     );
   }
-
-  const formStars = () => (
-    <div id="review-addReview-starRating">
-      {[...Array(5)].map((star, index) => {
-        index += 1;
-        return (
-          <button
-            id="reviews-formStarButton"
-            data-testId={`reviews-addReviewStars${index}`}
-            type="button"
-            key={index}
-            className={index <= (hover || formRating) ? 'on' : 'off'}
-            onClick={() => setFormRating(index)}
-            onMouseEnter={() => setHover(index)}
-            onMouseLeave={() => setHover(formRating)}
-          >
-            <span className="star"><FontAwesomeIcon icon="fa-solid fa-star" /></span>
-          </button>
-        );
-      })}
-    </div>
-  );
 
   const displayCharacterRadio = () => {
     if (characteristics) {

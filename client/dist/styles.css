@@ -100,6 +100,7 @@ body {background-color: rgb(255, 255, 255);}
 
 /* Breakdown Ratings */
 #reviews-graph-avg {
+  display: flex;
   margin-left: 10px;
   padding: 10px;
 }
@@ -190,6 +191,10 @@ body {background-color: rgb(255, 255, 255);}
   border-radius: 10px;
 }
 
+#reviewTile-stars {
+  display:flex;
+}
+
 #reviewTile-top {
   display:flex;
   justify-content: space-between;
@@ -227,7 +232,7 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .threeQ {
-  clip-path: polygon(0 0, 60% 0, 60% 100%, 0 100%);
+  clip-path: polygon(0 0, 62% 0, 62% 100%, 0 100%);
 }
 
 .oneHalf {

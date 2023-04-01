@@ -16,7 +16,7 @@ function Characteristics({ characteristics }) {
   const characteristicsSlider = () => {
     if (characteristicRatings.length) {
       return (
-        characteristicRatings.map((specificCharacteristic) => {
+        characteristicRatings.map((specificCharacteristic, ind) => {
           const dotStyle = {
             borderRadius: '30%',
             width: 5,
@@ -25,7 +25,7 @@ function Characteristics({ characteristics }) {
           };
 
           return (
-            <div>
+            <div key={ind}>
               <span className="reviews-singular-character-title">{specificCharacteristic.name}</span>
               <div className="reviews-singular-character-slider">
                 <span className="reviews-slider-leftLabel">{factorLabels[specificCharacteristic.name][0]}</span>
