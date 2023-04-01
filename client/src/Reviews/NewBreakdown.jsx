@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 import Characteristics from './Characteristics.jsx';
 
-library.add(faStar);
+library.add(solidStar, hollowStar);
 
 function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, setAvgRating, starArr, setStars, allReviews }) {
   const [recommended, setRecommended] = useState(0);
@@ -25,21 +26,42 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (roundToNearestQuarter > 1) {
-        stars.push(<FontAwesomeIcon icon="fa-solid fa-star" />);
+        stars.push(<FontAwesomeIcon icon={solidStar} />);
         roundToNearestQuarter--;
       } else if (roundToNearestQuarter < 1 && roundToNearestQuarter >= 0.75) {
-        stars.push(<span className="threeQ"><FontAwesomeIcon icon="fa-solid fa-star" /></span>);
+        stars.push(<span className="threeQ"><FontAwesomeIcon icon={solidStar} /></span>);
         roundToNearestQuarter--;
       } else if (roundToNearestQuarter < 0.75 && roundToNearestQuarter >= 0.5) {
-        stars.push(<span className="oneHalf"><FontAwesomeIcon icon="fa-solid fa-star" /></span>);
+        stars.push(<span className="oneHalf"><FontAwesomeIcon icon={solidStar} /></span>);
         roundToNearestQuarter--;
       } else if (roundToNearestQuarter < 0.5 && roundToNearestQuarter >= 0.25) {
-        stars.push(<span className="oneQuarter"><FontAwesomeIcon icon="fa-solid fa-star" /></span>);
+        stars.push(<span className="oneQuarter"><FontAwesomeIcon icon={solidStar} /></span>);
         roundToNearestQuarter--;
       }
     }
     setStars(stars);
   };
+
+  const displayHollowStars = () => {
+    return (
+        <div className="hollow-stars">
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={hollowStar} />
+          ))}
+        </div>
+    )
+  }
+
+  const displayAllStars = () => {
+    return (
+      <div id="reviews-star-container" style={{position: 'relative'}}>
+        {displayHollowStars()}
+        <div style={{ position: 'absolute', top: 0, left: 0 }}>
+        {starArr}
+      </div>
+      </div>
+    )
+  }
 
   const calcRecommend = () => {
     if (metaData.recommended) {
@@ -76,15 +98,15 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
           };
 
           return (
-            <div key={index} className="bar" onClick={() => { filterClick(rating.rating); }}>
-              <span className="leftBarText">
+            <div key={index} className="reviews-ratingbar" onClick={() => { filterClick(rating.rating); }}>
+              <span className="reviews-leftBarText">
                 {`${rating.rating} `}
                 <FontAwesomeIcon icon="fa-solid fa-star" />
               </span>
-              <div id="total-rating-bar" style={{ width: totalRatings / 2 }}>
+              <div id="reviews-total-rating-bar" style={{ width: totalRatings / 2 }}>
                 <div id={`${rating.rating}-rating-bar`} style={barStyle} />
               </div>
-              <span className="rightBarText">{calcReviewNum(rating.rating)}</span>
+              <span className="reviews-rightBarText">{calcReviewNum(rating.rating)}</span>
             </div>
           );
         })
@@ -154,11 +176,11 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
   }, [avgRating]);
 
   return (
-    <div id="breakdown" data-testid="reviews-breakdown">
+    <div id="reviews-breakdown" data-testid="reviews-breakdown">
       <span id="reviews-graph-avg">
         {avgRating}
         {" "}
-        {starArr}
+        {displayAllStars()}
       </span>
       <div id="reviews-ratingsGraph">
         {ratingsGraph()}

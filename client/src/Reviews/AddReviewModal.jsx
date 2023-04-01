@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -14,6 +14,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const [formEmail, setFormEmail] = useState('');
   const [formPhotos, setFormPhotos] = useState([]);
   const [formCharacteristics, setFormCharacteristics] = useState({});
+  const [checkedFormChar, setCheckedFormChar] = useState({});
 
   const [formRating, setFormRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -65,7 +66,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     }
   };
 
-  function DisplayRadioButtons(input) {
+  function DisplayRadioButtons(input, checked) {
     const radioButtons = [];
 
     const trackRadioValues = (key, value) => {
@@ -81,7 +82,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             type="radio"
             name={input}
             value={i}
-            checked={i}
+            checked={checked === i}
             onChange={() => {
               trackRadioValues(input, i);
             }}
@@ -129,7 +130,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
           {charKeys.map((key) => (
             <div key={key} id="reviews-addReviewCharacteristicIndividual">
               {key}
-              <DisplayRadioButtons input={key} />
+              <DisplayRadioButtons input={key} checked={formCharacteristics[key]}/>
               <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[key][formCharacteristics[key] - 1]}</span>
             </div>
           ))}

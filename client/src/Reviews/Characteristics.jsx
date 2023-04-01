@@ -26,13 +26,13 @@ function Characteristics({ characteristics }) {
 
           return (
             <div>
-              <span className="singular-character-title">{specificCharacteristic.name}</span>
-              <div className="singular-character-slider">
-                <span className="slider-leftLabel">{factorLabels[specificCharacteristic.name][0]}</span>
-                <div id="total-characteristics-bar">
-                  <span className="slider-bar" style={dotStyle} />
+              <span className="reviews-singular-character-title">{specificCharacteristic.name}</span>
+              <div className="reviews-singular-character-slider">
+                <span className="reviews-slider-leftLabel">{factorLabels[specificCharacteristic.name][0]}</span>
+                <div id="reviews-total-characteristics-bar">
+                  <span className="reviews-slider-bar" style={dotStyle} />
                 </div>
-                <span className="slider-rightLabel">{factorLabels[specificCharacteristic.name][1]}</span>
+                <span className="reviews-slider-rightLabel">{factorLabels[specificCharacteristic.name][1]}</span>
               </div>
             </div>
           );
@@ -54,7 +54,7 @@ function Characteristics({ characteristics }) {
   }, [characteristics]);
 
   return (
-    <div id="characterSliders" data-testid="reviews-sliders">{characteristicsSlider()}</div>
+    <div id="reviews-characterSliders" data-testid="reviews-sliders">{characteristicsSlider()}</div>
   );
 }
 

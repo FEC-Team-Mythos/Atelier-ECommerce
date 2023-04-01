@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 
 library.add(faStar);
 library.add(faCheck);
@@ -50,11 +51,32 @@ function ReviewTile({ review }) {
       rating--;
     }
     return (
-      <span id="stars">
-        {stars}
-      </span>
+      <>
+            {stars}
+      </>
     );
   };
+
+  const displayHollowStars = () => {
+    return (
+        <div className="hollow-stars">
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={hollowStar} />
+          ))}
+        </div>
+    )
+  }
+
+  const displayAllStars = (rating) => {
+    return (
+      <div id="reviews-star-container" style={{position: 'relative'}}>
+        {displayHollowStars()}
+        <div style={{ position: 'absolute', top: 0, left: 0 }}>
+        {starCount(rating)}
+      </div>
+      </div>
+    )
+  }
 
   const reviewBody = () => {
     if (!reviewBodyButton) {
@@ -120,7 +142,7 @@ function ReviewTile({ review }) {
       <div id="reviewTile-top">
         <div id="reviewTile-stars" data-testid="reviews-individualReview-stars">
           {review.rating}
-          {starCount(review.rating)}
+          {displayAllStars(review.rating)}
         </div>
         <div id="reviewTile-date">
           {formatDate()}
