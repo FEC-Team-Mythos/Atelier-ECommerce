@@ -7,7 +7,7 @@ import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-function ProductInformation({ productInformation, product, starArr }) {
+function ProductInformation({ productInformation, product, starArr, totalReviewsPerProduct }) {
   library.add(solidStar, hollowStar);
 
   const displayHollowStars = () => (
@@ -38,7 +38,7 @@ function ProductInformation({ productInformation, product, starArr }) {
         <span id="reviews-graph-avg" style={{position: 'relative', left: '-3.5%'}}>
           {displayAllStars()}
         </span>
-        <span id="overview-allReviews" onClick={scrollToReview}>Read all reviews</span>
+        <span id="overview-allReviews" onClick={scrollToReview}>{`Read all ${totalReviewsPerProduct} reviews`}</span>
       </div>
       <div id="overview-categoryName">{product.category}</div>
       <div id="overview-productName">{product.name}</div>

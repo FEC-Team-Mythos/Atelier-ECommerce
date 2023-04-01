@@ -5,7 +5,7 @@ import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
 function Reviews({
-  changeRequestHook, avgRating, setAvgRating, starArr, setStars,
+  changeRequestHook, avgRating, setAvgRating, starArr, setStars, setTotalReviewsPerProduct
 }) {
   const [clickedElement, clickedTime] = changeRequestHook('reviews');
 
@@ -21,6 +21,7 @@ function Reviews({
       const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: 71697 } });
       setAllReviews(response.data.results);
       setReviewList(response.data.results);
+      setTotalReviewsPerProduct(response.data.results.length);
     } catch (err) {
       console.log(err);
     }
