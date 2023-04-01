@@ -576,6 +576,80 @@ select:hover {
   margin-top: 12vh;
 }
 
+.overview-cartContainer {
+  position: fixed;
+  max-height: 300px;
+  width: 400px;
+  top: 10vh;
+  right: 1%;
+  overflow: scroll;
+  border: 2px solid rgb(77, 77, 77);
+  background-color: white;
+  z-index: 3;
+}
+
+.overview-bottomButtons {
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: white;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+}
+
+.overview-bottomButtons button {
+width: 30%;
+}
+
+.overview-cartItems {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2fr 4fr 0.5fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  height: 85px;
+  width: 100%;
+  font-size: 0.8em;
+  align-items: center;
+}
+
+#overview-removeButton {
+  grid-column: 3/4;
+  grid-row: 1/-1;
+  width: 80%;
+  aspect-ratio: 1/1;
+  background: none;
+  border: none;
+}
+
+#overview-removeIcon {
+  height: 40px;
+  width: 40px;
+}
+
+#overview-cartProductImage {
+  position:relative;
+  grid-column: 1/2;
+  grid-row: 1/-1;
+  max-height: 90%;
+  aspect-ratio: 1/1;
+  margin: 2%
+}
+
+.overview-cartInfo {
+  grid-column: 2/3;
+  grid-row: 1/-1;
+  display:flex;
+  flex-direction: column;
+}
+
+#overview-removeButton {
+  grid-column: 3/4;
+  display: flex;
+  align-self: center;
+}
+
 .overview-sideImages {
   display: flex;
   align-items: center;
@@ -758,11 +832,12 @@ select:hover {
 
 #overview-leftButton {
   position: absolute;
-  top: 50%;
   left: 0;
   padding: 10px;
   border: solid black;
   border-width: 0 0 3px 3px;
+  display:flex;
+  align-self: center;
   display: inline-block;
 }
 
@@ -787,11 +862,12 @@ select:hover {
 
 #overview-rightButton {
   position: absolute;
-  top: 50%;
   right: 0;
   padding: 10px;
   border: solid black;
   border-width: 0 3px 3px 0;
+  display:flex;
+  align-self: center;
   display: inline-block;
 }
 

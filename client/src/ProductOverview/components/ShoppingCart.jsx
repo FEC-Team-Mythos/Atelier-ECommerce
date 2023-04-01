@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { CiCircleRemove } from 'react-icons/ci';
 
-function ShoppingCart({ cartItems, setCartItems }) {
+function ShoppingCart({
+  cartItems, setCartItems, cartOpen, setCartOpen,
+}) {
   const removeItem = (skuId, size) => {
     const updatedCart = [...cartItems];
 
@@ -19,24 +22,38 @@ function ShoppingCart({ cartItems, setCartItems }) {
     setCartItems(updatedCart);
   };
 
-  if (cartItems.length) {
-    return (
-      <div className="overview-cartContainer">
-        {cartItems.map((item, index) => (
-          <div key={item.sku_id} className="overview-cartItems">
-            <img src={item.productPhoto} alt={`Product in Cart - ${index}`} />
-            <p>{`Product: ${item.productName} - ${item.styleName}`}</p>
-            <p>{`Cost: ${item.productCost}`}</p>
-            <p>{`Size: ${item.size}`}</p>
-            <p>{`Quantity: ${item.quantity}`}</p>
-            <button type="submit" aria-label="Remove Current Item" onClick={() => { removeItem(item.sku_id, item.size); }}>Remove</button>
-          </div>
-        ))}
-      </div>
-    );
-  }
   return (
-    null
+    <div>
+      {cartOpen && cartItems.length
+        ? (
+          <div className="overview-cartContainer">
+            {cartItems.map((item, index) => (
+              <div key={item.sku_id} className="overview-cartItems">
+                <img id="overview-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
+                <div className="overview-cartInfo">
+                  <span>{`Product: ${item.productName} - ${item.styleName}`}</span>
+                  <span>{`Cost: ${item.productCost}`}</span>
+                  <span>{`Size: ${item.size}`}</span>
+                  <span>{`Quantity: ${item.quantity}`}</span>
+                </div>
+                <button
+                  id="overview-removeButton"
+                  type="submit"
+                  aria-label="Remove Current Item"
+                  onClick={() => { removeItem(item.sku_id, item.size); }}
+                >
+                  <CiCircleRemove id="overview-removeIcon" />
+                </button>
+              </div>
+            ))}
+            <div className="overview-bottomButtons">
+              <button type="submit" aria-label="Exit Cart" onClick={() => { setCartOpen(false); }}>Exit</button>
+              <button type="submit" aria-label="Check Out">Check Out</button>
+            </div>
+          </div>
+        )
+        : null}
+    </div>
   );
 }
 
