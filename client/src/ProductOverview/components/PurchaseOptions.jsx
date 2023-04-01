@@ -57,30 +57,32 @@ function PurchaseOptions({
 
   const addToCart = () => {
     let updatedCart = [];
+    let exists = false;
 
     if (cartItems.length) {
       updatedCart = [...cartItems];
       for (const item of updatedCart) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
+          exists = true;
           break;
         }
       }
       // updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id:
       // selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-      updatedCart.push({
-        productName: product.name,
-        productPhoto: productInformation.photos[0].thumbnail_url,
-        styleName: productInformation.name,
-        productCost: (productInformation.sale_price || productInformation.original_price
+      if (!exists) {
+        updatedCart.push({
+          productName: product.name,
+          productPhoto: productInformation.photos[0].thumbnail_url,
+          styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price
                       || product.default_price),
-        sku_id: selectedSku,
-        size: selectedSize.size,
-        quantity: selectedQuantity,
-      });
+          sku_id: selectedSku,
+          size: selectedSize.size,
+          quantity: selectedQuantity,
+        });
+      }
     } else {
-      // let item = [{product_id: product.id, style_id: productInformation.style_id,
-      // sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
       updatedCart = [{
         productName: product.name,
         productPhoto: productInformation.photos[0].thumbnail_url,
