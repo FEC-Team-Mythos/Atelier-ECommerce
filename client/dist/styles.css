@@ -97,7 +97,7 @@ body {background-color: rgb(255, 255, 255);}
   display:flex;
 }
 
-#breakdown {
+#reviews-breakdown {
   flex: 0 0 20%;
   display: flex;
   flex-direction: column;
@@ -111,6 +111,7 @@ body {background-color: rgb(255, 255, 255);}
 
 /* Breakdown Ratings */
 #reviews-graph-avg {
+  display: flex;
   margin-left: 10px;
   padding: 10px;
 }
@@ -121,48 +122,52 @@ body {background-color: rgb(255, 255, 255);}
   flex-direction: column;
 }
 
-.bar{
+.reviews-ratingbar{
   display: flex;
   justify-content:space-evenly;
   align-items: center;
 }
 
-.leftBarText{
+.reviews-ratingbar:hover{
+  background-color: grey;
+}
+
+.reviews-leftBarText{
   font-size: 12px;
   white-space: nowrap;
 }
 
-.rightBarText{
+.reviews-rightBarText{
   font-size: 12px;
   white-space: nowrap;
 }
 
-#total-rating-bar {
+#reviews-total-rating-bar {
   background-color: lightgray;
   margin: 10px;
   flex-grow: 1;
 }
 
 /* Sliders */
-#characterSliders {
+#reviews-characterSliders {
   display:flex;
   flex-direction: column;
   font-size: 12px;
 }
 
-.slider-leftLabel {
+.reviews-slider-leftLabel {
   padding:3px;
   font-size: 10px;
   width:25px
 }
 
-.slider-rightLabel {
+.reviews-slider-rightLabel {
   padding:3px;
   font-size: 10px;
   width: 25px
 }
 
-#total-characteristics-bar {
+#reviews-total-characteristics-bar {
   background-color: lightgray;
   margin-left: 40px;
   margin-right: 10px;
@@ -173,18 +178,18 @@ body {background-color: rgb(255, 255, 255);}
   justify-content: space-between;
 }
 
-.singular-character-slider {
+.reviews-singular-character-slider {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.singular-character-title {
+.reviews-singular-character-title {
   font-weight: bold;
   font-size: 10px;
 }
 
-.slider-bar {
+.reviews-slider-bar {
   background-color: black;
 }
 
@@ -195,6 +200,10 @@ body {background-color: rgb(255, 255, 255);}
   width:500px;
   border: 2px solid black;
   border-radius: 10px;
+}
+
+#reviewTile-stars {
+  display:flex;
 }
 
 #reviewTile-top {
@@ -232,39 +241,116 @@ body {background-color: rgb(255, 255, 255);}
 #stars {
   font-size: 50px;
 }
+
 .threeQ {
-  clip-path: polygon(75% 0%, 75% 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0 0, 62% 0, 62% 100%, 0 100%);
 }
 
 .oneHalf {
-  clip-path: polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
 }
 
 .oneQuarter {
-  clip-path: polygon(25% 0%, 25% 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0 0, 20% 0, 20% 100%, 0 100%);
 }
 */
 
-/* #popup {
+#reviews-formStarButton {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
+
+#reviews-addReviewModal {
   position: fixed;
+  z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: rgba(red, green, blue, alpha);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-#popup-inner {
-  position: relative;
-  padding: 32px;
+#reviews-addReviewPopup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#reviews-addReviewPopupInner {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#reviews-addReviewStars {
+  padding: 5px;
+}
+
+#reviews-addReviewRecommend {
+  padding: 5px;
+}
+
+#reviews-addReviewCharacteristics {
+  padding: 10px;
+}
+
+#reviews-addReviewCharacteristicIndividual {
+  padding:5px;
+  display:flex;
+}
+
+.reviews-addReviewCharacteristicIndividualDisc {
+  margin-left: 5px;
+}
+
+#reviews-addReviewSummary {
+  margin-bottom: 10px;
+}
+
+#reviews-addReviewSummaryText {
   width: 100%;
-  max-width: 300px;
-  background-color: #FFF;
-} */
+  max-width: 250px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+#reviews-addReviewBodyText {
+  width: 300px;
+  height:50px;
+}
+
+#reviews-addReviewPhotos {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+#reviews-addReviewSubtext {
+  font-size: 12px;
+  font-style: italic;
+}
+
+#reviews-addReviewNameEmail {
+  margin-bottom: 5px;
+}
+
+#reviews-addFormCloseBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 50%);
+}
 
 
 /* _________________________________ OVERVIEW ______________________________*/
