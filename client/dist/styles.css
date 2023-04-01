@@ -86,7 +86,7 @@ body {background-color: rgb(255, 255, 255);}
   display:flex;
 }
 
-#breakdown {
+#reviews-breakdown {
   flex: 0 0 20%;
   display: flex;
   flex-direction: column;
@@ -110,52 +110,52 @@ body {background-color: rgb(255, 255, 255);}
   flex-direction: column;
 }
 
-.bar{
+.reviews-ratingbar{
   display: flex;
   justify-content:space-evenly;
   align-items: center;
 }
 
-.bar:hover{
+.reviews-ratingbar:hover{
   background-color: grey;
 }
 
-.leftBarText{
+.reviews-leftBarText{
   font-size: 12px;
   white-space: nowrap;
 }
 
-.rightBarText{
+.reviews-rightBarText{
   font-size: 12px;
   white-space: nowrap;
 }
 
-#total-rating-bar {
+#reviews-total-rating-bar {
   background-color: lightgray;
   margin: 10px;
   flex-grow: 1;
 }
 
 /* Sliders */
-#characterSliders {
+#reviews-characterSliders {
   display:flex;
   flex-direction: column;
   font-size: 12px;
 }
 
-.slider-leftLabel {
+.reviews-slider-leftLabel {
   padding:3px;
   font-size: 10px;
   width:25px
 }
 
-.slider-rightLabel {
+.reviews-slider-rightLabel {
   padding:3px;
   font-size: 10px;
   width: 25px
 }
 
-#total-characteristics-bar {
+#reviews-total-characteristics-bar {
   background-color: lightgray;
   margin-left: 40px;
   margin-right: 10px;
@@ -166,18 +166,18 @@ body {background-color: rgb(255, 255, 255);}
   justify-content: space-between;
 }
 
-.singular-character-slider {
+.reviews-singular-character-slider {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.singular-character-title {
+.reviews-singular-character-title {
   font-weight: bold;
   font-size: 10px;
 }
 
-.slider-bar {
+.reviews-slider-bar {
   background-color: black;
 }
 
@@ -225,16 +225,17 @@ body {background-color: rgb(255, 255, 255);}
 #stars {
   font-size: 50px;
 }
+
 .threeQ {
-  clip-path: polygon(75% 0%, 75% 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0 0, 60% 0, 60% 100%, 0 100%);
 }
 
 .oneHalf {
-  clip-path: polygon(50% 0%, 50% 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
 }
 
 .oneQuarter {
-  clip-path: polygon(25% 0%, 25% 100%, 0% 100%, 0% 0%);
+  clip-path: polygon(0 0, 20% 0, 20% 100%, 0 100%);
 }
 */
 
