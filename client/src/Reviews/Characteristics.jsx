@@ -8,17 +8,15 @@ function Characteristics({ characteristics }) {
     Comfort: ['Uncomfortable', 'Perfect'],
     Quality: ['Poor', 'Perfect'],
     Length: ['Runs Short', 'Runs Long'],
-    Fit: ['Runs Tight', 'Runs Long']
-  }
+    Fit: ['Runs Tight', 'Runs Long'],
+  };
 
-  const marginCalc = (rating) => {
-    return (rating / 5) * 200;
-  }
+  const marginCalc = (rating) => (rating / 5) * 200;
 
   const characteristicsSlider = () => {
     if (characteristicRatings.length) {
       return (
-        characteristicRatings.map((specificCharacteristic) => {
+        characteristicRatings.map((specificCharacteristic, ind) => {
           const dotStyle = {
             borderRadius: '30%',
             width: 5,
@@ -27,15 +25,15 @@ function Characteristics({ characteristics }) {
           };
 
           return (
-            <div>
-              <span className='singular-character-title'>{specificCharacteristic.name}</span>
-            <div className='singular-character-slider'>
-              <span className='slider-leftLabel'>{factorLabels[specificCharacteristic.name][0]}</span>
-              <div id="total-characteristics-bar">
-                <span className='slider-bar' style={dotStyle} />
+            <div key={ind}>
+              <span className="reviews-singular-character-title">{specificCharacteristic.name}</span>
+              <div className="reviews-singular-character-slider">
+                <span className="reviews-slider-leftLabel">{factorLabels[specificCharacteristic.name][0]}</span>
+                <div id="reviews-total-characteristics-bar">
+                  <span className="reviews-slider-bar" style={dotStyle} />
+                </div>
+                <span className="reviews-slider-rightLabel">{factorLabels[specificCharacteristic.name][1]}</span>
               </div>
-              <span className='slider-rightLabel'>{factorLabels[specificCharacteristic.name][1]}</span>
-            </div>
             </div>
           );
         })
@@ -56,7 +54,7 @@ function Characteristics({ characteristics }) {
   }, [characteristics]);
 
   return (
-    <div id="characterSliders" data-testid='reviews-sliders'>{characteristicsSlider()}</div>
+    <div id="reviews-characterSliders" data-testid="reviews-sliders">{characteristicsSlider()}</div>
   );
 }
 

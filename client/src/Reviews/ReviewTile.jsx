@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faStar as hollowStar } from '@fortawesome/free-regular-svg-icons';
 
 library.add(faStar);
 library.add(faCheck);
@@ -26,16 +27,18 @@ function ReviewTile({ review }) {
       maxHeight: expanded ? '300px' : '100px',
     };
 
-
     if (review.photos.length) {
       return (
         <>
-          {review.photos.map((photo, ind) =>
-          <img src={photo.url}
-          key={ind}
-          data-testid='review-photo'
-          onClick={()=>{setExpanded(!expanded)}}
-          style={imgStyle} />)}
+          {review.photos.map((photo, ind) => (
+            <img
+              src={photo.url}
+              key={ind}
+              data-testid="review-photo"
+              onClick={() => { setExpanded(!expanded); }}
+              style={imgStyle}
+            />
+          ))}
         </>
       );
     }
@@ -44,15 +47,36 @@ function ReviewTile({ review }) {
   const starCount = (rating) => {
     const stars = [];
     while (rating > 0) {
-      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" data-testid='star'/>);
+      stars.push(<FontAwesomeIcon icon="fa-solid fa-star" data-testid="star" />);
       rating--;
     }
     return (
-      <span id="stars">
-        {stars}
-      </span>
+      <>
+            {stars}
+      </>
     );
   };
+
+  const displayHollowStars = () => {
+    return (
+        <div className="hollow-stars">
+          {[...Array(5)].map((_, index) => (
+            <FontAwesomeIcon key={index} icon={hollowStar} />
+          ))}
+        </div>
+    )
+  }
+
+  const displayAllStars = (rating) => {
+    return (
+      <div id="reviews-star-container" style={{position: 'relative'}}>
+        {displayHollowStars()}
+        <div style={{ position: 'absolute', top: 0, left: 0 }}>
+        {starCount(rating)}
+      </div>
+      </div>
+    )
+  }
 
   const reviewBody = () => {
     if (!reviewBodyButton) {
@@ -88,7 +112,7 @@ function ReviewTile({ review }) {
   const reviewHelpful = () => {
     const postHelpful = async () => {
       try {
-        await axios.put(`/reviews/${review.review_id}/helpful`)
+        await axios.put(`/reviews/${review.review_id}/helpful`);
         setHelpfulClick(true);
       } catch (err) {
         console.log(err);
@@ -100,18 +124,17 @@ function ReviewTile({ review }) {
         <div>
           <span>Helpful?</span>
           {' '}
-          <button data-testid="reviewHelpBtn" onClick={()=>postHelpful()}>{` Yes ${review.helpfulness}`}</button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <span>Helpful?</span>
-          {' '}
-          <span datatest-id="reviewHelpBtnAfter">{` Yes ${review.helpfulness}`}</span>
+          <button data-testid="reviewHelpBtn" onClick={() => postHelpful()}>{` Yes ${review.helpfulness}`}</button>
         </div>
       );
     }
+    return (
+      <div>
+        <span>Helpful?</span>
+        {' '}
+        <span datatest-id="reviewHelpBtnAfter">{` Yes ${review.helpfulness}`}</span>
+      </div>
+    );
   };
 
   return (
@@ -119,7 +142,7 @@ function ReviewTile({ review }) {
       <div id="reviewTile-top">
         <div id="reviewTile-stars" data-testid="reviews-individualReview-stars">
           {review.rating}
-          {starCount(review.rating)}
+          {displayAllStars(review.rating)}
         </div>
         <div id="reviewTile-date">
           {formatDate()}

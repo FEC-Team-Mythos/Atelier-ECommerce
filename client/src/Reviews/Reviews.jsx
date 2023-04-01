@@ -4,21 +4,18 @@ import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
-function Reviews({ request, changeRequestHook }) {
-  // add state to top component of Widget to track all clicks in widget. Set widget in initial state declaration
+function Reviews({
+  changeRequestHook, avgRating, setAvgRating, starArr, setStars,
+}) {
   const [clickedElement, clickedTime] = changeRequestHook('reviews');
 
   const [allReviews, setAllReviews] = useState([]);
   const [metaData, setMetaData] = useState([]);
-
-  const [filteredReviews, setFilteredReviews] = useState([]);
   const [filterParams, setFilterParams] = useState([]);
   const [sortParam, setSortParam] = useState('relevance');
-
   const [reviewList, setReviewList] = useState([]);
-  const [reviewToAdd, setReviewToAdd] = useState({});
 
-  const getReviewData = async () => {
+  const getReviewData = async (count) => {
     // Product ID should be dynamic here, will grab from other widget
     try {
       const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: 71697 } });
@@ -79,22 +76,23 @@ function Reviews({ request, changeRequestHook }) {
     filterReviews();
   }, [filterParams]);
 
-  useEffect(() => {
-    // console.log(reviewToAdd)
-  }, [reviewToAdd]);
-
   return (
     <div id="reviews" data-testid="reviews">
       <NewBreakdown
         metaData={metaData}
         filterParams={filterParams}
         setFilterParams={setFilterParams}
+        starArr={starArr}
+        setStars={setStars}
+        avgRating={avgRating}
+        setAvgRating={setAvgRating}
+        allReviews={allReviews}
       />
       <ReviewList
         sortParam={sortParam}
         setSortParam={setSortParam}
         reviewList={reviewList}
-        setReviewToAdd={setReviewToAdd}
+        metaData={metaData}
       />
     </div>
   );

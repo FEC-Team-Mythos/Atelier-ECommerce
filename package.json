@@ -7,7 +7,8 @@
     "client-dev": "webpack --mode development --watch",
     "server-dev": "nodemon ./server/index.js",
     "test-related": "jest ./client/src/RelatedProducts/Related.test.js",
-    "test-review": "jest ./client/src/Reviews/Review.test.js"
+    "test-review": "jest ./client/src/Reviews/Review.test.js",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "babel-loader": "^9.1.2",
+    "compression-webpack-plugin": "^10.0.0",
     "eslint": "^8.36.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.27.5",
@@ -42,7 +44,8 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/react": "^14.0.0",
