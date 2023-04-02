@@ -36,17 +36,10 @@ const App = () => {
 
   return (
     <>
-      {/* <div className="overview-navBar">
-        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" />
-        <div className="overview-searchBar">
-          <input type="text" />
-          <button type="submit">Search Icon</button>
-        </div>
-      </div> */}
       <div className="content">
-        {/* <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct}/>
         <RelatedProducts  request={request}/>
-        <QuestionsAndAnswers  request={request}/> */}
+        <QuestionsAndAnswers  request={request}/>
         <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct}/>
       </div>
     </>
