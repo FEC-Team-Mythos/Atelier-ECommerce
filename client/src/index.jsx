@@ -26,7 +26,6 @@ function App() {
     })
     */
 
-  const [outfits, setOutfits] = useState([]);
     const [outfits, setOutfits] = useState([]);
     const [avgRating, setAvgRating] = useState(0);
     const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
@@ -35,12 +34,8 @@ function App() {
   return (
     <>
       <div className="content">
-        {/*<ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} />*/}
-        <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
-        {/*<QuestionsAndAnswers request={request} />*/}
-        {/*<Reviews request={request} changeRequestHook={changeRequestHook} />*/}
         <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct}/>
-        <RelatedProducts  request={request}/>
+        <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
         <QuestionsAndAnswers  request={request}/>
         <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct}/>
       </div>

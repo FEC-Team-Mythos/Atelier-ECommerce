@@ -18,6 +18,7 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
     numberOfCards++;
   }
 
+  // if the width of the window is greater than the width of the cards, dont show right arrow
   useEffect(() => {
     if (windowWidth > (numberOfCards * cardSize)) {
       setShowRight(false);
@@ -36,49 +37,37 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
     }
   }, [carouselPos]);
 
-
+  // go back 1 product card
   const prev = () => {
-    //console.log('partial', partialScroll);
     var pos = carouselBox.scrollLeft;
-    //console.log('pos', pos);
-
     if (!(pos % cardSize === 0))  {
       carouselBox.scrollLeft -= partialScroll + additionalScroll;
       pos -= partialScroll + additionalScroll;
-
     } else {
       carouselBox.scrollLeft -= cardSize;
       pos -= cardSize;
     }
-    //console.log('pos after', pos)
     setShowRight(true);
     setCarouselPos(pos);
   };
 
+  // go forward 1 product card
   const next = () => {
     const lastPos = carouselBox.scrollLeft;
     var pos = carouselBox.scrollLeft;
-    //console.log('pos', pos);
     if (((cardSize * numberOfCards) - pos - width) < cardSize) {
-      //console.log('cbox', carouselBox.scrollLeft);
-      //console.log('calc', (cardSize * numberOfCards) - pos - width);
       carouselBox.scrollLeft += ((cardSize * numberOfCards) - pos - width - additionalScroll);
       pos += ((cardSize * numberOfCards) - pos - width - additionalScroll);
-      //console.log('partial', pos - lastPos)
       setPartialScroll(pos - lastPos - additionalScroll);
       setShowRight(false);
     } else {
       carouselBox.scrollLeft += cardSize;
       pos += cardSize;
     }
-    //console.log('pos after', pos);
     setCarouselPos(pos);
-    /*setTimeout(() => {
-      console.log(carouselBox.scrollLeft);
-    }, 1000)
-    */
   };
 
+  // if carousel list is for related products
   if (listType.type === 'related') {
     return (
       <div className="related-product-carousel">
@@ -92,6 +81,7 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
       </div>
     );
   }
+  // if carousel list is for outfit products
   return (
     <div className="related-outfit-carousel">
       { carouselPos === 0 ? (null) : (<button className="related-pre-btn" onClick={prev}><p>&lt;</p></button>) }
