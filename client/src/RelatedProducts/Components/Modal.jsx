@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 
 // this component is for the modal popup
-function Modal({ related, showModal, setShowModal, comparedProduct, currentProduct }) {
+function Modal({ showModal, setShowModal, comparedProduct, currentProduct }) {
   // find like features and create array aligned by characteristic for display
   const features = {};
   if (currentProduct) {

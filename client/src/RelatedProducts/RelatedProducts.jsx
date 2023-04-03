@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RelatedList from './Components/RelatedList.jsx';
 import OutfitList from './Components/OutfitList.jsx';
-import Carousel from './Components/Carousel.jsx';
 import Modal from './Components/Modal.jsx';
 
 // this is the parent component for the Related Products widget
@@ -9,7 +8,7 @@ function RelatedProducts({ request, changeRequestHook }) {
   const [showModal, setShowModal] = useState(false);
   const [comparedProduct, setComparedProduct] = useState();
   const [currentProduct, setCurrentProduct] = useState();
-  const [clickedElement, clickedTime] = changeRequestHook('related');
+  //const [clickedElement, clickedTime] = changeRequestHook('related');
 
   useEffect(() => {
     request('/products/71697', { product_id: 71697 }, 'get')
@@ -32,7 +31,6 @@ function RelatedProducts({ request, changeRequestHook }) {
 
   return (
     <div id="related-products">
-      Related Products Confirmation
       <RelatedList setShowModal={setShowModal} setComparedProduct={setComparedProduct} />
       <OutfitList currentProduct={currentProduct} />
       <Modal showModal={showModal} setShowModal={setShowModal} comparedProduct={comparedProduct} currentProduct={currentProduct} />

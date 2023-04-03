@@ -1,8 +1,11 @@
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import axios from 'axios';
 import '@testing-library/jest-dom';
 import RelatedProducts from './RelatedProducts.jsx';
+import Modal from './Components/Modal.jsx';
 import RelatedList from './Components/RelatedList.jsx';
+import OutfitList from './Components/OutfitList.jsx';
 import Carousel from './Components/Carousel.jsx';
 
 const mockData = [
@@ -1688,28 +1691,48 @@ const mockData = [
   }
 ];
 
+
+const request = (endpoint, params = {}, method = 'get') => axios({
+    method,
+    url: endpoint,
+    params,
+  });
+
 const emptyMockData = [];
 
-test('child components render', () => {
-  render(<RelatedProducts />);
-  const productsTitle = screen.getByText('Related Products');
-  const outfitsTitle = screen.getByText('Your Outfit');
-  expect(productsTitle).toBeInTheDocument();
-  expect(outfitsTitle).toBeInTheDocument();
-});
+describe('Products carousel', () => {
 
+    test('related products component render', () => {
+    render(<RelatedList />);
+    const productsTitle = screen.getByText('Related Products');
+    expect(productsTitle).toBeInTheDocument();
+    });
+
+    test('outfits component render', () => {
+        render(<OutfitList currentProduct={emptyMockData}/>);
+        const outfitsTitle = screen.getByText('Your Outfit');
+        expect(outfitsTitle).toBeInTheDocument();
+    });
+
+    test('modal component render', () => {
+        render(<Modal showModal={true} currentProduct={mockData[0]} comparedProduct={mockData[1]}/>);
+        const modalTitle = screen.getByText('Compare Products');
+        expect(modalTitle).toBeInTheDocument();
+    });
+
+});
 
 describe('Products carousel', () => {
 
   test('Related product should render in carousel', () => {
     const listType = {type: 'related'};
-    render(<Carousel product={mockData} listType={listType}/>);
+    render(<Carousel products={mockData} listType={listType}/>);
     screen.getByText(/bright/i);
   });
 
   test('Your outfit carousel should include add button', () => {
     const listType = {type: 'outfit'};
-    render(<Carousel product={emptyMockData} listType={listType}/>);
+    render(<Carousel products={emptyMockData} listType={listType}/>);
     screen.getByRole('add-outfit');
   });
 });
