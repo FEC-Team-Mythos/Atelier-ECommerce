@@ -16,7 +16,6 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const [formEmail, setFormEmail] = useState('');
   const [formPhotos, setFormPhotos] = useState([]);
   const [formCharacteristics, setFormCharacteristics] = useState({});
-  const [checkedFormChar, setCheckedFormChar] = useState({});
 
   const [formRating, setFormRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -26,7 +25,8 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const charObj = {};
-    for (var key in formCharacteristics) {
+
+    for (const key in formCharacteristics) {
       key === 'Size' ? charObj['10'] = formCharacteristics[key] : null;
       key === 'Width' ? charObj['11'] = formCharacteristics[key] : null;
       key === 'Comfort' ? charObj['12'] = formCharacteristics[key] : null;
@@ -35,19 +35,22 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
       key === 'Fit' ? charObj['15'] = formCharacteristics[key] : null;
     }
 
-    const data = {
-      product_id: 71697,
-      rating: formRating,
-      summary: formSummary,
-      body: formBody,
-      recommend: formRecommend,
-      name: formName,
-      email: formEmail,
-      photos: formPhotos,
-      characteristics: charObj,
-    };
+    const data = new FormData();
 
-    await axios.post('/reviews', data);
+    data.append('product_id', 71697);
+    data.append('rating', formRating);
+    data.append('summary', formSummary);
+    data.append('body', formBody);
+    data.append('recommend', formRecommend);
+    data.append('name', formName);
+    data.append('email', formEmail);
+    data.append('characteristics', charObj);
+
+    formPhotos.forEach((photo) => {
+      data.append('file', photo);
+    });
+
+    await axios.post('/reviews', data, {headers: {'Content-Type': 'multipart/form-data'}});
     toggleAddReviewState(!addReviewState);
   };
 
@@ -56,6 +59,13 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
       setFormRecommend(true);
     } else {
       setFormRecommend(false);
+    }
+  };
+
+  const handlePhotoUploadChange = (event) => {
+    const { files } = event.target;
+    if (files.length <= 5) {
+      setFormPhotos([...formPhotos, ...files]);
     }
   };
 
@@ -98,7 +108,8 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
               {key}
               <CharRadioBtns
                 id={key}
-                trackRadioValues={trackRadioValues}/>
+                trackRadioValues={trackRadioValues}
+              />
             </div>
           ))}
         </>
@@ -117,7 +128,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     return (
       <div id="reviews-addReviewPopup" onClick={() => toggleAddReviewState(false)}>
         <div id="reviews-addReviewPopupInner" onClick={(e) => e.stopPropagation()}>
-          <form onSubmit={handleSubmit}>
+          <form encType="multipart/form-data" onSubmit={handleSubmit}>
             <h3>Write Your Review</h3>
             <label>
               <div id="reviews-addReviewStars">
@@ -185,7 +196,14 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <div id="reviews-addReviewSubtext">{formBodyCounter()}</div>
               </div>
               <div id="reviews-addReviewPhotos">
-                Photos: PLACEHOLDER
+                <label htmlFor="fileInput">Select up to 5 image files:</label>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  multiple
+                  onChange={handlePhotoUploadChange}
+                />
               </div>
             </label>
             <label>

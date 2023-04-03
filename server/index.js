@@ -6,6 +6,9 @@ const fetch = require('../fetchData');
 const app = express();
 const port = 3000;
 
+const multer = require('multer');
+const upload = multer();
+
 const statics = path.join(`${__dirname}/../client/dist`);
 
 app.use(express.static(statics));
@@ -42,14 +45,18 @@ var getRelated = async function (product_id, callback) {
   callback(relatedProducts);
 };
 
-app.post('/reviews', (req, res) => {
-  console.log('abc', req);
+app.post('/reviews', upload.any(), (req, res) => {
+  const { body, files } = req;
+
+  console.log(body);
+  console.log(files);
+
   fetch(req.url, req.body, req.method)
     .then(() => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      console.log('Could not post data: ', err);
+      // console.log('Could not post data: ', err);
       res.sendStatus(501);
     });
 });
