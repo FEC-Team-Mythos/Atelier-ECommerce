@@ -377,21 +377,30 @@ function CheckOut({ cartItems }) {
       {shippingInformation()}
       {/* {paymentInformation()} */}
       <div className="checkout-cartContainer">
-        {/* {cartItems.map((item, index) => (
-          <div key={item.sku_id} className="checkout-cartItems">
-            <img id="checkout-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
-            <div className="checkout-cartInfo">
-              <span>{`Product: ${item.productName} - ${item.styleName}`}</span>
-              <span>{`Cost: ${item.productCost}`}</span>
-              <span>{`Size: ${item.size}`}</span>
-              <span>{`Quantity: ${item.quantity}`}</span>
-              <span>{`Subtotal: $${item.quantity * item.productCost}`}</span>
-            </div>
+        <div className="checkout-oversizeContainer">
+          <div className="checkout-cartItemsContainer">
+            {cartItems.map((item, index) => (
+              <div key={item.sku_id} className="checkout-cartItems">
+                <img id="checkout-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
+                <div className="checkout-cartInfo">
+                  <span>{`${item.productName} - ${item.styleName}`}</span>
+                  <span>{`$${item.productCost}`}</span>
+                  <span>{`Size: ${item.size}`}</span>
+                  <span>{`Quantity: ${item.quantity}`}</span>
+                </div>
+                <span id="checkout-cartSubtotal">{`$${item.quantity * item.productCost}`}</span>
+              </div>
+            ))}
           </div>
-        ))}
-        <input type="text" aria-label="Promotional code text input" id="checkout-promo" placeholder="Promotion Code" />
-        <button type="submit" aria-label="Apply Code">Apply</button>
-        <div id="checkout-totalCost">{`Total USD $${totalCost}`}</div> */}
+          <div className="checkout-codeContainer">
+            <input type="text" aria-label="Promotional code text input" id="checkout-promo" placeholder="Promotion Code" />
+            <button type="submit" aria-label="Apply Code">Apply</button>
+          </div>
+          <div id="checkout-totalCost">
+            <span>Total</span>
+            <span>{`USD $${totalCost}`}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

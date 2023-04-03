@@ -912,7 +912,7 @@ width: 30%;
 
 .checkout-container {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: grid;
   grid-template-columns: 55% 45%;
   box-sizing: border-box;
@@ -922,7 +922,20 @@ width: 30%;
 .checkout-cartContainer {
   grid-column: 2/3;
   height: 100%;
+  width: 100%;
   background-color: rgb(229, 229, 229);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-oversizeContainer {
+  display: grid;
+  grid-template-rows: 4fr 1fr 1fr;
+  height: 500px;
+  width: 500px;
+  justify-content: center;
+  align-items: center;
 }
 
 .checkout-paymentInfo {
@@ -940,6 +953,84 @@ width: 30%;
   justify-self: center;
   align-self: center;
   gap: 1%;
+}
+
+.checkout-cartItemsContainer {
+  grid-row: 1/2;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  align-self: center;
+  justify-self: center;
+}
+
+.checkout-codeContainer {
+  grid-row: 2/3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5%;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#checkout-totalCost {
+  grid-row: 3/4;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-self: center;
+  align-self: center;
+  font-size: 2em;
+  text-decoration: bold;
+}
+
+.checkout-cartItems {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2fr 5fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  height: 30%;
+  width: 98%;
+  align-items: center;
+  border: 2px solid gray;
+  margin: 1%;
+}
+
+#checkout-cartProductImage {
+  height: 60px;
+  aspect-ratio: 1/1;
+  grid-row: 1/-1;
+  grid-column: 1/2;
+  align-self: center;
+  justify-self: center;
+}
+
+.checkout-cartInfo {
+  grid-row: 1/-1;
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout-cartSubtotal {
+  grid-row: 1/-1;
+  grid-column: 3/4;
+  align-self: center;
+}
+
+#checkout-promo {
+  height: 50%;
+  width: 70%;
+}
+
+.checkout-codeContainer button {
+  height: 50%;
+  width: 25%;
 }
 
 .checkout-contactShippingLock {
