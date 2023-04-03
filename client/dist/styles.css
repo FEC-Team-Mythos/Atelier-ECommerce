@@ -911,12 +911,11 @@ width: 30%;
 /* _________________________________ CHECKOUT ______________________________*/
 
 .checkout-container {
-  width: 100%;
+  margin-top: 10vh;
+  width: 100vw;
   height: 90vh;
   display: grid;
   grid-template-columns: 55% 45%;
-  box-sizing: border-box;
-  outline: 1px solid limegreen !important;
 }
 
 .checkout-cartContainer {
@@ -944,7 +943,6 @@ width: 30%;
 }
 
 .checkout-contactShippingContainer {
-  margin-top: 10vh;
   position:relative;
   height: 70%;
   width: 60%;
@@ -1241,6 +1239,16 @@ width: 30%;
 .checkout-finalButtons button {
   width: 48%;
   height: 80%;
+}
+
+#checkout-placeOrder {
+  width: 48%;
+  height: 80%;
+}
+
+#checkout-placeOrder button {
+  height: 100%;
+  width: 100%;
 }
 
 .checkout-navBar {

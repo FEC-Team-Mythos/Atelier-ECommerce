@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProductOverview from './ProductOverview/ProductOverview.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
@@ -35,13 +35,12 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route
           path="/"
           element={(
             <div className="content">
-              <CheckOut cartItems={cartItems} />
               <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct} cartItems={cartItems} setCartItems={setCartItems} />
               <RelatedProducts request={request} />
               <QuestionsAndAnswers request={request} />
@@ -49,9 +48,9 @@ function App() {
             </div>
         )}
         />
-        <Route path="/checkout" element={(<CheckOut cartItems={cartItems} />)} />
+        <Route path="checkout" element={(<CheckOut />)} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
