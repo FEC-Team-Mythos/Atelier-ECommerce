@@ -19,16 +19,16 @@ function CheckOut({ cartItems }) {
   const shippingInformation = () => (
     <div className="overview-contactShippingContainer">
       <span id="checkout-contactInfo">Contact Information</span>
-      <form className="checkout-form">
-        <input type="text" aria-label="Email text input" id="checkout-email" placeholder="Email" />
+      <form className="checkout-contactForm">
+        <input type="text" aria-label="Email text input" id="checkout-email" placeholder="Email" required />
         <input type="checkbox" id="checkout-offers" name="Email Checkbox" />
         <label htmlFor="checkout-offers">Email me with news and offers about your products</label>
         <span id="checkout-shippingInformation">Shipping Information</span>
-        <input type="text" aria-label="First name text input" id="checkout-firstName" placeholder="First Name" />
-        <input type="text" aria-label="Last name text input" id="checkout-lastName" placeholder="Last Name" />
-        <input type="text" aria-label="Street address text input" id="checkout-address" placeholder="Street Address" />
+        <input type="text" aria-label="First name text input" id="checkout-firstName" placeholder="First Name" required />
+        <input type="text" aria-label="Last name text input" id="checkout-lastName" placeholder="Last Name" required />
+        <input type="text" aria-label="Street address text input" id="checkout-address" placeholder="Street Address" required />
         <input type="text" aria-label="Apartment, suite, etc text input" id="checkout-optInfo" placeholder="Apartment, Suite, etc (optional)" />
-        <input type="text" aria-label="City text input" id="checkout-city" placeholder="City" />
+        <input type="text" aria-label="City text input" id="checkout-city" placeholder="City" required />
         <label htmlFor="overview-country">Country</label>
         <select id="overview-country">
           <option value="United States">United States</option>
@@ -331,7 +331,7 @@ function CheckOut({ cartItems }) {
           <option value="WV">WV</option>
           <option value="WY">WY</option>
         </select>
-        <input type="text" aria-label="Zip Code text input" id="checkout-zipCode" placeholder="Zip Code" />
+        <input type="text" aria-label="Zip Code text input" id="checkout-zipCode" placeholder="Zip Code" required />
         <input type="text" aria-label="Phone number text input" id="checkout-phoneNumber" placeholder="Phone Number" />
         <button type="submit" aria-label="Return to Products">Return to Products</button>
         <button type="submit" aria-label="Continue to Payment">Continue to Payment</button>
@@ -341,19 +341,21 @@ function CheckOut({ cartItems }) {
 
   const paymentInformation = () => (
     <div className="checkout-paymentInfo">
-      <label htmlFor="checkout-creditCard">Credit Card</label>
-      <input type="text" id="checkout-creditCard" />
-      <div id="overview-expiration">
-        <input type="text" id="checkout-month" aria-label="Expiration Month" placeholder="MM" />
-        /
-        <input type="text" id="checkout-year" aria-label="Expiration Year" placeholder="YY" />
-      </div>
-      <label htmlFor="checkout-verification">Card Verification Number</label>
-      <input type="text" id="checkout-verification" />
-      <label htmlFor="checkout-postal">Postal Code</label>
-      <input type="text" id="checkout-postal" />
-      <button type="submit" aria-label="Return to Products">Return to Products</button>
-      <button type="submit" aria-label="Place Order">Place Order</button>
+      <form className="checkout-paymentForm">
+        <label htmlFor="checkout-creditCard">Credit Card</label>
+        <input type="text" id="checkout-creditCard" required />
+        <div id="overview-expiration">
+          <input type="text" id="checkout-month" aria-label="Expiration Month" placeholder="MM" required />
+          /
+          <input type="text" id="checkout-year" aria-label="Expiration Year" placeholder="YY" required />
+        </div>
+        <label htmlFor="checkout-verification">Card Verification Number</label>
+        <input type="text" id="checkout-verification" required />
+        <label htmlFor="checkout-postal">Postal Code</label>
+        <input type="text" id="checkout-postal" />
+        <button type="submit" aria-label="Return to Products">Return to Products</button>
+        <button type="submit" aria-label="Place Order">Place Order</button>
+      </form>
     </div>
   );
 
@@ -370,9 +372,12 @@ function CheckOut({ cartItems }) {
               <span>{`Cost: ${item.productCost}`}</span>
               <span>{`Size: ${item.size}`}</span>
               <span>{`Quantity: ${item.quantity}`}</span>
+              <span>{`Subtotal: $${item.quantity * item.productCost}`}</span>
             </div>
           </div>
         ))}
+        <input type="text" aria-label="Promotional code text input" id="checkout-promo" placeholder="Promotion Code" />
+        <button type="submit" aria-label="Apply Code">Apply</button>
         <div id="checkout-totalCost">{`Total USD $${totalCost}`}</div>
       </div>
     </div>
