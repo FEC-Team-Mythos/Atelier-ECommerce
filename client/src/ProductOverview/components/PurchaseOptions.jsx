@@ -1,9 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 
 import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { RxCheckCircled } from 'react-icons/rx';
+
+library.add(faStar);
 
 function PurchaseOptions({
   product, productInformation, setProductInformation, productStyles, setMainImage,
@@ -13,6 +20,7 @@ function PurchaseOptions({
   const [selectedQuantity, setSelectedQuantity] = useState(0);
   const [selectedSku, setSelectedSku] = useState('');
   const [favorited, setFavorited] = useState(false);
+  const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
 
   useEffect(() => {
     if (localStorage.getItem('outfits')) {
@@ -43,32 +51,38 @@ function PurchaseOptions({
     setSelectedQuantity(Number(e.value));
   };
 
+  useEffect(() => {
+    getSelectedQuantity();
+  }, [selectedSize]);
+
   const addToCart = () => {
     let updatedCart = [];
+    let exists = false;
 
     if (cartItems.length) {
       updatedCart = [...cartItems];
       for (const item of updatedCart) {
         if (item.sku_id === selectedSku && item.size === selectedSize.size) {
           item.quantity += selectedQuantity;
+          exists = true;
           break;
         }
       }
       // updatedCart.push({product_id: product.id, style_id: productInformation.style_id, sku_id:
       // selectedSku, size: selectedSize.size, quantity: selectedQuantity});
-      updatedCart.push({
-        productName: product.name,
-        productPhoto: productInformation.photos[0].thumbnail_url,
-        styleName: productInformation.name,
-        productCost: (productInformation.sale_price || productInformation.original_price
+      if (!exists) {
+        updatedCart.push({
+          productName: product.name,
+          productPhoto: productInformation.photos[0].thumbnail_url,
+          styleName: productInformation.name,
+          productCost: (productInformation.sale_price || productInformation.original_price
                       || product.default_price),
-        sku_id: selectedSku,
-        size: selectedSize.size,
-        quantity: selectedQuantity,
-      });
+          sku_id: selectedSku,
+          size: selectedSize.size,
+          quantity: selectedQuantity,
+        });
+      }
     } else {
-      // let item = [{product_id: product.id, style_id: productInformation.style_id,
-      // sku_id: selectedSku, size: selectedSize.size, quantity: selectedQuantity}]
       updatedCart = [{
         productName: product.name,
         productPhoto: productInformation.photos[0].thumbnail_url,
@@ -134,32 +148,73 @@ function PurchaseOptions({
 
   return (
     <div>
-      <ul>
+      <p id="overview-selectedStyle">
+        <b>
+          STYLE
+          {' > '}
+        </b>
+        <em>{productInformation.name}</em>
+      </p>
+      <ul className="overview-productStyleContainer">
         {productStyles.map((style, index) => (
-          <img
-            src={style.photos[0].thumbnail_url}
-            key={style.photos[0].thumbnail_url}
-            alt={`Product Style - ${index}`}
-            onClick={() => {
-              setProductInformation(style);
-              setMainImage(style.photos[0].url);
-            }}
-          />
+          <div key={style.photos[0].url} className={selectedStyleIndex === index ? 'overview-productStyleList-selected' : 'overview-productStyleList'}>
+            <img
+              src={style.photos[0].thumbnail_url}
+              key={style.photos[0].thumbnail_url}
+              alt={`Product Style - ${index}`}
+              id={selectedStyleIndex === index ? 'overview-productStyle-selected' : 'overview-productStyle'}
+              onClick={() => {
+                if (productInformation !== style) {
+                  setProductInformation(style);
+                  setMainImage({ url: style.photos[0].url, index: 0 });
+                  setSelectedSize(0);
+                  setSelectedStyleIndex(index);
+                }
+              }}
+            />
+            {selectedStyleIndex === index ? <RxCheckCircled id="overview-productCheck" /> : null}
+          </div>
         ))}
       </ul>
-      <select id="overview_productSize" onChange={getSelectedSize}>
-        <option value="0">SELECT SIZE</option>
-        {Object.keys(productInformation.skus).map((style) => (
-          <option key={style} value={style}>{productInformation.skus[style].size}</option>
-        ))}
-      </select>
-
-      <select id="overview_productQuantity" onChange={getSelectedQuantity}>
-        <option value="0">SELECT QUANTITY</option>
-        {selectedSize ? quantityWithData() : null}
-      </select>
-      <button type="submit" onClick={addToCart}>Add to Bag</button>
-      <button type="submit" onClick={outfitButtonHandler}>Favorite</button>
+      <div className="overview-purchaseSelections">
+        <select id="overview_productSize" onChange={getSelectedSize}>
+          <option value="0">SELECT SIZE</option>
+          {Object.keys(productInformation.skus).map((style) => (
+            <option key={style} value={style}>{productInformation.skus[style].size}</option>
+          ))}
+        </select>
+        {selectedSize
+          ? (
+            <select id="overview_productQuantity" onChange={getSelectedQuantity}>
+              {quantityWithData()}
+            </select>
+          )
+          : (
+            <select id="overview_productQuantity" onChange={getSelectedQuantity}>
+              <option value="0">-</option>
+            </select>
+          )}
+      </div>
+      <div className="overview-purchaseButtons">
+        {selectedSize
+          ? <button type="submit" aria-label="Add to Bag" onClick={addToCart} id="overview-addToBag" data-testid="addToBag">ADD TO CART &nbsp;&nbsp;&nbsp; +</button>
+          : <button type="submit" aria-label="Add to Bag" onClick={addToCart} id="overview-addToBag" data-testid="addToBag" disabled>ADD TO CART &nbsp;&nbsp;&nbsp; +</button>}
+        {favorited
+          ? (
+            <button type="submit" onClick={outfitButtonHandler} aria-label="Favorite Outfit" id="overview-favoriteButton" data-testid="favorite">
+              <div>
+                <FontAwesomeIcon icon="fa-solid fa-star" style={{ color: '#000000' }} />
+              </div>
+            </button>
+          )
+          : (
+            <button type="submit" onClick={outfitButtonHandler} id="overview-favoriteButton" aria-label="Favorite Outfit" data-testid="favorite">
+              <div>
+                <FontAwesomeIcon icon="fa-regular fa-star" style={{ color: '#000000' }} />
+              </div>
+            </button>
+          )}
+      </div>
     </div>
   );
 }
