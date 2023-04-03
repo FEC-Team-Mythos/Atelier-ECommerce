@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function RadioButtons({ id }) {
+function RadioButtons({ id, trackRadioValues }) {
   const charLabels = {
     Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'Too Big'],
     Width: ['Too Narrow', 'Slightly Narrow', 'Perfect', 'Slightly Wide', 'Too Wide'],
@@ -14,6 +14,7 @@ function RadioButtons({ id }) {
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    trackRadioValues(id, Number(event.target.value));
   };
 
   return (

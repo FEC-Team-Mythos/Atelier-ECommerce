@@ -81,41 +81,10 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     </div>
   );
 
-  function DisplayRadioButtons(input, checked) {
-    const trackRadioValues = (key, value) => {
-      const newRadioValues = { ...formCharacteristics };
-      newRadioValues[key.input] = value;
-      setFormCharacteristics(newRadioValues);
-    };
-
-    // for (let i = 1; i <= 5; i++) {
-    //   const radioButton = (
-    //     <label key={i}>
-    //       <input
-    //         type="radio"
-    //         name={input}
-    //         value={i}
-    //         checked={checked === i}
-    //         onChange={() => {
-    //           trackRadioValues(input, i);
-    //         }}
-    //       />
-    //       {i}
-    //     </label>
-    //   );
-    //   radioButtons.push(radioButton);
-    // }
-    // return (
-    //   <div>
-    //     {radioButtons}
-    //   </div>
-    // );
-  }
-
   const displayCharacterRadio = () => {
     const trackRadioValues = (key, value) => {
       const newRadioValues = { ...formCharacteristics };
-      newRadioValues[key.input] = value;
+      newRadioValues[key] = value;
       setFormCharacteristics(newRadioValues);
     };
 
@@ -127,7 +96,6 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
           {charKeys.map((key) => (
             <div key={key} id="reviews-addReviewCharacteristicIndividual">
               {key}
-              <DisplayRadioButtons input={key} checked={formCharacteristics[key]}/>
               <CharRadioBtns
                 id={key}
                 trackRadioValues={trackRadioValues}/>
