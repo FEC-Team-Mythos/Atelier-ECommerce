@@ -6,6 +6,7 @@ import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 import CheckOut from './CheckOut/CheckOut.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { changeRequestHook } from '../../changeRequestHook.js';
 
@@ -38,13 +39,19 @@ const App = () => {
 
   return (
     <>
-      <div className="content">
-        <CheckOut cartItems={cartItems} />
-        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct} cartItems={cartItems} setCartItems={setCartItems}/>
-        <RelatedProducts  request={request}/>
-        <QuestionsAndAnswers  request={request}/>
-        <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct}/>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+          <div className="content">
+            <CheckOut cartItems={cartItems} />
+            <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct} cartItems={cartItems} setCartItems={setCartItems}/>
+            <RelatedProducts  request={request}/>
+            <QuestionsAndAnswers  request={request}/>
+            <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct}/>
+          </div>} />
+          <Route path='/checkout' element={<CheckOut cartItems={cartItems} />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
