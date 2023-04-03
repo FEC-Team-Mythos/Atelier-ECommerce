@@ -355,27 +355,30 @@ function CheckOut({ cartItems }) {
   const paymentInformation = () => (
     <div className="checkout-paymentInfo">
       <form className="checkout-paymentForm">
-        <label htmlFor="checkout-creditCard">Credit Card</label>
+        <label id="checkout-cardLabel" htmlFor="checkout-creditCard">Credit Card</label>
         <input type="text" id="checkout-creditCard" required />
-        <div id="overview-expiration">
+        <div id="checkout-expiration">Expiration</div>
+        <div id="checkout-expirationDate">
           <input type="text" id="checkout-month" aria-label="Expiration Month" placeholder="MM" required />
           /
           <input type="text" id="checkout-year" aria-label="Expiration Year" placeholder="YY" required />
         </div>
-        <label htmlFor="checkout-verification">Card Verification Number</label>
+        <label id="checkout-verificationLabel" htmlFor="checkout-verification">Card Verification Number</label>
         <input type="text" id="checkout-verification" required />
-        <label htmlFor="checkout-postal">Postal Code</label>
+        <label id="checkout-postalLabel" htmlFor="checkout-postal">Postal Code</label>
         <input type="text" id="checkout-postal" />
-        <button type="submit" aria-label="Return to Products">Return to Products</button>
-        <button type="submit" aria-label="Place Order">Place Order</button>
+        <div className="checkout-finalButtons">
+          <button type="button" aria-label="Return to Products">Return to Products</button>
+          <button type="submit" aria-label="Place Order">Place Order</button>
+        </div>
       </form>
     </div>
   );
 
   return (
     <div className="checkout-container">
-      {shippingInformation()}
-      {/* {paymentInformation()} */}
+      {/* {shippingInformation()} */}
+      {paymentInformation()}
       <div className="checkout-cartContainer">
         <div className="checkout-oversizeContainer">
           <div className="checkout-cartItemsContainer">
