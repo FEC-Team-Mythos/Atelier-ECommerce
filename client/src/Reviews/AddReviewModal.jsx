@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
+import CharRadioBtns from './CharRadioBtns.jsx';
+
 library.add(faStar);
 
 function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics }) {
@@ -20,15 +22,6 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const [hover, setHover] = useState(0);
 
   const starText = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
-
-  const charLabels = {
-    Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'Too Big'],
-    Width: ['Too Narrow', 'Slightly Narrow', 'Perfect', 'Slightly Wide', 'Too Wide'],
-    Comfort: ['Uncomfortable', 'Slightly Uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-    Quality: ['Poor', 'Below Average', 'What I expected', 'Pretty Great', 'Perfect'],
-    Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs Long'],
-    Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs Long'],
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,39 +82,43 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   );
 
   function DisplayRadioButtons(input, checked) {
-    const radioButtons = [];
-
     const trackRadioValues = (key, value) => {
       const newRadioValues = { ...formCharacteristics };
       newRadioValues[key.input] = value;
       setFormCharacteristics(newRadioValues);
     };
 
-    for (let i = 1; i <= 5; i++) {
-      const radioButton = (
-        <label key={i}>
-          <input
-            type="radio"
-            name={input}
-            value={i}
-            checked={checked === i}
-            onChange={() => {
-              trackRadioValues(input, i);
-            }}
-          />
-          {i}
-        </label>
-      );
-      radioButtons.push(radioButton);
-    }
-    return (
-      <div>
-        {radioButtons}
-      </div>
-    );
+    // for (let i = 1; i <= 5; i++) {
+    //   const radioButton = (
+    //     <label key={i}>
+    //       <input
+    //         type="radio"
+    //         name={input}
+    //         value={i}
+    //         checked={checked === i}
+    //         onChange={() => {
+    //           trackRadioValues(input, i);
+    //         }}
+    //       />
+    //       {i}
+    //     </label>
+    //   );
+    //   radioButtons.push(radioButton);
+    // }
+    // return (
+    //   <div>
+    //     {radioButtons}
+    //   </div>
+    // );
   }
 
   const displayCharacterRadio = () => {
+    const trackRadioValues = (key, value) => {
+      const newRadioValues = { ...formCharacteristics };
+      newRadioValues[key.input] = value;
+      setFormCharacteristics(newRadioValues);
+    };
+
     if (characteristics) {
       const charKeys = Object.keys(characteristics);
 
@@ -131,7 +128,9 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
             <div key={key} id="reviews-addReviewCharacteristicIndividual">
               {key}
               <DisplayRadioButtons input={key} checked={formCharacteristics[key]}/>
-              <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[key][formCharacteristics[key] - 1]}</span>
+              <CharRadioBtns
+                id={key}
+                trackRadioValues={trackRadioValues}/>
             </div>
           ))}
         </>
