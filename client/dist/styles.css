@@ -944,6 +944,7 @@ width: 30%;
 }
 
 .checkout-contactShippingContainer {
+  margin-top: 10vh;
   position:relative;
   height: 70%;
   width: 60%;
@@ -1240,4 +1241,14 @@ width: 30%;
 .checkout-finalButtons button {
   width: 48%;
   height: 80%;
+}
+
+.checkout-navBar {
+  position: fixed;
+  height: 10vh;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(57, 57, 57);
+  z-index: 5;
 }
