@@ -5,6 +5,7 @@ import ProductOverview from './ProductOverview/ProductOverview.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
+import Home from './home.jsx';
 
 
 import { changeRequestHook } from '../../changeRequestHook.js';
@@ -42,10 +43,11 @@ const App = () => {
         </div>
       </div>
       <div className="content">
-        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
-        <RelatedProducts  request={request}/>
-        <QuestionsAndAnswers  request={request}/>
-        <Reviews  request={request} changeRequestHook={changeRequestHook}/>
+        <Home request={request}/>
+        {/*<ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>*/}
+        {/*<RelatedProducts  request={request}/>*/}
+        {/*<QuestionsAndAnswers  request={request}/>*/}
+        {/*<Reviews  request={request} changeRequestHook={changeRequestHook}/>*/}
       </div>
     </>
   )
