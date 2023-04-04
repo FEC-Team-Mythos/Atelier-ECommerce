@@ -42,7 +42,7 @@ function App() {
           element={(
             <div className="content">
               <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct} cartItems={cartItems} setCartItems={setCartItems} />
-              <RelatedProducts request={request} />
+              <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
               <QuestionsAndAnswers request={request} />
               <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} />
             </div>

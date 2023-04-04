@@ -23,6 +23,19 @@ body {background-color: rgb(255, 255, 255);}
   scroll-behavior: smooth;
 }
 
+.related-outfit-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.related-outfit-container {
+  padding: 0px 5px;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
 .related-pre-btn,
 .related-next-btn {
   border: none;
@@ -68,14 +81,13 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .related-card {
-  height: 228px;
-  margin: 15px;
+  height: 250px;
+  width: 150px;
+  margin: 10px;
   padding: 10px;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
-
-
 
 #related-table {
   border: 2px solid rgb(0, 0, 0);
