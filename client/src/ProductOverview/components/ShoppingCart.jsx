@@ -48,7 +48,7 @@ function ShoppingCart({
             ))}
             <div className="overview-bottomButtons">
               <button type="submit" aria-label="Exit Cart" onClick={() => { setCartOpen(false); }}>Exit</button>
-              <button type="submit" aria-label="Check Out">Check Out</button>
+              <button type="submit" aria-label="Check Out" onClick={() => { window.location.assign('checkout'); }}>Check Out</button>
             </div>
           </div>
         )

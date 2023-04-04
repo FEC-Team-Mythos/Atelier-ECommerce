@@ -11,12 +11,11 @@ import ShoppingCart from './components/ShoppingCart.jsx';
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct }) {
+function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct, cartItems, setCartItems }) {
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
   const [mainImage, setMainImage] = useState({});
-  const [cartItems, setCartItems] = useState([]);
   const [expand, setExpand] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
