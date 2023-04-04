@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProductOverview from './ProductOverview/ProductOverview.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
+import CheckOut from './CheckOut/CheckOut.jsx';
 
 import { changeRequestHook } from '../../changeRequestHook.js';
 
@@ -26,20 +28,29 @@ function App() {
     })
     */
 
-    const [outfits, setOutfits] = useState([]);
-    const [avgRating, setAvgRating] = useState(0);
-    const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
-    const [starArr, setStars] = useState('');
+  const [outfits, setOutfits] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
+  const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
+  const [starArr, setStars] = useState('');
+  const [cartItems, setCartItems] = useState([]);
 
   return (
-    <>
-      <div className="content">
-        {/*<ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct}/>*/}
-        <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
-        {/*<QuestionsAndAnswers  request={request}/>*/}
-        {/*<Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct}/>*/}
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <div className="content">
+              <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct} cartItems={cartItems} setCartItems={setCartItems} />
+              <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
+              <QuestionsAndAnswers request={request} />
+              <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} />
+            </div>
+        )}
+        />
+        <Route path="checkout" element={(<CheckOut />)} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

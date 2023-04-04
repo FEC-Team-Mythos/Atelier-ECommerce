@@ -18,6 +18,11 @@ app.get('/related/products', (req, res) => {
   });
 });
 
+//For routing
+app.get('/checkout', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 app.get('*', (req, res) => {
   fetch(req.url, req.body.params, req.method)
     .then((data) => {
@@ -28,6 +33,7 @@ app.get('*', (req, res) => {
       res.sendStatus(404);
     });
 });
+
 
 // async function to get related products
 var getRelated = async function (product_id, callback) {
