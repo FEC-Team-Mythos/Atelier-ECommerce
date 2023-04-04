@@ -1,18 +1,49 @@
 require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const fetch = require('../fetchData');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 const app = express();
 const port = 3000;
 
 const multer = require('multer');
+
 const upload = multer();
 
 const statics = path.join(`${__dirname}/../client/dist`);
 
 app.use(express.static(statics));
 app.use(express.json());
+
+const bucketName = process.env.BUCKET_NAME;
+const region = process.env.BUCKET_REGION;
+const accessKeyId = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+
+const s3Client = new S3Client({
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey,
+  },
+});
+
+const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
+  console.log(fileBuffer, fileName, ContentType);
+  const uploadParams = {
+    Bucket: bucketName,
+    Body: fileBuffer,
+    Key: fileName,
+    ContentType,
+  };
+
+  photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
+  console.log(photoPost)
+  //SEND BACK URL
+  //COMPILE URLS TO SEND TO API
+};
 
 // path for related products
 app.get('/related/products', (req, res) => {
@@ -45,11 +76,10 @@ var getRelated = async function (product_id, callback) {
   callback(relatedProducts);
 };
 
-app.post('/reviews', upload.any(), (req, res) => {
+app.post('/reviews', upload.any(), async (req, res) => {
   const { body, files } = req;
-
-  console.log(body);
   console.log(files);
+  uploadPhoto(files[0].buffer, files[0].originalname, files[0].mimetype);
 
   fetch(req.url, req.body, req.method)
     .then(() => {
