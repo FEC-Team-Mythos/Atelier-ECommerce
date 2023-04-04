@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fetch = require('../fetchData');
+const axios = require('axios')
+
 const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
@@ -37,7 +39,6 @@ const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
     Body: fileBuffer,
     Key: fileName,
     ContentType,
-    'x-amz-acl': 'public-read',
   };
 
   const getParams = {
@@ -48,8 +49,16 @@ const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
   const getCommand = new GetObjectCommand({ Bucket: bucketName, Key: fileName });
 
   const photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
-  const photoURL = await getSignedUrl(s3Client, getCommand, { expiresIn: 3600 });
-  return photoURL;
+  const photoURL = await getSignedUrl(s3Client, getCommand);
+  const shortURL = await axios.post('https://api-ssl.bitly.com/v4/shorten', {
+    long_url: photoURL,
+    domain: 'bit.ly',
+  }, {
+    headers: {
+      Authorization: process.env.BITLY_TOKEN,
+    },
+  });
+  return shortURL.data.link;
 };
 
 // path for related products
@@ -96,7 +105,7 @@ app.post('/reviews', upload.any(), async (req, res) => {
   newBody.rating = Number(body.rating);
   newBody.recommend = (body.recommend === 'true');
   newBody.photos = photoArr;
-  newBody.characteristics = JSON.parse(body.characteristics)
+  newBody.characteristics = JSON.parse(body.characteristics);
 
   fetch(req.url, {...newBody}, req.method)
     .then(() => {
