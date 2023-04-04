@@ -11,6 +11,10 @@ const statics = path.join(`${__dirname}/../client/dist`);
 app.use(express.static(statics));
 app.use(express.json());
 
+app.get('/product', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 // path for related products
 app.get('/related/products', (req, res) => {
   getRelated(req.query.product_id, (relatedProducts) => {

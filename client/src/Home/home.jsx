@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard.jsx';
 
-function Home() {
+function Home({ navigate }) {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
