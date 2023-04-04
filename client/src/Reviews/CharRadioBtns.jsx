@@ -64,7 +64,7 @@ function RadioButtons({ id, trackRadioValues }) {
         />
         5
       </label>
-      <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[id][selectedOption]}</span>
+      <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[id][selectedOption - 1]}</span>
     </div>
   );
 }
