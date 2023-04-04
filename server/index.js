@@ -59,6 +59,8 @@ const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
     },
   });
   return shortURL.data.link;
+
+  //NEED TO BUY BITLY MONTHLY MEMBERSHIP
 };
 
 // path for related products
@@ -100,6 +102,8 @@ app.post('/reviews', upload.any(), async (req, res) => {
     photoArr.push(currPhotoURL);
   }
 
+  console.log('photo arr', photoArr);
+
   const newBody = body;
   newBody.product_id = Number(body.product_id);
   newBody.rating = Number(body.rating);
@@ -112,7 +116,7 @@ app.post('/reviews', upload.any(), async (req, res) => {
       res.sendStatus(201);
     })
     .catch((err) => {
-      // console.log('Could not post data: ', err);
+      console.log('Could not post data: ', err);
       res.sendStatus(501);
     });
 });
