@@ -9,7 +9,7 @@ function Filter({ allReviews, sortParam, setSortParam }) {
 
     return (
       <select id="reviews-sorting" data-testid="reviews-sorting" value={sortParam} onChange={handleChange}>
-        <option value="relevance">Relevance</option>
+        <option value="relevant">Relevance</option>
         <option data-testid="reviews-dropNew" value="helpful">Helpful</option>
         <option value="newest">Newest</option>
       </select>

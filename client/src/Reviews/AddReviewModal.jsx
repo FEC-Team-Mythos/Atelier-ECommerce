@@ -51,8 +51,15 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
 
     data.append('characteristics', JSON.stringify(charObj));
 
-    await axios.post('/reviews', data, {headers: {'Content-Type': 'multipart/form-data'}});
-    toggleAddReviewState(!addReviewState);
+    axios.post('/reviews', data, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then((postReview) => {
+        console.log('success');
+        toggleAddReviewState(!addReviewState);
+      })
+      .catch((e) => {
+        console.log(e);
+        toggleAddReviewState(!addReviewState);
+      });
   };
 
   const handleRecommendChange = (e) => {
