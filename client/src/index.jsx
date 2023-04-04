@@ -33,6 +33,7 @@ function App() {
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
   const [starArr, setStars] = useState('');
   const [cartItems, setCartItems] = useState([]);
+  const [productId, setProductId] = useState(71697);
 
   return (
     <BrowserRouter>

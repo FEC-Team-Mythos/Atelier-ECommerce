@@ -11,7 +11,7 @@ import ShoppingCart from './components/ShoppingCart.jsx';
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct, cartItems, setCartItems }) {
+function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct, cartItems, setCartItems, productId }) {
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
