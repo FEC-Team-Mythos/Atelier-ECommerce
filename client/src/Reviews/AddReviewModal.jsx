@@ -44,11 +44,12 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     data.append('recommend', formRecommend);
     data.append('name', formName);
     data.append('email', formEmail);
-    data.append('characteristics', charObj);
 
     formPhotos.forEach((photo) => {
       data.append('file', photo);
     });
+
+    data.append('characteristics', JSON.stringify(charObj));
 
     await axios.post('/reviews', data, {headers: {'Content-Type': 'multipart/form-data'}});
     toggleAddReviewState(!addReviewState);
