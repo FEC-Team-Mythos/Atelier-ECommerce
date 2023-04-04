@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProductOverview from './ProductOverview/ProductOverview.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
-import Home from './home.jsx';
 
 
 import { changeRequestHook } from '../../changeRequestHook.js';
 
-const App = () => {
-
-  const request = (endpoint, params={}, method='get') => {
-    return axios({
-      method: method,
-      url: endpoint,
-      params: params
-    });
-  };
+function App() {
+  const request = (endpoint, params = {}, method = 'get') => axios({
+    method,
+    url: endpoint,
+    params,
+  });
   /* EXAMPLE REQUEST WITHIN WIDGET. MAKE SURE TO EITHER CALL props.request OR { request }
   ___________________________________________________________________________________________
 
@@ -31,7 +28,11 @@ const App = () => {
     })
     */
 
-    const [outfits, setOutfits] = useState([]);
+  const [outfits, setOutfits] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
+  const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
+  const [starArr, setStars] = useState('');
+  const [cartItems, setCartItems] = useState([]);
 
   return (
     <>
@@ -43,11 +44,10 @@ const App = () => {
         </div>
       </div>
       <div className="content">
-        <Home request={request}/>
-        {/*<ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>*/}
-        {/*<RelatedProducts  request={request}/>*/}
-        {/*<QuestionsAndAnswers  request={request}/>*/}
-        {/*<Reviews  request={request} changeRequestHook={changeRequestHook}/>*/}
+        <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+        <RelatedProducts  request={request}/>
+        <QuestionsAndAnswers  request={request}/>
+        <Reviews  request={request} changeRequestHook={changeRequestHook}/>
       </div>
     </>
   )

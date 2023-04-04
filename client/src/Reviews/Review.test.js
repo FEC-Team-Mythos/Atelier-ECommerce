@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '@testing-library/jest-dom';
 import {
   render, fireEvent, waitFor, screen,
 } from '@testing-library/react';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { expect, jest, test } from '@jest/globals';
+
 import Reviews from './Reviews.jsx';
 import ReviewList from './ReviewList.jsx';
 import ReviewTile from './ReviewTile.jsx';
+import Filter from './Filter.jsx';
+import NewBreakdown from './NewBreakdown.jsx';
+import Characteristics from './Characteristics.jsx';
+import AddReviewModal from './AddReviewModal.jsx';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { changeRequestHook } from '../../../changeRequestHook.js';
 
 library.add(faStar);
 library.add(faCheck);
-
-import {expect, jest, test} from '@jest/globals';
 
 jest.mock('axios');
 
@@ -67,7 +72,7 @@ const mockDataWithMoreReviews = [
     body: "I would buy these again. But you shouldn't buy them because then there are more for me!",
     date: '2022-08-27T00:00:00.000Z',
     reviewer_name: 'guest',
-    helpfulness: 1,
+    helpfulness: 2,
     photos: [],
   },
   {
@@ -79,7 +84,7 @@ const mockDataWithMoreReviews = [
     body: "This product is acceptable. I wouldn't write home about it, but it's good enough for what you need it for.",
     date: '2022-10-22T00:00:00.000Z',
     reviewer_name: 'bubs',
-    helpfulness: 1,
+    helpfulness: 10,
     photos: [],
   },
   {
@@ -103,33 +108,81 @@ const mockDataWithMoreReviews = [
     body: 'I liked it cause its great and this needs to be longer',
     date: '2022-10-15T00:00:00.000Z',
     reviewer_name: 'camer',
-    helpfulness: 0,
+    helpfulness: 5,
     photos: [],
   },
 ];
+
+const mockMetaData = {
+  product_id: '71697',
+  ratings: {
+    1: '56',
+    2: '22',
+    3: '41',
+    4: '66',
+    5: '165',
+  },
+  recommended: {
+    false: '74',
+    true: '276',
+  },
+  characteristics: {
+    Fit: {
+      id: 240582,
+      value: '3.5714285714285714',
+    },
+    Length: {
+      id: 240583,
+      value: '3.1346153846153846',
+    },
+    Comfort: {
+      id: 240584,
+      value: '3.3346007604562738',
+    },
+    Quality: {
+      id: 240585,
+      value: '3.5077519379844961',
+    },
+  },
+};
 
 describe('Reviews', () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
-  test('Reviews should render to page', async () => {
-    axios.get.mockResolvedValue({ data: mockData });
-    const widget = render(<Reviews request={request} />);
-    const reviewDiv = widget.container.querySelector('#reviews');
-    await waitFor(() => {
-      expect(reviewDiv.id).toEqual('reviews');
-    });
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
-  test('Reviews should render to 2 child components', async () => {
-    axios.get.mockResolvedValue({ data: mockData });
-    const widget = render(<Reviews request={request} />);
-    const reviewDiv = widget.container.querySelector('#reviews');
+  test('Reviews should render to page', () => {
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<Reviews request={request} changeRequestHook={changeRequestHook} setAvgRating={setAvgRating} setStars={setStars} />);
+    const widget = screen.getByTestId('reviews');
+    expect(widget).toBeInTheDocument();
+  });
+
+  test('Reviews should fetch reviews and review meta data upon page load', async () => {
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<Reviews request={request} changeRequestHook={changeRequestHook} setAvgRating={setAvgRating} setStars={setStars} />);
+
+    axios.get.mockImplementation((url) => {
+      if (url === '/reviews') {
+        return Promise.resolve({ data: mockData });
+      }
+      if (url === '/reviews/meta') {
+        return Promise.resolve({ data: mockMetaData });
+      }
+    });
+
     await waitFor(() => {
-      expect(reviewDiv.children.length).toBe(2);
+      expect(axios.get).toHaveBeenCalledWith('/reviews', { params: { count: 250, product_id: 71697, sort: 'relevant' } });
+      expect(axios.get).toHaveBeenCalledWith('/reviews/meta', { params: { product_id: 71697 } });
     });
   });
+  // TODO TEST SORTING, TEST FILTERING
 });
 
 describe('Review List', () => {
@@ -139,13 +192,13 @@ describe('Review List', () => {
 
   test('Review List should render to page', () => {
     const data = axios.get.mockResolvedValue({ data: mockData });
-    render(<ReviewList />);
+    render(<ReviewList metaData={mockMetaData} />);
     const reviewList = screen.getByTestId('reviewList');
     expect(reviewList).toBeInTheDocument();
   });
 
   test('If Total Reviews <= 2, review list should show 2 reviews and no button', () => {
-    render(<ReviewList reviewList={mockData} />);
+    render(<ReviewList reviewList={mockData} metaData={mockMetaData} />);
     const reviews = screen.getAllByTestId('reviews-individualReview');
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
 
@@ -157,7 +210,7 @@ describe('Review List', () => {
   });
 
   test('If Total Reviews > 2, review list should initially show 2 reviews and more reviews button', () => {
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const firstListOfReviews = screen.getAllByTestId('reviews-individualReview');
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
     expect(firstListOfReviews.length).toBe(2);
@@ -165,7 +218,7 @@ describe('Review List', () => {
   });
 
   test('Clicking More Reviews Button should increment list by 2', () => {
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const firstListOfReviews = screen.getAllByTestId('reviews-individualReview');
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
     expect(firstListOfReviews.length).toBe(2);
@@ -175,7 +228,7 @@ describe('Review List', () => {
   });
 
   test('Button should dissappear if no more reviews are available to be shown', () => {
-    render(<ReviewList reviewList={mockDataWithMoreReviews} />);
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
     const moreReviewsButton = screen.queryByTestId('reviews-moreReviews-button');
     expect(moreReviewsButton).toBeInTheDocument();
     fireEvent.click(moreReviewsButton);
@@ -212,11 +265,10 @@ describe('Review Tile', () => {
     expect(reviewStars.length).toBe(4);
   });
 
-  // if body > 250, button should display with hidden part of review
   test('Summary and Body should be standard lengths', () => {
     render(<ReviewTile review={review} />);
     const reviewBody = screen.getByTestId('reviews-individualReview-body');
-    //250 Character Body + 6 Characters from Button
+    // 250 Character Body + 6 Characters from Button
     expect(reviewBody.textContent.length).toBe(256);
     const reviewBodyButton = screen.getByTestId('reviews-individualReview-bodyBtn');
     fireEvent.click(reviewBodyButton);
@@ -244,20 +296,143 @@ describe('Review Tile', () => {
   });
 });
 
-xdescribe('Sorting', () => {
+describe('Sorting', () => {
   beforeEach(() => {
     jest.resetModules();
   });
 
   test('Should display dropdown with 3 sorting options', () => {
-
+    const sortingOptions = ['Relevance', 'Helpful', 'Newest'];
+    render(<ReviewList reviewList={mockDataWithMoreReviews} metaData={mockMetaData} />);
+    const filterDropdown = screen.queryByTestId('reviews-sorting');
+    fireEvent.click(filterDropdown);
+    sortingOptions.forEach((option) => {
+      expect(screen.getByText(option)).toBeInTheDocument();
+    });
   });
 
-  test('Changing Sort Option should sort review list', () => {
-
+  test('Displays selected sorting option correctly', () => {
+    const sortParam = 'helpful';
+    render(<Filter sortParam={sortParam} />);
+    const filter = screen.getByTestId('reviews-sorting');
+    expect(filter).toHaveValue('helpful');
   });
 
-  test('Sorting should persist when filters are added/removed', () => {
+  test('Changes sorting option when new option is selected from dropdown', () => {
+    const setSortParam = jest.fn();
+    render(<Filter setSortParam={setSortParam} />);
+    const filter = screen.getByTestId('reviews-sorting');
+    fireEvent.change(filter, { target: { value: 'helpful' } });
+    expect(setSortParam).toHaveBeenCalledWith('helpful');
+  });
 
+  test('Displays total number of reviews', () => {
+    render(<Filter allReviews={mockDataWithMoreReviews} />);
+    const filter = screen.getByTestId('reviews-filter');
+    expect(filter).toHaveTextContent('4 Total Reviews');
+  });
+});
+
+describe('Rating Graph', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Should display correct average rating based on metadata', async () => {
+    const ratings = {
+      1: '56',
+      2: '22',
+      3: '41',
+      4: '66',
+      5: '165',
+    };
+    const setFilterParams = jest.fn();
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars} avgRating={3.7} />);
+    const totalRatings = Object.keys(ratings).reduce((acc, rating) => acc + (rating * ratings[rating]), 0);
+    const avgRating = (totalRatings / 350).toFixed(1);
+    const graph = screen.getByTestId('reviews-breakdown');
+    expect(graph).toHaveTextContent(avgRating);
+  });
+
+  test('Should display correct recommended percentage', () => {
+    const recommended = {
+      false: 74,
+      true: 276,
+    };
+    const setFilterParams = jest.fn();
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars}  />);
+    const totalRecommend = Math.round(recommended.true / (recommended.true + recommended.false));
+    const graph = screen.getByTestId('reviews-breakdown');
+    expect(graph).toHaveTextContent(totalRecommend);
+  });
+
+  test('Should render ratings graph', () => {
+    const setFilterParams = jest.fn();
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars}  />);
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByText('3')).toBeInTheDocument();
+    expect(screen.getByText('4')).toBeInTheDocument();
+    expect(screen.getByText('5')).toBeInTheDocument();
+  });
+
+  test('Should filter review list by clicking on graph', () => {
+    const setFilterParams = jest.fn();
+    const setAvgRating = jest.fn();
+    const setStars = jest.fn();
+    render(<NewBreakdown metaData={mockMetaData} filterParams={[5]} setFilterParams={setFilterParams} setAvgRating={setAvgRating} setStars={setStars} />);
+    const ratingFilter4 = screen.getByText('4');
+    const ratingFilter3 = screen.getByText('3');
+    fireEvent.click(ratingFilter4);
+    expect(setFilterParams).toHaveBeenCalledWith([5, 4]);
+    fireEvent.click(ratingFilter4);
+    fireEvent.click(ratingFilter3);
+    expect(setFilterParams).toHaveBeenCalledWith([5, 3]);
+  });
+});
+
+describe('Characteristics Sliders', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Should display slider for all available characteristics', () => {
+    render(<Characteristics characteristics={mockMetaData.characteristics} />);
+    const sliders = screen.getByTestId('reviews-sliders');
+    expect(sliders).toHaveTextContent('Fit');
+    expect(sliders).toHaveTextContent('Length');
+    expect(sliders).toHaveTextContent('Comfort');
+    expect(sliders).toHaveTextContent('Quality');
+  });
+});
+
+describe('Adding New Review', () => {
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  test('Form should submit if all fields are filled out properly', async () => {
+    const toggleAddReviewState = jest.fn();
+    render(<AddReviewModal characteristics={mockMetaData.characteristics} addReviewState toggleAddReviewState={toggleAddReviewState} />);
+    fireEvent.input(screen.getByTestId('reviews-addReviewSummaryText'), { target: { value: 'Lorem Ipsum Summary' } });
+    fireEvent.input(screen.getByTestId('reviews-addReviewBodyText'), { target: { value: 'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,' } });
+    fireEvent.input(screen.getByTestId('reviews-addReviewName'), { target: { value: 'tester4567' } });
+    fireEvent.input(screen.getByTestId('reviews-addReviewEmail'), { target: { value: 'tester4567@yahoo.com' } });
+
+    fireEvent.mouseEnter(screen.getByTestId('reviews-addReviewStars3', { key: '3' }));
+    fireEvent.click(screen.getByTestId('reviews-addReviewStars3', { key: '3' }));
+
+    fireEvent.click(screen.getByTestId('reviews-addReviewRecYes'));
+
+    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+
+    await waitFor(() => expect(axios.post).toHaveBeenCalled());
   });
 });
