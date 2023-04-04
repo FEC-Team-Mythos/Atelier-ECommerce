@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fetch = require('../fetchData');
@@ -21,6 +22,10 @@ app.get('/products', (req, res) => {
   getProducts(req.query.page, req.query.count, (products) => {
     res.send(products);
   });
+});
+//For routing
+app.get('/checkout', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.get('*', (req, res) => {
@@ -57,6 +62,18 @@ var getRelated = async function (product_id, callback) {
   }
   callback(relatedProducts);
 };
+
+app.post('/reviews', (req, res) => {
+  console.log('abc', req);
+  fetch(req.url, req.body, req.method)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('Could not post data: ', err);
+      res.sendStatus(501);
+    });
+});
 
 app.post('*', (req, res) => {
   fetch(req.url, req.body.params, req.method)
