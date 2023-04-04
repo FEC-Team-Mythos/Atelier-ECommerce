@@ -3,7 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const fetch = require('../fetchData');
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
 const app = express();
 const port = 3000;
@@ -31,18 +32,24 @@ const s3Client = new S3Client({
 });
 
 const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
-  console.log(fileBuffer, fileName, ContentType);
   const uploadParams = {
     Bucket: bucketName,
     Body: fileBuffer,
     Key: fileName,
     ContentType,
+    'x-amz-acl': 'public-read',
   };
 
-  photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
-  console.log(photoPost)
-  //SEND BACK URL
-  //COMPILE URLS TO SEND TO API
+  const getParams = {
+    Bucket: bucketName,
+    Key: fileName,
+  }
+
+  const getCommand = new GetObjectCommand({ Bucket: bucketName, Key: fileName });
+
+  const photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
+  const photoURL = await getSignedUrl(s3Client, getCommand, { expiresIn: 3600 });
+  return photoURL;
 };
 
 // path for related products
@@ -78,10 +85,20 @@ var getRelated = async function (product_id, callback) {
 
 app.post('/reviews', upload.any(), async (req, res) => {
   const { body, files } = req;
-  console.log(files);
-  uploadPhoto(files[0].buffer, files[0].originalname, files[0].mimetype);
+  const photoArr = [];
+  for (var i = 0; i < files.length; i++) {
+    const currPhotoURL = await uploadPhoto(files[i].buffer, files[i].originalname, files[i].mimetype);
+    photoArr.push(currPhotoURL);
+  }
 
-  fetch(req.url, req.body, req.method)
+  const newBody = body;
+  newBody.product_id = Number(body.product_id);
+  newBody.rating = Number(body.rating);
+  newBody.recommend = (body.recommend === 'true');
+  newBody.photos = photoArr;
+  newBody.characteristics = JSON.parse(body.characteristics)
+
+  fetch(req.url, {...newBody}, req.method)
     .then(() => {
       res.sendStatus(201);
     })
