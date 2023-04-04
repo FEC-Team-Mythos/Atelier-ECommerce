@@ -14,7 +14,6 @@ const fetchData = (endpoint, params = {}, method = 'get') => {
   } else {
     requestData.data = params;
   }
-
   return axios(requestData);
 };
 
