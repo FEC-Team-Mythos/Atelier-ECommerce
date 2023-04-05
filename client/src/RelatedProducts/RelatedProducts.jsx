@@ -32,7 +32,7 @@ function RelatedProducts({ request, changeRequestHook, productId }) {
   return (
     <div id="related-products">
       <RelatedList setShowModal={setShowModal} setComparedProduct={setComparedProduct} />
-      <OutfitList currentProduct={currentProduct} />
+      {/* <OutfitList currentProduct={currentProduct} /> */}
       <Modal showModal={showModal} setShowModal={setShowModal} comparedProduct={comparedProduct} currentProduct={currentProduct} />
     </div>
   );
