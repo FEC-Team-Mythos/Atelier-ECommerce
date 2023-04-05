@@ -120,11 +120,13 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-left: 20px
 }
 
 #reviewList {
   flex: 0 0 80%;
   padding:10px;
+  margin-left: 20px;
 }
 
 /* Breakdown Ratings */
@@ -138,11 +140,12 @@ body {background-color: rgb(255, 255, 255);}
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .reviews-ratingbar{
   display: flex;
-  justify-content:space-evenly;
+  justify-content:center;
   align-items: center;
 }
 
@@ -153,17 +156,20 @@ body {background-color: rgb(255, 255, 255);}
 .reviews-leftBarText{
   font-size: 12px;
   white-space: nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .reviews-rightBarText{
   font-size: 12px;
   white-space: nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 #reviews-total-rating-bar {
   background-color: lightgray;
   margin: 10px;
-  flex-grow: 1;
 }
 
 /* Sliders */
@@ -171,6 +177,7 @@ body {background-color: rgb(255, 255, 255);}
   display:flex;
   flex-direction: column;
   font-size: 12px;
+  margin-left: 10px;
 }
 
 .reviews-slider-leftLabel {
@@ -274,7 +281,7 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .oneQuarter {
-  clip-path: polygon(0 0, 20% 0, 20% 100%, 0 100%);
+  clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
 }
 */
 

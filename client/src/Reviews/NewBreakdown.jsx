@@ -71,8 +71,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
 
   const displayRecommended = () => (
     <div>
-      {recommended}
-      % recommended
+      {recommended + '% recommended'}
     </div>
   );
 
@@ -92,7 +91,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
           const barStyle = {
             backgroundColor: '#2E8B57',
             height: '10px',
-            width: ((rating.count / allReviews.length) * 200),
+            width: ((rating.count / allReviews.length) * 250),
           };
 
           return (
@@ -101,7 +100,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
                 {`${rating.rating} `}
                 <FontAwesomeIcon icon="fa-solid fa-star" />
               </span>
-              <div id="reviews-total-rating-bar" style={{ width: 200 }}>
+              <div id="reviews-total-rating-bar" style={{ width: 250 }}>
                 <div id={`${rating.rating}-rating-bar`} style={barStyle} />
               </div>
               <span className="reviews-rightBarText">{calcReviewNum(rating.rating)}</span>
