@@ -82,6 +82,8 @@ function AddAnswerModal({
               Q:
               {' '}
               {questionText}
+              <br />
+              <br />
             </label>
             <label className="qa-modal-a-label">
               Your Answer*
