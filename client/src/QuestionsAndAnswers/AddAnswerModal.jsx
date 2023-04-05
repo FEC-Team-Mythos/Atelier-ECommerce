@@ -1,7 +1,7 @@
 // client/src/QuestionsAndAnswers/AddAnswerModal.jsx
 import React, { useState } from 'react';
 
-const AddAnswerModal = ({ question, questionId, showModal, handleClose }) => {
+const AddAnswerModal = ({ question, questionId, showModal, handleClose, request }) => {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
@@ -31,9 +31,16 @@ const AddAnswerModal = ({ question, questionId, showModal, handleClose }) => {
       email,
     };
 
-    // TODO: post request to server/API
-    console.log(`[POST/todo] Submitting answer "${formData.body}" for question ${questionId}...`);
-    console.log(`...with nickname "${formData.name}" and email "${formData.email}"`);
+    // POST answer to API
+    console.log(`Submitting answer "${formData.body}" for question ${questionId}...`);
+    var answerEndpoint = `/qa/questions/${questionId}/answers`;
+    request(answerEndpoint, formData, 'post')
+      .then((response) => {
+        console.log('Success, answer submitted: ', response);
+      })
+      .catch((error) => {
+        console.log('Error submitting answer: ', error);
+      });
 
     // finally, clear form fields & close modal
     setAnswer('');

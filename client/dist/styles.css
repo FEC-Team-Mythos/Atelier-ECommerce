@@ -390,3 +390,156 @@ body {background-color: rgb(255, 255, 255);}
   width: 80px;
   height: 100px;
 }
+
+/* Questions & Answers */
+
+body {
+  font-family: 'adobe-clean', sans-serif;
+  color: rgb(52, 52, 52);
+  margin: 0;
+  padding: 0;
+}
+
+.qa-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.qa-heading {
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 0.75em;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.qa-search-container {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid #333;
+}
+
+.qa-search-input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  font-size: 12px;
+  outline: none;
+  flex-grow: 1;
+  font-weight: bold;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.qa-search-btn {
+  position: absolute;
+  right: 8px;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  outline: none;
+}
+
+.qa-search-icon {
+  font-size: 18px;
+}
+
+.qa-buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.qa-btn-load-more,
+.qa-btn-add-question {
+  display: inline-block;
+  padding: 20px 16px;
+  margin: 2%;
+  border: 1px solid #333;
+  background-color: transparent;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+}
+
+.qa-question-list {
+  max-height: 500px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.qa-question-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.qa-question-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qa-question-body {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.qa-question-info {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.qa-answer {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.qa-answer-body {
+  font-size: 1.1em;
+  font-weight: normal;
+}
+
+.qa-answer-info {
+  display: flex;
+  font-size: 0.7em;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.qa-btn-helpful,
+.qa-btn-report {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  outline: none;
+}
+
+.qa-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  margin-top: 20px;
+}

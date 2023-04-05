@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
-import ProductOverview from './ProductOverview/ProductOverview.jsx';
+//import ProductOverview from './ProductOverview/ProductOverview.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
-import Reviews from './Reviews/Reviews.jsx';
+//import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+//import Reviews from './Reviews/Reviews.jsx';
 
 import { changeRequestHook } from '../../changeRequestHook.js';
 
 const App = () => {
 
-  const request = (endpoint, params={}, method='get') => {
+  const request = (endpoint, params = {}, method = 'get') => {
     return axios({
       method: method,
       url: endpoint,
@@ -29,9 +29,18 @@ const App = () => {
     })
     */
 
-    const [outfits, setOutfits] = useState([]);
-    const [avgRating, setAvgRating] = useState(0);
-    const [starArr, setStars] = useState('');
+  const [outfits, setOutfits] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
+  const [starArr, setStars] = useState('');
+  const testProductId = 71714;
+
+  /**
+   *
+      <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
+      <RelatedProducts  request={request}/>
+      <QuestionsAndAnswers request={request} productId={testProductId} changeRequestHook={changeRequestHook}/>
+      <Reviews  request={request} changeRequestHook={changeRequestHook}/>
+   */
 
   return (
     <>
@@ -45,8 +54,9 @@ const App = () => {
       <div className="content">
         {/* <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook}/>
         <RelatedProducts  request={request}/>
-        <QuestionsAndAnswers  request={request}/> */}
         <Reviews  request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars ={setStars} avgRating={avgRating} setAvgRating={setAvgRating}/>
+    */}
+        <QuestionsAndAnswers request={request} productId={testProductId} changeRequestHook={changeRequestHook} />
       </div>
     </>
   )

@@ -1,21 +1,28 @@
 // client/src/QuestionsAndAnswers/QuestionsList.jsx
-import React from 'react';
+import React, {useEffect} from 'react';
 import Question from './Question.jsx';
+//import '../dist/styles.css';
 
-const QuestionsList = ({ questions, productId, searchTerm, handleAddAnswerClick }) => {
+
+const QuestionsList = ({ questions, productId, searchTerm, handleAddAnswerClick, visibleQuestionsCount, setMoreQuestionsAvailable, request }) => {
   const filteredQuestions = questions.filter((question) => {
-    // for case-insensitive search, we just convert to lowercase
     return question.question_body.toLowerCase().includes(searchTerm.toLowerCase());
-  });
+  }).sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+
+  useEffect(() => {
+    setMoreQuestionsAvailable(visibleQuestionsCount < filteredQuestions.length);
+  }, [visibleQuestionsCount, filteredQuestions])
 
   return (
-    <div>
-      {filteredQuestions.map((question) => {
+    <div className="qa-question-list">
+      {filteredQuestions.slice(0, visibleQuestionsCount).map((question) => {
         return (
           <Question
             key={question.question_id}
             question={question}
             handleAddAnswerClick={handleAddAnswerClick}
+            request={request}
+            visibleQuestionsCount={visibleQuestionsCount}
           />
         );
       })}
