@@ -31,7 +31,7 @@ function RelatedProducts({ request, outfits, setOutfits, changeRequestHook, prod
 
   return (
     <div id="related-products">
-      <RelatedList setShowModal={setShowModal} setComparedProduct={setComparedProduct} />
+      <RelatedList setShowModal={setShowModal} setComparedProduct={setComparedProduct} productId={productId}/>
       <OutfitList outfits={outfits} setOutfits={setOutfits} currentProduct={currentProduct} product={product} productInformation={productInformation}/>
       <Modal showModal={showModal} setShowModal={setShowModal} comparedProduct={comparedProduct} currentProduct={currentProduct} />
     </div>
