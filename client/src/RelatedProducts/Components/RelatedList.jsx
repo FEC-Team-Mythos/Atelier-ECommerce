@@ -3,13 +3,13 @@ import axios from 'axios';
 import Carousel from './Carousel.jsx';
 
 // this component gets the data for "Related Products" and sends it to the Carousel component
-function RelatedList({ setShowModal, setComparedProduct }) {
+function RelatedList({ setShowModal, setComparedProduct, productId }) {
   const [related, setRelated] = useState([]);
   const listType = { type: 'related' };
 
   // get related products object data
   useEffect(() => {
-    axios.get('/related/products', { params: { product_id: 71697 } })
+    axios.get('/related/products', { params: { product_id: productId } })
       .then((response) => {
         setRelated(response.data);
       });
