@@ -30,6 +30,8 @@ function App() {
     })
     */
 
+    var url = window.location.href.slice(30);
+
   const [outfits, setOutfits] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
@@ -37,11 +39,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [product, setProduct] = useState({}); // Product general information
   const [productInformation, setProductInformation] = useState({}); // Style information
-  const [productId, setProductId] = useState(71697); // To be revised tonight. Default to 0 on homepage. Homepage will set id
-
-  useEffect(() => {
-    console.log('rerender');
-  }, [productId]);
+  const [productId, setProductId] = useState(url); // To be revised tonight. Default to 0 on homepage. Homepage will set id
 
   return (
     <BrowserRouter>
