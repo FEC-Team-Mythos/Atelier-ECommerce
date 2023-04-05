@@ -15,7 +15,7 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(1);
+  const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(2);
   const [totalQuestionsCount, setTotalQuestionsCount] = useState(0);
   const [moreQuestionsAvailable, setMoreQuestionsAvailable] = useState(false);
 
