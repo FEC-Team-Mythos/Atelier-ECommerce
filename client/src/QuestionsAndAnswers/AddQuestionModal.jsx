@@ -2,6 +2,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
+// client/src/QuestionsAndAnswers/AddQuestionModal.jsx
 import React, { useState } from 'react';
 
 function AddQuestionModal({
@@ -41,7 +42,7 @@ function AddQuestionModal({
     const formData = {
       body: question,
       name: nickname,
-      email,
+      email: email,
       product_id: productId,
     };
 

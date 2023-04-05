@@ -198,6 +198,7 @@ function Question({ question, request }) {
 
       <AddAnswerModal
         questionId={question.question_id}
+        questionText={question.question_body}
         showModal={showModal}
         handleClose={handleCloseModal}
         request={request}
