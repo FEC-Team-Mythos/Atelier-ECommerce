@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
@@ -8,7 +11,7 @@ import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 import CheckOut from './CheckOut/CheckOut.jsx';
 
-import { changeRequestHook } from '../../changeRequestHook.js';
+import { changeRequestHook } from '../../changeRequestHook';
 
 function App() {
   const request = (endpoint, params = {}, method = 'get') => axios({
@@ -28,14 +31,15 @@ function App() {
     })
     */
 
-  const [outfits, setOutfits] = useState([]);
-  const [avgRating, setAvgRating] = useState(0);
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
   const [starArr, setStars] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [product, setProduct] = useState({}); // Product general information
   const [productInformation, setProductInformation] = useState({}); // Style information
-  const [productId, setProductId] = useState(71697); // To be revised tonight. Default to 0 on homepage. Homepage will set id
+  // eslint-disable-next-line no-unused-vars
+  const [productId, setProductId] = useState(71697); // To be revised tonight. Default to 0.
+  const [outfits, setOutfits] = useState([]);
+  const [avgRating, setAvgRating] = useState(0);
 
   return (
     <BrowserRouter>
@@ -59,11 +63,32 @@ function App() {
                 productInformation={productInformation}
                 setProductInformation={setProductInformation}
               />
-              <RelatedProducts request={request} changeRequestHook={changeRequestHook} productId={productId} product={product} productInformation={productInformation} outfits={outfits} setOutfits={setOutfits}/>
-              <QuestionsAndAnswers request={request} productId={productId} />
-              <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} productId={productId} />
+              <RelatedProducts
+                request={request}
+                changeRequestHook={changeRequestHook}
+                productId={productId}
+                product={product}
+                productInformation={productInformation}
+                outfits={outfits}
+                setOutfits={setOutfits}
+              />
+              <QuestionsAndAnswers
+                request={request}
+                productId={productId}
+                changeRequestHook={changeRequestHook}
+              />
+              <Reviews
+                request={request}
+                changeRequestHook={changeRequestHook}
+                starArr={starArr}
+                setStars={setStars}
+                avgRating={avgRating}
+                setAvgRating={setAvgRating}
+                setTotalReviewsPerProduct={setTotalReviewsPerProduct}
+                productId={productId}
+              />
             </div>
-        )}
+          )}
         />
         <Route path="checkout" element={(<CheckOut />)} />
       </Routes>

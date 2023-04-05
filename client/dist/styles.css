@@ -1278,3 +1278,290 @@ width: 30%;
   background-color: rgb(57, 57, 57);
   z-index: 5;
 }
+
+/* ______________________ QUESTIONS & ANSWERS ___________________________*/
+
+body {
+  font-family: 'adobe-clean', sans-serif;
+  color: rgb(42, 42, 42);
+  margin: 0;
+  padding: 0;
+}
+
+.qa-question-body,
+.qa-question-helpful,
+.qa-btn-add-answer,
+.qa-answer-body,
+.qa-answerer-name,
+.qa-answer-helpful,
+.qa-btn-helpful,
+.qa-btn-report,
+.qa-btn-load-more,
+.qa-btn-add-question,
+.qa-btn-more-answers {
+  color: rgb(88, 88, 88);
+}
+
+.qa-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.qa-heading, .qa-question-helpful, .qa-answer-info {
+  font-weight: lighter;
+  font-size: 0.8em;
+}
+
+.qa-heading {
+  text-transform: uppercase;
+}
+
+.qa-heading {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.qa-search-container {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid #333;
+}
+
+.qa-search-input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  font-size: .9em;
+  outline: none;
+  flex-grow: 1;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.qa-search-btn {
+  position: absolute;
+  right: 8px;
+  padding: 8px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  outline: none;
+}
+
+.qa-search-icon {
+  font-size: 18px;
+}
+
+.qa-btn-load-more,
+.qa-btn-add-question {
+  padding: 20px 16px;
+  margin: 2%;
+  border: 1px solid #333;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+}
+
+.qa-question-list {
+  max-height: 500px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.qa-question-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.qa-question-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qa-question-body, .qa-answer-label {
+  font-weight: bold;
+  font-size: 1.0em;
+  margin: 0;
+}
+
+
+.qa-question-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.qa-answer-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.qa-answer {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.87em;
+  font-weight: lighter;
+  margin-top: 5px;
+}
+
+.qa-answer-body {
+  font-size: .92em;
+  font-weight: normal;
+}
+
+.qa-btn-helpful,
+.qa-btn-add-answer,
+.qa-btn-report {
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  text-transform:none;
+  cursor: pointer;
+  padding: 0;
+  font-size: .9em;
+  font-weight: lighter;
+  outline: none;
+}
+
+.qa-btn-helpful {
+  font-size: .9em;
+}
+
+.qa-btn-more-answers {
+  display: block;
+  text-align: left;
+  font-size: .7em;
+  font-weight: 575;
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  outline: none;
+}
+
+.qa-buttons-container {
+  display: flex;
+  justify-content: left;
+  gap: 3px;
+  width: 80%;
+  margin-top: 15px;
+}
+
+.qa-modal-a-overlay,
+.qa-modal-visible {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.qa-modal-a,
+.qa-modal-q-main {
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 4px;
+  width: 50%;
+  max-width: 500px;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.qa-modal-a-header,
+.qa-modal-q-main h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.qa-modal-a-body label,
+.qa-modal-q-main label {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.qa-modal-a-textarea,
+.qa-modal-q-main textarea,
+.qa-modal-a-input,
+.qa-modal-q-main input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+  outline: none;
+  width: 100%;
+}
+
+.qa-modal-a-textarea,
+.qa-modal-q-main textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+.qa-modal-a-submit,
+.qa-modal-q-main button[type="button"],
+.qa-modal-a-cancel {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 2%;
+  border: 1px solid #333;
+  background-color: transparent;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+}
+
+.qa-modal-a-submit,
+.qa-modal-q-main button[type="button"] {
+  color: #001125;
+}
+
+.qa-modal-a-cancel {
+  color: #555;
+}
+
+.qa-modal-a-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.qa-modal-a-close:hover {
+  color: rgb(0, 0, 0);
+}
