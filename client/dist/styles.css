@@ -411,7 +411,7 @@ body {
 .qa-heading {
   text-transform: uppercase;
   font-weight: lighter;
-  font-size: 0.75em;
+  font-size: .85em;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -431,7 +431,7 @@ body {
   width: 100%;
   padding: 8px;
   border: none;
-  font-size: 12px;
+  font-size: .9em;
   outline: none;
   flex-grow: 1;
   font-weight: bold;
@@ -520,12 +520,13 @@ body {
 
 .qa-answer-info {
   display: flex;
-  font-size: 0.7em;
+  font-size: 0.8em;
   justify-content: space-between;
   align-items: left;
 }
 
 .qa-btn-helpful,
+.qa-btn-add-answer,
 .qa-btn-report {
   background-color: transparent;
   border: none;
@@ -533,7 +534,7 @@ body {
   text-decoration: underline;
   cursor: pointer;
   padding: 0;
-  font-size: 14px;
+  font-size: .9em;
   outline: none;
 }
 
@@ -542,4 +543,109 @@ body {
   justify-content: space-between;
   width: 60%;
   margin-top: 20px;
+}
+
+.qa-modal-a-overlay,
+.qa-modal-visible {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.qa-modal-a,
+.qa-modal-q-main {
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 4px;
+  width: 50%;
+  max-width: 500px;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.qa-modal-a-header,
+.qa-modal-q-main h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.qa-modal-a-body label,
+.qa-modal-q-main label {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.qa-modal-a-textarea,
+.qa-modal-q-main textarea {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+  outline: none;
+  resize: none;
+  width: 100%;
+  min-height: 100px;
+}
+
+.qa-modal-a-input,
+.qa-modal-q-main input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  margin-bottom: 1em;
+  outline: none;
+  width: 100%;
+}
+
+.qa-modal-a-submit,
+.qa-modal-q-main button[type="button"] {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 2%;
+  border: 1px solid #333;
+  background-color: transparent;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  color: #0070f3;
+}
+
+.qa-modal-a-cancel,
+.qa-modal-q-main button[type="button"] {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 2%;
+  border: 1px solid #333;
+  background-color: transparent;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  color: #555;
+}
+
+.qa-modal-a-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.qa-modal-a-close:hover {
+  color: rgb(0, 0, 0);
 }
