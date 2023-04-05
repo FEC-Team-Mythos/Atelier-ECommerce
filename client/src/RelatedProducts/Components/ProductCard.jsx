@@ -12,19 +12,40 @@ function ProductCard({ product, index, listType, setShowModal, setComparedProduc
       </div>
     );
   }
+  if (listType.type === 'related') {
+    return (
+      <div>
+        <div className="related-card">
+            {listType.type === 'related' ? <button style={{float: 'right'}} onClick={() => { setComparedProduct(product); setShowModal(true); }}>☆</button> : <button style={{float: 'right'}} onClick={() => {handleRemove(product.name)}}>x</button> }
+              <br />
+              <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} />
+              <br />
+              {product.category}
+              <br />
+              {product.name}
+              <br />
+              $
+              {product.default_price}
+              <br />
+              ☆☆☆☆☆
+              <br />
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <div className="related-card">
           {listType.type === 'related' ? <button style={{float: 'right'}} onClick={() => { setComparedProduct(product); setShowModal(true); }}>☆</button> : <button style={{float: 'right'}} onClick={() => {handleRemove(product.name)}}>x</button> }
             <br />
-            <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} />
+            <img src={product.productPhoto} width={125} height={125} />
             <br />
-            {product.category}
+            {product.productCategory}
             <br />
-            {product.name}
+            {product.productName}
             <br />
             $
-            {product.default_price}
+            {product.productCost}
             <br />
             ☆☆☆☆☆
             <br />
