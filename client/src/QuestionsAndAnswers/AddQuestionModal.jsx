@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
@@ -45,8 +46,10 @@ function AddQuestionModal({
     };
 
     // POST question to API
+    console.log(`Submitting q: "${question}" n: "${nickname}"  e: "${email}" p: ${productId}`);
     request('/qa/questions', formData, 'post')
       .then((response) => {
+        console.log('Success, question submitted: ', response);
       })
       .catch((error) => {
         console.error('Error submitting question: ', error);
