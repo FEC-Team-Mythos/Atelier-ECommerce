@@ -92,7 +92,7 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
 
   return (
     <div className="qa-container">
-      <h1 class="qa-heading">
+      <h1 className="qa-heading">
       Questions & Answers
       </h1>
       <SearchBar handleSearch={handleSearch} />

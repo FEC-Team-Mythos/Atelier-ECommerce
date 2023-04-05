@@ -392,12 +392,25 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 /* Questions & Answers */
-
 body {
   font-family: 'adobe-clean', sans-serif;
-  color: rgb(52, 52, 52);
+  color: rgb(42, 42, 42);
   margin: 0;
   padding: 0;
+}
+
+.qa-question-body,
+.qa-question-helpful,
+.qa-btn-add-answer,
+.qa-answer-body,
+.qa-answerer-name,
+.qa-answer-helpful,
+.qa-btn-helpful,
+.qa-btn-report,
+.qa-btn-load-more,
+.qa-btn-add-question,
+.qa-btn-more-answers {
+  color: rgb(88, 88, 88);
 }
 
 .qa-container {
@@ -408,10 +421,16 @@ body {
   margin: 0 auto;
 }
 
+.qa-heading, .qa-question-helpful, .qa-answer-info {
+  font-weight: lighter;
+  font-size: 0.8em;
+}
+
 .qa-heading {
   text-transform: uppercase;
-  font-weight: lighter;
-  font-size: .85em;
+}
+
+.qa-heading {
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -436,7 +455,6 @@ body {
   flex-grow: 1;
   font-weight: bold;
   text-transform: uppercase;
-  outline: none;
 }
 
 .qa-search-btn {
@@ -452,11 +470,6 @@ body {
 
 .qa-search-icon {
   font-size: 18px;
-}
-
-.qa-buttons-container {
-  display: flex;
-  justify-content: space-between;
 }
 
 .qa-btn-load-more,
@@ -494,20 +507,24 @@ body {
   justify-content: space-between;
 }
 
-.qa-question-body,
-.qa-answer-label {
+.qa-question-body, .qa-answer-label {
   font-weight: bold;
-  font-size: 1.1em;
-  margin:0;
+  font-size: 1.0em;
+  margin: 0;
 }
+
 
 .qa-question-info {
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  font-weight: lighter;
-  font-size: 0.87em;
+  flex-wrap: nowrap;
+}
+
+.qa-answer-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .qa-answer {
@@ -523,31 +540,37 @@ body {
   font-weight: normal;
 }
 
-.qa-answer-info {
-  display: flex;
-  font-size: 0.87em;
-  font-weight: lighter;
-  justify-content: flex-start;
-  align-items: left;
-}
-
-.qa-question-helpful {
-  font-size: 0.87em;
-  font-weight: lighter;
-  justify-content: space-between;
-}
-
 .qa-btn-helpful,
 .qa-btn-add-answer,
 .qa-btn-report {
   background-color: transparent;
   border: none;
-  color: #333;
   text-decoration: underline;
+  text-transform:none;
   cursor: pointer;
   padding: 0;
-  font-size: .87em;
+  font-size: .9em;
   font-weight: lighter;
+  outline: none;
+}
+
+.qa-btn-helpful {
+  font-size: .9em;
+}
+
+.qa-btn-more-answers {
+  display: block;
+  text-align: left;
+  font-size: .7em;
+  font-weight: 575;
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  padding-top: 8px;
+  padding-bottom: 4px;
   outline: none;
 }
 
@@ -599,17 +622,7 @@ body {
 }
 
 .qa-modal-a-textarea,
-.qa-modal-q-main textarea {
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  margin-bottom: 1em;
-  outline: none;
-  resize: none;
-  width: 100%;
-  min-height: 100px;
-}
-
+.qa-modal-q-main textarea,
 .qa-modal-a-input,
 .qa-modal-q-main input {
   padding: 8px;
@@ -620,8 +633,15 @@ body {
   width: 100%;
 }
 
+.qa-modal-a-textarea,
+.qa-modal-q-main textarea {
+  min-height: 100px;
+  resize: none;
+}
+
 .qa-modal-a-submit,
-.qa-modal-q-main button[type="button"] {
+.qa-modal-q-main button[type="button"],
+.qa-modal-a-cancel {
   display: inline-block;
   padding: 8px 16px;
   margin: 2%;
@@ -632,21 +652,14 @@ body {
   cursor: pointer;
   outline: none;
   font-weight: bold;
+}
+
+.qa-modal-a-submit,
+.qa-modal-q-main button[type="button"] {
   color: #001125;
 }
 
-.qa-modal-a-cancel,
-.qa-modal-q-main button[type="button"] {
-  display: inline-block;
-  padding: 8px 16px;
-  margin: 2%;
-  border: 1px solid #333;
-  background-color: transparent;
-  font-size: 16px;
-  text-transform: uppercase;
-  cursor: pointer;
-  outline: none;
-  font-weight: bold;
+.qa-modal-a-cancel {
   color: #555;
 }
 

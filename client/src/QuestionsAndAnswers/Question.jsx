@@ -15,6 +15,7 @@ const Question = ({ question, request }) => {
   const [reportedAnswers, setReportedAnswers] = useState([]);
   const [helpfulAnswers, setHelpfulAnswers] = useState([]);
   const [questionHelpfulClicked, setQuestionHelpfulClicked] = useState(false);
+  const [visibleAnswers, setVisibleAnswers] = useState(2);
   const [answerHelpfulness, setAnswerHelpfulness] = useState(
     Object.fromEntries(
       Object.values(question.answers).map((answer) => [
@@ -30,6 +31,10 @@ const Question = ({ question, request }) => {
 
   const handleAddAnswerClick = (questionId) => {
     setShowModal(true);
+  };
+
+  const handleSeeMoreAnswersClick = () => {
+    setVisibleAnswers((prev) => prev + 2);
   };
 
   const markQuestionHelpful = async (questionId) => {
@@ -59,7 +64,7 @@ const Question = ({ question, request }) => {
   const sortedAnswers = Object.values(question.answers)
     .filter((answer) => !reportedAnswers.includes(answer.id))
     .sort((a, b) => b.helpfulness - a.helpfulness);
-  const bestAnswers = sortedAnswers.slice(0, 2);
+  const bestAnswers = sortedAnswers.slice(0, visibleAnswers);
 
   const handleMarkHelpful = async () => {
     await markQuestionHelpful(question.question_id);
@@ -123,15 +128,15 @@ const Question = ({ question, request }) => {
         <div key={answer.id} className="qa-answer">
           <p className="qa-answer-body">
             <span className="qa-answer-label">
-              A: &nbsp;
+              <font size="+1">A:</font>&nbsp;
             </span>
             {answer.body}
           </p>
           <div className="qa-answer-info">
             <span className="qa-answerer-name">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               by {answer.answerer_name}, {formatDate(answer.date)}&nbsp;</span>
-              &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             <div className="qa-answer-helpful">
               Helpful? <button className="qa-btn-helpful" onClick={() => handleAnswerHelpful(answer.id)} disabled={helpfulAnswers.includes(answer.id)}>Yes</button> ({answerHelpfulness[answer.id]})
               &nbsp;&nbsp;|&nbsp;&nbsp;
@@ -140,6 +145,12 @@ const Question = ({ question, request }) => {
           </div>
         </div>
       ))}
+      {sortedAnswers.length > visibleAnswers && (
+        <button className="qa-btn-more-answers" onClick={handleSeeMoreAnswersClick}>
+          &nbsp;&nbsp;&nbsp;&nbsp; See more answers
+        </button>
+      )}
+
       <AddAnswerModal
         questionId={question.question_id}
         showModal={showModal}
