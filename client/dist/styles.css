@@ -1034,11 +1034,6 @@ width: 30%;
   flex-direction: column;
 }
 
-#overview-sideImage {
-  width: 80px;
-  height: 100px;
-}
-
 #checkout-cartSubtotal {
   grid-row: 1/-1;
   grid-column: 3/4;
