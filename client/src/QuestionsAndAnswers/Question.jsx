@@ -104,8 +104,6 @@ const Question = ({ question, request }) => {
       <div className="qa-question-heading">
         <h4 className="qa-question-body">Q: {question.question_body}</h4>
         <div className="qa-question-info">
-          <span className="qa-question-asker">by {question.asker_name},</span>
-          <span className="qa-question-date">{formatDate(question.question_date)}</span>
           <div className="qa-question-helpful">
             Helpful?
             <button
