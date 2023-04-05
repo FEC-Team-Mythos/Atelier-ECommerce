@@ -50,17 +50,14 @@ const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
 
   const photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
   const photoURL = await getSignedUrl(s3Client, getCommand);
-  const shortURL = await axios.post('https://api-ssl.bitly.com/v4/shorten', {
-    long_url: photoURL,
-    domain: 'bit.ly',
+  const shortURL = await axios.post('https://tinyurl.com/api-create.php', {
+    url: photoURL,
   }, {
     headers: {
-      Authorization: process.env.BITLY_TOKEN,
+      Authorization: process.env.TINYURL_TOKEN,
     },
   });
-  return shortURL.data.link;
-
-  //NEED TO BUY BITLY MONTHLY MEMBERSHIP
+  return shortURL.data;
 };
 
 // path for related products
@@ -107,8 +104,6 @@ app.post('/reviews', upload.any(), async (req, res) => {
     const currPhotoURL = await uploadPhoto(files[i].buffer, files[i].originalname, files[i].mimetype);
     photoArr.push(currPhotoURL);
   }
-
-  console.log('photo arr', photoArr);
 
   const newBody = body;
   newBody.product_id = Number(body.product_id);
