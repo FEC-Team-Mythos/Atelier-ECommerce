@@ -1,10 +1,11 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import QuestionsList from './QuestionsList';
-import AddQuestionModal from './AddQuestionModal';
-import SearchBar from './SearchBar';
+import QuestionsList from './QuestionsList.jsx';
+import AddQuestionModal from './AddQuestionModal.jsx';
+import SearchBar from './SearchBar.jsx';
 
 // component tree for reference:
 //  QuestionsAndAnswers.jsx

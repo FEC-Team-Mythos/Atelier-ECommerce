@@ -1,8 +1,9 @@
+/* eslint-disable import/extensions */
 /* eslint-disable indent */
 /* eslint-disable react/prop-types */
 // client/src/QuestionsAndAnswers/QuestionsList.jsx
 import React, { useEffect } from 'react';
-import Question from './Question';
+import Question from './Question.jsx';
 
 function QuestionsList({
   // eslint-disable-next-line no-unused-vars

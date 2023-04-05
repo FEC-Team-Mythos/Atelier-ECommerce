@@ -1,9 +1,10 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 // client/src/QuestionsAndAnswers/Question.jsx
 import React, { useState } from 'react';
-import AddAnswerModal from './AddAnswerModal';
+import AddAnswerModal from './AddAnswerModal.jsx';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);

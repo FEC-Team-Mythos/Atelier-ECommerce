@@ -1,14 +1,15 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ProductOverview from './ProductOverview/ProductOverview';
-import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers';
-import RelatedProducts from './RelatedProducts/RelatedProducts';
-import Reviews from './Reviews/Reviews';
-import CheckOut from './CheckOut/CheckOut';
+import ProductOverview from './ProductOverview/ProductOverview.jsx';
+import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
+import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+import Reviews from './Reviews/Reviews.jsx';
+import CheckOut from './CheckOut/CheckOut.jsx';
 
 import { changeRequestHook } from '../../changeRequestHook';
 
