@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
+import CharRadioBtns from './CharRadioBtns.jsx';
+
 library.add(faStar);
 
 function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics }) {
@@ -14,26 +16,17 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
   const [formEmail, setFormEmail] = useState('');
   const [formPhotos, setFormPhotos] = useState([]);
   const [formCharacteristics, setFormCharacteristics] = useState({});
-  const [checkedFormChar, setCheckedFormChar] = useState({});
 
   const [formRating, setFormRating] = useState(0);
   const [hover, setHover] = useState(0);
 
   const starText = ['Poor', 'Fair', 'Average', 'Good', 'Great'];
 
-  const charLabels = {
-    Size: ['A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'Too Big'],
-    Width: ['Too Narrow', 'Slightly Narrow', 'Perfect', 'Slightly Wide', 'Too Wide'],
-    Comfort: ['Uncomfortable', 'Slightly Uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
-    Quality: ['Poor', 'Below Average', 'What I expected', 'Pretty Great', 'Perfect'],
-    Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs Long'],
-    Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs Long'],
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const charObj = {};
-    for (var key in formCharacteristics) {
+
+    for (const key in formCharacteristics) {
       key === 'Size' ? charObj['10'] = formCharacteristics[key] : null;
       key === 'Width' ? charObj['11'] = formCharacteristics[key] : null;
       key === 'Comfort' ? charObj['12'] = formCharacteristics[key] : null;
@@ -42,20 +35,31 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
       key === 'Fit' ? charObj['15'] = formCharacteristics[key] : null;
     }
 
-    const data = {
-      product_id: 71697,
-      rating: formRating,
-      summary: formSummary,
-      body: formBody,
-      recommend: formRecommend,
-      name: formName,
-      email: formEmail,
-      photos: formPhotos,
-      characteristics: charObj,
-    };
+    const data = new FormData();
 
-    await axios.post('/reviews', data);
-    toggleAddReviewState(!addReviewState);
+    data.append('product_id', 71697);
+    data.append('rating', formRating);
+    data.append('summary', formSummary);
+    data.append('body', formBody);
+    data.append('recommend', formRecommend);
+    data.append('name', formName);
+    data.append('email', formEmail);
+
+    formPhotos.forEach((photo) => {
+      data.append('file', photo);
+    });
+
+    data.append('characteristics', JSON.stringify(charObj));
+
+    axios.post('/reviews', data, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then((postReview) => {
+        console.log('success');
+        toggleAddReviewState(!addReviewState);
+      })
+      .catch((e) => {
+        console.log(e);
+        toggleAddReviewState(!addReviewState);
+      });
   };
 
   const handleRecommendChange = (e) => {
@@ -63,6 +67,13 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
       setFormRecommend(true);
     } else {
       setFormRecommend(false);
+    }
+  };
+
+  const handlePhotoUploadChange = (event) => {
+    const { files } = event.target;
+    if (files.length <= 5) {
+      setFormPhotos([...formPhotos, ...files]);
     }
   };
 
@@ -88,40 +99,13 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     </div>
   );
 
-  function DisplayRadioButtons(input, checked) {
-    const radioButtons = [];
-
+  const displayCharacterRadio = () => {
     const trackRadioValues = (key, value) => {
       const newRadioValues = { ...formCharacteristics };
-      newRadioValues[key.input] = value;
+      newRadioValues[key] = value;
       setFormCharacteristics(newRadioValues);
     };
 
-    for (let i = 1; i <= 5; i++) {
-      const radioButton = (
-        <label key={i}>
-          <input
-            type="radio"
-            name={input}
-            value={i}
-            checked={checked === i}
-            onChange={() => {
-              trackRadioValues(input, i);
-            }}
-          />
-          {i}
-        </label>
-      );
-      radioButtons.push(radioButton);
-    }
-    return (
-      <div>
-        {radioButtons}
-      </div>
-    );
-  }
-
-  const displayCharacterRadio = () => {
     if (characteristics) {
       const charKeys = Object.keys(characteristics);
 
@@ -130,8 +114,10 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
           {charKeys.map((key) => (
             <div key={key} id="reviews-addReviewCharacteristicIndividual">
               {key}
-              <DisplayRadioButtons input={key} checked={formCharacteristics[key]}/>
-              <span className="reviews-addReviewCharacteristicIndividualDisc">{charLabels[key][formCharacteristics[key] - 1]}</span>
+              <CharRadioBtns
+                id={key}
+                trackRadioValues={trackRadioValues}
+              />
             </div>
           ))}
         </>
@@ -150,7 +136,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
     return (
       <div id="reviews-addReviewPopup" onClick={() => toggleAddReviewState(false)}>
         <div id="reviews-addReviewPopupInner" onClick={(e) => e.stopPropagation()}>
-          <form onSubmit={handleSubmit}>
+          <form encType="multipart/form-data" onSubmit={handleSubmit}>
             <h3>Write Your Review</h3>
             <label>
               <div id="reviews-addReviewStars">
@@ -218,7 +204,14 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <div id="reviews-addReviewSubtext">{formBodyCounter()}</div>
               </div>
               <div id="reviews-addReviewPhotos">
-                Photos: PLACEHOLDER
+                <label htmlFor="fileInput">Select up to 5 image files:</label>
+                <input
+                  type="file"
+                  id="fileInput"
+                  accept="image/*"
+                  multiple
+                  onChange={handlePhotoUploadChange}
+                />
               </div>
             </label>
             <label>

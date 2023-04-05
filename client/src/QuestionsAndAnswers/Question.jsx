@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 // client/src/QuestionsAndAnswers/Question.jsx
 import React, { useState } from 'react';
-import AddAnswerModal from './AddAnswerModal.jsx';
+import AddAnswerModal from './AddAnswerModal';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -8,9 +11,9 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('en-US', options);
 };
 
-const Question = ({ question, request }) => {
+function Question({ question, request }) {
   const [showModal, setShowModal] = useState(false);
-  const [helpful, setHelpful] = useState(parseInt(question.question_helpfulness));
+  const [helpful, setHelpful] = useState(parseInt(question.question_helpfulness, 10));
   const [reported, setReported] = useState(false);
   const [reportedAnswers, setReportedAnswers] = useState([]);
   const [helpfulAnswers, setHelpfulAnswers] = useState([]);
@@ -21,8 +24,8 @@ const Question = ({ question, request }) => {
       Object.values(question.answers).map((answer) => [
         answer.id,
         answer.helpfulness,
-      ])
-    )
+      ]),
+    ),
   );
 
   const handleCloseModal = () => {
@@ -106,20 +109,31 @@ const Question = ({ question, request }) => {
   return (
     <div className="qa-question-container">
       <div className="qa-question-heading">
-        <h4 className="qa-question-body">Q: {question.question_body}</h4>
+        <h4 className="qa-question-body">
+          Q:
+          {' '}
+          {question.question_body}
+        </h4>
         <div className="qa-question-info">
           <div className="qa-question-helpful">
             Helpful? &nbsp;&nbsp;
             <button
+              type="button"
               className="qa-btn-helpful"
               onClick={handleMarkHelpful}
               disabled={questionHelpfulClicked}
             >
               Yes
             </button>
-            &nbsp;({helpful})&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+            &nbsp;(
+            {helpful}
+            )&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
           </div>
-          <button className="qa-btn-add-answer" onClick={() => handleAddAnswerClick(question.question_id)}>
+          <button
+            type="button"
+            className="qa-btn-add-answer"
+            onClick={() => handleAddAnswerClick(question.question_id)}
+          >
             Add Answer
           </button>
         </div>
@@ -128,25 +142,55 @@ const Question = ({ question, request }) => {
         <div key={answer.id} className="qa-answer">
           <p className="qa-answer-body">
             <span className="qa-answer-label">
-              <font size="+1">A:</font>&nbsp;
+              <font size="+1">A:</font>
+              &nbsp;
             </span>
             {answer.body}
           </p>
           <div className="qa-answer-info">
             <span className="qa-answerer-name">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              by {answer.answerer_name}, {formatDate(answer.date)}&nbsp;</span>
+              by
+              {' '}
+              {answer.answerer_name}
+              ,
+              {' '}
+              {formatDate(answer.date)}
+              &nbsp;
+
+            </span>
             &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             <div className="qa-answer-helpful">
-              Helpful? <button className="qa-btn-helpful" onClick={() => handleAnswerHelpful(answer.id)} disabled={helpfulAnswers.includes(answer.id)}>Yes</button> ({answerHelpfulness[answer.id]})
+              Helpful?
+              {' '}
+              <button
+                type="button"
+                className="qa-btn-helpful"
+                onClick={() => handleAnswerHelpful(answer.id)}
+                disabled={helpfulAnswers.includes(answer.id)}
+              >
+                Yes
+
+              </button>
+              {' '}
+              (
+              {answerHelpfulness[answer.id]}
+              )
               &nbsp;&nbsp;|&nbsp;&nbsp;
             </div>
-            <button className="qa-btn-report" onClick={() => handleAnswerReport(answer.id)} disabled={reportedAnswers.includes(answer.id)}>Report</button>
+            <button
+              type="button"
+              className="qa-btn-report"
+              onClick={() => handleAnswerReport(answer.id)}
+              disabled={reportedAnswers.includes(answer.id)}
+            >
+              Report
+            </button>
           </div>
         </div>
       ))}
       {sortedAnswers.length > visibleAnswers && (
-        <button className="qa-btn-more-answers" onClick={handleSeeMoreAnswersClick}>
+        <button type="button" className="qa-btn-more-answers" onClick={handleSeeMoreAnswersClick}>
           &nbsp;&nbsp;&nbsp;&nbsp; See more answers
         </button>
       )}
@@ -159,6 +203,6 @@ const Question = ({ question, request }) => {
       />
     </div>
   );
-};
+}
 
 export default Question;

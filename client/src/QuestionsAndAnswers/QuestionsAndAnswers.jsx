@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import QuestionsList from './QuestionsList.jsx';
-import AddQuestionModal from './AddQuestionModal.jsx';
-import SearchBar from './SearchBar.jsx';
+import QuestionsList from './QuestionsList';
+import AddQuestionModal from './AddQuestionModal';
+import SearchBar from './SearchBar';
 
 // component tree for reference:
 //  QuestionsAndAnswers.jsx
@@ -11,7 +13,8 @@ import SearchBar from './SearchBar.jsx';
 //  |- AddAnswerModal.jsx
 //  |- AddQuestionModal.jsx
 
-const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
+// eslint-disable-next-line no-unused-vars
+function QuestionsAndAnswers({ request, productId, changeRequestHook }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -28,7 +31,6 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
       console.log(err);
     }
   };
-
 
   useEffect(() => {
     getQuestionsData();
@@ -89,11 +91,10 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
     }
   };
 
-
   return (
     <div className="qa-container">
       <h1 className="qa-heading">
-      Questions & Answers
+        Questions & Answers
       </h1>
       <SearchBar handleSearch={handleSearch} />
       {showAddQuestionModal && (
@@ -117,17 +118,17 @@ const QuestionsAndAnswers = ({ request, productId, changeRequestHook }) => {
         reportAnswer={reportAnswer}
       />
       <div className="qa-buttons-container">
-      {hasMoreQuestions && (
-        <button className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
+        {hasMoreQuestions && (
+        <button type="button" className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
           More Answered Questions
         </button>
-      )}
-      <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
-        Add a Question&nbsp;&nbsp;&nbsp;＋
-      </button>
+        )}
+        <button type="button" className="qa-btn-add-question" onClick={handleAddQuestionClick}>
+          Add a Question&nbsp;&nbsp;&nbsp;＋
+        </button>
       </div>
     </div>
   );
-};
+}
 
 export default QuestionsAndAnswers;

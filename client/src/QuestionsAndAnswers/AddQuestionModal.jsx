@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+/* eslint-disable no-alert */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 
-const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
-  const [question, setQuestion] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
+function AddQuestionModal({
+  productId, showModal, handleClose, request,
+}) {
+  const [question, setQuestion] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,23 +40,21 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
     const formData = {
       body: question,
       name: nickname,
-      email: email,
+      email,
       product_id: productId,
     };
 
     // POST question to API
-    console.log(`Submitting question "${question}" with name "${nickname}" and email "${email}" for product ${productId}`);
     request('/qa/questions', formData, 'post')
       .then((response) => {
-        console.log('Success, question submitted: ', response);
       })
       .catch((error) => {
-        console.log('Error submitting question: ', error);
+        console.error('Error submitting question: ', error);
       });
     handleClose();
   };
 
-  const modalClassName = showModal ? "qa-modal-visible" : "qa-modal-hidden";
+  const modalClassName = showModal ? 'qa-modal-visible' : 'qa-modal-hidden';
 
   return (
     <div className={modalClassName}>
@@ -68,10 +71,10 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="What question do you have about the product?"
               rows="3"
-            ></textarea>
+            />
           </div>
           <div>
-            <label>Nickname*</label>
+            <label htmlFor="qa-nickname-input">Nickname*</label>
             <input
               id="qa-nickname-input"
               required
@@ -81,10 +84,11 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
               maxLength="60"
             />
             <small>For privacy reasons, do not use your full name or email address.</small>
-            <br /><br />
-         </div>
+            <br />
+            <br />
+          </div>
           <div>
-            <label>Email*</label>
+            <label htmlFor="qa-email-input">Email*</label>
             <input
               id="qa-email-input"
               type="email"
@@ -102,6 +106,6 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
       </section>
     </div>
   );
-};
+}
 
 export default AddQuestionModal;

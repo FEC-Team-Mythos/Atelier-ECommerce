@@ -150,7 +150,7 @@ const mockProductStyles =
 
 let mockMainImage = mockProductInformationData.photos[0].url;
 
-const [mockSetMainImage, mockSetProductInformation, mockSetCartItems, mockSetOutfits] = [jest.fn(), jest.fn(), jest.fn(), jest.fn()];
+const [mockSetMainImage, mockSetProductInformation, mockSetCartItems, mockSetOutfits, mockSetExpand] = [jest.fn(), jest.fn(), jest.fn(), jest.fn(), jest.fn()];
 
 /* ____________ UNIT TESTS ____________ */
 
@@ -158,7 +158,7 @@ describe('Unit Tests', () => {
 
   it('Product Overview Component Renders on Screen', () => {
     render(<ProductOverview request={request} />);
-    const logoPlaceholder = screen.getByText('Logo');
+    const logoPlaceholder = screen.getByTestId('logo');
     expect(logoPlaceholder).toBeInTheDocument();
   });
 
@@ -224,7 +224,7 @@ describe('Integration Tests', () => {
   it('Calls to add an item to shopping cart state when add button is clicked', async () => {
     await render(<PurchaseOptions product={mockProductData} productInformation={mockProductInformationData} setProductInformation={mockSetProductInformation}
     productStyles={mockProductStyles} setMainImage={mockSetMainImage} cartItems={mockCartItems} setCartItems={mockSetCartItems} setOutfits={mockSetOutfits} outfits={[]}/>);
-    const addButton = screen.getByRole('button', {name: "Add to Bag"});
+    const addButton = screen.getByTestId('addToBag');
     fireEvent.click(addButton);
     expect(mockSetCartItems).toHaveBeenCalled();
   });
@@ -232,10 +232,17 @@ describe('Integration Tests', () => {
   it('Update outfits state if favorite button is clicked', async () => {
     await render(<PurchaseOptions product={mockProductData} productInformation={mockProductInformationData} setProductInformation={mockSetProductInformation}
     productStyles={mockProductStyles} setMainImage={mockSetMainImage} cartItems={mockCartItems} setCartItems={mockSetCartItems} setOutfits={mockSetOutfits} outfits={[]}/>);
-    const favoriteButton = screen.getByRole('button', {name: "Favorite"});
+    const favoriteButton = screen.getByTestId('favorite');
     fireEvent.click(favoriteButton);
     expect(mockSetOutfits).toHaveBeenCalled();
   });
+
+  it('Removes all purchase options when expand button is clicked', async () => {
+    await render(<MainImageScreen productInformation = {mockProductInformationData} mainImage = {mockMainImage} setMainImage = {mockSetMainImage} expand={false} setExpand={mockSetExpand}/>);
+    const expandButton = screen.getByRole('button', {name: "[ ]"});
+    fireEvent.click(expandButton);
+    expect(mockSetExpand).toHaveBeenCalled();
+  })
 
 })
 
