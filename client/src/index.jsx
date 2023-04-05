@@ -35,19 +35,40 @@ function App() {
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
   const [starArr, setStars] = useState('');
   const [cartItems, setCartItems] = useState([]);
+  const [product, setProduct] = useState({}); // Product general information
+  const [productInformation, setProductInformation] = useState({}); // Style information
+  const [productId, setProductId] = useState(71697); // To be revised tonight. Default to 0 on homepage. Homepage will set id
+
+  useEffect(() => {
+    console.log('rerender');
+  }, [productId]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={(<Home />)} />
+        <Route path="/" element={(<Home setProductId={setProductId}/>)} />
         <Route
           path="product"
           element={(
             <div className="content">
-              <ProductOverview request={request} outfits={outfits} setOutfits={setOutfits} changeRequestHook={changeRequestHook} starArr={starArr} totalReviewsPerProduct={totalReviewsPerProduct} cartItems={cartItems} setCartItems={setCartItems} />
-              <RelatedProducts request={request} changeRequestHook={changeRequestHook}/>
-              <QuestionsAndAnswers request={request} />
-              <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} />
+              <ProductOverview
+                request={request}
+                outfits={outfits}
+                setOutfits={setOutfits}
+                changeRequestHook={changeRequestHook}
+                starArr={starArr}
+                totalReviewsPerProduct={totalReviewsPerProduct}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                productId={productId}
+                product={product}
+                setProduct={setProduct}
+                productInformation={productInformation}
+                setProductInformation={setProductInformation}
+              />
+              <RelatedProducts request={request} changeRequestHook={changeRequestHook} productId={productId} product={product} productInformation={productInformation} outfits={outfits} setOutfits={setOutfits}/>
+              <QuestionsAndAnswers request={request} productId={productId} />
+              <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} productId={productId} />
             </div>
         )}
         />

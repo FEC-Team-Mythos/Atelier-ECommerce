@@ -1,10 +1,19 @@
 require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const fetch = require('../fetchData');
+const axios = require('axios')
+
+const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
 const app = express();
 const port = 3000;
+
+const multer = require('multer');
+
+const upload = multer();
 
 const statics = path.join(`${__dirname}/../client/dist`);
 
@@ -14,6 +23,46 @@ app.use(express.json());
 app.get('/product', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
+
+const bucketName = process.env.BUCKET_NAME;
+const region = process.env.BUCKET_REGION;
+const accessKeyId = process.env.ACCESS_KEY;
+const secretAccessKey = process.env.SECRET_ACCESS_KEY;
+
+const s3Client = new S3Client({
+  region,
+  credentials: {
+    accessKeyId,
+    secretAccessKey,
+  },
+});
+
+const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
+  const uploadParams = {
+    Bucket: bucketName,
+    Body: fileBuffer,
+    Key: fileName,
+    ContentType,
+  };
+
+  const getParams = {
+    Bucket: bucketName,
+    Key: fileName,
+  }
+
+  const getCommand = new GetObjectCommand({ Bucket: bucketName, Key: fileName });
+
+  const photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
+  const photoURL = await getSignedUrl(s3Client, getCommand);
+  const shortURL = await axios.post('https://tinyurl.com/api-create.php', {
+    url: photoURL,
+  }, {
+    headers: {
+      Authorization: process.env.TINYURL_TOKEN,
+    },
+  });
+  return shortURL.data;
+};
 
 // path for related products
 app.get('/related/products', (req, res) => {
@@ -67,9 +116,22 @@ var getRelated = async function (product_id, callback) {
   callback(relatedProducts);
 };
 
-app.post('/reviews', (req, res) => {
-  console.log('abc', req);
-  fetch(req.url, req.body, req.method)
+app.post('/reviews', upload.any(), async (req, res) => {
+  const { body, files } = req;
+  const photoArr = [];
+  for (var i = 0; i < files.length; i++) {
+    const currPhotoURL = await uploadPhoto(files[i].buffer, files[i].originalname, files[i].mimetype);
+    photoArr.push(currPhotoURL);
+  }
+
+  const newBody = body;
+  newBody.product_id = Number(body.product_id);
+  newBody.rating = Number(body.rating);
+  newBody.recommend = (body.recommend === 'true');
+  newBody.photos = photoArr;
+  newBody.characteristics = JSON.parse(body.characteristics);
+
+  fetch(req.url, {...newBody}, req.method)
     .then(() => {
       res.sendStatus(201);
     })

@@ -26,7 +26,7 @@ function Modal({ showModal, setShowModal, comparedProduct, currentProduct }) {
   const modalRef = useRef(null);
 
   return (
-    <>
+    <div className="related-modal-container">
       {showModal ? (
         <div
           className="related-product-modal"
@@ -59,7 +59,7 @@ function Modal({ showModal, setShowModal, comparedProduct, currentProduct }) {
           </div>
         </div>
       ) : null}
-    </>
+    </div>
   );
 }
 

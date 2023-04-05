@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductCard from './ProductCard.jsx';
 
-function Home({ navigate }) {
+function Home({ setProductId }) {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -20,7 +20,7 @@ function Home({ navigate }) {
       <h3>Home page</h3>
       <div className="home-card">
         {products.map((item, index) => (
-          <ProductCard product={item} key={index} />
+          <ProductCard id={item.id} setProductId={setProductId} product={item} key={index} />
         ))}
       </div>
       Page: {page}

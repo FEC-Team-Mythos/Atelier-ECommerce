@@ -65,6 +65,12 @@ body {background-color: rgb(255, 255, 255);}
   cursor: pointer;
 }
 
+.related-modal-container {
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+}
+
 .related-product-modal {
   position: absolute;
   display: flex;
