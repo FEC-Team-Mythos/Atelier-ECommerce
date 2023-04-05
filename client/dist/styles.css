@@ -240,6 +240,11 @@ body {background-color: rgb(255, 255, 255);}
 
 #reviewTile-summary {
   font-weight: bold;
+  width: 470px;
+}
+
+#reviewTile-body {
+  width: 470px;
 }
 
 #reviews-filter {
@@ -261,11 +266,11 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .threeQ {
-  clip-path: polygon(0 0, 62% 0, 62% 100%, 0 100%);
+  clip-path: polygon(0 0, 75% 0, 75% 100%, 0 100%);
 }
 
 .oneHalf {
-  clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
 .oneQuarter {
