@@ -4,19 +4,19 @@ import OutfitList from './Components/OutfitList.jsx';
 import Modal from './Components/Modal.jsx';
 
 // this is the parent component for the Related Products widget
-function RelatedProducts({ request, changeRequestHook }) {
+function RelatedProducts({ request, changeRequestHook, productId }) {
   const [showModal, setShowModal] = useState(false);
   const [comparedProduct, setComparedProduct] = useState();
   const [currentProduct, setCurrentProduct] = useState();
   //const [clickedElement, clickedTime] = changeRequestHook('related');
 
   useEffect(() => {
-    request('/products/71697', { product_id: 71697 }, 'get')
+    request(`/products/${productId}`, { product_id: productId }, 'get')
       .then((data) => {
         setCurrentProduct(data.data);
       })
       .then(() => (
-        request('/products/71697/styles', { product_id: 71697 }, 'get')
+        request(`/products/${productId}/styles`, { product_id: productId }, 'get')
       ))
       .then((data) => {
         setCurrentProduct((prevState) => ({

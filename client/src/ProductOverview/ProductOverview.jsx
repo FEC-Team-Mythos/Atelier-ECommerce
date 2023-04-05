@@ -20,12 +20,12 @@ function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPe
   const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    request('/products/71701', { product_id: 71701 }, 'get')
+    request(`/products/${productId}`, { product_id: productId }, 'get')
       .then((data) => {
         setProduct(data.data);
       })
       .then(() => (
-        request('/products/71701/styles', { product_id: 71701 }, 'get')
+        request(`/products/${productId}/styles`, { product_id: productId }, 'get')
       ))
       .then((data) => {
         setProductInformation(data.data.results[0]);

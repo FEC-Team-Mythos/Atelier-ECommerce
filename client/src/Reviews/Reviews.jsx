@@ -5,7 +5,7 @@ import ReviewList from './ReviewList.jsx';
 import NewBreakdown from './NewBreakdown.jsx';
 
 function Reviews({
-  changeRequestHook, avgRating, setAvgRating, starArr, setStars, setTotalReviewsPerProduct
+  changeRequestHook, avgRating, setAvgRating, starArr, setStars, setTotalReviewsPerProduct, productId
 }) {
   const [clickedElement, clickedTime] = changeRequestHook('reviews');
 
@@ -18,7 +18,7 @@ function Reviews({
   const getReviewData = async (count) => {
     // Product ID should be dynamic here, will grab from other widget
     try {
-      const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: 71697 } });
+      const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: productId } });
       setAllReviews(response.data.results);
       setReviewList(response.data.results);
       setTotalReviewsPerProduct(response.data.results.length);
@@ -30,7 +30,7 @@ function Reviews({
   const getReviewMetaData = async () => {
     // Product ID should be dynamic here, will grab from other widget
     try {
-      const response = await axios.get('/reviews/meta', { params: { product_id: 71697 } });
+      const response = await axios.get('/reviews/meta', { params: { product_id: productId } });
       setMetaData(response.data);
     } catch (err) {
       console.log(err);
@@ -39,7 +39,7 @@ function Reviews({
 
   const sortReviews = async () => {
     try {
-      const response = await axios.get('/reviews/', { params: { count: 250, sort: sortParam, product_id: 71697 } });
+      const response = await axios.get('/reviews/', { params: { count: 250, sort: sortParam, product_id: productId } });
       if (filterParams.length) {
         const newReviews = response.data.results.filter((review) => filterParams.includes(review.rating));
         setReviewList(newReviews);
@@ -94,6 +94,7 @@ function Reviews({
         setSortParam={setSortParam}
         reviewList={reviewList}
         metaData={metaData}
+        productId={productId}
       />
     </div>
   );
