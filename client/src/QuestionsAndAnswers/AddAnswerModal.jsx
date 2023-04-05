@@ -103,7 +103,7 @@ const AddAnswerModal = ({ question, questionId, showModal, handleClose, request 
                 required
               />
               <small>For privacy reasons, do not use your full name or email address</small>
-              <br />
+              <br /><br />
               <label className="qa-modal-a-label">
                 Your Email*
               </label>

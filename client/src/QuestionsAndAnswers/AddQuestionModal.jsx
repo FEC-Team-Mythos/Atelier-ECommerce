@@ -66,7 +66,7 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
               required
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
-              placeholder="Why did you like the product or not?"
+              placeholder="What question do you have about the product?"
               rows="3"
             ></textarea>
           </div>
@@ -81,7 +81,8 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
               maxLength="60"
             />
             <small>For privacy reasons, do not use your full name or email address.</small>
-          </div>
+            <br /><br />
+         </div>
           <div>
             <label>Email*</label>
             <input
@@ -90,9 +91,10 @@ const AddQuestionModal = ({ productId, showModal, handleClose, request }) => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Why did you like the product or not?"
+              placeholder="jack@example.com"
             />
             <small>For authentication reasons, you will not be emailed.</small>
+            <br />
           </div>
           <button type="button" onClick={handleSubmit}>Submit</button>
           <button type="button" onClick={handleClose}>Cancel</button>

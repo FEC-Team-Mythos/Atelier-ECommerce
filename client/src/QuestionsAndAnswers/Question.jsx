@@ -9,7 +9,6 @@ const formatDate = (dateString) => {
 };
 
 const Question = ({ question, request }) => {
-  //console.log(question);
   const [showModal, setShowModal] = useState(false);
   const [helpful, setHelpful] = useState(parseInt(question.question_helpfulness));
   const [reported, setReported] = useState(false);
@@ -134,7 +133,7 @@ const Question = ({ question, request }) => {
               by {answer.answerer_name}, {formatDate(answer.date)}&nbsp;</span>
               &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             <div className="qa-answer-helpful">
-              Helpful? <button className="qa-btn-helpful" onClick={() => handleAnswerHelpful(answer.id)} disabled={helpfulAnswers.includes(answer.id)}>Yes</button> ({answer.helpfulness})
+              Helpful? <button className="qa-btn-helpful" onClick={() => handleAnswerHelpful(answer.id)} disabled={helpfulAnswers.includes(answer.id)}>Yes</button> ({answerHelpfulness[answer.id]})
               &nbsp;&nbsp;|&nbsp;&nbsp;
             </div>
             <button className="qa-btn-report" onClick={() => handleAnswerReport(answer.id)} disabled={reportedAnswers.includes(answer.id)}>Report</button>
