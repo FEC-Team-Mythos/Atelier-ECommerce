@@ -11,7 +11,7 @@ import ShoppingCart from './components/ShoppingCart.jsx';
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
-function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct, cartItems, setCartItems }) {
+function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct, cartItems, setCartItems, productId }) {
   const [product, setProduct] = useState({});
   const [productInformation, setProductInformation] = useState({});
   const [productStyles, setProductStyles] = useState([]);
@@ -20,12 +20,12 @@ function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPe
   const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
-    request('/products/71701', { product_id: 71701 }, 'get')
+    request(`/products/${productId}`, { product_id: productId }, 'get')
       .then((data) => {
         setProduct(data.data);
       })
       .then(() => (
-        request('/products/71701/styles', { product_id: 71701 }, 'get')
+        request(`/products/${productId}/styles`, { product_id: productId }, 'get')
       ))
       .then((data) => {
         setProductInformation(data.data.results[0]);
