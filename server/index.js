@@ -1,17 +1,25 @@
+/* eslint-disable no-var */
+/* eslint-disable vars-on-top */
+/* eslint-disable max-len */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
 require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
-const fetch = require('../fetchData');
-const axios = require('axios')
+// eslint-disable-next-line import/no-extraneous-dependencies
+const multer = require('multer');
+const axios = require('axios');
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+
+const fetch = require('../fetchData');
 
 const app = express();
 const port = 3000;
-
-const multer = require('multer');
 
 const upload = multer();
 
@@ -41,13 +49,15 @@ const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
     ContentType,
   };
 
+  // eslint-disable-next-line no-unused-vars
   const getParams = {
     Bucket: bucketName,
     Key: fileName,
-  }
+  };
 
   const getCommand = new GetObjectCommand({ Bucket: bucketName, Key: fileName });
 
+  // eslint-disable-next-line no-unused-vars
   const photoPost = await s3Client.send(new PutObjectCommand(uploadParams));
   const photoURL = await getSignedUrl(s3Client, getCommand);
   const shortURL = await axios.post('https://tinyurl.com/api-create.php', {
@@ -62,12 +72,13 @@ const uploadPhoto = async (fileBuffer, fileName, ContentType) => {
 
 // path for related products
 app.get('/related/products', (req, res) => {
+  // eslint-disable-next-line no-use-before-define
   getRelated(req.query.product_id, (relatedProducts) => {
     res.send(relatedProducts);
   });
 });
 
-//For routing
+// For routing
 app.get('/checkout', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
@@ -83,13 +94,17 @@ app.get('*', (req, res) => {
     });
 });
 
-
 // async function to get related products
+// eslint-disable-next-line func-names, camelcase
 var getRelated = async function (product_id, callback) {
+  // eslint-disable-next-line camelcase
   const related_ids = await fetch(`/products/${product_id}/related`, { product_id }, 'get');
   const relatedProducts = [];
+  // eslint-disable-next-line camelcase, no-plusplus
   for (let i = 0; i < related_ids.data.length; i++) {
+    // eslint-disable-next-line camelcase
     const product = await fetch(`/products/${related_ids.data[i]}`, { product_id: related_ids.data[i] }, 'get');
+    // eslint-disable-next-line camelcase
     const styles = await fetch(`/products/${related_ids.data[i]}/styles`, { product_id: related_ids.data[i] }, 'get');
     relatedProducts.push(product.data);
     relatedProducts[i].styles = styles.data;
@@ -100,7 +115,8 @@ var getRelated = async function (product_id, callback) {
 app.post('/reviews', upload.any(), async (req, res) => {
   const { body, files } = req;
   const photoArr = [];
-  for (var i = 0; i < files.length; i++) {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < files.length; i++) {
     const currPhotoURL = await uploadPhoto(files[i].buffer, files[i].originalname, files[i].mimetype);
     photoArr.push(currPhotoURL);
   }
@@ -112,7 +128,7 @@ app.post('/reviews', upload.any(), async (req, res) => {
   newBody.photos = photoArr;
   newBody.characteristics = JSON.parse(body.characteristics);
 
-  fetch(req.url, {...newBody}, req.method)
+  fetch(req.url, { ...newBody }, req.method)
     .then(() => {
       res.sendStatus(201);
     })

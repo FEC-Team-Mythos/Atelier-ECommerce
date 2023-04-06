@@ -7,7 +7,6 @@
     "client-dev": "webpack --mode development --watch",
     "server-dev": "nodemon ./server/index.js",
     "test-related": "jest ./client/src/RelatedProducts/Related.test.js",
-
     "build": "webpack --mode production"
   },
   "repository": {

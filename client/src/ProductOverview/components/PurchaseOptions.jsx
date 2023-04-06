@@ -111,6 +111,7 @@ function PurchaseOptions({
       }
     } else if (updatedOutfits.length) {
       updatedOutfits.push({
+        productId: product.id,
         productName: product.name,
         productPhoto: productInformation.photos[0].thumbnail_url,
         styleName: productInformation.name,
@@ -120,6 +121,7 @@ function PurchaseOptions({
       });
     } else {
       updatedOutfits = [{
+        productId: product.id,
         productName: product.name,
         productPhoto: productInformation.photos[0].thumbnail_url,
         styleName: productInformation.name,

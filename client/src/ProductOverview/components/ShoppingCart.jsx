@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { CiCircleRemove } from 'react-icons/ci';
+import { NavLink } from 'react-router-dom';
 
 function ShoppingCart({
   cartItems, setCartItems, cartOpen, setCartOpen,
@@ -48,7 +49,9 @@ function ShoppingCart({
             ))}
             <div className="overview-bottomButtons">
               <button type="submit" aria-label="Exit Cart" onClick={() => { setCartOpen(false); }}>Exit</button>
-              <button type="submit" aria-label="Check Out" onClick={() => { window.location.assign('checkout'); }}>Check Out</button>
+              <NavLink to="checkout">
+                <button type="submit" aria-label="Check Out" id="overview-checkoutButton">Check Out</button>
+              </NavLink>
             </div>
           </div>
         )
