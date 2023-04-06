@@ -28,6 +28,8 @@ function App() {
     })
     */
 
+    //localStorage.clear();
+
   const [outfits, setOutfits] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
@@ -59,7 +61,17 @@ function App() {
                 productInformation={productInformation}
                 setProductInformation={setProductInformation}
               />
-              <RelatedProducts request={request} changeRequestHook={changeRequestHook} productId={productId} product={product} productInformation={productInformation} outfits={outfits} setOutfits={setOutfits} setProductId={setProductId}/>
+              <RelatedProducts
+                request={request}
+                changeRequestHook={changeRequestHook}
+                productId={productId}
+                product={product}
+                productInformation={productInformation}
+                outfits={outfits}
+                setOutfits={setOutfits}
+                setProductId={setProductId}
+                starArr={starArr}
+                totalReviewsPerProduct={totalReviewsPerProduct} />
               <QuestionsAndAnswers request={request} productId={productId} />
               <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} productId={productId} />
             </div>

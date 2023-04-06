@@ -18,8 +18,6 @@ function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPe
   const [expand, setExpand] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
-  console.log('overview prod id', productId)
-
   useEffect(() => {
     request(`/products/${productId}`, { product_id: productId }, 'get')
       .then((data) => {

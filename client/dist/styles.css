@@ -71,6 +71,12 @@ body {background-color: rgb(255, 255, 255);}
   bottom: 10%;
 }
 
+.related-modal-sq {
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px #525252;
+  text-align: center;
+}
+
 .related-product-modal {
   position: absolute;
   display: flex;
@@ -93,6 +99,12 @@ body {background-color: rgb(255, 255, 255);}
   padding: 10px;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
+  background-color: rgba(0,0,0,0.05);
+  color: black;
+  box-shadow: 5px 5px 4px #525252;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
 }
 
 #related-table {
@@ -108,6 +120,18 @@ body {background-color: rgb(255, 255, 255);}
 
 #related-td {
   text-align: center;
+}
+
+.related-text {
+  display:inline-block;
+  margin:0;
+  vertical-align:top;
+}
+
+#related-graph-avg {
+  display: flex;
+  margin-left: 0px;
+  padding: 0px;
 }
 
 /* Main Widget + 2 columns */
