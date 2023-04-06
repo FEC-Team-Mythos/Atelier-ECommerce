@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // This component serves as the template for the individual product cards
 // that make up the product list in both carousels
-function ProductCard({ product, index, listType, setShowModal, setComparedProduct, handleAdd, handleRemove }) {
+function ProductCard({ product, index, listType, setShowModal, setComparedProduct, handleAdd, handleRemove, setProductId }) {
 
   // if list is for "Your Outfit", add "+" card to add product to outfit, else create and return product card for product being
   if (listType.type === 'outfit' && index === undefined) {
@@ -14,7 +14,7 @@ function ProductCard({ product, index, listType, setShowModal, setComparedProduc
   }
   if (listType.type === 'related') {
     return (
-      <div>
+      <div onClick={() => {setProductId(product.id); console.log(product.id)}}>
         <div className="related-card">
             {listType.type === 'related' ? <button style={{float: 'right'}} onClick={() => { setComparedProduct(product); setShowModal(true); }}>☆</button> : <button style={{float: 'right'}} onClick={() => {handleRemove(product.name)}}>x</button> }
               <br />

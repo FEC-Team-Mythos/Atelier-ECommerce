@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import ProductCard from './ProductCard.jsx';
 
 // this component is for the carousel which serves both related products and your outfit sections
-function Carousel({ products, listType, setShowModal, setComparedProduct, handleAdd, handleRemove }) {
+function Carousel({ products, listType, setShowModal, setComparedProduct, handleAdd, handleRemove, setProductId}) {
 
   const [carouselBox, setCarouselBox] = useState(listType.type === 'related' ? document.querySelector('.related-product-container') : document.querySelector('.related-outfit-container'));
   const [carouselPos, setCarouselPos] = useState(0);
@@ -75,7 +75,7 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
         { showRight ? (<button className="related-next-btn" onClick={next}><p>&gt;</p></button>) : (null) }
         <div className="related-product-container">
           {products.map((item, index) => (
-            <ProductCard product={item} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} key={index} index={index} handleRemove={handleRemove} />
+            <ProductCard product={item} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} key={index} index={index} handleRemove={handleRemove} setProductId={setProductId}/>
           ))}
         </div>
       </div>

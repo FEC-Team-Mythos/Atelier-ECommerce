@@ -3,7 +3,7 @@ import axios from 'axios';
 import Carousel from './Carousel.jsx';
 
 // this component gets the data for "Related Products" and sends it to the Carousel component
-function RelatedList({ setShowModal, setComparedProduct, productId }) {
+function RelatedList({ setShowModal, setComparedProduct, productId, setProductId }) {
   const [related, setRelated] = useState([]);
   const listType = { type: 'related' };
 
@@ -18,7 +18,7 @@ function RelatedList({ setShowModal, setComparedProduct, productId }) {
   return (
     <div id="Related Products">
       <h3>Related Products</h3>
-      <Carousel products={related} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} />
+      <Carousel products={related} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} setProductId={setProductId}/>
     </div>
   );
 }

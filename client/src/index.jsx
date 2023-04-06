@@ -59,7 +59,7 @@ function App() {
                 productInformation={productInformation}
                 setProductInformation={setProductInformation}
               />
-              <RelatedProducts request={request} changeRequestHook={changeRequestHook} productId={productId} product={product} productInformation={productInformation} outfits={outfits} setOutfits={setOutfits}/>
+              <RelatedProducts request={request} changeRequestHook={changeRequestHook} productId={productId} product={product} productInformation={productInformation} outfits={outfits} setOutfits={setOutfits} setProductId={setProductId}/>
               <QuestionsAndAnswers request={request} productId={productId} />
               <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} productId={productId} />
             </div>

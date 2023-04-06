@@ -4,7 +4,7 @@ import OutfitList from './Components/OutfitList.jsx';
 import Modal from './Components/Modal.jsx';
 
 // this is the parent component for the Related Products widget
-function RelatedProducts({ request, outfits, setOutfits, changeRequestHook, productId, product, productInformation}) {
+function RelatedProducts({ request, outfits, setOutfits, changeRequestHook, productId, product, productInformation, setProductId}) {
   const [showModal, setShowModal] = useState(false);
   const [comparedProduct, setComparedProduct] = useState();
   const [currentProduct, setCurrentProduct] = useState();
@@ -31,7 +31,7 @@ function RelatedProducts({ request, outfits, setOutfits, changeRequestHook, prod
 
   return (
     <div id="related-products">
-      <RelatedList setShowModal={setShowModal} setComparedProduct={setComparedProduct} productId={productId}/>
+      <RelatedList setShowModal={setShowModal} setComparedProduct={setComparedProduct} productId={productId} setProductId={setProductId}/>
       <OutfitList outfits={outfits} setOutfits={setOutfits} currentProduct={currentProduct} product={product} productInformation={productInformation}/>
       <Modal showModal={showModal} setShowModal={setShowModal} comparedProduct={comparedProduct} currentProduct={currentProduct} />
     </div>
