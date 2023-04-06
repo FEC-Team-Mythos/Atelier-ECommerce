@@ -2,14 +2,14 @@ import React, { useRef, useState, useEffect } from 'react';
 import ProductCard from './ProductCard.jsx';
 
 // this component is for the carousel which serves both related products and your outfit sections
-function Carousel({ products, listType, setShowModal, setComparedProduct, handleAdd, handleRemove }) {
+function Carousel({ currentProduct, starArr, related, products, listType, setShowModal, setComparedProduct, handleAdd, handleRemove, setProductId}) {
 
   const [carouselBox, setCarouselBox] = useState(listType.type === 'related' ? document.querySelector('.related-product-container') : document.querySelector('.related-outfit-container'));
   const [carouselPos, setCarouselPos] = useState(0);
   const [width, setWidth] = useState(0);
   const [showRight, setShowRight] = useState(true);
   const [partialScroll, setPartialScroll] = useState(0);
-  const cardSize = 204;
+  const cardSize = 200;
   const additionalScroll = 30;
   const windowWidth = useRef(window.innerWidth).current - 16;
 
@@ -25,7 +25,18 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
     } else {
       setShowRight(true);
     }
-  }, [products]);
+    if (listType.type === 'related') {
+      setCarouselBox(document.querySelector('.related-product-container'));
+      setWidth(document.querySelector('.related-product-container').clientWidth);
+    } else {
+      setCarouselBox(document.querySelector('.related-outfit-container'));
+      setWidth(document.querySelector('.related-outfit-container').clientWidth);
+    }
+    if (carouselBox) {
+      carouselBox.scrollLeft = 0;
+      setCarouselPos(0);
+    }
+  }, [products, related]);
 
   useEffect(() => {
     if (listType.type === 'related') {
@@ -75,7 +86,7 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
         { showRight ? (<button className="related-next-btn" onClick={next}><p>&gt;</p></button>) : (null) }
         <div className="related-product-container">
           {products.map((item, index) => (
-            <ProductCard product={item} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} key={index} index={index} handleRemove={handleRemove} />
+            <ProductCard starArr={starArr} product={item} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} key={index} index={index} handleRemove={handleRemove} setProductId={setProductId}/>
           ))}
         </div>
       </div>
@@ -87,9 +98,9 @@ function Carousel({ products, listType, setShowModal, setComparedProduct, handle
       { carouselPos === 0 ? (null) : (<button className="related-pre-btn" onClick={prev}><p>&lt;</p></button>) }
       { showRight ? (<button className="related-next-btn" onClick={next}><p>&gt;</p></button>) : (null) }
       <div className="related-outfit-container">
-          <ProductCard product={products} listType={listType} setShowModal={setShowModal} handleAdd={handleAdd} />
+          <ProductCard currentProduct={currentProduct} product={products} listType={listType} setShowModal={setShowModal} handleAdd={handleAdd} />
         {products.map((item, index) => (
-          <ProductCard product={item} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} key={index} index={index} handleRemove={handleRemove} />
+          <ProductCard starArr={starArr} product={item} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} key={index} index={index} handleRemove={handleRemove} setProductId={setProductId}/>
         ))}
       </div>
     </div>
