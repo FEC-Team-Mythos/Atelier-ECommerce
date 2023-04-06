@@ -90,7 +90,7 @@ function App() {
             </div>
           )}
         />
-        <Route path="checkout" element={(<CheckOut />)} />
+        <Route path="checkout" element={(<CheckOut cartItems={cartItems} />)} />
       </Routes>
     </BrowserRouter>
   );
