@@ -36,7 +36,7 @@ function Carousel({ currentProduct, starArr, related, products, listType, setSho
       carouselBox.scrollLeft = 0;
       setCarouselPos(0);
     }
-  }, [related]);
+  }, [products, related]);
 
   useEffect(() => {
     if (listType.type === 'related') {

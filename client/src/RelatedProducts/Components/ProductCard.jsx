@@ -80,6 +80,8 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
               <br />
               <div style={{fontSize: '14px'}} className="related-text">${product.productCost}</div>
               <br />
+              <div style={{fontSize: '14px'}} className="related-text">{product.styleName}</div>
+              <br />
               <span id="related-graph-avg" style={{position: 'left'}}>
               {displayAllStars()}
               </span>
