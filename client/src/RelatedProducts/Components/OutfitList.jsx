@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Carousel from './Carousel.jsx';
 
 // this component is the carousel for "Your Outfit"
-function OutfitList({ starArr, related, outfits, setOutfits, currentProduct, product, productInformation }) {
+function OutfitList({ setProductId, starArr, related, outfits, setOutfits, currentProduct, product, productInformation }) {
 
   const listType = { type: 'outfit' };
 
@@ -26,6 +26,7 @@ function OutfitList({ starArr, related, outfits, setOutfits, currentProduct, pro
     if (favorited === false) {
       if (updatedOutfits.length) {
         updatedOutfits.push({
+          productId: product.id,
           productName: product.name,
           productPhoto: productInformation.photos[0].thumbnail_url,
           styleName: productInformation.name,
@@ -35,6 +36,7 @@ function OutfitList({ starArr, related, outfits, setOutfits, currentProduct, pro
         });
       } else {
         updatedOutfits = [{
+          productId: product.id,
           productName: product.name,
           productPhoto: productInformation.photos[0].thumbnail_url,
           styleName: productInformation.name,
@@ -72,7 +74,7 @@ function OutfitList({ starArr, related, outfits, setOutfits, currentProduct, pro
   return (
     <div id="My Outfit">
       <h3>Your Outfit</h3>
-      <Carousel currentProduct={currentProduct} starArr={starArr} related={related} products={outfits} setOutfits={setOutfits} listType={listType} handleAdd={handleAdd} handleRemove={handleRemove} />
+      <Carousel setProductId={setProductId} currentProduct={currentProduct} starArr={starArr} related={related} products={outfits} setOutfits={setOutfits} listType={listType} handleAdd={handleAdd} handleRemove={handleRemove} />
     </div>
   );
 }

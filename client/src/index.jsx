@@ -31,8 +31,6 @@ function App() {
     })
     */
 
-    //localStorage.clear();
-
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
   const [starArr, setStars] = useState('');
   const [cartItems, setCartItems] = useState([]);

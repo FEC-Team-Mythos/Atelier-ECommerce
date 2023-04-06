@@ -43,7 +43,7 @@ function RelatedProducts({ starArr, request, outfits, setOutfits, changeRequestH
   return (
     <div id="related-products">
       <RelatedList starArr={starArr} related={related} setShowModal={setShowModal} setComparedProduct={setComparedProduct} productId={productId} setProductId={setProductId}/>
-      <OutfitList starArr={starArr} related={related} outfits={outfits} setOutfits={setOutfits} currentProduct={currentProduct} product={product} productInformation={productInformation}/>
+      <OutfitList starArr={starArr} related={related} outfits={outfits} setOutfits={setOutfits} currentProduct={currentProduct} product={product} productInformation={productInformation} setProductId={setProductId}/>
       <Modal showModal={showModal} setShowModal={setShowModal} comparedProduct={comparedProduct} currentProduct={currentProduct} />
     </div>
   );

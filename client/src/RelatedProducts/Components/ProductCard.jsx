@@ -71,7 +71,7 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
     <div>
       <div className="related-card">
           {listType.type === 'related' ? <button style={{float: 'right'}} onClick={() => { setComparedProduct(product); setShowModal(true); }}>☆</button> : <button style={{float: 'right'}} onClick={() => {handleRemove({name: product.productName, style: product.styleName})}}>x</button> }
-            <div onClick={() => console.log('placeholder')}>
+            <div onClick={() => setProductId(product.productId)}>
             <img src={product.productPhoto} width={125} height={125} />
               <br />
               <div style={{fontSize: '12px'}}className="related-text">{product.productCategory}</div>
