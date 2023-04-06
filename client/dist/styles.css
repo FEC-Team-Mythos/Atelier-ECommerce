@@ -680,23 +680,23 @@ width: 30%;
 }
 
 #overview-sideImage {
-  width: auto;
+  /* width: auto;
   height: auto;
   max-width: 30%;
-  max-height: 30%;
+  max-height: 30%; */
   margin: 5%;
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; */
   border: 1.5px solid black;
   filter: brightness(60%);
 }
 
 #overview-sideImage-selected {
-  width: auto;
+  /* width: auto;
   height: auto;
   max-width: 40%;
-  max-height: 40%;
+  max-height: 40%; */
   margin: 5%;
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; */
   border: 1.5px solid black;
   filter: brightness(100%);
   box-shadow: -5px 5px #888888;

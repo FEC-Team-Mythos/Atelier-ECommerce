@@ -97,6 +97,11 @@ function MainImageScreen({
     }
   };
 
+  const sideImagesStyle = {
+    height: `${100 / 10}%`,
+    aspectRatio: 1/1
+  };
+
   return (
     <div className={expand ? 'overview-imagesContainer-clicked' : 'overview-imagesContainer'}>
       <ul className="overview-sideImages">
@@ -110,6 +115,7 @@ function MainImageScreen({
         {imageSelection.productInfoList.map((photo, index) => (
           <img
             id={imageSelection.indexSet + index === selectedIndex ? 'overview-sideImage-selected' : 'overview-sideImage'}
+            style={sideImagesStyle}
             src={photo.thumbnail_url}
             key={photo.url}
             alt="Product View Options"
