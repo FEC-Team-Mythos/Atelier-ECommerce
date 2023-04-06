@@ -4,19 +4,19 @@
 
 import React, { useState, useEffect } from 'react';
 
-function CheckOut() {
+function CheckOut({ cartItems }) {
   const [totalCost, setTotalCost] = useState(0);
   const [currentPage, setPage] = useState('shipping');
-  const [cartItems, setCart] = useState([]);
+  // const [cartItems, setCart] = useState([]);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('cart'));
+    // const data = JSON.parse(localStorage.getItem('cart'));
     let total = 0;
-    data.forEach((cartItem) => {
+    cartItems.forEach((cartItem) => {
       total += (cartItem.productCost * cartItem.quantity);
     });
     setTotalCost(total);
-    setCart(JSON.parse(localStorage.getItem('cart')));
+    // setCart(JSON.parse(localStorage.getItem('cart')));
   }, []);
 
   const shippingInformation = () => (

@@ -37,7 +37,7 @@ function App() {
   const [product, setProduct] = useState({}); // Product general information
   const [productInformation, setProductInformation] = useState({}); // Style information
   // eslint-disable-next-line no-unused-vars
-  const [productId, setProductId] = useState(71702); // To be revised tonight. Default to 0.
+  const [productId, setProductId] = useState(71701); // To be revised tonight. Default to 0.
   const [outfits, setOutfits] = useState([]);
   const [avgRating, setAvgRating] = useState(0);
 
@@ -90,7 +90,7 @@ function App() {
             </div>
           )}
         />
-        <Route path="checkout" element={(<CheckOut />)} />
+        <Route path="checkout" element={(<CheckOut cartItems={cartItems} />)} />
       </Routes>
     </BrowserRouter>
   );

@@ -530,8 +530,11 @@ select:hover {
   grid-column: 1/-1;
   display: grid;
   grid-template-columns: 60% 40%;
-  padding-top: 2%;
-  padding-left: 3%;
+  margin-left: 1.8%;
+  margin-right: 1.8%;
+  margin-top: 1%;
+  padding: 1%;
+  background-color: rgb(225, 255, 255);
 }
 
 .overview-description {
@@ -547,9 +550,9 @@ select:hover {
   grid-column: 2/3;
   padding-left: 3%;
   display: flex;
-  height: auto;
+  height: 100%;
   flex-direction: column;
-  display: space-evenly;
+  justify-content: space-evenly;
 }
 .overview-features {
   display:flex;
@@ -617,8 +620,16 @@ select:hover {
   padding-bottom: 1.5%;
 }
 
+.overview-bottomButtons .active {
+  width: 30%;
+}
+
+#overview-checkoutButton {
+  width: 100%;
+}
+
 .overview-bottomButtons button {
-width: 30%;
+width: 25%;
 }
 
 .overview-cartItems {
