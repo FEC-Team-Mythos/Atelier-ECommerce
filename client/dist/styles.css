@@ -453,7 +453,8 @@ select:hover {
   grid-column: 1/2;
   grid-row: 1/9;
   display:grid;
-  grid-template-columns: 20% 80%;
+  overflow: clip;
+  grid-template-columns: 15% 85%;
   grid-template-rows: 100%;
   background-color: rgb(229, 229, 229);
   margin-left: 3%;
@@ -464,7 +465,7 @@ select:hover {
   grid-column: 1/-1;
   grid-row: 1/9;
   display:grid;
-  grid-template-columns: 12% 88%;
+  grid-template-columns: 9% 91%;
   grid-template-rows: 100%;
   background-color: rgb(229, 229, 229);
   margin-left: 3%;
@@ -543,7 +544,7 @@ select:hover {
   flex-direction: column;
   height: auto;
   padding-right: 3%;
-  border-right: 4px solid black;
+  border-right: 3px solid black;
 }
 
 .overview-featuresContainer {
@@ -784,9 +785,13 @@ width: 25%;
 }
 
 #overview-mainImage {
-  max-width: 85%;
-  max-height: 85%;
-  box-shadow: 0 0 15px 3px;
+  position: absolute;
+  width: 100%;
+  max-height: auto;
+  display: grid;
+  align-self: center;
+  justify-self: center;
+  /* box-shadow: 0 0 15px 3px; */
 }
 
 
@@ -872,11 +877,11 @@ width: 25%;
 }
 
 #overview-leftButton:hover {
-  background-color: rgb(177, 177, 177);
+  background-color: rgb(177, 177, 177, 0.6);
 }
 
 #overview-rightButton:hover {
-  background-color: rgb(177, 177, 177);
+  background-color: rgb(177, 177, 177, 0.6);
 }
 
 #overview-leftArrow {

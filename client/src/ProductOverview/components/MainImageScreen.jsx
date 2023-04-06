@@ -98,12 +98,13 @@ function MainImageScreen({
   };
 
   const sideImagesStyle = {
-    height: `${100 / 10}%`,
+    height: '10%',
     aspectRatio: 1/1
   };
 
   return (
     <div className={expand ? 'overview-imagesContainer-clicked' : 'overview-imagesContainer'}>
+      {expand ? null : <img src={mainImage.url} alt="Main Product" id="overview-mainImage" />}
       <ul className="overview-sideImages">
         {productInformation.photos[imageSelection.indexSet - 1]
           ? (
@@ -154,7 +155,7 @@ function MainImageScreen({
                 onMouseMove={mouseMove}
               />
             ) : (
-              <img src={mainImage.url} alt="Main Product" id="overview-mainImage" />
+              null
             )}
         </div>
         {productInformation.photos[mainImage.index + 1]
