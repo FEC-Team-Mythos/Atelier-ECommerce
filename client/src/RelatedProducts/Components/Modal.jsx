@@ -35,8 +35,8 @@ function Modal({ showModal, setShowModal, comparedProduct, currentProduct }) {
             setShowModal(false);
           }}
         >
-          <div style={{ backgroundColor: 'white' }} ref={modalRef}>
-            <h1>Compare Products</h1>
+          <div className="related-modal-sq" style={{ backgroundColor: 'white' }} ref={modalRef}>
+            <h1  >Compare Products</h1>
             <div className="table">
               <table id="related-table">
                 <tbody>
@@ -55,6 +55,7 @@ function Modal({ showModal, setShowModal, comparedProduct, currentProduct }) {
                 </tbody>
               </table>
             </div>
+            <br/>
             <button onClick={() => setShowModal(false)}> close</button>
           </div>
         </div>

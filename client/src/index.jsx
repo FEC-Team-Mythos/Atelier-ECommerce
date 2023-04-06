@@ -71,7 +71,9 @@ function App() {
                 productInformation={productInformation}
                 outfits={outfits}
                 setOutfits={setOutfits}
-              />
+                setProductId={setProductId}
+                starArr={starArr}
+                totalReviewsPerProduct={totalReviewsPerProduct} />
               <QuestionsAndAnswers
                 request={request}
                 productId={productId}
