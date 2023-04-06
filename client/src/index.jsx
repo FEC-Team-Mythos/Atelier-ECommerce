@@ -74,8 +74,21 @@ function App() {
                 setProductId={setProductId}
                 starArr={starArr}
                 totalReviewsPerProduct={totalReviewsPerProduct} />
-              <QuestionsAndAnswers request={request} productId={productId} />
-              <Reviews request={request} changeRequestHook={changeRequestHook} starArr={starArr} setStars={setStars} avgRating={avgRating} setAvgRating={setAvgRating} setTotalReviewsPerProduct={setTotalReviewsPerProduct} productId={productId} />
+              <QuestionsAndAnswers
+                request={request}
+                productId={productId}
+                changeRequestHook={changeRequestHook}
+              />
+              <Reviews
+                request={request}
+                changeRequestHook={changeRequestHook}
+                starArr={starArr}
+                setStars={setStars}
+                avgRating={avgRating}
+                setAvgRating={setAvgRating}
+                setTotalReviewsPerProduct={setTotalReviewsPerProduct}
+                productId={productId}
+              />
             </div>
           )}
         />
