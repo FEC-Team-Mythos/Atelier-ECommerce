@@ -38,7 +38,7 @@ function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPe
       .catch((err) => {
         console.log('Could not get: ', err);
       });
-  }, []);
+  }, [productId]);
 
   return (
     <div>

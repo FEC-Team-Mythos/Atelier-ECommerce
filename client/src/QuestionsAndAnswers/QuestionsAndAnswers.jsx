@@ -1,5 +1,8 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import QuestionsList from './QuestionsList.jsx';
 import AddQuestionModal from './AddQuestionModal.jsx';
 import SearchBar from './SearchBar.jsx';
@@ -12,30 +15,31 @@ import SearchBar from './SearchBar.jsx';
 //  |- AddAnswerModal.jsx
 //  |- AddQuestionModal.jsx
 
-const QuestionsAndAnswers = ({ productId }) => {
+// eslint-disable-next-line no-unused-vars
+function QuestionsAndAnswers({ request, productId, changeRequestHook }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
   const [questions, setQuestions] = useState([]);
-  const [allQuestions, setAllQuestions] = useState([]);
+  const [visibleQuestionsCount, setVisibleQuestionsCount] = useState(2);
+  const [totalQuestionsCount, setTotalQuestionsCount] = useState(0);
+  const [moreQuestionsAvailable, setMoreQuestionsAvailable] = useState(false);
 
   const getQuestionsData = async () => {
     try {
-      var response = await axios.get('/qa/questions', { params: { product_id: productId } })
-      // this is redundant now, but depending on how filtering is implemented we may want two
-      setAllQuestions(response.data.results);
+      const response = await request('/qa/questions', { product_id: productId }, 'get');
       setQuestions(response.data.results);
+      setTotalQuestionsCount(response.data.results.length);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     getQuestionsData();
   }, [productId]);
 
-
   const handleSearch = (term) => {
-    console.log('Searching for:', term);
+    console.log('Searching for: ', term);
     setSearchTerm(term);
   };
 
@@ -47,24 +51,86 @@ const QuestionsAndAnswers = ({ productId }) => {
     setShowAddQuestionModal(false);
   };
 
+  const handleMoreAnsweredQuestions = () => {
+    setVisibleQuestionsCount(visibleQuestionsCount + 2);
+  };
+
+  const hasMoreQuestions = visibleQuestionsCount < questions.length;
+
+  const markQuestionHelpful = async (questionId) => {
+    try {
+      await request(`/qa/questions/${questionId}/helpful`, {}, 'put');
+      console.log('Marked question as helpful: ', questionId);
+    } catch (err) {
+      console.log('Error marking question as helpful: ', err);
+    }
+  };
+
+  const reportQuestion = async (questionId) => {
+    try {
+      await request(`/qa/questions/${questionId}/report`, {}, 'put');
+      console.log('Reported question: ', questionId);
+    } catch (err) {
+      console.log('Error reporting question: ', err);
+    }
+  };
+
+  const markAnswerHelpful = async (answerId) => {
+    try {
+      await request(`/qa/answers/${answerId}/helpful`, {}, 'put');
+      console.log('Marked answer as helpful: ', answerId);
+    } catch (err) {
+      console.log('Error marking answer as helpful: ', err);
+    }
+  };
+
+  const reportAnswer = async (answerId) => {
+    try {
+      await request(`/qa/answers/${answerId}/report`, {}, 'put');
+      console.log('Reported answer: ', answerId);
+    } catch (err) {
+      console.log('Error reporting answer: ', err);
+    }
+  };
+
   return (
-    <div>
+    <div className="qa-container">
+      <h1 className="qa-heading">
+        Questions & Answers
+      </h1>
       <SearchBar handleSearch={handleSearch} />
+      {showAddQuestionModal && (
+        <AddQuestionModal
+          productId={productId}
+          showModal={showAddQuestionModal}
+          handleClose={handleModalClose}
+          request={request}
+        />
+      )}
       <QuestionsList
-        questions={questions}
+        questions={questions.slice(0, visibleQuestionsCount)}
         productId={productId}
         searchTerm={searchTerm}
+        request={request}
+        setMoreQuestionsAvailable={setMoreQuestionsAvailable}
+        visibleQuestionsCount={visibleQuestionsCount}
+        markQuestionHelpful={markQuestionHelpful}
+        reportQuestion={reportQuestion}
+        markAnswerHelpful={markAnswerHelpful}
+        reportAnswer={reportAnswer}
       />
-      <button className="qa-btn-add-question" onClick={handleAddQuestionClick}>
-        Add a Question
-      </button>
-      <AddQuestionModal
-        productId={productId}
-        showModal={showAddQuestionModal}
-        handleClose={handleModalClose}
-      />
+      <div className="qa-buttons-container">
+        {hasMoreQuestions && (
+        <button type="button" className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
+          More Answered Questions
+        </button>
+        )}
+        <button type="button" className="qa-btn-add-question" onClick={handleAddQuestionClick}>
+          Add a Question&nbsp;&nbsp;&nbsp;＋
+        </button>
+      </div>
     </div>
   );
-};
+}
 
 export default QuestionsAndAnswers;
