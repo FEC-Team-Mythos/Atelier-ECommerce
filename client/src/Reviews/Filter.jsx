@@ -9,9 +9,9 @@ function Filter({ allReviews, sortParam, setSortParam }) {
 
     return (
       <select id="reviews-sorting" data-testid="reviews-sorting" value={sortParam} onChange={handleChange}>
-        <option value="relevant">Relevance</option>
-        <option data-testid="reviews-dropNew" value="helpful">Helpful</option>
-        <option value="newest">Newest</option>
+        <option value="relevant" aria-label="Sort By Relevant">Relevance</option>
+        <option data-testid="reviews-dropNew" value="helpful" aria-label="Sort By Helpful">Helpful</option>
+        <option value="newest" aria-label="Sort By Newest">Newest</option>
       </select>
     );
   };
