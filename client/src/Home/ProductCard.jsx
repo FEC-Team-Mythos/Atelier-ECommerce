@@ -5,8 +5,6 @@ import { NavLink } from 'react-router-dom';
 // that make up the product list in both carousels
 function ProductCard({ id, setProductId, product }) {
 
-  console.log(product);
-
   return (
     <div>
       <NavLink to='product'>
