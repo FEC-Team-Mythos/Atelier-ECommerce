@@ -49,7 +49,7 @@ function ShoppingCart({
             ))}
             <div className="overview-bottomButtons">
               <button type="submit" aria-label="Exit Cart" onClick={() => { setCartOpen(false); }}>Exit</button>
-              <NavLink to="checkout">
+              <NavLink to="/checkout">
                 <button type="submit" aria-label="Check Out" id="overview-checkoutButton">Check Out</button>
               </NavLink>
             </div>

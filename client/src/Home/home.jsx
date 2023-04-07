@@ -14,17 +14,13 @@ function Home({ setProductId }) {
       });
   }, [page]);
 
-  const navigateToProduct = (id) => {
-    window.location.assign('product?' + id);
-  };
-
   return (
 
     <div>
       <h3>Home page</h3>
       <div className="home-card">
         {products.map((item, index) => (
-          <ProductCard navigateToProduct={navigateToProduct} id={item.id} setProductId={setProductId} product={item} key={index} />
+          <ProductCard id={item.id} setProductId={setProductId} product={item} key={index} />
         ))}
       </div>
       Page: {page}
