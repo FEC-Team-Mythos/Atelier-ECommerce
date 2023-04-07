@@ -10,6 +10,14 @@ html {
 
 body {background-color: rgb(255, 255, 255);}
 
+#home-page {
+  margin-left: 2%;
+}
+
+#related-products {
+  margin-left: 2%;
+}
+
 .related-product-carousel {
   position: relative;
   overflow: hidden;
@@ -93,10 +101,10 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .related-card {
-  height: 228px;
-  width: 125px;
-  margin: 15px;
-  padding: 10px;
+  height: 250px;
+  width: 150px;
+  margin: 10px;
+  padding: 0px;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   background-color: rgba(0,0,0,0.05);
@@ -107,12 +115,38 @@ body {background-color: rgb(255, 255, 255);}
   text-align: left;
 }
 
-.home-card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.related-add-outfit {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 2%;
+  border: 1px solid #333;
+  background-color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
 }
 
+.related-star-button {
+  float: right;
+  outline: none;
+  border: none;
+}
+
+.related-fill {
+  height: 125px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
+}
+.related-fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
+}
 
 #related-table {
   border: 2px solid rgb(0, 0, 0);
@@ -140,6 +174,13 @@ body {background-color: rgb(255, 255, 255);}
   margin-left: 0px;
   padding: 0px;
 }
+
+.home-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 
 /* Main Widget + 2 columns */
 #reviews {
