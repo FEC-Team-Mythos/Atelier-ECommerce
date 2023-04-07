@@ -4,10 +4,10 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install necessary dependencies.
+Use the package manager [npm](https://docs.npmjs.com/) to install necessary dependencies.
 
 ```bash
-pip install foobar
+npm install
 ```
 
 ## Usage
