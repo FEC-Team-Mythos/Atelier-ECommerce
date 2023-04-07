@@ -401,7 +401,7 @@ function CheckOut({ cartItems }) {
   return (
     <>
       <div className="checkout-navBar">
-        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
+        <img src="https://www.shoppersvineyard.com/images/labels/mythos-breweries-mythos-hellenic-lager-beer.gif?1680837605" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
       </div>
       <div className="checkout-container">
         {currentPage === 'shipping'

@@ -43,7 +43,7 @@ function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPe
   return (
     <div>
       <div className="overview-navBar">
-        <img src="https://socialimpact.com/wp-content/uploads/2021/03/logo-placeholder.jpg" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
+        <img src="https://www.shoppersvineyard.com/images/labels/mythos-breweries-mythos-hellenic-lager-beer.gif?1680837605" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
         <div className="overview-searchBar">
           <input type="text" aria-label="Search form" id="overview-searchForm" />
           <button type="submit" aria-label="Search" id="overview-searchButton"><FiSearch id="overview-searchIcon" /></button>
