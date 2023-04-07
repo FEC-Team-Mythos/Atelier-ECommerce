@@ -35,8 +35,6 @@ function App() {
     })
     */
 
-  const url = window.location.href.slice(30);
-
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
   const [starArr, setStars] = useState('');
   const [cartItems, setCartItems] = useState([]);
