@@ -5,7 +5,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'adobe-clean', sans-serif;
 }
 
 body {background-color: rgb(255, 255, 255);}
@@ -144,6 +144,10 @@ body {background-color: rgb(255, 255, 255);}
 /* Main Widget + 2 columns */
 #reviews {
   display:flex;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 10px;
+  width: auto;
 }
 
 #reviews-breakdown {
@@ -151,7 +155,6 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px
 }
 
 #reviewList {
@@ -163,15 +166,14 @@ body {background-color: rgb(255, 255, 255);}
 /* Breakdown Ratings */
 #reviews-graph-avg {
   display: flex;
-  margin-left: 10px;
-  padding: 10px;
+  padding: 5px;
 }
 
 #reviews-ratingsGraph {
-  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 15px;
 }
 
 .reviews-ratingbar{
@@ -203,12 +205,19 @@ body {background-color: rgb(255, 255, 255);}
   margin: 10px;
 }
 
+#reviews-recText {
+  font-size: small;
+  font-style: italic;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
 /* Sliders */
 #reviews-characterSliders {
   display:flex;
   flex-direction: column;
   font-size: 12px;
-  margin-left: 10px;
+  margin-top: 15px;
 }
 
 .reviews-slider-leftLabel {
@@ -249,13 +258,16 @@ body {background-color: rgb(255, 255, 255);}
   background-color: black;
 }
 
+#reviews-sorting {
+  margin-left: 5px;
+}
+
 /* Review Tile Components */
 #reviewTile {
   padding:10px;
   margin: 10px 0 10px 0;
-  width:500px;
   border: 2px solid black;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 #reviewTile-stars {
@@ -340,8 +352,8 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #reviews-addReviewPopup {
-  position: absolute;
-  top: 250%;
+  position: fixed;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
@@ -427,6 +439,7 @@ select:hover {
 .overview-overviewContainer {
   width: auto;
   height: 88vh;
+  margin-bottom: 3%;
 }
 
 .overview-parentContainer {
