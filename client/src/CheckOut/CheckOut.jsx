@@ -399,42 +399,37 @@ function CheckOut({ cartItems }) {
   );
 
   return (
-    <>
-      <div className="checkout-navBar">
-        <img src="https://www.shoppersvineyard.com/images/labels/mythos-breweries-mythos-hellenic-lager-beer.gif?1680837605" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
-      </div>
-      <div className="checkout-container">
-        {currentPage === 'shipping'
-          ? shippingInformation()
-          : paymentInformation()}
-        <div className="checkout-cartContainer">
-          <div className="checkout-oversizeContainer">
-            <div className="checkout-cartItemsContainer">
-              {cartItems.map((item, index) => (
-                <div key={item.sku_id} className="checkout-cartItems">
-                  <img id="checkout-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
-                  <div className="checkout-cartInfo">
-                    <span>{`${item.productName} - ${item.styleName}`}</span>
-                    <span>{`$${item.productCost}`}</span>
-                    <span>{`Size: ${item.size}`}</span>
-                    <span>{`Quantity: ${item.quantity}`}</span>
-                  </div>
-                  <span id="checkout-cartSubtotal">{`$${item.quantity * item.productCost}`}</span>
+    <div className="checkout-container">
+      {currentPage === 'shipping'
+        ? shippingInformation()
+        : paymentInformation()}
+      <div className="checkout-cartContainer">
+        <div className="checkout-oversizeContainer">
+          <div className="checkout-cartItemsContainer">
+            {cartItems.map((item, index) => (
+              <div key={item.sku_id} className="checkout-cartItems">
+                <img id="checkout-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
+                <div className="checkout-cartInfo">
+                  <span>{`${item.productName} - ${item.styleName}`}</span>
+                  <span>{`$${item.productCost}`}</span>
+                  <span>{`Size: ${item.size}`}</span>
+                  <span>{`Quantity: ${item.quantity}`}</span>
                 </div>
-              ))}
-            </div>
-            <div className="checkout-codeContainer">
-              <input type="text" aria-label="Promotional code text input" id="checkout-promo" placeholder="Promotion Code" />
-              <button type="submit" aria-label="Apply Code">Apply</button>
-            </div>
-            <div id="checkout-totalCost">
-              <span>Total</span>
-              <span>{`USD $${totalCost}`}</span>
-            </div>
+                <span id="checkout-cartSubtotal">{`$${item.quantity * item.productCost}`}</span>
+              </div>
+            ))}
+          </div>
+          <div className="checkout-codeContainer">
+            <input type="text" aria-label="Promotional code text input" id="checkout-promo" placeholder="Promotion Code" />
+            <button type="submit" aria-label="Apply Code">Apply</button>
+          </div>
+          <div id="checkout-totalCost">
+            <span>Total</span>
+            <span>{`USD $${totalCost}`}</span>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 export default CheckOut;

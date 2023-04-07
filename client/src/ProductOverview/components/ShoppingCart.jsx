@@ -1,11 +1,18 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CiCircleRemove } from 'react-icons/ci';
 import { NavLink } from 'react-router-dom';
 
 function ShoppingCart({
   cartItems, setCartItems, cartOpen, setCartOpen,
 }) {
+  useEffect(() => {
+    if (localStorage.getItem('cart')) {
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      setCartItems(cart);
+    }
+  }, []);
+
   const removeItem = (skuId, size) => {
     const updatedCart = [...cartItems];
 

@@ -7,16 +7,12 @@ import MainImageScreen from './components/MainImageScreen.jsx';
 import ProductInformation from './components/ProductInformation.jsx';
 import ProductDescription from './components/ProductDescription.jsx';
 import PurchaseOptions from './components/PurchaseOptions.jsx';
-import ShoppingCart from './components/ShoppingCart.jsx';
-import { FiSearch } from "react-icons/fi";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 
 function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPerProduct, cartItems, setCartItems,
   productId, product, setProduct, productInformation, setProductInformation }) {
   const [productStyles, setProductStyles] = useState([]);
   const [mainImage, setMainImage] = useState({});
   const [expand, setExpand] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
 
   useEffect(() => {
     request(`/products/${productId}`, { product_id: productId }, 'get')
@@ -42,23 +38,6 @@ function ProductOverview({ request, outfits, setOutfits, starArr, totalReviewsPe
 
   return (
     <div>
-      <div className="overview-navBar">
-        <img src="https://www.shoppersvineyard.com/images/labels/mythos-breweries-mythos-hellenic-lager-beer.gif?1680837605" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
-        <div className="overview-searchBar">
-          <input type="text" aria-label="Search form" id="overview-searchForm" />
-          <button type="submit" aria-label="Search" id="overview-searchButton"><FiSearch id="overview-searchIcon" /></button>
-          <button type="submit" aria-label="Open Cart" id="overview-cartButton" onClick={() => { setCartOpen(!cartOpen); }}>
-            <AiOutlineShoppingCart id="overview-cartIcon" />
-            {cartItems.length > 0 ? <div id="overview-cartQuantity">{cartItems.length}</div> : null}
-          </button>
-        </div>
-      </div>
-      <ShoppingCart
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        cartOpen={cartOpen}
-        setCartOpen={setCartOpen}
-      />
       {(Object.keys(product).length && Object.keys(productInformation).length)
         ? (
           <div className="overview-overviewContainer">
