@@ -73,14 +73,9 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
       <div className="related-card">
           <button className='related-star-button' onClick={() => {handleRemove({name: product.productName, style: product.styleName})}}>x</button>
             <div onClick={() => setProductId(product.productId)}>
-<<<<<<< HEAD
-            <img src={product.productPhoto} width={125} height={125} loading="lazy" />
-              <br />
-=======
             <div className="related-fill">
-            <img src={product.productPhoto} />
+            <img src={product.productPhoto} loading="lazy" />
             </div>
->>>>>>> bf7067f72f5495ec878ee5b0072dc2199d15dd4e
               <div style={{fontSize: '12px'}}className="related-text">{product.productCategory}</div>
               <br />
               <div style={{fontSize: '16px', fontWeight: 'bold'}} className="related-text">{product.productName}</div>
