@@ -36,6 +36,10 @@ Repository requires a github token to access API data. Create a .env file after 
 API_KEY=YourGithubTokenHere
 ```
 ## Team Members
+Anthony Bui - Product Overview, Shopping Cart, Checkout Page
+Justin Cheng - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
+Dylan Kahlstorf - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
+Nick Mann - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
 
 ## License
 
