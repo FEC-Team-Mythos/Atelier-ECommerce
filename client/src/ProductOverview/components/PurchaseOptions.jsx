@@ -173,6 +173,7 @@ function PurchaseOptions({
                   setSelectedStyleIndex(index);
                 }
               }}
+              loading="lazy"
             />
             {selectedStyleIndex === index ? <RxCheckCircled id="overview-productCheck" /> : null}
           </div>

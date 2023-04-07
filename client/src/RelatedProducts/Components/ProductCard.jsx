@@ -31,7 +31,7 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
     return (
       <div>
         <div className="related-card">
-        <img src={currentProduct.styles.results[0].photos[0].thumbnail_url} width={125} height={125} />
+        <img src={currentProduct.styles.results[0].photos[0].thumbnail_url} width={125} height={125} loading="lazy" />
         <br />
               <div style={{fontSize: '12px'}}className="related-text">Current Product</div>
               <br />
@@ -50,7 +50,7 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
         <div className="related-card">
             {listType.type === 'related' ? <button style={{width: '22px', height: '22px', float: 'right'}} onClick={() => { setComparedProduct(product); setShowModal(true); }}>☆</button> : <button style={{float: 'right'}} onClick={() => {handleRemove(product.name)}}>x</button> }
               <div onClick={() => setProductId(product.id)}>
-              <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} />
+              <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} loading="lazy" />
               <br />
               <div style={{fontSize: '12px'}}className="related-text">{product.category}</div>
               <br />
@@ -72,7 +72,7 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
       <div className="related-card">
           {listType.type === 'related' ? <button style={{float: 'right'}} onClick={() => { setComparedProduct(product); setShowModal(true); }}>☆</button> : <button style={{float: 'right'}} onClick={() => {handleRemove({name: product.productName, style: product.styleName})}}>x</button> }
             <div onClick={() => setProductId(product.productId)}>
-            <img src={product.productPhoto} width={125} height={125} />
+            <img src={product.productPhoto} width={125} height={125} loading="lazy" />
               <br />
               <div style={{fontSize: '12px'}}className="related-text">{product.productCategory}</div>
               <br />

@@ -9,7 +9,7 @@ function ProductCard({ id, setProductId, product }) {
     <div>
       <NavLink to='product'>
         <div onClick={() => setProductId(id)} className="related-card">
-              {product.styles.results.length ? <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} /> : null}
+              {product.styles.results.length ? <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} loading="lazy" /> : null}
               <br />
               {product.category}
               <br />
