@@ -10,14 +10,12 @@ library.add(solidStar, hollowStar);
 function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, setAvgRating, starArr, setStars, allReviews }) {
   const [recommended, setRecommended] = useState(0);
   const [chartRatings, setChartRatings] = useState({});
-  const [totalRatings, setTotalRatings] = useState(0);
 
   const calcAvgRating = (avg = 0, total = 0) => {
     for (const rating in metaData.ratings) {
       avg += (rating * metaData.ratings[rating]);
       total += Number(metaData.ratings[rating]);
     }
-    setTotalRatings(total);
     setAvgRating(Number((avg / total).toFixed(1)));
   };
 
@@ -73,8 +71,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
 
   const displayRecommended = () => (
     <div>
-      {recommended}
-      % recommended
+      {recommended + '% recommended'}
     </div>
   );
 
@@ -88,13 +85,13 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
   };
 
   const ratingsGraph = () => {
-    if (totalRatings > 1) {
+    if (allReviews.length > 1) {
       return (
         chartRatings.map((rating, index) => {
           const barStyle = {
             backgroundColor: '#2E8B57',
             height: '10px',
-            width: rating.count / 2,
+            width: ((rating.count / allReviews.length) * 250),
           };
 
           return (
@@ -103,7 +100,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
                 {`${rating.rating} `}
                 <FontAwesomeIcon icon="fa-solid fa-star" />
               </span>
-              <div id="reviews-total-rating-bar" style={{ width: totalRatings / 2 }}>
+              <div id="reviews-total-rating-bar" style={{ width: 250 }}>
                 <div id={`${rating.rating}-rating-bar`} style={barStyle} />
               </div>
               <span className="reviews-rightBarText">{calcReviewNum(rating.rating)}</span>
@@ -152,19 +149,19 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
 
   useEffect(() => {
     const chartData = [
-      { rating: 1, count: 0, total: totalRatings },
-      { rating: 2, count: 0, total: totalRatings },
-      { rating: 3, count: 0, total: totalRatings },
-      { rating: 4, count: 0, total: totalRatings },
-      { rating: 5, count: 0, total: totalRatings },
+      { rating: 1, count: 0 },
+      { rating: 2, count: 0 },
+      { rating: 3, count: 0 },
+      { rating: 4, count: 0 },
+      { rating: 5, count: 0 },
     ];
 
-    for (const rating in metaData.ratings) {
-      chartData[rating - 1].count = Number(metaData.ratings[rating]);
+    for (var i = 0; i < 5; i++) {
+      chartData[i].count = calcReviewNum(i + 1);
     }
 
     setChartRatings(chartData);
-  }, [totalRatings]);
+  }, [allReviews]);
 
   useEffect(() => {
     calcAvgRating();

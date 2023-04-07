@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 import ReviewList from './ReviewList.jsx';
@@ -15,8 +15,7 @@ function Reviews({
   const [sortParam, setSortParam] = useState('relevance');
   const [reviewList, setReviewList] = useState([]);
 
-  const getReviewData = async (count) => {
-    // Product ID should be dynamic here, will grab from other widget
+  const getReviewData = async () => {
     try {
       const response = await axios.get('/reviews', { params: { count: 250, sort: 'relevant', product_id: productId } });
       setAllReviews(response.data.results);
@@ -28,7 +27,6 @@ function Reviews({
   };
 
   const getReviewMetaData = async () => {
-    // Product ID should be dynamic here, will grab from other widget
     try {
       const response = await axios.get('/reviews/meta', { params: { product_id: productId } });
       setMetaData(response.data);
@@ -37,7 +35,7 @@ function Reviews({
     }
   };
 
-  const sortReviews = async () => {
+  const sortReviews = useCallback(async () => {
     try {
       const response = await axios.get('/reviews/', { params: { count: 250, sort: sortParam, product_id: productId } });
       if (filterParams.length) {
@@ -49,9 +47,9 @@ function Reviews({
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [filterParams, productId, sortParam]);
 
-  const filterReviews = async () => {
+  const filterReviews = useCallback(async () => {
     try {
       if (!filterParams || filterParams.length === 0) {
         setReviewList(allReviews);
@@ -62,7 +60,7 @@ function Reviews({
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [allReviews, filterParams]);
 
   useEffect(() => {
     getReviewData();

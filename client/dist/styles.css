@@ -144,11 +144,13 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-left: 20px
 }
 
 #reviewList {
   flex: 0 0 80%;
   padding:10px;
+  margin-left: 20px;
 }
 
 /* Breakdown Ratings */
@@ -162,11 +164,12 @@ body {background-color: rgb(255, 255, 255);}
   padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .reviews-ratingbar{
   display: flex;
-  justify-content:space-evenly;
+  justify-content:center;
   align-items: center;
 }
 
@@ -177,17 +180,20 @@ body {background-color: rgb(255, 255, 255);}
 .reviews-leftBarText{
   font-size: 12px;
   white-space: nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 .reviews-rightBarText{
   font-size: 12px;
   white-space: nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 
 #reviews-total-rating-bar {
   background-color: lightgray;
   margin: 10px;
-  flex-grow: 1;
 }
 
 /* Sliders */
@@ -195,6 +201,7 @@ body {background-color: rgb(255, 255, 255);}
   display:flex;
   flex-direction: column;
   font-size: 12px;
+  margin-left: 10px;
 }
 
 .reviews-slider-leftLabel {
@@ -264,6 +271,11 @@ body {background-color: rgb(255, 255, 255);}
 
 #reviewTile-summary {
   font-weight: bold;
+  width: 470px;
+}
+
+#reviewTile-body {
+  width: 470px;
 }
 
 #reviews-filter {
@@ -285,15 +297,15 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .threeQ {
-  clip-path: polygon(0 0, 62% 0, 62% 100%, 0 100%);
+  clip-path: polygon(0 0, 75% 0, 75% 100%, 0 100%);
 }
 
 .oneHalf {
-  clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
 .oneQuarter {
-  clip-path: polygon(0 0, 20% 0, 20% 100%, 0 100%);
+  clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
 }
 */
 
@@ -322,7 +334,7 @@ body {background-color: rgb(255, 255, 255);}
 
 #reviews-addReviewPopup {
   position: absolute;
-  top: 50%;
+  top: 250%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
