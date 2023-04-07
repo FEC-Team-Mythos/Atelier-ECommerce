@@ -104,7 +104,7 @@ function MainImageScreen({
 
   return (
     <div className={expand ? 'overview-imagesContainer-clicked' : 'overview-imagesContainer'}>
-      {expand ? null : <img src={mainImage.url} alt="Main Product" id="overview-mainImage" />}
+      {expand ? null : <img src={mainImage.url} alt="Main Product" id="overview-mainImage" loading="lazy" />}
       <ul className="overview-sideImages">
         {productInformation.photos[imageSelection.indexSet - 1]
           ? (
@@ -125,6 +125,7 @@ function MainImageScreen({
               setMainImage({ url: photo.url, index: imageSelection.indexSet + index });
               setSelectedIndex(imageSelection.indexSet + index);
             }}
+            loading="lazy"
           />
         ))}
         {productInformation.photos[imageSelection.indexSet + 7]
@@ -153,6 +154,7 @@ function MainImageScreen({
                 style={zoomIn ? { cursor: 'zoomIn' } : { cursor: 'zoomOut' }}
                 onClick={zoom}
                 onMouseMove={mouseMove}
+                loading="lazy"
               />
             ) : (
               null
