@@ -1360,15 +1360,17 @@ body {
 .qa-btn-load-more,
 .qa-btn-add-question,
 .qa-btn-more-answers {
-  color: rgb(88, 88, 88);
+  color: rgb(0, 0, 0);
 }
 
 .qa-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 80%;
+  width: 98%;
   margin: 0 auto;
+  padding: 0 2%;
+  box-sizing: border-box;
 }
 
 .qa-heading, .qa-question-helpful, .qa-answer-info {
@@ -1423,6 +1425,8 @@ body {
 }
 
 .qa-btn-load-more,
+.reviews-addReview-button,
+.reviews-moreReviews-button,
 .qa-btn-add-question {
   padding: 20px 16px;
   margin: 2%;
