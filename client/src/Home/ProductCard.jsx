@@ -8,15 +8,17 @@ function ProductCard({ id, setProductId, product }) {
   return (
     <div>
       <NavLink to='product'>
-        <div onClick={() => setProductId(id)} className="related-card">
-              {product.styles.results.length ? <img src={product.styles.results[0].photos[0].thumbnail_url} width={125} height={125} /> : null}
+        <div className="related-card" onClick={() => setProductId(id)} >
+        <div className="related-fill">
+              {product.styles.results.length ? <img src={product.styles.results[0].photos[0].thumbnail_url} /> : null}
+              </div>
+              <div style={{fontSize: '12px'}}className="related-text">  {product.category}</div>
               <br />
-              {product.category}
+              <div style={{fontSize: '16px', fontWeight: 'bold'}} className="related-text"> {product.name}</div>
               <br />
-              {product.name}
-              <br />
-              $
-              {product.default_price}
+              <div style={{fontSize: '12px'}} className="related-text"><i>  {product.slogan}</i></div>
+              <br/>
+              <div style={{fontSize: '16px'}} className="related-text">  ${product.default_price}</div>
         </div>
       </NavLink>
     </div>
