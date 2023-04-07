@@ -33,6 +33,7 @@ function ReviewTile({ review }) {
           {review.photos.map((photo, ind) => (
             <img
               src={photo.url}
+              alt="review-image"
               key={ind}
               data-testid="review-photo"
               onClick={() => { setExpanded(!expanded); }}
@@ -124,7 +125,7 @@ function ReviewTile({ review }) {
         <div>
           <span>Helpful?</span>
           {' '}
-          <button data-testid="reviewHelpBtn" onClick={() => postHelpful()}>{` Yes ${review.helpfulness}`}</button>
+          <button aria-label="Mark Review Helpful" data-testid="reviewHelpBtn" onClick={() => postHelpful()}>{` Yes ${review.helpfulness}`}</button>
         </div>
       );
     }

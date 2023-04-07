@@ -85,6 +85,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
           <button
             id="reviews-formStarButton"
             data-testId={`reviews-addReviewStars${index}`}
+            aria-label="Choose Star Rating for New Review"
             type="button"
             key={index}
             className={index <= (hover || formRating) ? 'on' : 'off'}
@@ -150,6 +151,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <input
                   type="radio"
                   data-testid="reviews-addReviewRecYes"
+                  aria-label="Recommend Product"
                   name="yes"
                   value="true"
                   checked={formRecommend === true}
@@ -161,6 +163,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <input
                   type="radio"
                   data-testid="reviews-addReviewRecNo"
+                  aria-label="Do Not Recommend Product"
                   name="no"
                   value="false"
                   checked={formRecommend === false}
@@ -180,6 +183,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <input
                   id="reviews-addReviewSummaryText"
                   data-testid="reviews-addReviewSummaryText"
+                  aria-label='New Review Summary Text'
                   type="text"
                   maxLength={60}
                   value={formSummary}
@@ -195,6 +199,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                   type="text"
                   id="reviews-addReviewBodyText"
                   data-testid="reviews-addReviewBodyText"
+                  aria-label='New Review Body Text'
                   minLength={50}
                   maxLength={1000}
                   value={formBody}
@@ -207,6 +212,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <label htmlFor="fileInput">Select up to 5 image files:</label>
                 <input
                   type="file"
+                  aria-label='New Review Photo File'
                   id="fileInput"
                   accept="image/*"
                   multiple
@@ -220,6 +226,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <input
                   type="text"
                   data-testid="reviews-addReviewName"
+                  aria-label='New Review Nickname'
                   maxLength={60}
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
@@ -236,6 +243,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 <input
                   type="text"
                   data-testid="reviews-addReviewEmail"
+                  aria-label='New Review Email'
                   maxLength={60}
                   value={formEmail}
                   onChange={(e) => setFormEmail(e.target.value)}
@@ -246,7 +254,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
                 </div>
               </div>
             </label>
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Submit" aria-label="Submit New Review"/>
           </form>
           <button
             onClick={() => toggleAddReviewState(!addReviewState)}

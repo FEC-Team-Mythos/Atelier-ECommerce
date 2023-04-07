@@ -15,6 +15,7 @@ function ReviewList({
       <button
         id="reviews-moreReviews-button"
         data-testid="reviews-moreReviews-button"
+        aria-label="See More Reviews"
         onClick={() => setReviewListLength(reviewListLength + 2)}
       >
         More Reviews
@@ -26,6 +27,7 @@ function ReviewList({
     <button
       id="reviews-addReview-button"
       data-testid="reviews-addReview-button"
+      aria-label="Add New Review"
       onClick={() => toggleAddReviewState(!addReviewState)}
     >
       Add Review

@@ -22,6 +22,7 @@ function RadioButtons({ id, trackRadioValues }) {
       <label>
         <input
           type="radio"
+          aria-label='Rating of 1'
           value={1}
           checked={selectedOption === '1'}
           onChange={handleOptionChange}
@@ -32,6 +33,7 @@ function RadioButtons({ id, trackRadioValues }) {
         <input
           type="radio"
           value={2}
+          aria-label='Rating of 2'
           checked={selectedOption === '2'}
           onChange={handleOptionChange}
         />
@@ -41,6 +43,7 @@ function RadioButtons({ id, trackRadioValues }) {
         <input
           type="radio"
           value={3}
+          aria-label='Rating of 3'
           checked={selectedOption === '3'}
           onChange={handleOptionChange}
         />
@@ -50,6 +53,7 @@ function RadioButtons({ id, trackRadioValues }) {
         <input
           type="radio"
           value={4}
+          aria-label='Rating of 4'
           checked={selectedOption === '4'}
           onChange={handleOptionChange}
         />
@@ -59,6 +63,7 @@ function RadioButtons({ id, trackRadioValues }) {
         <input
           type="radio"
           value={5}
+          aria-label='Rating of 5'
           checked={selectedOption === '5'}
           onChange={handleOptionChange}
         />
