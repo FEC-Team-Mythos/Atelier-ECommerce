@@ -157,7 +157,7 @@ function PurchaseOptions({
         </b>
         <em>{productInformation.name}</em>
       </p>
-      <ul className="overview-productStyleContainer">
+      <div className="overview-productStyleContainer">
         {productStyles.map((style, index) => (
           <div key={style.photos[0].url} className={selectedStyleIndex === index ? 'overview-productStyleList-selected' : 'overview-productStyleList'}>
             <img
@@ -178,7 +178,7 @@ function PurchaseOptions({
             {selectedStyleIndex === index ? <RxCheckCircled id="overview-productCheck" /> : null}
           </div>
         ))}
-      </ul>
+      </div>
       <div className="overview-purchaseSelections">
         <select id="overview_productSize" onChange={getSelectedSize}>
           <option value="0">SELECT SIZE</option>
