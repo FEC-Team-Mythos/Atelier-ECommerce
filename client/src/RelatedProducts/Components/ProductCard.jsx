@@ -31,13 +31,12 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
     return (
       <div>
         <div className="related-card">
-        <div className="related-fill">
+        <div className="related-add-fill">
         <img src={currentProduct.styles.results[0].photos[0].thumbnail_url} width={125} height={125} />
         </div>
               <div style={{fontSize: '12px'}}className="related-text">Current Product</div>
               <br />
               <div style={{fontSize: '16px', fontWeight: 'bold'}} className="related-text">{currentProduct.name}</div>
-              <br />
               <br />
           <button type='button' className='related-add-outfit' role="add-outfit" onClick={handleAdd}>Add to outfit</button>
         </div>
@@ -81,9 +80,9 @@ function ProductCard({ currentProduct, starArr, product, index, listType, setSho
               <br />
               <div style={{fontSize: '16px', fontWeight: 'bold'}} className="related-text">{product.productName}</div>
               <br />
-              <div style={{fontSize: '14px'}} className="related-text">${product.productCost}</div>
+              <div style={{fontSize: '12px'}} className="related-text"><i>{product.styleName}</i></div>
               <br />
-              <div style={{fontSize: '14px'}} className="related-text"><i>{product.styleName}</i></div>
+              <div style={{fontSize: '14px'}} className="related-text">${product.productCost}</div>
               <br />
               <span id="related-graph-avg" style={{position: 'left'}}>
               {displayAllStars()}
