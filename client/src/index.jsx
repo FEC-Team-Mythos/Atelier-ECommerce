@@ -52,7 +52,7 @@ function App() {
     <BrowserRouter>
       <div className="overview-navBar">
         <NavLink to="/">
-          <img src="https://www.shoppersvineyard.com/images/labels/mythos-breweries-mythos-hellenic-lager-beer.gif?1680837605" id="overview-logo" alt="Logo Placeholder" data-testid="logo" />
+          <img src="https://www.shoppersvineyard.com/images/labels/mythos-breweries-mythos-hellenic-lager-beer.gif?1680837605" id="overview-logo" alt="Logo Placeholder" data-testid="logo" loading="lazy" />
         </NavLink>
         <div className="overview-searchBar">
           <input type="text" aria-label="Search form" id="overview-searchForm" />

@@ -37,7 +37,7 @@ function ShoppingCart({
           <div className="overview-cartContainer">
             {cartItems.map((item, index) => (
               <div key={item.sku_id} className="overview-cartItems">
-                <img id="overview-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
+                <img id="overview-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} loading="lazy" />
                 <div className="overview-cartInfo">
                   <span>{`Product: ${item.productName} - ${item.styleName}`}</span>
                   <span>{`Cost: ${item.productCost}`}</span>

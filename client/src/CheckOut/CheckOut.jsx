@@ -408,7 +408,7 @@ function CheckOut({ cartItems }) {
           <div className="checkout-cartItemsContainer">
             {cartItems.map((item, index) => (
               <div key={item.sku_id} className="checkout-cartItems">
-                <img id="checkout-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} />
+                <img id="checkout-cartProductImage" src={item.productPhoto} alt={`Product in Cart - ${index}`} loading="lazy" />
                 <div className="checkout-cartInfo">
                   <span>{`${item.productName} - ${item.styleName}`}</span>
                   <span>{`$${item.productCost}`}</span>
