@@ -5,6 +5,10 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 ## Table of Contents
 
 1. [Description](#Description)
+2. [Installation](#Installation)
+3. [Setup](#Setup)
+4. [Team Members](#Team-members)
+5. [License](#License)
 
 ```python
 import foobar
