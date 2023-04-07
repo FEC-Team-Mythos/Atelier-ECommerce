@@ -9,6 +9,7 @@ import ProductOverview from './ProductOverview/ProductOverview.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
 import Reviews from './Reviews/Reviews.jsx';
+import Home from './Home/home.jsx';
 import CheckOut from './CheckOut/CheckOut.jsx';
 
 import { changeRequestHook } from '../../changeRequestHook';
@@ -31,6 +32,8 @@ function App() {
     })
     */
 
+    var url = window.location.href.slice(30);
+
   const [totalReviewsPerProduct, setTotalReviewsPerProduct] = useState(0);
   const [starArr, setStars] = useState('');
   const [cartItems, setCartItems] = useState([]);
@@ -44,8 +47,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={(<Home setProductId={setProductId}/>)} />
         <Route
-          path="/"
+          path="product"
           element={(
             <div className="content">
               <ProductOverview

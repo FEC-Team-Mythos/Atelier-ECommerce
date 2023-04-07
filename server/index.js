@@ -28,6 +28,10 @@ const statics = path.join(`${__dirname}/../client/dist`);
 app.use(express.static(statics));
 app.use(express.json());
 
+app.get('/product', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
 const bucketName = process.env.BUCKET_NAME;
 const region = process.env.BUCKET_REGION;
 const accessKeyId = process.env.ACCESS_KEY;
@@ -78,6 +82,11 @@ app.get('/related/products', (req, res) => {
   });
 });
 
+app.get('/products', (req, res) => {
+  getProducts(req.query.page, req.query.count, (products) => {
+    res.send(products);
+  });
+});
 // For routing
 app.get('/checkout', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
@@ -93,6 +102,16 @@ app.get('*', (req, res) => {
       res.sendStatus(404);
     });
 });
+var getProducts = async function (page, count, callback) {
+  var products = await fetch('/products/', { page, count }, 'get');
+  products = products.data;
+  for (let i = 0; i < products.length; i++) {
+    // const product = await fetch(`/products/${products.data[i].id}`, { product_id: products.data[i].id }, 'get');
+    const styles = await fetch(`/products/${products[i].id}/styles`, { product_id: products[i].id }, 'get');
+    products[i].styles = styles.data;
+  }
+  callback(products);
+};
 
 // async function to get related products
 // eslint-disable-next-line func-names, camelcase
