@@ -17,6 +17,9 @@ foobar.pluralize('goose')
 foobar.singularize('phenomena')
 ```
 
+## Description
+
+
 ## Installation
 
 Use the package manager [npm](https://docs.npmjs.com/) to install necessary dependencies.
@@ -32,8 +35,7 @@ Repository requires a github token to access API data. Create a .env file after 
 ```bash
 API_KEY=YourGithubTokenHere
 ```
-
-Please make sure to update tests as appropriate.
+## Team Members
 
 ## License
 
