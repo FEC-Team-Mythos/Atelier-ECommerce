@@ -70,7 +70,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
   };
 
   const displayRecommended = () => (
-    <div>
+    <div id="reviews-recText">
       {recommended + '% recommended'}
     </div>
   );

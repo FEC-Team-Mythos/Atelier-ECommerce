@@ -10,6 +10,18 @@ html {
 
 body {background-color: rgb(255, 255, 255);}
 
+#home-page {
+  margin-left: 2%;
+}
+
+#Related-Products {
+  margin-left: 2%;
+}
+
+#Related-Outfit {
+  margin-left: 2%;
+}
+
 .related-product-carousel {
   position: relative;
   overflow: hidden;
@@ -67,14 +79,15 @@ body {background-color: rgb(255, 255, 255);}
 
 .related-modal-container {
   position: fixed;
-  top: 10%;
-  bottom: 10%;
+  top: 5%;
+  bottom: 5%;
 }
 
 .related-modal-sq {
   border-radius: 5px;
   box-shadow: 10px 10px 10px #525252;
   text-align: center;
+  z-index: 1000;
 }
 
 .related-product-modal {
@@ -93,10 +106,10 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .related-card {
-  height: 228px;
-  width: 125px;
-  margin: 15px;
-  padding: 10px;
+  height: 260px;
+  width: 150px;
+  margin: 10px;
+  padding: 0px;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   background-color: rgba(0,0,0,0.05);
@@ -107,12 +120,53 @@ body {background-color: rgb(255, 255, 255);}
   text-align: left;
 }
 
-.home-card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.related-add-outfit {
+  display: inline-block;
+  padding: 5px 5px;
+  margin: 4%;
+  border: 1px solid #333;
+  background-color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  margin-top: 15px;
 }
 
+.related-star-button {
+  float: right;
+  outline: none;
+  border: none;
+}
+
+.related-fill {
+  height: 125px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
+}
+.related-fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
+}
+.related-add-fill {
+  height: 125px;
+  width: 150px;
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden
+}
+.related-add-fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%
+}
 
 #related-table {
   border: 2px solid rgb(0, 0, 0);
@@ -141,9 +195,20 @@ body {background-color: rgb(255, 255, 255);}
   padding: 0px;
 }
 
+.home-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
 /* Main Widget + 2 columns */
 #reviews {
   display:flex;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 10px;
+  width: auto;
 }
 
 #reviews-breakdown {
@@ -151,7 +216,6 @@ body {background-color: rgb(255, 255, 255);}
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 20px
 }
 
 #reviewList {
@@ -163,15 +227,14 @@ body {background-color: rgb(255, 255, 255);}
 /* Breakdown Ratings */
 #reviews-graph-avg {
   display: flex;
-  margin-left: 10px;
-  padding: 10px;
+  padding: 5px;
 }
 
 #reviews-ratingsGraph {
-  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-top: 15px;
 }
 
 .reviews-ratingbar{
@@ -203,12 +266,19 @@ body {background-color: rgb(255, 255, 255);}
   margin: 10px;
 }
 
+#reviews-recText {
+  font-size: small;
+  font-style: italic;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
 /* Sliders */
 #reviews-characterSliders {
   display:flex;
   flex-direction: column;
   font-size: 12px;
-  margin-left: 10px;
+  margin-top: 15px;
 }
 
 .reviews-slider-leftLabel {
@@ -249,11 +319,14 @@ body {background-color: rgb(255, 255, 255);}
   background-color: black;
 }
 
+#reviews-sorting {
+  margin-left: 5px;
+}
+
 /* Review Tile Components */
 #reviewTile {
   padding:10px;
   margin: 10px 0 10px 0;
-  width:800px;
   border: 2px solid black;
   border-radius: 4px;
 }

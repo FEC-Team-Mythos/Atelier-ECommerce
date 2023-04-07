@@ -8,7 +8,7 @@ import CharRadioBtns from './CharRadioBtns.jsx';
 
 library.add(faStar);
 
-function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics }) {
+function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics, productId }) {
   const [formSummary, setFormSummary] = useState('');
   const [formBody, setFormBody] = useState('');
   const [formRecommend, setFormRecommend] = useState(false);
@@ -37,7 +37,7 @@ function AddReviewModal({ addReviewState, toggleAddReviewState, characteristics 
 
     const data = new FormData();
 
-    data.append('product_id', 71697);
+    data.append('product_id', productId);
     data.append('rating', formRating);
     data.append('summary', formSummary);
     data.append('body', formBody);
