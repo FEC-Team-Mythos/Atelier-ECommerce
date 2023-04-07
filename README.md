@@ -1,10 +1,10 @@
 # Atelier E-Commerce Frontend
 
-Foobar is a Python library for dealing with word pluralization.
+Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HTML, Node Express deployed on AWS consisting of a homepage, product page (overview, related products, questions and answers, reviews), and a checkout page.
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install necessary dependencies.
 
 ```bash
 pip install foobar
