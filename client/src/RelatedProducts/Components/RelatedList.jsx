@@ -7,7 +7,7 @@ function RelatedList({ starArr, related, setShowModal, setComparedProduct, produ
   const listType = { type: 'related' };
 
   return (
-    <div id="Related Products">
+    <div id="Related-Products">
       <h3>Related Products</h3>
       <Carousel starArr={starArr} products={related} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} setProductId={setProductId} related={related}/>
     </div>

@@ -72,7 +72,7 @@ function OutfitList({ setProductId, starArr, related, outfits, setOutfits, curre
   };
 
   return (
-    <div id="My Outfit">
+    <div id="Related-Outfit">
       <h3>Your Outfit</h3>
       <Carousel setProductId={setProductId} currentProduct={currentProduct} starArr={starArr} related={related} products={outfits} setOutfits={setOutfits} listType={listType} handleAdd={handleAdd} handleRemove={handleRemove} />
     </div>

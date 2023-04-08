@@ -23,7 +23,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
     let roundToNearestQuarter = Math.round(avgRating * 4) / 4;
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      if (roundToNearestQuarter > 1) {
+      if (roundToNearestQuarter >= 1) {
         stars.push(<FontAwesomeIcon icon={solidStar} />);
         roundToNearestQuarter--;
       } else if (roundToNearestQuarter < 1 && roundToNearestQuarter >= 0.75) {
@@ -70,7 +70,7 @@ function NewBreakdown({ metaData={}, filterParams, setFilterParams, avgRating, s
   };
 
   const displayRecommended = () => (
-    <div>
+    <div id="reviews-recText">
       {recommended + '% recommended'}
     </div>
   );

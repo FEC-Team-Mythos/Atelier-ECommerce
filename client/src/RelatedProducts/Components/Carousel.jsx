@@ -9,7 +9,7 @@ function Carousel({ currentProduct, starArr, related, products, listType, setSho
   const [width, setWidth] = useState(0);
   const [showRight, setShowRight] = useState(true);
   const [partialScroll, setPartialScroll] = useState(0);
-  const cardSize = 200;
+  const cardSize = 174;
   const additionalScroll = 30;
   const windowWidth = useRef(window.innerWidth).current - 16;
 

@@ -4,7 +4,7 @@ import Filter from './Filter.jsx';
 import AddReviewModal from './AddReviewModal.jsx';
 
 function ReviewList({
-  reviewList, sortParam, setSortParam, metaData
+  reviewList, sortParam, setSortParam, metaData, productId
 }) {
   const [reviewListLength, setReviewListLength] = useState(2);
   const [addReviewState, toggleAddReviewState] = useState(false);
@@ -51,6 +51,7 @@ function ReviewList({
         addReviewState={addReviewState}
         toggleAddReviewState={toggleAddReviewState}
         characteristics={metaData.characteristics}
+        productId={productId}
       />
       {moreReviewsButton()}
       {addReview()}
