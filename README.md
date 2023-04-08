@@ -13,6 +13,9 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 ## Description
 
 ### Product Overview
+- Product overview consists of images pertaining to current selected product style from the API. A main image will be displayed with all other image options on the left. You can move forward and backwards of the image using the arrow buttons. The side image can be clicked to update the main image on screen. Side images display a max of 7 and if there are more, a down arrow can be toggled to see more. Selected main image will be shown on the side image bar.
+- <img width="849" alt="image" src="https://user-images.githubusercontent.com/106826710/230746975-d47b49ca-d5c0-46eb-9a93-c7ec844aaac8.png">
+
 ### Related Products
 ### Questions and Answers
 ### Reviews and Ratings
@@ -25,11 +28,6 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 - Upon clicking on Add Review, a modal will popup where you can a new review can be added. Up to 5 images can be included with new reviews
 - <img width="383" alt="Screenshot 2023-04-08 at 3 34 50 PM" src="https://user-images.githubusercontent.com/106470519/230739650-8d7e80bb-7e41-473e-89a2-9d16c1716e12.png">
-
-
-
-
-
 
 
 ## Installation
@@ -60,4 +58,4 @@ TINYURL_TOKEN=TinyURL API Token
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[ISC](https://opensource.org/license/isc-license-txt/)
