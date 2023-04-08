@@ -10,20 +10,15 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 4. [Team Members](#Team-members)
 5. [License](#License)
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
 ## Description
+
+### Product Overview
+### Related Products
+### Questions and Answers
+### Reviews and Ratings
+- Review List will contain all reviews for a given product. Can filter list via any selection within drop-down. Upon clicking More Reviews button, list will increment by two reviews with each click. If all reviews are shown, button will dissapear.
+- Rating Graph will show average rating with subsequent filled-in star value. Each star rating bar is actionable, filtering the review list <img width="377" alt="Screenshot 2023-04-08 at 3 25 13 PM" src="https://user-images.githubusercontent.com/106470519/230739285-7a1ad887-a1bf-40be-993b-afafcfadc4e5.png">
+
 
 
 ## Installation
@@ -36,7 +31,7 @@ npm install
 
 ## Setup
 
-Repository requires a github token to access API data. Create a .env file after cloning repository. A .env file template is provided below.
+Repository requires a github token to access API data, as well as an AWS S3 bucket to handle hosting images. TinyURL is also used in order to manage S3 links. A .env file template is provided below.
 
 ```bash
 API_KEY=Github API Token
