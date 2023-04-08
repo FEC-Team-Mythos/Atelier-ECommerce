@@ -14,7 +14,7 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 ### Product Overview
 - Product overview consists of images pertaining to current selected product style from the API. A main image will be displayed with all other image options on the left. You can move forward and backwards of the image using the arrow buttons. The side image can be clicked to update the main image on screen. Side images display a max of 7 and if there are more, a down arrow can be toggled to see more. Selected main image will be shown on the side image bar.
-- <img width="849" alt="image" src="https://user-images.githubusercontent.com/106826710/230746975-d47b49ca-d5c0-46eb-9a93-c7ec844aaac8.png">
+- <img width="500" alt="image" src="https://user-images.githubusercontent.com/106826710/230746975-d47b49ca-d5c0-46eb-9a93-c7ec844aaac8.png">
 
 ### Related Products
 ### Questions and Answers
