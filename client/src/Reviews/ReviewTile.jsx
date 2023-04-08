@@ -126,7 +126,7 @@ function ReviewTile({ review }) {
         <div>
           <span>Helpful?</span>
           {' '}
-          <button aria-label="Mark Review Helpful" data-testid="reviewHelpBtn" onClick={() => postHelpful()}>{` Yes ${review.helpfulness}`}</button>
+          <button aria-label="Mark Review Helpful" data-testid="reviewHelpBtn" className="reviews-btn-link" onClick={() => postHelpful()}>{` Yes ${review.helpfulness}`}</button>
         </div>
       );
     }

@@ -83,6 +83,7 @@ app.get('/related/products', (req, res) => {
 });
 
 app.get('/products', (req, res) => {
+  // eslint-disable-next-line no-use-before-define
   getProducts(req.query.page, req.query.count, (products) => {
     res.send(products);
   });
@@ -102,9 +103,11 @@ app.get('*', (req, res) => {
       res.sendStatus(404);
     });
 });
+// eslint-disable-next-line func-names
 var getProducts = async function (page, count, callback) {
   var products = await fetch('/products/', { page, count }, 'get');
   products = products.data;
+  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < products.length; i++) {
     // const product = await fetch(`/products/${products.data[i].id}`, { product_id: products.data[i].id }, 'get');
     const styles = await fetch(`/products/${products[i].id}/styles`, { product_id: products[i].id }, 'get');

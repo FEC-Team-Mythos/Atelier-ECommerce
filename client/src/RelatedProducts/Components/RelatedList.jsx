@@ -8,7 +8,7 @@ function RelatedList({ starArr, related, setShowModal, setComparedProduct, produ
 
   return (
     <div id="Related-Products">
-      <h3>Related Products</h3>
+      <h3>&nbsp;&nbsp;Related Products</h3>
       <Carousel starArr={starArr} products={related} listType={listType} setShowModal={setShowModal} setComparedProduct={setComparedProduct} setProductId={setProductId} related={related}/>
     </div>
   );

@@ -95,9 +95,9 @@ function QuestionsAndAnswers({ request, productId, changeRequestHook }) {
 
   return (
     <div className="qa-container">
-      <h1 className="qa-heading">
+      <h3>
         Questions & Answers
-      </h1>
+      </h3>
       <SearchBar handleSearch={handleSearch} />
       {showAddQuestionModal && (
         <AddQuestionModal
@@ -121,9 +121,9 @@ function QuestionsAndAnswers({ request, productId, changeRequestHook }) {
       />
       <div className="qa-buttons-container">
         {hasMoreQuestions && (
-        <button type="button" className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
-          More Answered Questions
-        </button>
+          <button type="button" className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
+            More Answered Questions
+          </button>
         )}
         <button type="button" className="qa-btn-add-question" onClick={handleAddQuestionClick}>
           Add a Question&nbsp;&nbsp;&nbsp;＋
