@@ -43,7 +43,7 @@ API_KEY=YourGithubTokenHere
 ```
 ## Team Members
 #### [Anthony Bui](https://www.linkedin.com/in/bui-anthony/) | [Github](https://github.com/aboowee) - Product Overview, Shopping Cart, Checkout Page, Navigation Bar
-#### Justin Cheng - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
+#### [Justin Cheng](https://www.linkedin.com/in/justin-cheng-4117b854/) | [Github](https://github.com/juchengca) - Home Page, Related Products, Your Outfit
 #### Dylan Kahlstorf - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
 #### Nick Mann - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
 
