@@ -1,6 +1,6 @@
 # Atelier E-Commerce Frontend
 
-Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HTML, Node Express deployed on AWS consisting of a homepage, product page (overview, related products, questions and answers, reviews), and a checkout page.
+Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HTML, Node Express deployed on AWS consisting of a homepage, product page (overview, related products, questions and answers, reviews), and a checkout page. Page routing is handled using React Router. Uploaded Images are stored via AWS S3.
 
 ## Table of Contents
 
@@ -17,7 +17,18 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 ### Questions and Answers
 ### Reviews and Ratings
 - Review List will contain all reviews for a given product. Can filter list via any selection within drop-down. Upon clicking More Reviews button, list will increment by two reviews with each click. If all reviews are shown, button will dissapear.
-- Rating Graph will show average rating with subsequent filled-in star value. Each star rating bar is actionable, filtering the review list <img width="377" alt="Screenshot 2023-04-08 at 3 25 13 PM" src="https://user-images.githubusercontent.com/106470519/230739285-7a1ad887-a1bf-40be-993b-afafcfadc4e5.png">
+
+- Rating Graph will show average rating with subsequent filled-in star value.
+- Each star rating bar is actionable, filtering the review list by the selected star rating
+- Characteristics from Reviews are shown below rating graph, mapped from a value of 1 to 5.
+-  <img width="170" alt="Screenshot 2023-04-08 at 3 25 13 PM" src="https://user-images.githubusercontent.com/106470519/230739285-7a1ad887-a1bf-40be-993b-afafcfadc4e5.png"> <img width="170" alt="Screenshot 2023-04-08 at 3 28 12 PM" src="https://user-images.githubusercontent.com/106470519/230739392-0fba7190-adc7-47a8-bc75-871d3f7c0941.png">
+
+- Upon clicking on Add Review, a modal will popup where you can a new review can be added. Up to 5 images can be included with new reviews
+- <img width="383" alt="Screenshot 2023-04-08 at 3 34 50 PM" src="https://user-images.githubusercontent.com/106470519/230739650-8d7e80bb-7e41-473e-89a2-9d16c1716e12.png">
+
+
+
+
 
 
 
