@@ -14,6 +14,7 @@ body {
 
 #home-page {
   margin-left: 2%;
+  margin-top: 12vh;
 }
 
 #Related-Products {
@@ -210,7 +211,7 @@ body {
   margin-left: 3%;
   margin-right: 3%;
   margin-top: 10px;
-  width: auto;
+  width: 85%;
 }
 
 #reviews-breakdown {
