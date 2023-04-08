@@ -11,7 +11,7 @@ function ReviewList({
 
   const moreReviewsButton = () => (
     reviewList && reviewList.length > reviewListLength
-      && (
+    && (
       <button
         id="reviews-moreReviews-button"
         className="reviews-large-button"
@@ -21,7 +21,7 @@ function ReviewList({
       >
         More Reviews
       </button>
-      )
+    )
   );
 
   const addReview = () => (
