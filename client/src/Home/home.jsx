@@ -17,7 +17,6 @@ function Home({ setProductId }) {
   return (
 
     <div id="home-page">
-      <h3>Home page</h3>
       <div className="home-card">
         {products.map((item, index) => (
           <ProductCard id={item.id} setProductId={setProductId} product={item} key={index} />
