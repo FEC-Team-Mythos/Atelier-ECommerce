@@ -372,6 +372,14 @@ body {
   display: block;
 }
 
+#reviewHelpBtn {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size:medium;
+  font-weight:bold;
+}
+
 */
 
 /* Stars */
@@ -489,7 +497,6 @@ body {
   right: 0;
   transform: translate(-50%, 50%);
 }
-
 
 /* _________________________________ OVERVIEW ______________________________*/
 
