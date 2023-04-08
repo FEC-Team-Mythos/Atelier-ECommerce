@@ -8,7 +8,9 @@ html {
   font-family: 'adobe-clean', sans-serif;
 }
 
-body {background-color: rgb(255, 255, 255);}
+body {
+  background-color: rgb(255, 255, 255);
+}
 
 .related-product-carousel {
   position: relative;
@@ -89,7 +91,7 @@ body {background-color: rgb(255, 255, 255);}
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .related-card {
@@ -99,7 +101,7 @@ body {background-color: rgb(255, 255, 255);}
   padding: 10px;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  background-color: rgba(0,0,0,0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   color: black;
   box-shadow: 5px 5px 4px #525252;
   justify-content: center;
@@ -130,9 +132,9 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 .related-text {
-  display:inline-block;
-  margin:0;
-  vertical-align:top;
+  display: inline-block;
+  margin: 0;
+  vertical-align: top;
 }
 
 #related-graph-avg {
@@ -143,7 +145,7 @@ body {background-color: rgb(255, 255, 255);}
 
 /* Main Widget + 2 columns */
 #reviews {
-  display:flex;
+  display: flex;
   margin-left: 3%;
   margin-right: 3%;
   margin-top: 10px;
@@ -159,7 +161,7 @@ body {background-color: rgb(255, 255, 255);}
 
 #reviewList {
   flex: 0 0 80%;
-  padding:10px;
+  padding: 10px;
   margin-left: 20px;
 }
 
@@ -176,24 +178,24 @@ body {background-color: rgb(255, 255, 255);}
   margin-top: 15px;
 }
 
-.reviews-ratingbar{
+.reviews-ratingbar {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
 }
 
-.reviews-ratingbar:hover{
+.reviews-ratingbar:hover {
   background-color: grey;
 }
 
-.reviews-leftBarText{
+.reviews-leftBarText {
   font-size: 12px;
   white-space: nowrap;
   flex-grow: 1;
   flex-basis: 0;
 }
 
-.reviews-rightBarText{
+.reviews-rightBarText {
   font-size: 12px;
   white-space: nowrap;
   flex-grow: 1;
@@ -214,20 +216,20 @@ body {background-color: rgb(255, 255, 255);}
 
 /* Sliders */
 #reviews-characterSliders {
-  display:flex;
+  display: flex;
   flex-direction: column;
   font-size: 12px;
   margin-top: 15px;
 }
 
 .reviews-slider-leftLabel {
-  padding:3px;
+  padding: 3px;
   font-size: 10px;
-  width:25px
+  width: 25px
 }
 
 .reviews-slider-rightLabel {
-  padding:3px;
+  padding: 3px;
   font-size: 10px;
   width: 25px
 }
@@ -238,7 +240,7 @@ body {background-color: rgb(255, 255, 255);}
   margin-right: 10px;
   height: 5px;
   width: 200px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }
@@ -264,18 +266,18 @@ body {background-color: rgb(255, 255, 255);}
 
 /* Review Tile Components */
 #reviewTile {
-  padding:10px;
+  padding: 10px;
   margin: 10px 0 10px 0;
   border: 2px solid black;
   border-radius: 4px;
 }
 
 #reviewTile-stars {
-  display:flex;
+  display: flex;
 }
 
 #reviewTile-top {
-  display:flex;
+  display: flex;
   justify-content: space-between;
   padding: 5 5 5 0;
 }
@@ -326,17 +328,18 @@ body {background-color: rgb(255, 255, 255);}
 .oneQuarter {
   clip-path: polygon(0 0, 40% 0, 40% 100%, 0 100%);
 }
-*/
 
-#reviews-formStarButton {
+*/ #reviews-formStarButton {
   background-color: transparent;
   border: none;
   outline: none;
   cursor: pointer;
 }
+
 .on {
   color: #000;
 }
+
 .off {
   color: #ccc;
 }
@@ -380,8 +383,8 @@ body {background-color: rgb(255, 255, 255);}
 }
 
 #reviews-addReviewCharacteristicIndividual {
-  padding:5px;
-  display:flex;
+  padding: 5px;
+  display: flex;
 }
 
 .reviews-addReviewCharacteristicIndividualDisc {
@@ -401,7 +404,7 @@ body {background-color: rgb(255, 255, 255);}
 
 #reviews-addReviewBodyText {
   width: 300px;
-  height:50px;
+  height: 50px;
 }
 
 #reviews-addReviewPhotos {
@@ -508,7 +511,7 @@ select:hover {
   position: relative;
   grid-column: 1/2;
   grid-row: 1/9;
-  display:grid;
+  display: grid;
   overflow: clip;
   grid-template-columns: 15% 85%;
   grid-template-rows: 100%;
@@ -520,7 +523,7 @@ select:hover {
 .overview-imagesContainer-clicked {
   grid-column: 1/-1;
   grid-row: 1/9;
-  display:grid;
+  display: grid;
   grid-template-columns: 9% 91%;
   grid-template-rows: 100%;
   background-color: rgb(229, 229, 229);
@@ -557,7 +560,7 @@ select:hover {
 }
 
 #overview-searchIcon {
-  display:flex;
+  display: flex;
   justify-self: center;
   align-self: center;
   width: 80%;
@@ -571,11 +574,11 @@ select:hover {
 }
 
 * button:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
 
 #overview-cartIcon {
-  display:flex;
+  display: flex;
   justify-self: center;
   align-self: center;
   width: 80%;
@@ -611,9 +614,11 @@ select:hover {
   flex-direction: column;
   justify-content: space-evenly;
 }
+
 .overview-features {
-  display:flex;
+  display: flex;
 }
+
 #overview-slogan {
   /* font-weight: bold; */
   text-decoration: underline;
@@ -686,7 +691,7 @@ select:hover {
 }
 
 .overview-bottomButtons button {
-width: 25%;
+  width: 25%;
 }
 
 .overview-cartItems {
@@ -715,7 +720,7 @@ width: 25%;
 }
 
 #overview-cartProductImage {
-  position:relative;
+  position: relative;
   grid-column: 1/2;
   grid-row: 1/-1;
   max-height: 90%;
@@ -726,7 +731,7 @@ width: 25%;
 .overview-cartInfo {
   grid-column: 2/3;
   grid-row: 1/-1;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -811,8 +816,8 @@ width: 25%;
   position: absolute;
   width: 40%;
   height: 40%;
-  top:-18%;
-  right:-18%;
+  top: -18%;
+  right: -18%;
   color: black;
 }
 
@@ -866,7 +871,7 @@ width: 25%;
   width: 40px;
   height: 40px;
   background-color: rgb(177, 177, 177, 0.6);
-  border:none;
+  border: none;
 }
 
 #overview-expand:hover {
@@ -891,14 +896,14 @@ width: 25%;
 }
 
 #overview-downArrow {
-    position: relative;
-    display: inline-block;
-    top: -5px;
-    width: 15px;
-    height: 15px;
-    border-right: 0.2em solid black;
-    border-top: 0.2em solid black;
-    transform: rotate(135deg);
+  position: relative;
+  display: inline-block;
+  top: -5px;
+  width: 15px;
+  height: 15px;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(135deg);
 }
 
 #overview-upButton {
@@ -910,14 +915,14 @@ width: 25%;
 }
 
 #overview-upArrow {
-    position: relative;
-    display: inline-block;
-    top: 5px;
-    width: 15px;
-    height: 15px;
-    border-right: 0.2em solid black;
-    border-top: 0.2em solid black;
-    transform: rotate(315deg);
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(315deg);
 }
 
 #overview-leftButton {
@@ -926,7 +931,7 @@ width: 25%;
   padding: 10px;
   border: solid black;
   border-width: 0 0 3px 3px;
-  display:flex;
+  display: flex;
   align-self: center;
   display: inline-block;
   background-color: rgb(177, 177, 177, 0.6);
@@ -941,14 +946,14 @@ width: 25%;
 }
 
 #overview-leftArrow {
-    position: relative;
-    display: inline-block;
-    top: 5px;
-    width: 15px;
-    height: 15px;
-    border-right: 0.2em solid black;
-    border-top: 0.2em solid black;
-    transform: rotate(-135deg);
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(-135deg);
 }
 
 #overview-rightButton {
@@ -958,20 +963,20 @@ width: 25%;
   padding: 10px;
   border: solid black;
   border-width: 0 3px 3px 0;
-  display:flex;
+  display: flex;
   align-self: center;
   display: inline-block;
 }
 
 #overview-rightArrow {
-    position: relative;
-    display: inline-block;
-    top: 5px;
-    width: 15px;
-    height: 15px;
-    border-right: 0.2em solid black;
-    border-top: 0.2em solid black;
-    transform: rotate(45deg);
+  position: relative;
+  display: inline-block;
+  top: 5px;
+  width: 15px;
+  height: 15px;
+  border-right: 0.2em solid black;
+  border-top: 0.2em solid black;
+  transform: rotate(45deg);
 }
 
 .overview-purchaseSelections {
@@ -1035,7 +1040,7 @@ width: 25%;
 }
 
 .checkout-contactShippingContainer {
-  position:relative;
+  position: relative;
   height: 70%;
   width: 60%;
   grid-column: 1/2;
@@ -1239,7 +1244,7 @@ width: 25%;
 
 
 .checkout-paymentInfo {
-  position:relative;
+  position: relative;
   height: 60%;
   width: 60%;
   grid-column: 1/2;
@@ -1354,7 +1359,6 @@ width: 25%;
 }
 
 /* ______________________ QUESTIONS & ANSWERS ___________________________*/
-
 body {
   font-family: 'adobe-clean', sans-serif;
   color: rgb(42, 42, 42);
@@ -1386,9 +1390,11 @@ body {
   box-sizing: border-box;
 }
 
-.qa-heading, .qa-question-helpful, .qa-answer-info {
+.qa-heading,
+.qa-question-helpful,
+.qa-answer-info {
   font-weight: lighter;
-  font-size: 0.8em;
+  font-size: 12.8px;
 }
 
 .qa-heading {
@@ -1415,7 +1421,7 @@ body {
   width: 100%;
   padding: 8px;
   border: none;
-  font-size: .9em;
+  font-size: 14.4px;
   outline: none;
   flex-grow: 1;
   font-weight: bold;
@@ -1474,12 +1480,12 @@ body {
   justify-content: space-between;
 }
 
-.qa-question-body, .qa-answer-label {
+.qa-question-body,
+.qa-answer-label {
   font-weight: bold;
-  font-size: 1.0em;
+  font-size: 16px;
   margin: 0;
 }
-
 
 .qa-question-info {
   display: flex;
@@ -1497,13 +1503,13 @@ body {
 .qa-answer {
   display: flex;
   flex-direction: column;
-  font-size: 0.87em;
+  font-size: 13.92px;
   font-weight: lighter;
   margin-top: 5px;
 }
 
 .qa-answer-body {
-  font-size: .92em;
+  font-size: 14.72px;
   font-weight: normal;
 }
 
@@ -1513,22 +1519,22 @@ body {
   background-color: transparent;
   border: none;
   text-decoration: underline;
-  text-transform:none;
+  text-transform: none;
   cursor: pointer;
   padding: 0;
-  font-size: .9em;
+  font-size: 14.4px;
   font-weight: lighter;
   outline: none;
 }
 
 .qa-btn-helpful {
-  font-size: .9em;
+  font-size: 14.4px;
 }
 
 .qa-btn-more-answers {
   display: block;
   text-align: left;
-  font-size: .7em;
+  font-size: 8.96px;
   font-weight: 575;
   text-transform: uppercase;
   border: none;
@@ -1576,14 +1582,14 @@ body {
 
 .qa-modal-a-header,
 .qa-modal-q-main h2 {
-  font-size: 1.2em;
+  font-size: 19.2px;
   font-weight: bold;
   margin-bottom: 1em;
 }
 
 .qa-modal-a-body label,
 .qa-modal-q-main label {
-  font-size: 0.9em;
+  font-size: 14.4px;
   font-weight: bold;
   margin-bottom: 4px;
 }
@@ -1634,7 +1640,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 1.4em;
+  font-size: 24px;
   font-weight: bold;
   color: #333;
   cursor: pointer;
