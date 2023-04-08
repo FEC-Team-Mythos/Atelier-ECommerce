@@ -95,9 +95,9 @@ function QuestionsAndAnswers({ request, productId, changeRequestHook }) {
 
   return (
     <div className="qa-container">
-      <h1 className="qa-heading">
+      <h3>
         Questions & Answers
-      </h1>
+      </h3>
       <SearchBar handleSearch={handleSearch} />
       {showAddQuestionModal && (
         <AddQuestionModal
