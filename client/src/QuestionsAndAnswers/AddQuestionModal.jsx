@@ -42,7 +42,7 @@ function AddQuestionModal({
     const formData = {
       body: question,
       name: nickname,
-      email: email,
+      email,
       product_id: productId,
     };
 
