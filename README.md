@@ -4,13 +4,14 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 ## Table of Contents
 
-1. [Description](#Description)
-2. [Installation](#Installation)
-3. [Setup](#Setup)
-4. [Team Members](#Team-members)
-5. [License](#License)
+1. [Main Product Widgets](#Main-Product-Widgets)
+2. [Additional Components](#Additional-Components)
+3. [Installation](#Installation)
+4. [Setup](#Setup)
+5. [Team Members](#Team-members)
+6. [License](#License)
 
-## Description
+## Main Product Widgets
 
 ### Product Overview
 - Product overview consists of an image container, rating, category information, product name, product style options, size selection, quantity selection, add to cart button, favorite outfit button, and product description / features pulled from multiple API calls. 
@@ -33,6 +34,8 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 - Upon clicking on Add Review, a modal will popup where you can a new review can be added. Up to 5 images can be included with new reviews
 - <img width="383" alt="Screenshot 2023-04-08 at 3 34 50 PM" src="https://user-images.githubusercontent.com/106470519/230739650-8d7e80bb-7e41-473e-89a2-9d16c1716e12.png">
+
+## Additional Components
 
 
 ## Installation
