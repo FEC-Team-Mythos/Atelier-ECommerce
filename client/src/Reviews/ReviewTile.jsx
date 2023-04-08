@@ -38,6 +38,7 @@ function ReviewTile({ review }) {
               data-testid="review-photo"
               onClick={() => { setExpanded(!expanded); }}
               style={imgStyle}
+              loading="lazy"
             />
           ))}
         </>
