@@ -36,7 +36,11 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 - <img width="383" alt="Screenshot 2023-04-08 at 3 34 50 PM" src="https://user-images.githubusercontent.com/106470519/230739650-8d7e80bb-7e41-473e-89a2-9d16c1716e12.png">
 
 ## Additional Components
+### Shopping Cart
 
+### Navigation Bar
+
+### Checkout Page
 
 ## Installation
 
