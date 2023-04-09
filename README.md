@@ -41,7 +41,7 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 - <img width="403" alt="image" src="https://user-images.githubusercontent.com/106826710/230747868-34745c20-8b2c-4bbe-bac6-d87ceb81c6fe.png">
 
 ### Navigation Bar
-- The navigation bar will show up on all page paths. When logo is clicked, the browser will redirect the user to the home page. The shopping cart will be accessible at anytime to send user to checkout page. 
+- The navigation bar will show up on the top of all page paths. When the logo is clicked, the browser will redirect the user to the home page. The shopping cart will be accessible at anytime to send user to checkout page. 
 - <img width="1000" alt="image" src="https://user-images.githubusercontent.com/106826710/230748190-f25b6b05-06b8-4684-a006-414167005645.png">
 
 ### Checkout Page
