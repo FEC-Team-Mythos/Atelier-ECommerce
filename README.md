@@ -37,6 +37,9 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 ## Additional Components
 ### Shopping Cart
+- The shopping cart works with product overview page. Items added to cart are saved to the client's local storage preventing unnecessary use of a cart API. Product meta data consist of image url, quantity, size, cost, product name and style name. Items can be removed from cart. Clicking on checkout button will utilize react router to send user to checkout page.
+<img width="403" alt="image" src="https://user-images.githubusercontent.com/106826710/230747868-34745c20-8b2c-4bbe-bac6-d87ceb81c6fe.png">
+
 
 ### Navigation Bar
 
