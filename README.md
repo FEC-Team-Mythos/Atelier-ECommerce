@@ -42,12 +42,12 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 ### Navigation Bar
 - The navigation bar will show up on all page paths. When logo is clicked, the browser will redirect the user to the home page. The shopping cart will be accessible at anytime to send user to checkout page. 
-- <img width="600" alt="image" src="https://user-images.githubusercontent.com/106826710/230748190-f25b6b05-06b8-4684-a006-414167005645.png">
+- <img width="1000" alt="image" src="https://user-images.githubusercontent.com/106826710/230748190-f25b6b05-06b8-4684-a006-414167005645.png">
 
 ### Checkout Page
 - Checkout page consists of 2 different containers. The right container consists of data saved on the local storage. Subtotals for quantity and individual costs are added up into a total ammount. On the left consists of a shipping and contact information, then moves into payment information before placing order. The user can return to the product page at any time.
 - <img width="700" alt="image" src="https://user-images.githubusercontent.com/106826710/230748933-47003ca4-1be4-4a87-b6e3-def1f432f020.png">
-<img width="700" alt="image" src="https://user-images.githubusercontent.com/106826710/230748951-3a83e37d-ccba-4a79-82f2-0c7c5d119413.png">
+- <img width="700" alt="image" src="https://user-images.githubusercontent.com/106826710/230748951-3a83e37d-ccba-4a79-82f2-0c7c5d119413.png">
 
 
 ## Installation
