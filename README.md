@@ -23,7 +23,9 @@ Frontend project for an E-Commerce website utilizing Javascript (React), CSS, HT
 
 
 ### Related Products
+-
 ### Questions and Answers
+-
 ### Reviews and Ratings
 - Review List will contain all reviews for a given product. Can filter list via any selection within drop-down. Upon clicking More Reviews button, list will increment by two reviews with each click. If all reviews are shown, button will dissapear.
 
@@ -74,7 +76,7 @@ TINYURL_TOKEN=TinyURL API Token
 #### [Anthony Bui](https://www.linkedin.com/in/bui-anthony/) | [Github](https://github.com/aboowee) - Product Overview, Shopping Cart, Checkout Page, Navigation Bar, URL Pathing, Data Storage
 #### [Justin Cheng](https://www.linkedin.com/in/justin-cheng-4117b854/) | [Github](https://github.com/juchengca) - Home Page, Related Products, Your Outfit
 #### [Dylan Kahlstorf](https://www.linkedin.com/in/dylan-kahlstorf-3983ab241/) | [Github](https://github.com/kahlstorf1) - Reviews/Ratings, Interactions Logging, S3 Integration
-#### Nick Mann - Fill whatever you like (MAKE YOURSELF LOOK GOOOOOD HERE)
+#### Nick Mann
 
 ## License
 
