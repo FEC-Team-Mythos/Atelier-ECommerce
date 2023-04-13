@@ -22,10 +22,9 @@ function Question({ question, request }) {
   const [visibleAnswers, setVisibleAnswers] = useState(2);
   const [answerHelpfulness, setAnswerHelpfulness] = useState(
     Object.fromEntries(
-      Object.values(question.answers).map((answer) => [
-        answer.id,
-        answer.helpfulness,
-      ]),
+      (question.answers
+        ? Object.values(question.answers)
+        : []).map((answer) => [answer.id, answer.helpfulness]),
     ),
   );
 
@@ -65,9 +64,12 @@ function Question({ question, request }) {
     await request(`/qa/answers/${answerId}/report`, {}, 'put');
   };
 
-  const sortedAnswers = Object.values(question.answers)
-    .filter((answer) => !reportedAnswers.includes(answer.id))
-    .sort((a, b) => b.helpfulness - a.helpfulness);
+  const sortedAnswers = question.answers
+    ? Object.values(question.answers)
+      .filter((answer) => !reportedAnswers.includes(answer.id))
+      .sort((a, b) => b.helpfulness - a.helpfulness)
+    : [];
+
   const bestAnswers = sortedAnswers.slice(0, visibleAnswers);
 
   const handleMarkHelpful = async () => {

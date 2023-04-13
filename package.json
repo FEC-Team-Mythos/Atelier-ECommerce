@@ -8,6 +8,7 @@
     "server-dev": "nodemon ./server/index.js",
     "server-prod": "NODE_ENV=production node ./server/index.js",
     "test-related": "jest ./client/src/RelatedProducts/Related.test.js",
+    "test-qanda": "jest ./client/src/QuestionsAndAnswers/qanda.test.js",
     "build": "webpack --mode production"
   },
   "repository": {

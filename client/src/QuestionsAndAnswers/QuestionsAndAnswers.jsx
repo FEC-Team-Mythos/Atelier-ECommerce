@@ -121,7 +121,7 @@ function QuestionsAndAnswers({ request, productId, changeRequestHook }) {
       />
       <div className="qa-buttons-container">
         {hasMoreQuestions && (
-          <button type="button" className="qa-btn-load-more" onClick={handleMoreAnsweredQuestions}>
+          <button type="button" className="qa-btn-load-more" data-testid="more-questions" onClick={handleMoreAnsweredQuestions}>
             More Answered Questions
           </button>
         )}
